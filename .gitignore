@@ -1,0 +1,82 @@
+# Compiled bytecode
+target/
+*.class
+
+# Maven build directory
+# Use `mvnw` or `./mvnw` instead of `mvn` to ensure these files aren't committed
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle build directory
+# Use `gradlew` or `./gradlew` instead of `gradle` to ensure these files aren't committed
+.gradle/
+gradle-wrapper.properties
+gradle-wrapper.jar
+
+# IDE specific files
+.idea/
+.vscode/
+
+# Spring Boot log files
+logs/
+
+# Compiled JAR or WAR files
+*.jar
+*.war
+
+# Application properties
+application.properties
+application.yml
+
+# Spring Boot Devtools properties
+spring-boot-devtools.properties
+
+# Spring Boot JARs
+spring-boot-starter-*.jar
+spring-boot-autoconfigure-*.jar
+spring-boot-2*.jar
+
+# Eclipse metadata
+.classpath
+.project
+.settings/
+.factorypath
+.metadata/
+
+# Intellij IDEA metadata
+*.iml
+*.ipr
+*.iws
+*.log
+
+# Package file
+*.jar
+*.war
+*.ear
+
+# Ignore compiled binaries
+*.exe
+*.out
+*.o
+
+# Ignore dependencies and generated files
+node_modules/
+dist/
+build/
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore sensitive information
+config.ini
+secrets.json
+
