@@ -1,0 +1,191 @@
+					Git
+———————————————————————————————————————————
+Git is a distributed version control system (VCS) that is widely used for tracking changes in source code during software development. It was created by Linus Torvalds in 2005.
+
+Git provides the core version control features such as creating repositories, making commits, creating branches, merging changes, and maintaining a history of code changes.
+
+Git operates locally on a developer's machine. It allows you to perform version control tasks without requiring an internet connection or a remote server.
+
+Git Benefits: 
+
+Repository (Repo): A repository is a collection of files, folders, and the history of changes (commits) associated with a software project. It stores the entire history of the project's development.
+
+Remote Repository: A remote repository is a version of the repository that's hosted on a server. It's a centralized location where multiple developers can collaborate and share their code changes.
+
+1.) Distributed Version Control: Every developer has a full copy of the entire repository on their local machine. So Work (locally)Offline and synchronize with remote repositories when connected. 
+
+2.) Branching: Allows developers to work on features, bug fixes, or experiments without affecting the main codebase.
+
+3.) Merging: Merging feature branches into the main branch.
+
+4.) Commit: A Git commit is a way to save changes to your project's source code, along with a message describing what changes you've made.
+
+5.) Pull: In Git, "pull" is used to fetch changes from a remote repository and merge them into the local repository. It's often used to synchronize your local repository with changes made by others.
+
+6.) Push: "Push" is used to upload local commits to a remote repository. 
+
+7.) Clone: Cloning creates a local copy of a remote repository on your machine.
+
+8.) Pull Request (PR): In a collaborative environment like GitHub, a pull request is a request to merge changes from one branch into another. It allows code changes to be reviewed, discussed, and eventually merged into the main codebase. 
+
+9.) Rebase: Reapply your commits on top of another branch. 
+
+10.) Cherry-Pick <commit>: Apply the changes introduced by a specific commit to the current branch.   
+
+11.) Stash: Temporarily save changes that are not ready to be committed.
+
+12.) Revert: Create a new commit that undoes changes made in a specific commit.
+
+13.)  Reset <file>: Unstage changes from a specific file. 
+
+14.) Reset --hard <commit>: Reset your working directory to a specific commit, discarding all changes after that commit.
+15.) Switch: It is used to switch between branches or restore working tree files.
+
+16.) Restore: It is used to restore specific files or the working directory to a previous state.
+
+
+
+
+
+
+
+
+Git workflow refers to the specific processes and practices that a development team follows when using Git for version control. There are several Git workflows that teams can adopt, and the choice of workflow depends on the team's needs, project size, and collaboration style. Here are some common Git workflows:  
+
+Centralized Workflow: In this simple workflow, there is a central repository where all developers commit their changes. Developers clone the repository, make changes locally, and then push them to the central repository. It's suitable for small teams or projects with a linear history of commits. 
+
+Feature Branch Workflow: Each new feature or bug fix is developed on a dedicated branch. Developers create a new branch for their feature, work on it, and then merge it back into the main branch when it's complete. Helps isolate changes and prevents conflicts between different features. 
+
+Gitflow Workflow: Extends the feature branch workflow with defined branches for features, releases, and hotfixes. Involves two main branches: master (for stable releases) and develop (for ongoing development). Feature branches are created from develop and merged back when completed. Releases and hotfixes are managed on dedicated branches. 
+
+Forking Workflow: Often used in open-source projects, contributors fork the main repository to their own accounts. They create feature branches in their forks, push changes, and then create pull requests to request merging their changes into the main repository. Maintainers review the changes and merge them if they meet project standards. 
+
+Pull Request Workflow (GitHub Flow): Similar to the forking workflow but used primarily with platforms like GitHub. Developers create feature branches, push changes to those branches, and then open pull requests (PRs) to request merging their changes into the main branch. Reviews, discussions, and automated checks are performed in the PR before merging. 
+
+Continuous Integration (CI) Workflow: Emphasizes frequent integration of code changes into the main branch through automated testing and building. Developers push changes to a shared branch, and a CI server automatically runs tests, builds, and potentially deploys the application. Ensures that code changes don't break the build or introduce regressions. 
+
+Trunk-Based Development: Developers work on short-lived feature branches that are merged into the main branch (trunk) as soon as possible. Encourages small and frequent merges to minimize conflicts and maintain a continuous integration process. 
+
+It's important to choose a workflow that aligns with your team's development practices and project requirements. Some workflows are more suited for large teams with complex release cycles, while others are simpler and better for smaller teams or individual projects. Regardless of the chosen workflow, proper communication, code review, and collaboration are crucial for successful software development.
+
+ 
+
+
+
+
+
+
+
+GitFlow + some adaptions is best choice of web application development.
+Git Flow:
+	Branching: 
+		Feature
+		Hot-fixes
+		Develop (Long Release)
+		Master
+
+++ some adaptions
+Continuous Integration (CI): Implement a strong CI/CD process to automate testing, building, and deployment. This is crucial for maintaining the quality of the application, especially in a larger context.
+
+Pull Requests and Code Reviews: Enforce code reviews through pull requests. This ensures that changes are reviewed and tested before being merged into main branches.
+
+Documentation: Place a strong emphasis on documentation. With a larger team and application, clear documentation becomes essential for onboarding new team members and understanding the architecture. 
+
+Release Planning: Plan releases in advance, including feature priorities, resource allocation, and timelines. 
+
+Communication and Collaboration: With a bigger team, effective communication and collaboration tools and practices are even more important. 
+
+Customization: Don't hesitate to customize the workflow further to match the unique requirements of your big web application.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Git Commands
+
+git init: Initialize a new Git repository in the current directory.
+git clone <repository_url>: Clone a remote repository onto your local machine.
+git add <file>: Stage changes in a specific file for the next commit.
+git add .: Stage all changes in the current directory for the next commit.
+git commit -m "<message>": Commit staged changes with a descriptive message.
+git status: Display the status of your working directory, showing staged and unstaged changes.
+git diff: Show the differences between your working directory and the last commit.
+git log: Display the commit history.
+git pull <remote> <branch>: Fetch and merge changes from a remote repository into your current branch.
+git push <remote> <branch>: Push your local commits to a remote repository.
+git branch: List all branches in the repository.
+git branch <branch_name>: Create a new branch.
+git checkout <branch_name>: Switch to a different branch.
+git merge <branch_name>: Merge changes from one branch into another.
+git remote -v: List all remote repositories associated with your local repository.
+git remote add <remote_name> <repository_url>: Add a new remote repository.
+git remote remove <remote_name>: Remove a remote repository.
+git stash: Temporarily save changes that are not ready to be committed.
+git stash pop: Apply and remove the most recent stash.
+git reset <file>: Unstage changes from a specific file.
+git reset --hard <commit>: Reset your working directory to a specific commit, discarding all changes after that commit.
+git rebase <branch_name>: Reapply your commits on top of another branch.
+git tag <tag_name>: Create a lightweight tag at the current commit.
+git tag -a <tag_name> -m "<message>": Create an annotated tag with a message.
+git fetch: Fetch changes from remote repositories without merging them.
+git cherry-pick <commit>: Apply the changes introduced by a specific commit to the current branch.
+git config: Set or view configuration options for Git.
+git show <commit>: Display detailed information about a specific commit.
+git rm <file>: Delete a file from both the working directory and Git repository.
+git revert <commit>: Create a new commit that undoes changes made in a specific commit.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git init
+——————-
+Keep in mind that running git init initializes a local Git repository. If you're working with a remote repository (such as on GitHub or GitLab), you'll need to set up the remote repository separately and then connect your local repository to it using the git remote add command.
+
+
+
