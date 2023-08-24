@@ -138,12 +138,15 @@ git commit -m "<message>": Commit staged changes with a descriptive message.
 git status: Display the status of your working directory, showing staged and unstaged changes.
 git diff: Show the differences between your working directory and the last commit.
 git log: Display the commit history.
-git pull <remote> <branch>: Fetch and merge changes from a remote repository into your current branch.
-git push <remote> <branch>: Push your local commits to a remote repository.
+
 git branch: List all branches in the repository.
 git branch <branch_name>: Create a new branch.
 git checkout <branch_name>: Switch to a different branch.
+git switch -c <branch)name>: 
+git fetch: Fetch changes from remote repositories without merging them.
 git merge <branch_name>: Merge changes from one branch into another.
+git pull <remote> <branch>: Fetch and merge changes from a remote repository into your current branch.
+git push <remote> <branch>: Push your local commits to a remote repository.
 git remote -v: List all remote repositories associated with your local repository.
 git remote add <remote_name> <repository_url>: Add a new remote repository.
 git remote remove <remote_name>: Remove a remote repository.
@@ -154,7 +157,6 @@ git reset --hard <commit>: Reset your working directory to a specific commit, di
 git rebase <branch_name>: Reapply your commits on top of another branch.
 git tag <tag_name>: Create a lightweight tag at the current commit.
 git tag -a <tag_name> -m "<message>": Create an annotated tag with a message.
-git fetch: Fetch changes from remote repositories without merging them.
 git cherry-pick <commit>: Apply the changes introduced by a specific commit to the current branch.
 git config: Set or view configuration options for Git.
 git show <commit>: Display detailed information about a specific commit.
@@ -198,6 +200,70 @@ git clone https://github.com/username/myrepo.git
 a new directory named "myrepo" will be created in your current directory, and the entire repository's contents will be downloaded to that directory.
 
 
+git add
+------------
+git add file1.txt file2.js : To stage specific files 
+git add . : To stage all changes in your working directory  
+git add my_directory/ : To stage changes within a specific directory and its subdirectories  git add git add -i  : This opens an interactive interface where you can select changes to stage.
+
+
+
+git commit
+------------
+The git commit command is used to save your changes to the Git repository, creating a new commit with a snapshot of your project's current state. Each commit represents a specific set of changes along with a meaningful message that describes what those changes are.    git commit -m "Your commit message here"   
+git commit -m “[Bug-JiraBugNumber] [UAT] Your commit message here"   
+git commit -m “[Feat-JiraFeatNumber] [DEV] Your commit message here"   
+git commit -m “[HotFix-JiraBugNumber] [PROD] Your commit message here"   
+
+You can view the commit history using the git log command
+git log
+
+
+git status
+——————
+display the current state of your working directory and staging area (index). It shows information about any untracked files, changes that are staged for commit, and changes that are not yet staged.  
+command: git status
+
+If we modify file, we can do following actions
+Stage modified file: (use "git add <file>..." to update what will be committed) 
+Discard modified file: (use "git restore <file>..." to discard changes in working directory)
+
+If we stage file, we can do following actions
+Unstaged modified changes: (use "git restore --staged <file>..." to unstage)
+Commit changes: git commit -m “commit message.”
+
+
+git diff
+—————-
+The git diff command is used to display the differences between two different states of a Git repository, typically showing changes between the working directory and the most recent commit, or between different commits.
+
+Command: git diff
+
+git diff: Difference between working directory and the last commit.
+git diff —color-words: This command displays the differences using color highlighting to make additions and deletions more visually distinguishable.
+git diff —staged: This command will show the differences between the files in the staging area (files that are ready to be committed) and the last commit.
+git diff filename: This will show the differences for the specified file between the working directory and the last commit.
+git diff commit_hash1 commit_hash2: This will show the differences between the two specified commits. Replace commit_hash1 and commit_hash2 with the actual hashes of the commits you want to compare.
+git diff branch_name1 branch_name2: This will show the differences between two branches, often used to compare feature branches with the main branch.
+
+
+
+
+git log
+————-
+git log is another useful command in Git that allows you to view the commit history of a repository. It displays a list of commits in reverse chronological order, showing the most recent commits first. This command provides information about each commit, such as the commit hash, author, date, and commit message.
+
+Command: git log
+git log —oneline: This command shows a more compact representation of the commit history, displaying only the commit hash and the first line of the commit message. 
+git log -n <number> : Replace <number> with the desired number of commits to display. For example, git log -n 5 will show the most recent 5 commits.
+git log -p: Adding the -p flag will display the commit history along with the actual changes introduced in each commit.
+git log —author=<author_name> :Replace <author_name> with the name or email of the author to filter the commit history by. 
+git log —since=<date>: Replace <date> with a specific date or date range to filter the commit history by commits made after that date.
+	Example: git log --since=Aug-22-2023\n 
+git log --graph --oneline —all: This command provides a graphical representation of the commit history, showing branch and merge information, along with the commit hashes and the first line of the commit messages.
+
+git log --graph —all: commits in details, not in one line.
+git log --graph -n 2 
 
 
 
@@ -205,19 +271,21 @@ a new directory named "myrepo" will be created in your current directory, and th
 
 
 
+git branch
+——————
+In Git, the git branch command is used to manage and view branches in your repository.
+Command: git branch
+If you run git branch without any arguments, it will list all the branches in your repository. The currently checked out branch will be indicated with an asterisk (*).
 
+git branch new-feature: You can use the git branch command followed by a branch name to create a new branch based on your current branch. The new branch will start with the same content as the current branch.
 
+git branch -d branch-name
+# or
+git branch -D branch-name: To delete a branch, you can use the -d flag with the git branch command. Note that you can't delete the branch you're currently on unless you force it using -D. Be cautious when deleting branches as the changes on the branch will be lost.
 
+git branch -m old-name new-name: To rename a branch, you can use the -m flag with the git branch command.
 
-
-
-
-
-
-
-
-
-
+git branch -r: To view remote branches, you can use the -r flag with the git branch command. This will show you a list of remote branches.
 
 
 
