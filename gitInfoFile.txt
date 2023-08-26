@@ -42,14 +42,6 @@ Remote Repository: A remote repository is a version of the repository that's hos
 15.) Switch: It is used to switch between branches or restore working tree files.
 
 16.) Restore: It is used to restore specific files or the working directory to a previous state.
-
-
-
-
-
-
-
-
 Git workflow refers to the specific processes and practices that a development team follows when using Git for version control. There are several Git workflows that teams can adopt, and the choice of workflow depends on the team's needs, project size, and collaboration style. Here are some common Git workflows:  
 
 Centralized Workflow: In this simple workflow, there is a central repository where all developers commit their changes. Developers clone the repository, make changes locally, and then push them to the central repository. It's suitable for small teams or projects with a linear history of commits. 
@@ -68,15 +60,7 @@ Trunk-Based Development: Developers work on short-lived feature branches that ar
 
 It's important to choose a workflow that aligns with your team's development practices and project requirements. Some workflows are more suited for large teams with complex release cycles, while others are simpler and better for smaller teams or individual projects. Regardless of the chosen workflow, proper communication, code review, and collaboration are crucial for successful software development.
 
- 
-
-
-
-
-
-
-
-GitFlow + some adaptions is best choice of web application development.
+ GitFlow + some adaptions is best choice of web application development.
 Git Flow:
 	Branching: 
 		Feature
@@ -99,35 +83,6 @@ Customization: Don't hesitate to customize the workflow further to match the uni
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Git Commands
 
 git init: Initialize a new Git repository in the current directory.
@@ -143,7 +98,6 @@ git branch <branch_name>: Create a new branch.
 git checkout <branch_name>: Switch to a different branch.
 git switch -c <branch)name>: 
 git fetch: Fetch changes from remote repositories without merging them.
-
 git merge <branch_name>: Merge changes from one branch into another.
 git pull <remote> <branch>: Fetch and merge changes from a remote repository into your current branch.
 git push <remote> <branch>: Push your local commits to a remote repository.
@@ -165,26 +119,6 @@ git revert <commit>: Create a new commit that undoes changes made in a specific 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 git init
 ——————-
 Keep in mind that running git init initializes a local Git repository. If you're working with a remote repository (such as on GitHub or GitLab), you'll need to set up the remote repository separately and then connect your local repository to it using the git remote add command.
@@ -192,7 +126,6 @@ Keep in mind that running git init initializes a local Git repository. If you're
 
 git clone 
 ——————-
-
 git clone <repository_url>
 Replace <repository_url> with the actual URL of the Git repository you want to clone.
 
@@ -205,7 +138,6 @@ git add
 git add file1.txt file2.js : To stage specific files 
 git add . : To stage all changes in your working directory  
 git add my_directory/ : To stage changes within a specific directory and its subdirectories  git add git add -i  : This opens an interactive interface where you can select changes to stage.
-
 
 
 git commit
@@ -233,6 +165,9 @@ Unstaged modified changes: (use "git restore --staged <file>..." to unstage)
 Commit changes: git commit -m “commit message.”
 
 
+
+
+
 git diff
 —————-
 The git diff command is used to display the differences between two different states of a Git repository, typically showing changes between the working directory and the most recent commit, or between different commits.
@@ -245,8 +180,6 @@ git diff —staged: This command will show the differences between the files in 
 git diff filename: This will show the differences for the specified file between the working directory and the last commit.
 git diff commit_hash1 commit_hash2: This will show the differences between the two specified commits. Replace commit_hash1 and commit_hash2 with the actual hashes of the commits you want to compare.
 git diff branch_name1 branch_name2: This will show the differences between two branches, often used to compare feature branches with the main branch.
-
-
 
 
 git log
@@ -264,6 +197,10 @@ git log --graph --oneline —all: This command provides a graphical representati
 
 git log --graph —all: commits in details, not in one line.
 git log --graph -n 2 
+
+
+
+
 
 
 
@@ -336,68 +273,23 @@ Recover Deleted Branch: If a branch was deleted and you want to recover it, you 
 git switch branch-name
 
 
-
 git fetch
 —————-
 The git fetch command is used to retrieve updates and changes from a remote repository without automatically merging them into your current local branch. It's a useful command for staying up to date with the changes made by other collaborators in the remote repository. 
 Command: git fetch
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 git merge
 ——————-
-The git merge command in Git is used to integrate changes from one branch into another. It combines the commit history of two branches by creating a new commit that has both branches' changes. This process is known as merging branches. Here's how the git merge command works:
+The git merge command in Git is used to integrate changes from one branch into another. It combines the commit history of two branches by creating a new commit that has both branches' changes.
 
-Select Target Branch: To integrate changes from one branch (usually called the source branch) into another (usually called the target branch), you first need to make sure you are on the target branch. You can use git checkout or git switch to switch to the target branch.
-git switch target-branch
+You first need to make sure you are on the target branch. Command: git switch target-branch
 
-Initiate Merge: Once you're on the target branch, you can run the git merge command followed by the name of the source branch to initiate the merge process.
+git merge command followed by the name of the source branch to initiate the merge process. 
 git merge source-branch
 
-Resolve Conflicts: If there are no conflicts between the changes on the source and target branches, Git will perform a "fast-forward" merge, which simply moves the target branch pointer to the latest commit of the source branch.
-However, if there are conflicting changes on the source and target branches, Git will pause the merge process and indicate the conflicting files. You'll need to manually resolve these conflicts by editing the conflicting files, marking the resolved parts, and then committing the changes.
-After resolving conflicts, you need to complete the merge by creating a new commit. Git provides a special commit message during conflict resolution. You can modify this message to provide a clear description of the merge and how conflicts were resolved.
-
-Complete Merge Commit: Once you've resolved the conflicts and are satisfied with the changes, you can commit the merge. This commit will have two parent commits: the last commit of the target branch and the last commit of the source branch.
-git commit
-
-Finish Merge: After committing, the merge process is complete. The changes from the source branch are now integrated into the target branch.
 Remember that before merging, it's a good practice to ensure your target branch is up to date with the latest changes from the remote repository using git fetch or git pull. This helps minimize the chance of conflicts during the merge. 
-
-It's also worth noting that while merging is a common way to integrate changes, there's another method called "rebasing," which can provide a linear commit history by moving the entire history of one branch onto the top of another. Rebasing is often used to maintain a cleaner and more organized commit history.     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
 
 
 git pull
@@ -405,90 +297,23 @@ git pull
 
 git pull is a Git command used to fetch and integrate changes from a remote repository into the current local branch. It's a combination of two separate Git commands: git fetch and git merge.
 
-When you run git pull, Git performs the following steps:
-Fetch: It contacts the remote repository specified by the default remote (usually named "origin") and retrieves any new commits that you don't have in your local repository. However, it doesn't automatically incorporate those changes into your branch.
-Merge (or Rebase): After fetching the changes, Git integrates them into your current branch. By default, it does this by creating a new commit that has two parent commits: your current branch's latest commit and the latest commit from the remote branch. This creates a merge commit that represents the integration of the changes from the remote branch into your local branch.
-Alternatively, you can use git pull --rebase to perform a rebase instead of a merge. This replays your local commits on top of the fetched commits from the remote branch, resulting in a linear history without merge commits.
-Here's the basic syntax of git pull:
-
 git pull [<remote>] [<branch>]
 <remote>: Specifies the remote repository to pull from (usually "origin" if not specified).
 <branch>: Specifies the branch from the remote repository to pull (defaults to the currently checked-out branch).
 It's important to note that if you have uncommitted changes in your local branch, git pull might result in conflicts that you need to resolve. In such cases, Git will stop and prompt you to resolve conflicts before proceeding with the pull.
-
-In a collaborative environment, using git pull helps you keep your local branch up-to-date with the latest changes from the remote repository, allowing for smoother collaboration with other team members. However, just like with any Git command that modifies history, it's essential to be cautious and communicate with your team to avoid disrupting the workflow or introducing conflicts.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 git push
 ————-
 git push is a Git command used to upload your local branch and its associated commits to a remote repository. This command is essential for sharing your changes with others and keeping the remote repository up-to-date.
 
-When you run git push, here's what happens:
-Authentication: Git verifies your identity with the remote repository using authentication methods such as SSH keys or username/password credentials. You need the necessary permissions to push to the remote repository.
-Upload Commits: Git pushes the commits that are unique to your local branch and are not yet present in the remote repository. This includes all the new commits you've made since your last push.
-Update Remote Branch: The remote branch corresponding to your local branch is updated to include the newly pushed commits. If the branch didn't exist remotely, it will be created.
-The basic syntax of git push is as follows:
-
-git push <remote> <branch>
+After git push, here's what happens: Authentication, Upload Commits, Update Remote Branch
+git push <remote> <branch> => git push origin master
 <remote>: Specifies the remote repository you want to push to (usually "origin" by default).
 <branch>: Specifies the local branch you want to push to the remote repository.
-For example, to push the changes in your currently checked-out branch to the remote repository:
 
-git push origin master
-It's important to note that git push might fail if you're trying to push to a branch that has new commits in the remote repository that you don't have locally. In such cases, you'll need to perform a git pull to fetch and integrate the remote changes before you can successfully push your own changes.
-
-Additionally, if you're working with a team and you're not the only one contributing to the remote repository, it's a good practice to pull any new changes from the remote repository using git pull before you push your own changes. This helps prevent conflicts and ensures that you have the latest version of the code before you make your own contributions.
-
-Always make sure you understand the implications of pushing changes, especially in shared repositories, to avoid overwriting or conflicting with other people's work.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+git pull to fetch and integrate the remote changes before push your own changes.
+This helps prevent conflicts and ensures that you have the latest version of the code before you make your own contributions.
 
 git remote -v: 
 ———————-
@@ -509,60 +334,49 @@ https://github.com/username/repo.git: The URL of the remote repository.
 You can have multiple remote repositories associated with your local repository. For example, you might have a primary remote repository named "origin" and additional remotes for collaborating with other team members or for different purposes.
 
 Remember that the URLs shown with git remote -v might be different based on the remote repository protocol (HTTPS, SSH, etc.) and the hosting platform (GitHub, GitLab, Bitbucket, etc.) you are using.
-
-
-
-git remote add <remote_name> <repository_url>
-—————————————————————————-
-The git remote add command is used to add a new remote repository to your local Git repository. This is typically done when you want to connect your local repository to a remote repository hosted on a Git server (like GitHub, GitLab, Bitbucket, etc.). Once you've added a remote, you can use its name to refer to it in various Git commands, such as git pull, git push, and more.
+git remote add
+———————-
+The git remote add command is used to add a new remote repository to your local Git repository.
 
 The basic syntax of git remote add is as follows:
 git remote add <remote_name> <repository_url>
 <remote_name>: The name you want to give to the remote repository. This is the name you'll use to refer to the remote in future Git commands.
 <repository_url>: The URL of the remote repository. This URL usually points to the Git hosting service where the remote repository is located.
-For example, if you want to add a remote named "origin" that points to a repository hosted on GitHub, you would run a command like this:
 
-git remote add origin https://github.com/username/repo.git
+	For example, if you want to add a remote named "origin" to a repository run a command like this: git remote add origin https://github.com/username/repo.git
 After adding the remote, you can then use the remote name "origin" in commands like git push origin and git pull origin.
+	It's important to note that the remote name "origin" is commonly used as the default remote name when you clone a repository. However, you can choose a different name if you're working with multiple remotes or if you're setting up a connection to a different repository.
 
-It's important to note that the remote name "origin" is commonly used as the default remote name when you clone a repository. However, you can choose a different name if you're working with multiple remotes or if you're setting up a connection to a different repository.
 
-Once you've added a remote, you can verify its addition by using the git remote -v command, which will display a list of remote repositories associated with your local repository along with their URLs.
+git remote remove 
+—————————-
+The git remote remove command is used to remove a remote repository from your local Git repository's configuration.
 
-git remote remove <remote_name>:
-—————————————————-
-The git remote remove command is used to remove a remote repository from your local Git repository's configuration. This is useful when you no longer want to connect to a particular remote repository or if you want to change the configuration of your repository's remotes.
-
-The basic syntax of git remote remove is as follows:
-git remote remove <remote_name>
+syntax git remote remove <remote_name>
 <remote_name>: The name of the remote repository you want to remove.
-For example, if you have a remote named "origin" that you want to remove, you would run a command like this:
-
-git remote remove origin
-After running this command, the remote repository named "origin" will no longer be associated with your local repository. You won't be able to use the "origin" remote name in commands like git pull or git push.
-
-Keep in mind that removing a remote doesn't affect the actual remote repository on the server; it only removes the reference to that remote from your local repository's configuration. If you've made changes or commits on branches that were associated with the removed remote, those branches and commits will remain in your local repository.
+For example: git remote remove origin
+After running this command, the remote repository named "origin" will no longer be associated with your local repository.
 
 Before removing a remote, make sure you don't have any unpushed or uncommitted changes that you want to keep. Additionally, if you're working in a collaborative environment, it's a good practice to communicate with your team members before removing a remote to avoid disrupting the workflow.
 
 
 git stash
 —————-
-The git stash command is used in Git to temporarily save and hide changes that you've made in your working directory but are not yet ready to commit. This can be useful when you need to switch to a different branch or work on a different task without committing your current changes. Stashing allows you to store your changes away so that you can work on something else and then later come back to your original changes.
-
-Here's how you use the git stash command:
-Stash Changes: Run git stash without any arguments:
-git stash: This command will save your changes in a new stash entry, reverting your working directory to the state of the last committed version.
-Switch Branches or Perform Other Actions: You can now switch branches, perform other operations, or simply take a break from your current work.
-Retrieve Stashed Changes: When you're ready to continue working on the changes you stashed, use the git stash apply command to reapply the stashed changes to your working directory:
-git stash apply: This will apply the most recent stash, but it will still keep the stash entry intact in case you need it again.
-If you have multiple stashes (because you've stashed your changes multiple times), you can use different options to apply or manipulate specific stash entries. For example, you can use git stash list to see a list of stashes and their references, and then use git stash apply stash@{n} to apply a specific stash.
-
-Remember that stashing is a local operation and doesn't affect the remote repository. If you're collaborating with others, you should still commit and push your changes when they're ready to be shared with the team.
-Additionally, if you're frequently using git stash, it might be a good time to consider branching more often or using feature branches to better manage your work without needing to stash changes as frequently.
+This command will save your changes in a new stash entry, reverting your working directory to the state of the last committed version.You can now switch branches, perform other operations, or simply take a break from your current work.
+git stash apply: This will apply the most recent stash, but it will still keep the stash entry intact in case you need it again. If you have multiple stashes, you can use git stash list to see a list of stashes and their references, and then use git stash apply stash@{n} to apply a specific stash.
 git stash pop: Apply and remove the most recent stash.
 
-git reset <file>: Unstage changes from a specific file.
+Remember that stashing is a local operation and doesn't affect the remote repository.
+Additionally, if you're frequently using git stash, it might be a good time to consider branching more often or using feature branches to better manage your work without needing to stash changes as frequently.
+
+
+
+
+
+
+
+
+git reset
 ————————
 The git reset <file> command is used in Git to unstage changes for a specific file. When you make changes to files and then use the git add command to stage those changes, they become part of the next commit. If you want to remove a file from the staging area and "unstage" its changes, you can use git reset <file>.
 
@@ -583,69 +397,26 @@ git reset --hard <commit>
 it discards commits and can't be easily undone (unless you have a backup or another reference to the previous state).
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 git tag <tag_name>: Create a lightweight tag at the current commit.
 git tag -a <tag_name> -m "<message>": Create an annotated tag with a message.
 ————————
 he git tag command is used in Git to create a tag, which is a reference to a specific point in your repository's history, usually associated with a specific commit. Tags are often used to mark significant points in your project's development, such as releases or milestones.
 
-The basic syntax of the git tag command is as follows:
-git tag <tag_name>
-<tag_name>: The name you want to give to the tag. This name can be any alphanumeric string, and it's used to identify the tagged commit.
-For example, to create a tag named "v1.0" for the current commit, you would run:
-git tag v1.0 
-By default, git tag creates what's known as a lightweight tag. Lightweight tags are just references to specific commits, and they don't store any additional information. However, you can also create annotated tags, which store extra information like the tagger's name, email, date, and an optional message.
-
-To create an annotated tag, you can use the -a flag:
-git tag -a <tag_name> -m "Tag message"
--a: Indicates that you want to create an annotated tag.
-Example: git tag -a v1.0 -m "Version 1.0 release"
+syntax: git tag <tag_name>, For example, git tag v1.0 
+To create an annotated tag, you can use the -a flag: git tag -a <tag_name> -m "Tag message"
 git tag: you can list all the tags in your repository using git tag.
 
-Keep in mind that tags are local by default, meaning they are stored in your local repository and are not automatically pushed to remote repositories when you use git push. To push tags to a remote repository, you need to explicitly push them:
-git push origin <tag_name>
-
-This pushes the specific tag to the remote repository. If you want to push all tags, you can use:
-git push origin --tags
-
-
+Keep in mind that tags are local by default, meaning they are stored in your local repository when you use git push. To push tags to a remote repository.
+Explicitly push them: git push origin <tag_name>
+To push all tags, you can use: git push origin --tags
 
 
 git cherry-pick <commit>: Apply the changes introduced by a specific commit to the current branch.
 ————————
 The git cherry-pick command is used in Git to apply the changes from a specific commit onto the current branch. This command allows you to select individual commits from other branches and apply them to your current working branch, effectively "cherry-picking" the changes you want.
 
-Here's how you can use the git cherry-pick command:
-git cherry-pick <commit>
-<commit>: The commit hash or reference of the commit you want to apply to the current branch.
+command: git cherry-pick <commit>
+
 It's important to note that git cherry-pick will only apply the changes made in the specified commit, and not the entire commit history. If the changes in the commit you're cherry-picking depend on changes made in earlier commits, you might encounter conflicts that need to be resolved.
 
 If you're cherry-picking multiple commits, you can provide a range of commits:
@@ -658,58 +429,30 @@ git config: Set or view configuration options for Git.
 ——————————————————————————
 The git config command is used in Git to configure various settings related to your Git repository. These settings can be specific to a single repository (--local), to your user account (--global), or system-wide (--system). The git config command is versatile and allows you to manage settings related to your identity, preferred text editors, remote repositories, and more.
 
-Here are the common ways to use the git config command:
-Setting Configuration Values:
-To set a configuration value, you can use the --local, --global, or --system flag along with the git config command. For example, to set your name and email for all repositories (global configuration), you would run:
-
+To set a configuration value, you can use the --local, --global, or --system flag along with the git config command.
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
-Viewing Configuration Values:
-To view configuration values, you can run the git config command without additional options:
 
+To view
 git config user.name
 git config user.email
-Listing All Configuration Settings:
-To see all the configuration settings for your current repository, you can use:
+To see all the configuration settings git config --list
+Editing Configuration Files Directly: The global configuration is usually stored in the ~/.gitconfig file, and the local configuration for a repository is stored in the .git/config file within that repository's directory.
 
-git config --list
-Editing Configuration Files Directly:
-You can also edit the Git configuration files directly if you prefer. The global configuration is usually stored in the ~/.gitconfig file, and the local configuration for a repository is stored in the .git/config file within that repository's directory.
-To edit the global configuration:
-
-git config --global --edit
-To edit the local configuration of a specific repository:
-
-git config --local --edit
 Remember that configuration values set with --global apply to all your repositories, while those set with --local apply only to the specific repository you're currently in. Configuration values set with --system apply to all users on the system.
-
-Git configuration settings cover a wide range of aspects, including user identity, core behavior, aliases, remote repository URLs, and more. The git config command is your tool for manag
-
 
 git show <commit>: Display detailed information about a specific commit.
 ——————————
 The git show command is used in Git to display information about a specific commit. It shows the details of the commit, including the commit message, author, date, and the changes introduced by the commit.
-Here's how you can use the git show command:
-git show <commit>
-<commit>: The commit hash or reference of the commit you want to show.
-
-
-
-
-
-
+command: git show <commit>
 
 
 
 git rm <file>: Delete a file from both the working directory and Git repository.
 —————————
 The git rm command is used in Git to remove a file from both your working directory and the Git repository. This action stages the file's removal for the next commit. When you commit, the file will no longer be part of your repository's history.
-
-Here's how you can use the git rm command:
-git rm <file>
-<file>: The name of the file you want to remove.
-
-It's important to note that using git rm not only removes the file but also stages its removal in the current branch's staging area. If you commit after running git rm, the file's deletion will be recorded in the commit history.
+command: git rm <file>
+	It's important to note that using git rm not only removes the file but also stages its removal in the current branch's staging area. If you commit after running git rm, the file's deletion will be recorded in the commit history.
 
 If you've committed the file's deletion but later realize you want to retrieve it, you can use git checkout <commit> -- <file> to restore the file from a previous commit:
 git checkout <commit> -- example.txt
@@ -718,11 +461,7 @@ git checkout <commit> -- example.txt
 git revert <commit>: Create a new commit that undoes changes made in a specific commit.
 ——————————-
 The git revert command in Git is used to create a new commit that undoes the changes introduced by a specific commit. It's a way to effectively reverse the effects of a previous commit while still preserving a record of the change in your commit history.
-
-Here's how you can use the git revert command:
-
-git revert <commit>
-<commit>: The commit hash or reference of the commit you want to revert.
+command: git revert <commit>
 
 git rebase <branch_name>: Reapply your commits on top of another branch.
 ——————————
@@ -733,8 +472,7 @@ Identify Common Ancestor: Git identifies the common ancestor between your curren
 Patch Commits: Git then calculates the changes introduced in each of your branch's commits relative to the common ancestor and applies them one by one onto the latest commit of the specified branch.
 Move Branch Pointer: After all commits are applied, Git moves your branch's pointer to the last commit from the specified branch. This effectively places your commits on top of the other branch's commits.
 
-Here’s how you can use the git rebase <branch_name> command:
-git rebase <branch_name>
+command: git rebase <branch_name>
 <branch_name>: The name of the branch you want to rebase onto.
 
 
