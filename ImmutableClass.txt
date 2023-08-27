@@ -1,0 +1,122 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 An immutable class in programming is a class whose instances, once created, cannot be modified.\
+Any attempt to change the object's state results in the creation of a new object with the modified state, rather than modifying the original object.\
+1. State cannot change\
+2. Thread-safe\
+3. Hash code stability: Since the object's state doesn't change, its hash code remains constant, making it suitable for use in hash-based collections like hash maps and sets.\
+Example: String, Wrapper classes, Enum, \
+\
+\
+\
+\
+Immutable Class\
+\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\'97\
+1. Don't provide "setter" methods \'97 methods that modify fields or objects referred to by fields.\
+2. Make all fields final and private.\
+3. Don't allow subclasses to override methods. The simplest way to do this is to declare the class as final. A more sophisticated approach is to make the constructor private and construct instances in factory methods.\
+4. If the instance fields include references to mutable objects, don't allow those objects to be changed:\
+	Don't provide methods that modify the mutable objects.\
+	Don't share references to the mutable objects. Never store references to external, mutable objects passed to the constructor; if necessary, create copies, and store references to the copies. Similarly, create copies of your internal mutable objects when necessary to avoid returning the originals in your methods.\
+5. Any method modify the state of it, then return new instance with those modification.\
+\
+In any case, 
+\f1\b if you have to provide updated Immutable class object, create new and Do not provide any existing reference with it, provide only content of existing object.
+\f0\b0 \
+\
+\
+\
+package com.programmer.gate.beans;\
+\
+public final class ImmutableStudent \{\
+\
+    private final int id;\
+    private final String name;\
+    private final Age age;\
+   \
+   public ImmutableStudent(ImmutableStudent stud) \{\
+  	this.id = stud.id;\
+           this.name = stud.name;\
+	this.age = new Age(stud.age);\
+   \}\
+\
+    public ImmutableStudent(int id, String name, Age age) \{\
+    this.name = name;\
+    this.id = id;\
+    this.age = age;\
+    \}\
+\
+    public int getId() \{\
+    return id;\
+    \}\
+\
+    public String getName() \{\
+    return name;\
+    \}\
+\
+    public Age getAge() \{\
+    return new Age(age);\
+    \}\
+\
+    public ImmutableStudent updateStudent(ImmutableStudent stud) \{\
+	return new ImmutableStudent(stud);\
+    \}	\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0     public ImmutableStudent updateName(String name) \{\
+	ImmutableStudent  stud = new ImmutableStudent(this);\
+	stud.name = name;\
+	return stud;\
+    \}		\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \}\
+\
+\
+\
+package com.programmer.gate.beans;\
+\
+public class Age \{\
+\
+    private int day;\
+    private int month;\
+    private int year;\
+\
+    Age(Age age) \{\
+      this.day = age.day;\
+      this.month = age.month;\
+      this.year = age.year;\
+    \}\
+	\
+    public int getDay() \{\
+        return day;\
+    \}\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0     public int getMonth() \{\
+        return month;\
+    \}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0     public int getYear() \{\
+        return year;\
+    \}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+    public void setDay(int day) \{\
+    this.day = day;\
+    \}\
+\
+    public void setMonth(int month) \{\
+    this.month = month;\
+    \}\
+\
+    public void setYear(int year) \{\
+    this.year = year;\
+    \}\
+\}}
