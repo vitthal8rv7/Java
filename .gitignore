@@ -80,3 +80,4 @@ build/
 config.ini
 secrets.json
 
+.DS_Store
