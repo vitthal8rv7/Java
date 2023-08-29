@@ -10,13 +10,15 @@ Singleton is a creational design pattern. 
 How to use ?
 ———————
 
-Approach 1
-———————
+Guidelines
+--------------
 —> a private constructor
 —> a static field containing its only instance
 —> a static factory method for obtaining the instance
 —> We'll also add an info property for later use only. 
 
+Approach 1
+———————
 public final class ClassSingleton {
 
     private static ClassSingleton INSTANCE;
@@ -60,10 +62,7 @@ public enum EnumSingleton {
     // getters and setters
 }
 
-Note: This approach has serialization and thread-safety guaranteed by the enum implementation itself.
-
-
-
+Note: This approach has serialization and thread-safety guaranteed by the enum implementation itself. But Enums are Immutable so if we used this, we may lead tight coupling.
 
 
 
@@ -91,18 +90,6 @@ Database Connection Pooling: When dealing with database connections, a singleton
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 Problems with Singleton class if not used properly
 ————————————————————————-
 
@@ -115,6 +102,7 @@ Singletons in Clustered Environments: In distributed or clustered environments, 
 Data Spoil: When we run the tests, the production database gets spoiled with the test data, which is hardly acceptable.
 
 Performance Slow: Synchronization might significantly affect the performance. 
+
 
 
 Alternative Solutions: 
