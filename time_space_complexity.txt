@@ -1,0 +1,20 @@
+Big O {O} ‘\mathcal{O}’ notation represents an upper bound for the time/space needed, describing the worst-case scenario. The notation ‘\Omega’ gives a lower bound for the time/space needed. It describes the best-case scenario. ‘\Theta’ notation frames the time/space needed by an upper bound and a lower bound. It narrates the average-case scenario.
+
+Time complexity
+—————————-
+Time complexity is the computational complexity describing the amount of time required for the execution of an algorithm. Time complexity measures the time taken by every statement of the algorithm.
+
+1. Count time for all statements.
+2. Depends mostly on input data size.
+3. More important for solution optimisation.
+4. Time complexity of merge sort is O(nlogs)
+
+
+Space complexity 
+—————————-
+Space complexity represents the amount of memory one program uses in order to achieve its execution. Because a program needs memory to store input data and temporal values while being executed, space complexity is auxiliary and input space.
+
+1. Counts memory space for all variables, even inputs and outputs.
+2. Depends mostly on auxiliary variable size.
+3. Less important with modern hardwares 
+4. Space complexity of merge sort is O(n)
