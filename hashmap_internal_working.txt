@@ -1,0 +1,43 @@
+Internal working of HashMap(K, V) 
+—————————————————-
+
+Internal data structure: HashTable(Buckets with Indexing)
+Default Initial capacity: (16), Default fill ratio(load factor): 0.75, (12)
+HashMap will increase by twice of its current capacity.
+
+
+
+Rehashing and Resizing Hash Map
+—————————————————
+Hashing — an algorithm to map object data to some representative integer value. 
+Capacity is the number of buckets in the HashMap. (16)
+The load factor is the measure that decides when to increase the capacity of the Map. The default load factor is 75% of the capacity(12).
+
+Default Initial capacity > MaximumNumberOfEntries / Default Fill Ratio (Load Factor)
+16 > 12(change by each entry)/0.75
+
+If true => No Rehashing
+Else Rehashing
+
+Rehashing is the process of re-calculating the hash code of already stored entries. Simply put, when the number of entries in the hash table exceeds the threshold, the Map is rehashed so that it has approximately twice the number of buckets as before.
+
+We can provide custom initial capacity and load factor.
+
+
+
+Bucket data structure conversion for better performance
+——————————————————————————
+A collision occurs when a hash function returns the same bucket location for two different keys.
+Collisions may occur due to a bad hash code algorithm and often slow down the performance of the Map.
+To avoid this issue, Java 8 and later versions use a balanced tree (also called a red-black tree) instead of a LinkedList to store collided entries. This improves the worst-case performance of HashMap from O(n) to O(log n).  HashMap initially uses the LinkedList. Then when the number of entries crosses a certain threshold, it will replace a LinkedList with a balanced binary tree. The TREEIFY_THRESHOLD constant decides this threshold value.
+The TREEIFY_THRESHOLD Default value is 8
+
+
+balanced tree also uses more space than singly linked list that’s why if bucket contain less number of elements than TREEIFY_THRESHOLD then hash map uses singly linked list, if number of element > TREEIFY_THRESHOLD then singly linked list converted into Balanced tree.
+
+
+
+Thread Safety 
+———————-
+HashMap is not thread safe, if multiple threads try to access the same HashMap object and modify it at the same time, it may lead to unexpected behavior, it's better to use ConcurrentHashMap in concurrent environments.
+
