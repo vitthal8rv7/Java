@@ -1,0 +1,158 @@
+
+Scheduling
+——————-
+	to arrange for something to happen or be done at a particular time.
+
+scheduling tasks or jobs at specified intervals or times is a common requirement in Enterprise Applications. To accomplish this, Java provides several mechanisms and libraries for task scheduling.
+
+Diff ways for scheduling…
+——————————————-
+1.) java.util.Timer and java.util.TimerTask
+2.) ScheduledExecutorService
+3.) Cron Expressions with Quartz Scheduler
+*4.) @Scheduled annotation
+
+java.util.Timer and java.util.TimerTask
+———————————————————-
+	Timer and TimerTask are java util classes that we use to schedule tasks in a background thread. Basically, TimerTask is the task to perform, and Timer is the scheduler.
+
+1.) void schedule(TimerTask task, Date time) 
+	Schedules the specified task for execution at the specified time.
+	(Simple: Schedule/run given task at given date for once)
+
+2.) void schedule(TimerTask task, Date firstTime, long period) 
+	Schedules the specified task for repeated fixed-delay execution, beginning at the specified time. 
+	(Simple: Schedule/run given task at given date and repeat the same task after given time period)
+
+3.) void schedule(TimerTask task, long delay) 
+	Schedules the specified task for execution after the specified delay. 
+	(Simple: Schedule/run given task after given delay for once.)
+
+4.)  void schedule(TimerTask task, long delay, long period) 
+	Schedules the specified task for repeated fixed-delay execution, beginning after the specified delay. 
+	(Simple: Schedule/run given task after given delay and repeat the same task after given time period)
+
+fixed-rate = true;
+5.) void scheduleAtFixedRate(TimerTask task, Date firstTime, long period) 
+	Schedules the specified task for repeated fixed-rate execution, beginning at the specified time. 
+	(Simple: Schedule/run given task at given date and repeat the same task after time period),  fixed-rate = true;
+
+fixed-rate = true;
+6.) void scheduleAtFixedRate(TimerTask task, long delay, long period) Schedules the specified task for repeated fixed-rate execution, beginning after the specified delay.
+	(Simple: Schedule/run given task after given delay and repeat the same task after given time period),  fixed-rate = true;
+
+
+
+
+
+
+Fixed-rate vs Fixed-delay
+————————————-
+Fixed-rate timers (scheduleAtFixedRate()) are based on the starting time (so each iteration will execute at startTime + iterationNumber * delayTime).
+	In fixed-rate execution, each execution is scheduled relative to the scheduled execution time of the initial execution. If an execution is delayed for any reason (such as garbage collection or other background activity), two or more executions will occur in rapid succession to "catch up.”
+
+Fixed-delay timers (schedule()) are based on the previous execution (so each iteration will execute at lastExecutionTime + delayTime).
+	In fixed-delay execution, each execution is scheduled relative to the actual execution time of the previous execution. If an execution is delayed for any reason (such as garbage collection or other background activity), subsequent executions will be delayed as well.
+	Aside from this, there is no difference. You will not find a significance performance difference, either.
+			SIMPLE
+		———————————
+Fixed-rate: Complete all the scheduled task which were pending due to delay in execution
+Fixed-delay: Ignore all the scheduled task which were pending due to delay in execution
+
+Condition
+————————-
+after starting if OS got some priority task to execute, OS will pause our task and work on priority task, OS complete it and return back to our task, 
+	then Fixed-rate and Fixed-delay work differently in this condition
+For example OS pause out task for 1hr/60min
+Fixed-rate: 
+	fixed-rate will check how much delay was there, here 60min then
+fixed-rate will check how many execution should happen till now….
+(For example: 60/5 => 12, we miss 12 execution)
+Then, to complete this 12 executions, it will not run task after every 5 min,
+
+	It will continuously run task until we catchup with execution number of current time 
+Then It will work as expected like run 1 task after every 5min…
+If its happens again, it will run task continuously again until catchup with execution number of current time.
+
+ 
+Fixed-delay:  It will not think much, it will check lastExecution+fixedDelay time(5min) <= current time [mean, we last completed last task before 5 or more times] then run(repeat) task again.
+Here lastExecution + 60min > 5min delay so It will execution 
+	But ONLY ONCE, NOT 12 time, it will not think like in last 60min we cloud complete 12 task, we should complete it now, no, it will ignore it.
+
+NOTE: use Fixed-Rate or Fixed-Delay AS per requirement.
+Example:
+public void givenUsingTimer_whenSchedulingTaskOnce_thenCorrect() {
+    TimerTask task = new TimerTask() {
+        public void run() {
+            System.out.println("Task performed on: " + new Date() + "n" +
+              "Thread's name: " + Thread.currentThread().getName());
+        }
+    };
+    Timer timer = new Timer("Timer");
+    long delay = 1000L;
+    timer.schedule(task, delay); 
+}
+
+
+ScheduledExecutorService
+—————————————-
+It is part of the java.util.concurrent package and allows you to schedule tasks with more control.
+
+Timer can be sensitive to changes in the system clock; ScheduledThreadPoolExecutor isn't. 
+
+Timer has only one execution thread; ScheduledThreadPoolExecutor can be configured with any number of threads. 
+
+Runtime Exceptions thrown inside the TimerTask kill the thread, so the following scheduled tasks won't run further; with ScheduledThreadExecutor, the current task will be cancelled, but the rest will continue to run.
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class MyScheduler {
+    public static void main(String[] args) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        Runnable task = () -> {
+            // Your task logic here
+            System.out.println("Task executed.");
+        };
+
+        // Schedule the task to run after an initial delay and then every 1 second
+        scheduler.scheduleAtFixedRate(task, 1, 1, TimeUnit.SECONDS);
+    }
+}
+
+
+Cron Expressions with Quartz Scheduler:
+————————————————————-
+The Quartz Scheduler is a powerful library for scheduling jobs in Java applications.
+It allows you to use cron expressions to define complex scheduling patterns.
+You can schedule jobs with specific timing and recurrence patterns.
+
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
+
+public class MyScheduler {
+    public static void main(String[] args) throws SchedulerException {
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+
+        JobDetail job = JobBuilder.newJob(MyJob.class)
+            .withIdentity("myJob", "group1")
+            .build();
+
+        Trigger trigger = TriggerBuilder.newTrigger()
+            .withIdentity("myTrigger", "group1")
+            .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?"))
+            .build();
+
+        scheduler.start();
+        scheduler.scheduleJob(job, trigger);
+    }
+}
+
+
+
+
+
+
+
+
