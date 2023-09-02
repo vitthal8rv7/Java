@@ -1,4 +1,3 @@
-
 Scheduling
 ——————-
 	to arrange for something to happen or be done at a particular time.
@@ -152,7 +151,176 @@ public class MyScheduler {
 
 
 
+@Scheduled
+———————-
+The @Scheduled annotation is used to trigger the scheduler for a specific time period.
+The @EnableScheduling annotation is used to enable the scheduler for your application. This annotation should be added into the main Spring Boot application class file.
+
+The rules need to follow to annotate a method with @Scheduled are: 
+1.) The method should have a void return type (if not, the returned value will be ignored) 
+2.) The method should not expect any parameters
+
+Add scheduled annotation on methods only.
+
+Examples:	
+1.) @Scheduled(fixedDelay = 1000)
+	execute a task to run after a fixed delay
+
+2.) @Scheduled(fixedRate = 1000)
+	execute a task at a fixed interval of time
+
+3.) @Scheduled(fixedDelay = 1000, initialDelay = 1000)
+	The task will be executed the first time after the initialDelay value, and it will continue to be executed according to the fixedDelay.
+
+4.) @Scheduled(cron = "0 15 10 15 * ?”)
+	Sometimes delays and rates are not enough, and we need the flexibility of a cron expression to control the schedule of our tasks
+
+Spring will use the server's local time zone for the cron expression. However, we can use the zone attribute to change this timezone
+@Scheduled(cron = "0 15 10 15 * ?", zone = “Europe/Paris")
+(“Second, Minute, Hours, Day Of Month, Month, Day Of Week, Year”, zone=“”)
+
+Hardcoding these schedules is simple, but we usually need to be able to control the schedule without re-compiling and re-deploying the entire app.
+We'll make use of Spring Expressions to externalize the configuration of the tasks, and we'll store these in properties files.
+@Scheduled(fixedDelayString = “${fixedDelay.in.milliseconds}")
+@Scheduled(fixedRateString = “${fixedRate.in.milliseconds}")
+@Scheduled(cron = "${cron.expression}")
+
+By default, Spring uses a local single-threaded scheduler to run the tasks. As a result, even if we have multiple @Scheduled methods, they each need to wait for the thread to complete executing a previous task. If our tasks are truly independent, it's more convenient to run them in parallel. For that, we need to provide a TaskScheduler that better suits our needs:
+
+@Bean
+public TaskScheduler  taskScheduler() {
+    ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+    threadPoolTaskScheduler.setPoolSize(5);
+    threadPoolTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
+    return threadPoolTaskScheduler;
+}
+If we use Spring Boot, we can make use of an even more convenient approach to increase the scheduler's pool size
+It's simply enough to set the spring.task.scheduling.pool.size property:
+spring.task.scheduling.pool.size=5
+
+
+If we want to support parallel behavior in scheduled tasks, we need to add the @Async annotation
+@EnableAsync
+public class ScheduledFixedRateExample {
+    @Async
+    @Scheduled(fixedRate = 1000)
+    public void scheduleFixedRateTaskAsync() throws InterruptedException {
+        System.out.println(
+          "Fixed rate task async - " + System.currentTimeMillis() / 1000);
+        Thread.sleep(2000);
+    }
+
+}
+
+The @EnableAsync annotation is used to enable the parallel execution for your application. This annotation can be added into class in which you want to use but we should add it into the main Spring Boot application class file so that Async concept is available to entire application instead of specific class.
+
+
+Second Minute Hours Day Of Month Month Day Of Week Year
+
+Asterisk (*): Represents "every" or "any" value for the field.
+Comma (,): Allows you to specify a list of values. [At specific value]
+Hyphen (-): Specifies a range of values. [0-11 or JAN-AUG]
+Slash (/): Introduces step values. (Every / UnitPlace) => 0 0/5 14 * * ? Every 5min 
+
+Question Mark (?): Used in the day of the month and day of the week fields to represent "no specific value" or "don't care." It is often used when one of these fields is not relevant for the task.
+
+L (last): Used in the day of the month and day of the week fields to represent "the last" value. 
+
+W (weekday): Used in the day of the month field to find the nearest weekday to a specified day. 
+
+# (nth): Used in the day of the week field to specify the nth occurrence of a particular day within the month.
+
+
+1.) ( * * * * * * ) ==> every second, every minute, every hour, every day of month, every month, every day of week, every year
 
 
 
+When you use "0/2" in a field, it means the task should run every "2 units" starting from "0" within that field.
+When you use "*/2" in a field, it means the task should run every "2 units" within that field, without specifying a starting point.
+In the minute field (the first field), "2/3" means "start at the 2nd minute of the hour and then every 3 minutes after that.”
+#: Week Number Of Day # nth occurrence of month
+Example A-1 Cron Expressions
+Second | Minute | Hours | Day Of Month | Month | Day Of Week | Year
+————————————————————————————————————————
+* * * * * * * 
+(every sec, every min, every hour, every day, every month, every year)
 
+* 0 * * * * *
+(every sec, once at 0th min, every hour, every day, every month, every year)
+
+* 25 * * * * *	
+(every sec, once at 25th min, every hour, every day, every month, every year)
+
+* 0/5 * * * * *	
+(every sec, every 5min start at 0th min, every hour, every day, every month, every year)
+
+* 1/5 * * * * * 	
+(every sec, every 5min start at 1st min, every hour, every day, every month, every year)
+
+* 2/5 * * * * * 	
+(every sec, every 5min start at 2nd min, every hour, every day, every month, every year)
+
+* 0-5 * * * ? *	
+(every sec, every min of 1st 5min, every hour, every day, every month, every year)
+
+* 1, 12, 22, 58 * * * ? *
+(every sec, (1st, 12th, 22nd, 58th) min, every hour, every day, every month, every year)
+
+* 1, 12, 14-19, 22, 58 * * * ? *
+(every sec, (1st, 12th, 14th to 19th(14, 15, 16, 17, 18 19), 22nd, 58th) min, every hour, every day, every month, every year)
+
+
+0 * * * * * * 
+(once(0th sec), every min, every hour, every day, every month, every year)
+
+0 0 * * * * *
+(once(0th sec), once at 0th min, every hour, every day, every month, every year)
+
+0 25 * * * * *	
+(once(0th sec), once at 25th min, every hour, every day, every month, every year)
+
+0 0/5 * * * * *	
+(once(0th sec), every 5min start at 0th min, every hour, every day, every month, every year)
+
+0 1/5 * * * * * 	
+(once(0th sec), every 5min start at 1st min, every hour, every day, every month, every year)
+
+0 2/5 * * * * * 	
+(once(0th sec), every 5min start at 2nd min, every hour, every day, every month, every year)
+
+0 0-5 * * * ? *	
+(once(0th sec), every min of 1st 5min, every hour, every day, every month, every year)
+
+0 1, 12, 22, 58 * * * ? *
+(once(0th sec),(1st, 12th, 22nd, 58th) min, every hour, every day, every month, every year)
+
+0 1, 12, 14-19, 22, 58 * * * ? *
+(once(0th sec),(1st, 12th, 14th to 19th(14, 15, 16, 17, 18 19), 22nd, 58th) min, every hour, every day, every month, every year)
+
+
+0 * 0 * * * * 
+(once(0th sec), every min, once at 0th hr, every day, every month, every year)
+
+0 0 0 * * * *
+(once(0th sec), once at 0th min, once at 0th hr, every day, every month, every year)
+
+0 25 0 * * * *	
+(once(0th sec), once at 25th min, once at 0th hr, every day, every month, every year)
+
+0 0/5 0 * * * *	
+(once(0th sec), every 5min start at 0th min, once at 0th hr, every day, every month, every year)
+
+0 1/5 0 * * * * 	
+(once(0th sec), every 5min start at 1st min, once at 0th hr, every day, every month, every year)
+
+0 2/5 0 * * * * 	
+(once(0th sec), every 5min start at 1st min, once at 0th hr, every day, every month, every year)
+
+0 0-5 0 * * ? *	
+(once(0th sec), every min of 1st 5min, once at 0th hr, every day, every month, every year)
+
+0 1, 12, 22, 58 0 * * ? *
+(once(0th sec),(1st, 12th, 22nd, 58th) min, once at 0th hr, every day, every month, every year)
+
+0 1, 12, 14-19, 22, 58 0 * * ? *
+(once(0th sec),(1st, 12th, 14th to 19th(14, 15, 16, 17, 18 19), 22nd, 58th) min, once at 0th hr, every day, every month, every year)
