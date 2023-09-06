@@ -1,5 +1,7 @@
 package com.learn.java.exception.handling.controller;
 
+import java.io.FileNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learn.java.exception.handling.service.ExceptionHandlingService;
 
 @RestController
-public class ExceptionHandlingDemo {
+public class ExceptionHandlingController {
 
 	@Autowired
 	public ExceptionHandlingService exceptionHandlingService;
@@ -46,6 +48,18 @@ public class ExceptionHandlingDemo {
 	public String tryWithResourcesDemo() {
 		exceptionHandlingService.tryWithResourcesDemo();
 		return "Try With Resources Tested.";
+	}
+
+	@GetMapping("/throws")
+	public String throwsDemo() throws FileNotFoundException {
+		exceptionHandlingService.throwsDemo();
+		return "Throws exception to caller Tested.";
+	}
+
+	@GetMapping("/throw")
+	public String throwDemo() {
+		exceptionHandlingService.throwDemo();
+		return "Throw new FileNotFound Exception Tested.";
 	}
 
 }

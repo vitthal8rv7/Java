@@ -104,4 +104,16 @@ public class ExceptionHandlingService {
 		}		
 	}
 
+	public void throwsDemo() throws FileNotFoundException {
+		FileInputStream fis = new FileInputStream("/no-file");
+	}
+
+	public void throwDemo() {
+		try {
+			FileInputStream fis = new FileInputStream("/no-file");
+		} catch (FileNotFoundException e) {
+			throw new CustomFileNotFoundException("FileNotFoundException");
+		}		
+	}
+
 }
