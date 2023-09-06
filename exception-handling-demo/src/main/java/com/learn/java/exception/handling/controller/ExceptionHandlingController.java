@@ -3,9 +3,14 @@ package com.learn.java.exception.handling.controller;
 import java.io.FileNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.exception.handling.ErrorResponse;
 import com.learn.java.exception.handling.service.ExceptionHandlingService;
 
 @RestController
@@ -62,4 +67,17 @@ public class ExceptionHandlingController {
 		return "Throw new FileNotFound Exception Tested.";
 	}
 
+	@GetMapping("/throw2")
+	public String throwDemo2() throws FileNotFoundException {
+		exceptionHandlingService.throwDemo2();
+		return "Throw new FileNotFound Exception Tested.";
+	}
+
+	@ExceptionHandler(FileNotFoundException.class) 
+	@ResponseBody
+	public ResponseEntity<ErrorResponse> fileNotFoundException() {
+		System.out.println("Inside Exception Handler");
+		ErrorResponse errorListResponse = new ErrorResponse("File Not Found Exception Demo");
+		return new ResponseEntity<>(errorListResponse, HttpStatus.NOT_FOUND);
+	}
 }

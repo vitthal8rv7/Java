@@ -116,4 +116,8 @@ public class ExceptionHandlingService {
 		}		
 	}
 
+	public void throwDemo2() throws FileNotFoundException {
+		FileInputStream fis = new FileInputStream("/no-file");
+	}
+
 }
