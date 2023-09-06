@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Service;
 
+import com.learn.java.exception.handling.exception.CustomFileNotFoundException;
+
 @Service
 public class ExceptionHandlingService {
 
@@ -118,6 +120,11 @@ public class ExceptionHandlingService {
 
 	public void throwDemo2() throws FileNotFoundException {
 		FileInputStream fis = new FileInputStream("/no-file");
+	}
+
+	public void controllerAdvice() {
+		System.out.println("In controllerAdvice demo.");
+		System.out.println("Arithmatic Exception: "+(10/0));		
 	}
 
 }

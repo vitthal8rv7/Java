@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.learn.java.exception.handling.ErrorResponse;
+import com.learn.java.exception.handling.model.ErrorResponse;
 import com.learn.java.exception.handling.service.ExceptionHandlingService;
 
 @RestController
@@ -80,4 +80,11 @@ public class ExceptionHandlingController {
 		ErrorResponse errorListResponse = new ErrorResponse("File Not Found Exception Demo");
 		return new ResponseEntity<>(errorListResponse, HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("/controller/advice")
+	public String controllerAdvice() {
+		exceptionHandlingService.controllerAdvice();
+		return "Try Catch Tested.";
+	}
+
 }

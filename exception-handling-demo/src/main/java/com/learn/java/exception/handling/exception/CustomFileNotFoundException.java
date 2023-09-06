@@ -1,6 +1,6 @@
-package com.learn.java.exception.handling.service;
+package com.learn.java.exception.handling.exception;
 
-import com.learn.java.exception.handling.ErrorResponse;
+import com.learn.java.exception.handling.model.ErrorResponse;
 
 public class CustomFileNotFoundException extends RuntimeException {
 
