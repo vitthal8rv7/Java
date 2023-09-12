@@ -30,61 +30,61 @@ public class controller {
 		return "Array List Demo Completed.";
 	}
 
-	@GetMapping("/collection/demo/linkedlist")
+	@GetMapping("/collection/demo/linked-list")
 	public String linkedListDemo() {
 		listDemoService.linkedListDemo();
 		return "Linked List Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/hashSet")
+	@GetMapping("/collection/demo/hash-set")
 	public String hashSetDemo() {
 		setDemoService.hashSetDemo();
 		return "Hash Set Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/linkedHashSet")
+	@GetMapping("/collection/demo/linked-hash-set")
 	public String linkedHashSetDemo() {
 		setDemoService.linkedHashSetDemo();
 		return "Linked Hash Set Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/treeSet")
+	@GetMapping("/collection/demo/tree-set")
 	public String treeSetDemo() {
 		setDemoService.treeSetDemo();
 		return "Tree Set Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/hashMap")
+	@GetMapping("/collection/demo/hash-map")
 	public String hashMapDemo() {
 		mapDemoService.hashMapDemo();
 		return "Hash Map Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/linkedHashMap")
+	@GetMapping("/collection/demo/linked-hash-map")
 	public String linkedHashMapDemo() {
 		mapDemoService.linkedHashMapDemo();
 		return "Linked Hash Map Demo Completed.";
 	}
 	
-	@GetMapping("/collection/demo/identityHashMap")
+	@GetMapping("/collection/demo/identity-hash-map")
 	public String identityHashMapDemo() {
 		mapDemoService.identityHashMapDemo();
 		return "Identity Hash Map Demo Completed.";
 	}
 
-	@GetMapping("/collection/demo/weakHashMap")
+	@GetMapping("/collection/demo/weak-hash-map")
 	public String weakHashMapDemo() {
 		mapDemoService.weakHashMapDemo();
 		return "Weak Hash Map Demo Completed.";
 	}
 
-	@GetMapping("/collection/demo/treeMap")
+	@GetMapping("/collection/demo/tree-map")
 	public String treeMapDemo() {
 		mapDemoService.treeMapDemo();
 		return "Tree Map Demo Completed.";
 	}
 
-	@GetMapping("/collection/demo/priorityQueue")
+	@GetMapping("/collection/demo/priority-queue")
 	public String priorityQueueDemo() {
 		queueDemoService.priorityQueue();
 		return "Priority Queue Demo Completed.";
