@@ -7,7 +7,7 @@ public class QueueDemoService {
 
 	public void priorityQueue() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

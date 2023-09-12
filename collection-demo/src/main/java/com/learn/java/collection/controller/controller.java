@@ -13,17 +13,17 @@ import com.learn.java.collection.service.SetDemoService;
 public class controller {
 
 	@Autowired
-	private ListDemoService listDemoService; 
-	
+	private ListDemoService listDemoService;
+
 	@Autowired
-	private SetDemoService setDemoService; 
-	
+	private SetDemoService setDemoService;
+
 	@Autowired
-	private QueueDemoService queueDemoService; 
-	
+	private QueueDemoService queueDemoService;
+
 	@Autowired
-	private MapDemoService mapDemoService; 
-	
+	private MapDemoService mapDemoService;
+
 	@GetMapping("/collection/demo/arraylist")
 	public String arrayListDemo() {
 		listDemoService.arrayListDemo();
@@ -35,37 +35,37 @@ public class controller {
 		listDemoService.linkedListDemo();
 		return "Linked List Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/hash-set")
 	public String hashSetDemo() {
 		setDemoService.hashSetDemo();
 		return "Hash Set Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/linked-hash-set")
 	public String linkedHashSetDemo() {
 		setDemoService.linkedHashSetDemo();
 		return "Linked Hash Set Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/tree-set")
 	public String treeSetDemo() {
 		setDemoService.treeSetDemo();
 		return "Tree Set Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/hash-map")
 	public String hashMapDemo() {
 		mapDemoService.hashMapDemo();
 		return "Hash Map Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/linked-hash-map")
 	public String linkedHashMapDemo() {
 		mapDemoService.linkedHashMapDemo();
 		return "Linked Hash Map Demo Completed.";
 	}
-	
+
 	@GetMapping("/collection/demo/identity-hash-map")
 	public String identityHashMapDemo() {
 		mapDemoService.identityHashMapDemo();
@@ -89,6 +89,5 @@ public class controller {
 		queueDemoService.priorityQueue();
 		return "Priority Queue Demo Completed.";
 	}
-
 
 }
