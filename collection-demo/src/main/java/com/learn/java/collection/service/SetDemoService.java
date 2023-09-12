@@ -53,7 +53,7 @@ public class SetDemoService {
 	 * 2.) Duplicates Not Allowed
 	 * 3.) NULL insertion is possible
 	 * 4.) No AutoSorting
-	 * 
+	 * 5.) LinkedList class also implement Queue Interface (follows FIFO)
 	 * 
 	 * */
 	public void linkedHashSetDemo() {
@@ -81,6 +81,7 @@ public class SetDemoService {
 		System.out.println(linkedHashSet);
 		System.out.println("Linked Hash Set removing R by Object: "+linkedHashSet.remove("R"));
 		System.out.println(linkedHashSet);
+		
 	}
 
 	public void treeSetDemo() {
