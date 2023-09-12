@@ -1,6 +1,7 @@
 package com.learn.java.collection.service;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 import org.springframework.stereotype.Service;
 
@@ -45,9 +46,41 @@ public class SetDemoService {
 
 	}
 
+	/*
+	 * 0.) Underlying Data Structure: Linked List + Hash Table
+	 * 
+	 * 1.) Insertion Order Preserved (due to linked list)
+	 * 2.) Duplicates Not Allowed
+	 * 3.) NULL insertion is possible
+	 * 4.) No AutoSorting
+	 * 
+	 * 
+	 * */
 	public void linkedHashSetDemo() {
-		// TODO Auto-generated method stub
-		
+		LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
+		linkedHashSet.add("A");
+		linkedHashSet.add("B");
+		linkedHashSet.add("D");
+		linkedHashSet.add("C");
+		linkedHashSet.add("F");
+		linkedHashSet.add("W");
+		linkedHashSet.add("Z");
+		linkedHashSet.add("S");
+		linkedHashSet.add("R");
+		linkedHashSet.add("A");
+		System.out.println("Added Linked Hash Set: "+linkedHashSet);
+		linkedHashSet.add(null);
+		System.out.println("Linked Hash Set after adding null: "+linkedHashSet);
+		linkedHashSet.add(null);
+		System.out.println("Linked Hash Set again adding null: "+linkedHashSet);
+		linkedHashSet.add("R");
+		System.out.println("Linked Hash Set again adding R: "+linkedHashSet);
+		System.out.println("Linked Hash Set Contains R? => "+linkedHashSet.contains("R"));
+		System.out.println("Linked Hash Set Contains null? => "+linkedHashSet.contains(null));		
+		System.out.println("Linked Hash Set removing R by index: "+linkedHashSet.remove(linkedHashSet.size()-1));
+		System.out.println(linkedHashSet);
+		System.out.println("Linked Hash Set removing R by Object: "+linkedHashSet.remove("R"));
+		System.out.println(linkedHashSet);
 	}
 
 	public void treeSetDemo() {
