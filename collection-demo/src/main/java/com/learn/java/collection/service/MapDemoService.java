@@ -1,6 +1,7 @@
 package com.learn.java.collection.service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import org.springframework.stereotype.Service;
 
@@ -48,9 +49,44 @@ public class MapDemoService {
 
 	}
 
+	/*
+	 * 0.) Underlying Data Structure: LinkedList + Hash Table
+	 * 
+	 * 1.) Insertion Order Preserved (due to linked list) 
+	 * 2.) Duplicate Keys Not Allowed, Values can be duplicate 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
+	 * 
+	 */
 	public void linkedHashMapDemo() {
-		// TODO Auto-generated method stub
-
+		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<>();
+		linkedHashMap.put("A", "A");
+		linkedHashMap.put("B", "B");
+		linkedHashMap.put("D", "D");
+		linkedHashMap.put("C", "C");
+		linkedHashMap.put("F", "F");
+		linkedHashMap.put("W", "W");
+		linkedHashMap.put("Z", "Z");
+		linkedHashMap.put("S", "S");
+		linkedHashMap.put("R", "R");
+		linkedHashMap.put("A", "A"); //if same key and same value...no changes
+		System.out.println("puted Linked Hash Map: " + linkedHashMap);
+		linkedHashMap.put(null, null);
+		System.out.println("Linked Hash Map after puting null: " + linkedHashMap);
+		linkedHashMap.put(null, null);
+		System.out.println("Linked Hash Map after puting null: " + linkedHashMap);
+		linkedHashMap.put("K", null);
+		System.out.println("Linked Hash Map again puting null: " + linkedHashMap);
+		linkedHashMap.put("A", "R");
+		System.out.println("Linked Hash Map again puting R: " + linkedHashMap);
+		System.out.println("Linked Hash Map Contains R? => " + linkedHashMap.containsKey("R"));
+		System.out.println("Linked Hash Map Contains null? => " + linkedHashMap.containsKey(null));
+		System.out.println("Linked Hash Map removing R by index: " + linkedHashMap.remove(linkedHashMap.size() - 1));
+		System.out.println(linkedHashMap);
+		System.out.println("Linked Hash Map removing R by Object: " + linkedHashMap.remove("R"));
+		System.out.println(linkedHashMap);
+		System.out.println(linkedHashMap.entrySet().toString());
+		System.out.println(linkedHashMap.entrySet().getClass());
 	}
 
 	public void identityHashMapDemo() {

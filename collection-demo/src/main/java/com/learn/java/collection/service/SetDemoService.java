@@ -52,7 +52,8 @@ public class SetDemoService {
 	 * 1.) Insertion Order Preserved (due to linked list) 
 	 * 2.) Duplicates Not Allowed
 	 * 3.) NULL insertion is possible 
-	 * 4.) No AutoSorting 5.) LinkedList class also implement Queue Interface (follows FIFO)
+	 * 4.) No AutoSorting 
+	 * 5.) LinkedList class also implement Queue Interface (follows FIFO)
 	 * 
 	 */
 	public void linkedHashSetDemo() {
