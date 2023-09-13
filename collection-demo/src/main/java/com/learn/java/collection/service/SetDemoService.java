@@ -12,9 +12,10 @@ public class SetDemoService {
 	/*
 	 * 0.) Underlying Data Structure: Hash Table
 	 * 
-	 * 1.) Insertion Order Not Preserved (as per hashing logic) 2.) Duplicates Not
-	 * Allowed 3.) NULL insertion is possible 4.) No AutoSorting
-	 * 
+	 * 1.) Insertion Order Not Preserved (as per hashing logic) 
+	 * 2.) Duplicates Not Allowed 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
 	 * 
 	 */
 	public void hashSetDemo() {
@@ -48,9 +49,10 @@ public class SetDemoService {
 	/*
 	 * 0.) Underlying Data Structure: Linked List + Hash Table
 	 * 
-	 * 1.) Insertion Order Preserved (due to linked list) 2.) Duplicates Not Allowed
-	 * 3.) NULL insertion is possible 4.) No AutoSorting 5.) LinkedList class also
-	 * implement Queue Interface (follows FIFO)
+	 * 1.) Insertion Order Preserved (due to linked list) 
+	 * 2.) Duplicates Not Allowed
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting 5.) LinkedList class also implement Queue Interface (follows FIFO)
 	 * 
 	 */
 	public void linkedHashSetDemo() {
@@ -84,9 +86,11 @@ public class SetDemoService {
 	/*
 	 * 0.) Underlying Data Structure: BalanceTree
 	 * 
-	 * 1.) Insertion Order Preserved (according to sorting order) 2.) Duplicates Not
-	 * Allowed 3.) NULL insertion is NOT possible //NPE 4.) AutoSorting (Default:
-	 * DNSO) 5.)
+	 * 1.) Insertion Order Preserved (according to sorting order) 
+	 * 2.) Duplicates Not Allowed 
+	 * 3.) NULL insertion is NOT possible //NPE 
+	 * 4.) AutoSorting (Default:DNSO) 
+	 * 5.)
 	 * 
 	 */
 	public void treeSetDemo() {

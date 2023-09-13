@@ -11,8 +11,10 @@ public class ListDemoService {
 	/*
 	 * 0.) Underlying Data Structure: Resizable/Growable Array
 	 * 
-	 * 1.) Insertion Order Preserved 2.) Duplicates Allowed 3.) NULL insertion is
-	 * possible 4.) No AutoSorting
+	 * 1.) Insertion Order Preserved 
+	 * 2.) Duplicates Allowed 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
 	 * 
 	 * 
 	 */
@@ -48,8 +50,10 @@ public class ListDemoService {
 	/*
 	 * 0.) Underlying Data Structure: LinkedList
 	 * 
-	 * 1.) Insertion Order Preserved 2.) Duplicates Allowed 3.) NULL insertion is
-	 * possible 4.) No AutoSorting
+	 * 1.) Insertion Order Preserved 
+	 * 2.) Duplicates Allowed 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
 	 * 
 	 */
 	public void linkedListDemo() {
