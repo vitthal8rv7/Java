@@ -1,5 +1,7 @@
 package com.learn.java.collection.mpdel;
 
+import java.util.Objects;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -8,6 +10,13 @@ public class Student {
 	public Integer sid;
 	public String sname;
 	
+	public Student() {
+	}
+	
+	public Student(Integer id, String name) {
+		sid = id;
+		sname = name;
+	}
 	public Integer getSid() {
 		return sid;
 	}
@@ -22,10 +31,17 @@ public class Student {
 		
 	}
 	
-    @Override
-	public String toString() {
-		return "Student [sid=" + sid + ", sname=" + sname + "]";
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		System.out.println("Inside Equals method.");
+//		return super.equals(obj);
+//	}
+	
+//	@Override
+//	public String toString() {
+//		return "Student [sid=" + sid + ", sname=" + sname + "]";
+//	}
+	
 	@Override  
     protected void finalize()   
     {   

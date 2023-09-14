@@ -1,6 +1,7 @@
 package com.learn.java.collection.service;
 
 import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.WeakHashMap;
 
@@ -92,9 +93,55 @@ public class MapDemoService {
 		System.out.println(linkedHashMap.entrySet().getClass());
 	}
 
+	/*
+	 * 0.) Underlying Data Structure: Hash Table (Internally its buckets usages linked list or tree in collision)
+	 * 
+	 * 1.) Insertion Order Not Preserved (as per hashing logic) 
+	 * 2.) Duplicate Keys Not Allowed, Values can be duplicate 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
+	 * 
+	 * Always check / compare reference not content. Due to this, IdentityHashMap can have duplicate keys
+	 */
 	public void identityHashMapDemo() {
-		// TODO Auto-generated method stub
-
+		IdentityHashMap<String, String> identityHashMapDemo = new IdentityHashMap<>();
+		String student = new String("sv");
+		System.out.println(student);
+		identityHashMapDemo.put(student, "A");
+		identityHashMapDemo.put(new String("1"), "An");
+		identityHashMapDemo.put(new String("1"), "BE");
+		identityHashMapDemo.put(new String("3"), "Z");
+		identityHashMapDemo.put(new String("4"), "Z");
+		identityHashMapDemo.put(student, "K");
+		System.out.println(identityHashMapDemo.toString());
+		System.gc();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			System.out.println("Interrupted Exception");
+			e.printStackTrace();
+		}
+		System.out.println(identityHashMapDemo);
+		
+		
+		WeakHashMap<String, String> weakHashMapDemo = new WeakHashMap<>();
+		String student1 = new String("sv");
+		System.out.println(student1);
+		weakHashMapDemo.put(student1, "A");
+		weakHashMapDemo.put(new String("1"), "An");
+		weakHashMapDemo.put(new String("1"), "BE");
+		weakHashMapDemo.put(new String("3"), "Z");
+		weakHashMapDemo.put(new String("4"), "Z");
+		weakHashMapDemo.put(student1, "K");
+		System.out.println(weakHashMapDemo.toString());
+		System.gc();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			System.out.println("Interrupted Exception");
+			e.printStackTrace();
+		}
+		System.out.println(weakHashMapDemo);
 	}
 
 	/*
@@ -113,10 +160,12 @@ public class MapDemoService {
 	 */
 	public void weakHashMapDemo() {
 		WeakHashMap<Student, String> weakHashMap = new WeakHashMap<>();
-		weakHashMap.put(new Student(), "A");
+		Student student = new Student(1, "1");
+		System.out.println(student);
+		weakHashMap.put(student, "A1");
 		weakHashMap.put(new Student(), "BE");
 		weakHashMap.put(new Student(), "Z");
-		weakHashMap.put(new Student(), "K");
+		weakHashMap.put(new Student(1,"1"), "K1");
 		weakHashMap.put(new Student(), "A");
 		System.out.println(weakHashMap.toString());
 		System.gc();
