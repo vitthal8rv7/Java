@@ -222,76 +222,76 @@ public class MapDemoService {
 		
 		// Navigation Methods.
 		System.out.println(
-				"Returns the least element in this set greater than or equal to the given element, or null if there is no such element. ceiling: "
+				"Returns the least element in this map greater than or equal to the given element, or null if there is no such element. ceiling: "
 						+ treeMap.ceilingKey("D"));
 		System.out.println(
-				"Returns the least element in this set strictly greater than the given element, or null if there is no such element.\n"
+				"Returns the least element in this map strictly greater than the given element, or null if there is no such element.\n"
 						+ "Specified by: higher(...) in NavigableSet higher: " + treeMap.higherKey("D"));
 
 		System.out.println(
-				"Returns the greatest element in this set less than or equal to the given element, or null if there is no such element. floor: "
+				"Returns the greatest element in this map less than or equal to the given element, or null if there is no such element. floor: "
 						+ treeMap.floorKey("D"));
 		System.out.println(
-				"Returns the greatest element in this set strictly less than the given element, or null if there is no such element. lower: "
+				"Returns the greatest element in this map strictly less than the given element, or null if there is no such element. lower: "
 						+ treeMap.lowerKey("D"));
 
 		/*
-		 * Returns a view of the portion of this set whose elements are strictly less
-		 * than toElement. The returned set is backed by this set, so changes in the
-		 * returned set are reflected in this set, and vice-versa. The returned set
-		 * supports all optional set operations that this set supports. The returned set
+		 * Returns a view of the portion of this map whose elements are strictly less
+		 * than toElement. The returned map is backed by this map, so changes in the
+		 * returned map are reflected in this map, and vice-versa. The returned map
+		 * supports all optional map operations that this map supports. The returned map
 		 * will throw an IllegalArgumentException on an attempt to insert an element
 		 * outside its range.
 		 */
-		System.out.println("Head Set: " + treeMap.headMap("D"));
+		System.out.println("Head map: " + treeMap.headMap("D"));
 
 		/*
-		 * Returns a view of the portion of this set whose elements are less than (or
-		 * equal to, if inclusive is true) toElement. The returned set is backed by this
-		 * set, so changes in the returned set are reflected in this set, and
-		 * vice-versa. The returned set supports all optional set operations that this
-		 * set supports. The returned set will throw an IllegalArgumentException on an
+		 * Returns a view of the portion of this map whose elements are less than (or
+		 * equal to, if inclusive is true) toElement. The returned map is backed by this
+		 * map, so changes in the returned map are reflected in this map, and
+		 * vice-versa. The returned map supports all optional map operations that this
+		 * map supports. The returned map will throw an IllegalArgumentException on an
 		 * attempt to insert an element outside its range.
 		 */
-		System.out.println("Head Set: " + treeMap.headMap("D", true));
+		System.out.println("Head map: " + treeMap.headMap("D", true));
 
 		System.out.println();
 		System.out.println();
 		System.out.println(
-				"Returns the least element in this set greater than or equal to the given element, or null if there is no such element. ceiling: "
+				"Returns the least element in this map greater than or equal to the given element, or null if there is no such element. ceiling: "
 						+ treeMap.ceilingKey("E"));
 		System.out.println(
-				"Returns the least element in this set strictly greater than the given element, or null if there is no such element.\n"
+				"Returns the least element in this map strictly greater than the given element, or null if there is no such element.\n"
 						+ "Specified by: higher(...) in NavigableSet higher: " + treeMap.higherKey("E"));
 
 		System.out.println(
-				"Returns the greatest element in this set less than or equal to the given element, or null if there is no such element. floor: "
+				"Returns the greatest element in this map less than or equal to the given element, or null if there is no such element. floor: "
 						+ treeMap.floorKey("E"));
 		System.out.println(
-				"Returns the greatest element in this set strictly less than the given element, or null if there is no such element. lower: "
+				"Returns the greatest element in this map strictly less than the given element, or null if there is no such element. lower: "
 						+ treeMap.lowerKey("E"));
 
 		/*
-		 * Returns a view of the portion of this set whose elements are strictly less
-		 * than toElement. The returned set is backed by this set, so changes in the
-		 * returned set are reflected in this set, and vice-versa. The returned set
-		 * supports all optional set operations that this set supports. The returned set
+		 * Returns a view of the portion of this map whose elements are strictly less
+		 * than toElement. The returned map is backed by this map, so changes in the
+		 * returned map are reflected in this map, and vice-versa. The returned map
+		 * supports all optional map operations that this map supports. The returned map
 		 * will throw an IllegalArgumentException on an attempt to insert an element
 		 * outside its range.
 		 */
-		System.out.println("Head Set: " + treeMap.headMap("E"));
+		System.out.println("Head Map: " + treeMap.headMap("E"));
 
 		/*
-		 * Returns a view of the portion of this set whose elements are less than (or
-		 * equal to, if inclusive is true) toElement. The returned set is backed by this
-		 * set, so changes in the returned set are reflected in this set, and
-		 * vice-versa. The returned set supports all optional set operations that this
-		 * set supports. The returned set will throw an IllegalArgumentException on an
+		 * Returns a view of the portion of this map whose elements are less than (or
+		 * equal to, if inclusive is true) toElement. The returned map is backed by this
+		 * map, so changes in the returned map are reflected in this map, and
+		 * vice-versa. The returned map supports all optional map operations that this
+		 * map supports. The returned map will throw an IllegalArgumentException on an
 		 * attempt to insert an element outside its range.
 		 */
-		System.out.println("Head Set: " + treeMap.headMap("E", true));
+		System.out.println("Head Map: " + treeMap.headMap("E", true));
 
-		System.out.println("descendingSet: " + treeMap.descendingMap());
+		System.out.println("descending Map: " + treeMap.descendingMap());
 	}
 
 }
