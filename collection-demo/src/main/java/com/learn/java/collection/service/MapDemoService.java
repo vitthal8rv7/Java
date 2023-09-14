@@ -3,6 +3,7 @@ package com.learn.java.collection.service;
 import java.util.HashMap;
 import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
+import java.util.TreeMap;
 import java.util.WeakHashMap;
 
 import org.springframework.stereotype.Service;
@@ -122,8 +123,7 @@ public class MapDemoService {
 			e.printStackTrace();
 		}
 		System.out.println(identityHashMapDemo);
-		
-		
+
 		WeakHashMap<String, String> weakHashMapDemo = new WeakHashMap<>();
 		String student1 = new String("sv");
 		System.out.println(student1);
@@ -179,9 +179,119 @@ public class MapDemoService {
 
 	}
 
+	/*
+	 * 0.) Underlying Data Structure: RED-BLACK TREE
+	 * 
+	 * 1.) Insertion Order Preserved (according to sorting order) 
+	 * 2.) Duplicates Not Allowed 
+	 * 3.) NULL insertion is NOT possible //NPE 
+	 * 4.) AutoSorting (Default:DNSO) 
+	 * 5.)
+	 * 
+	 */
 	public void treeMapDemo() {
-		// TODO Auto-generated method stub
+		TreeMap<String, String> treeMap = new TreeMap<>();
+		treeMap.put("A", "A");
+		treeMap.put("B", "B");
+		treeMap.put("D", "D");
+		treeMap.put("C", "C");
+		treeMap.put("F", "F");
+		treeMap.put("W", "W");
+		treeMap.put("Z", "Z");
+		treeMap.put("S", "S");
+		treeMap.put("R", "R");
+		treeMap.put("A", "A"); //if same key and same value...no changes
+//		System.out.println("puted Hash Map: " + treeMap);
+//		treeMap.put(null, null);
+//		System.out.println("Hash Map after puting null: " + treeMap);
+//		treeMap.put(null, null);
+		System.out.println("Hash Map after puting null: " + treeMap);
+		treeMap.put("K", null);
+		System.out.println("Hash Map again puting null: " + treeMap);
+		treeMap.put("A", "R");
+		System.out.println("Hash Map again puting R: " + treeMap);
+		System.out.println("Hash Map Contains R? => " + treeMap.containsKey("R"));
+//		System.out.println("Hash Map Contains null? => " + treeMap.containsKey(null));
+//		System.out.println("Hash Map removing R by index: " + treeMap.remove(treeMap.size() - 1));
+		System.out.println(treeMap);
+		System.out.println("Hash Map removing R by Object: " + treeMap.remove("R"));
+		System.out.println(treeMap);
+		System.out.println(treeMap.entrySet().toString());
+		System.out.println(treeMap.entrySet().getClass());
 
+		
+		// Navigation Methods.
+		System.out.println(
+				"Returns the least element in this set greater than or equal to the given element, or null if there is no such element. ceiling: "
+						+ treeMap.ceilingKey("D"));
+		System.out.println(
+				"Returns the least element in this set strictly greater than the given element, or null if there is no such element.\n"
+						+ "Specified by: higher(...) in NavigableSet higher: " + treeMap.higherKey("D"));
+
+		System.out.println(
+				"Returns the greatest element in this set less than or equal to the given element, or null if there is no such element. floor: "
+						+ treeMap.floorKey("D"));
+		System.out.println(
+				"Returns the greatest element in this set strictly less than the given element, or null if there is no such element. lower: "
+						+ treeMap.lowerKey("D"));
+
+		/*
+		 * Returns a view of the portion of this set whose elements are strictly less
+		 * than toElement. The returned set is backed by this set, so changes in the
+		 * returned set are reflected in this set, and vice-versa. The returned set
+		 * supports all optional set operations that this set supports. The returned set
+		 * will throw an IllegalArgumentException on an attempt to insert an element
+		 * outside its range.
+		 */
+		System.out.println("Head Set: " + treeMap.headMap("D"));
+
+		/*
+		 * Returns a view of the portion of this set whose elements are less than (or
+		 * equal to, if inclusive is true) toElement. The returned set is backed by this
+		 * set, so changes in the returned set are reflected in this set, and
+		 * vice-versa. The returned set supports all optional set operations that this
+		 * set supports. The returned set will throw an IllegalArgumentException on an
+		 * attempt to insert an element outside its range.
+		 */
+		System.out.println("Head Set: " + treeMap.headMap("D", true));
+
+		System.out.println();
+		System.out.println();
+		System.out.println(
+				"Returns the least element in this set greater than or equal to the given element, or null if there is no such element. ceiling: "
+						+ treeMap.ceilingKey("E"));
+		System.out.println(
+				"Returns the least element in this set strictly greater than the given element, or null if there is no such element.\n"
+						+ "Specified by: higher(...) in NavigableSet higher: " + treeMap.higherKey("E"));
+
+		System.out.println(
+				"Returns the greatest element in this set less than or equal to the given element, or null if there is no such element. floor: "
+						+ treeMap.floorKey("E"));
+		System.out.println(
+				"Returns the greatest element in this set strictly less than the given element, or null if there is no such element. lower: "
+						+ treeMap.lowerKey("E"));
+
+		/*
+		 * Returns a view of the portion of this set whose elements are strictly less
+		 * than toElement. The returned set is backed by this set, so changes in the
+		 * returned set are reflected in this set, and vice-versa. The returned set
+		 * supports all optional set operations that this set supports. The returned set
+		 * will throw an IllegalArgumentException on an attempt to insert an element
+		 * outside its range.
+		 */
+		System.out.println("Head Set: " + treeMap.headMap("E"));
+
+		/*
+		 * Returns a view of the portion of this set whose elements are less than (or
+		 * equal to, if inclusive is true) toElement. The returned set is backed by this
+		 * set, so changes in the returned set are reflected in this set, and
+		 * vice-versa. The returned set supports all optional set operations that this
+		 * set supports. The returned set will throw an IllegalArgumentException on an
+		 * attempt to insert an element outside its range.
+		 */
+		System.out.println("Head Set: " + treeMap.headMap("E", true));
+
+		System.out.println("descendingSet: " + treeMap.descendingMap());
 	}
 
 }
