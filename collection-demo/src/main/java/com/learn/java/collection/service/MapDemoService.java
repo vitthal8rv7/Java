@@ -2,8 +2,11 @@ package com.learn.java.collection.service;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.WeakHashMap;
 
 import org.springframework.stereotype.Service;
+
+import com.learn.java.collection.mpdel.Student;
 
 @Service
 public class MapDemoService {
@@ -94,8 +97,36 @@ public class MapDemoService {
 
 	}
 
+	/*
+	 * 0.) Underlying Data Structure: Hash Table (Internally its buckets usages
+	 * linked list or tree in collision)
+	 * 
+	 * 1.) Insertion Order Not Preserved (as per hashing logic) 
+	 * 2.) Duplicate Keys Not Allowed, Values can be duplicate 
+	 * 3.) NULL insertion is possible 
+	 * 4.) No AutoSorting
+	 * 
+	 * Exactly same as HashMap Except following differences If any Object not have
+	 * any reference variable but it associated with HashMap then GC collector can
+	 * not destroy this object. But If any Object not have any reference variable
+	 * but it associated with WeakHashMap then GC collector can destroy this object.
+	 */
 	public void weakHashMapDemo() {
-		// TODO Auto-generated method stub
+		WeakHashMap<Student, String> weakHashMap = new WeakHashMap<>();
+		weakHashMap.put(new Student(), "A");
+		weakHashMap.put(new Student(), "BE");
+		weakHashMap.put(new Student(), "Z");
+		weakHashMap.put(new Student(), "K");
+		weakHashMap.put(new Student(), "A");
+		System.out.println(weakHashMap.toString());
+		System.gc();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			System.out.println("Interrupted Exception");
+			e.printStackTrace();
+		}
+		System.out.println(weakHashMap);
 
 	}
 
