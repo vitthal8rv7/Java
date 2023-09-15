@@ -1,17 +1,23 @@
 package com.learn.java.collection.service;
 
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.collection.model.MyConcurrentHashMapThread;
+import com.learn.java.collection.model.MyCopyOnWriteArrayListThread;
 
 @Service
 public class ConcurrentCollectionService {
 
 	@Autowired
 	private MyConcurrentHashMapThread myConcurrentHashMapThread;
+	
+	@Autowired
+	private MyCopyOnWriteArrayListThread copyOnWriteArrayListThread;
 	
 	public void concurrentHashMapDemo() {
 		
@@ -47,8 +53,43 @@ public class ConcurrentCollectionService {
 	}
 
 	public void copyOnWriteArrayListDemo() {
-		// TODO Auto-generated method stub
 		
+		// Copy On Write Array List New Methods
+		
+		CopyOnWriteArrayList<String> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
+		
+		copyOnWriteArrayList.add("A");
+		copyOnWriteArrayList.add("B"); 
+		copyOnWriteArrayList.add("B"); 
+		System.out.println("duplicate allowed for add method "+copyOnWriteArrayList);
+		System.out.println();
+		
+		copyOnWriteArrayList.addIfAbsent("A"); //if exists, no action performed. skipped
+		System.out.println("duplicate NOT allowed for addIfAbsent method "+copyOnWriteArrayList);
+		System.out.println();
+		
+		ArrayList<String> al1 = new ArrayList<>(); 
+		al1.add("A");
+		al1.add("C");
+		al1.add("D");
+		al1.add("C");
+		al1.add("D");
+		copyOnWriteArrayList.addAll(al1);//duplicate allowed for normal allAll method
+		System.out.println("duplicate allowed for normal allAll method "+copyOnWriteArrayList);
+		System.out.println();
+		
+		al1.add("A");
+		al1.add("C");
+		al1.add("D");
+		al1.add("C");
+		al1.add("D");
+		al1.add("K");
+		copyOnWriteArrayList.addAllAbsent(al1);//duplicate NOT allowed for normal addAllAbsent method
+		System.out.println("duplicate NOT allowed for normal addAllAbsent method "+copyOnWriteArrayList);
+		System.out.println();
+		
+		System.out.println("Calling iterator method...");
+		//myConcurrentHashMapThread.iterate();		
 	}
 
 	public void copyOnWriteArraySetDemo() {
