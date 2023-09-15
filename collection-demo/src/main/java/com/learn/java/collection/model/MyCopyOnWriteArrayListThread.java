@@ -40,7 +40,7 @@ public class MyCopyOnWriteArrayListThread extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("concurrentHashMap is : "+ copyOnWriteArrayList);	
+		System.out.println("CopyOnWriteArrayList is : "+ copyOnWriteArrayList);	
 	}
 	
 	public void run () {
