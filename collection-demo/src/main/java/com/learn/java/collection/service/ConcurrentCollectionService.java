@@ -3,12 +3,14 @@ package com.learn.java.collection.service;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.collection.model.MyConcurrentHashMapThread;
 import com.learn.java.collection.model.MyCopyOnWriteArrayListThread;
+import com.learn.java.collection.model.MyCopyOnWriteArraySetThread;
 
 @Service
 public class ConcurrentCollectionService {
@@ -18,7 +20,10 @@ public class ConcurrentCollectionService {
 	
 	@Autowired
 	private MyCopyOnWriteArrayListThread copyOnWriteArrayListThread;
-	
+
+	@Autowired
+	private MyCopyOnWriteArraySetThread copyOnWriteArraySetThread;
+
 	public void concurrentHashMapDemo() {
 		
 		//Concurrent hash map new methods
@@ -93,8 +98,28 @@ public class ConcurrentCollectionService {
 	}
 
 	public void copyOnWriteArraySetDemo() {
-		// TODO Auto-generated method stub
+		// Copy On Write Array List New Methods
 		
+		CopyOnWriteArraySet<String> copyOnWriteArraySet = new CopyOnWriteArraySet<>();
+		
+		copyOnWriteArraySet.add("A");
+		copyOnWriteArraySet.add("B"); 
+		copyOnWriteArraySet.add("B"); 
+		System.out.println("duplicate NOT allowed for add method "+copyOnWriteArraySet);
+		System.out.println();
+		
+		ArrayList<String> al1 = new ArrayList<>(); 
+		al1.add("A");
+		al1.add("C");
+		al1.add("D");
+		al1.add("C");
+		al1.add("D");
+		copyOnWriteArraySet.addAll(al1);//duplicate NOT allowed for normal allAll method
+		System.out.println("duplicate NOT allowed for normal addAll method "+copyOnWriteArraySet);
+		System.out.println();
+		
+		System.out.println("Calling iterator method...");
+		copyOnWriteArraySetThread.iterate();				
 	}
 
 }
