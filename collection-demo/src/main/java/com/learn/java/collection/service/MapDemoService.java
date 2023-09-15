@@ -8,7 +8,7 @@ import java.util.WeakHashMap;
 
 import org.springframework.stereotype.Service;
 
-import com.learn.java.collection.mpdel.Student;
+import com.learn.java.collection.model.Student;
 
 @Service
 public class MapDemoService {

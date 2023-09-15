@@ -1,4 +1,4 @@
-package com.learn.java.collection.mpdel;
+package com.learn.java.collection.model;
 
 import java.util.Objects;
 

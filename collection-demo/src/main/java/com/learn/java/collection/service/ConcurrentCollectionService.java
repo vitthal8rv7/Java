@@ -2,11 +2,17 @@ package com.learn.java.collection.service;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.learn.java.collection.model.MyConcurrentHashMapThread;
 
 @Service
 public class ConcurrentCollectionService {
 
+	@Autowired
+	private MyConcurrentHashMapThread myConcurrentHashMapThread;
+	
 	public void concurrentHashMapDemo() {
 		
 		//Concurrent hash map new methods
@@ -34,7 +40,8 @@ public class ConcurrentCollectionService {
 		System.out.println("if key and value match, removed action performed "+concurrentHashMap);
 		System.out.println();
 		
-		
+		System.out.println("Calling iterator method...");
+		myConcurrentHashMapThread.iterate();
 		
 		
 	}
