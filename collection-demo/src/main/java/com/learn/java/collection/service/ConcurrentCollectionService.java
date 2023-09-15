@@ -89,7 +89,7 @@ public class ConcurrentCollectionService {
 		System.out.println();
 		
 		System.out.println("Calling iterator method...");
-		//myConcurrentHashMapThread.iterate();		
+		copyOnWriteArrayListThread.iterate();		
 	}
 
 	public void copyOnWriteArraySetDemo() {
