@@ -1,0 +1,195 @@
+Enum
+———-
+	what Java enums are, what problems they solve, and how some of their design patterns can be used in practice.
+
+
+Java 5 first introduced the enum keyword.
+enums are a special type of data structure that represents a fixed set of constant values.
+Internally, enums in Java are implemented as classes. When you declare an enum, the Java compiler automatically generates a class that extends the java.lang.Enum class.  This generated class contains the constant values you define in the enum and some additional methods provided by the Enum class, such as values(), valueOf(), and ordinal(). 
+
+Note: All enums implicitly extend java.lang.Enum. Because a class can only extend one parent (see Declaring Classes), the Java language does not support multiple inheritance of state (see Multiple Inheritance of State, Implementation, and Type), and therefore an enum cannot extend anything else.
+
+Constants defined this way make the code more readable, allow for compile-time checking, document the list of accepted values upfront, and avoid unexpected behavior due to invalid values being passed in. 
+	enums come with many useful methods that we would otherwise need to write if we were using traditional public static final constants.
+
+ enums are set of predefined constants. 
+Because they are constants, the names of an enum type's fields are in uppercase letters.
+
+Example:
+enum Color {
+    RED, GREEN, BLUE;
+}
+
+Internally, this enum is roughly equivalent to:
+
+final class Color extends Enum<Color> {
+    public static final Color RED = new Color();
+    public static final Color GREEN = new Color();
+    public static final Color BLUE = new Color();
+
+    private static final Color[] $VALUES = {RED, GREEN, BLUE};
+
+    public static Color[] values() {
+        return $VALUES.clone();
+    }
+
+    public static Color valueOf(String name) {
+        for (Color color : $VALUES) {
+            if (color.name().equals(name)) {
+                return color;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant " + name);
+    }
+
+    private Color() {
+        super("Color", $VALUES.length, null);
+    }
+}
+
+Enums are Immutable[Final class, private constructor], Immutable mean one initialized, will not changes in its lifecycle. But if you try to change it, it will create new instance for change/update 
+
+
+
+
+Enums cannot be subclassed by regular classes, meaning you cannot extend them further. They are implicitly marked as final.
+
+Enums can have constructors and methods just like regular classes, allowing you to associate behavior with each constant value.
+
+The values() method returns an array of all enum constants in the order they are defined.
+
+The valueOf(String name) method allows you to obtain an enum constant by its name.
+Each enum constant has an ordinal() method, which returns its position in the enum declaration, starting from 0.
+
+Enums can be used in switch statements for more readable code.
+
+Enums are widely used in Java to represent a fixed set of values like days of the week, months, error codes, and more, making the code more expressive and less error-prone.
+
+We can use enum types in switch statements also.
+
+
+
+We can define constructors, methods, and fields inside enum types, which makes them very powerful.
+public class Pizza {
+
+    private PizzaStatus status;
+    public enum PizzaStatus {
+        ORDERED (5){
+            @Override
+            public boolean isOrdered() {
+                return true;
+            }
+        },
+        READY (2){
+            @Override
+            public boolean isReady() {
+                return true;
+            }
+        },
+        DELIVERED (0){
+            @Override
+            public boolean isDelivered() {
+                return true;
+            }
+        };
+
+        private int timeToDelivery;
+
+        public boolean isOrdered() {return false;}
+
+        public boolean isReady() {return false;}
+
+        public boolean isDelivered(){return false;}
+
+        public int getTimeToDelivery() {
+            return timeToDelivery;
+        }
+
+        PizzaStatus (int timeToDelivery) {
+            this.timeToDelivery = timeToDelivery;
+        }
+    }
+
+    public boolean isDeliverable() {
+        return this.status.isReady();
+    }
+
+    public void printTimeToDeliver() {
+        System.out.println("Time to delivery is " + 
+          this.getStatus().getTimeToDelivery());
+    }
+    
+    // Methods that set and get the status variable.
+}
+
+Q. But When(In Which Scenario) we required this type of implementation?
+
+
+Enum Fields 
+——————-
+
+public enum Distance {
+    KILOMETER("km", 1000), 
+    MILE("miles", 1609.34),
+    METER("meters", 1), 
+    INCH("inches", 0.0254),
+    CENTIMETER("cm", 0.01), 
+    MILLIMETER("mm", 0.001);
+
+    private String unit;
+    private final double meters;
+
+    private Distance(String unit, double meters) {
+        this.unit = unit;
+        this.meters = meters;
+    }
+
+    // standard getters and setters
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Serializing Enums to JSON
+—————————————-
+
+Print: MILE
+
+JSON: 
+{“unit”:"miles","meters":1609.34}
+
+
+
+
+public enum Distance {
+    ...
+
+    @JsonValue
+    public double getMeters() {
+        return meters;
+    }
+}
+
+=> {“distance":"0.0254"}
+
+
+public enum Distance {
+    @JsonProperty("distance-in-km")
+    KILOMETER("km", 1000), 
+    @JsonProperty("distance-in-miles")
+    MILE("miles", 1609.34);
+ 
+    ...
+}
+
+
