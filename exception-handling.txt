@@ -1,0 +1,432 @@
+ExceptionHandling
+——————————-
+We need to make sure that our code has a plan for when things go wrong.
+
+The code can experience errors while executing our instructions
+Good exception handling can handle errors and gracefully re-route the program to give the user still a positive experience.
+
+Exception handling in Java is a crucial aspect of writing robust and reliable code. It allows you to gracefully handle unexpected situations or errors that can occur during the execution of a program. Properly handling exceptions can improve the robustness and maintainability of your code.
+
+this is the stack trace itself,So, we can often pinpoint offending code without needing to attach a debugger.
+
+The Throwable class is at the top of the exception hierarchy in Java.
+It has two main subclasses: Error and Exception.
+
+Error: 
+————————————————————————————
+	Represents serious errors that are typically not recoverable by the program, such as OutOfMemoryError, ibrary incompatibility, infinite recursion, or memory leaks.
+
+Exception: 
+————————————————————————————
+	Represents exceptional conditions that can be handled by the program, such as NullPointerException or FileNotFoundException.
+
+Checked Exceptions: 
+————————————————————————————
+	These are exceptions that must be either caught and handled or declared in the method's signature using the throws keyword. Examples include IOException and SQLException.
+
+Note: Checked exceptions are exceptions that the Java compiler requires us to handle.
+
+Unchecked Exceptions (Runtime Exceptions): 
+————————————————————————————
+	These are exceptions that don't need to be explicitly caught or declared. They are subclasses of RuntimeException and typically represent programming errors, such as NullPointerException or ArrayIndexOutOfBoundsException.
+
+Note: Unchecked exceptions are exceptions that the Java compiler does not require us to handle.
+
+Custom Exceptions:
+————————————————————————————
+	You can create your own custom exception classes by extending existing exception classes or by implementing the Throwable interface. This is useful for handling application-specific errors.
+
+Best Practices: 
+————————————————————————————
+ 1.) Catch exceptions at an appropriate level in your code. 
+ 2.) Provide meaningful error messages in your exceptions. 
+ 3.) Use checked exceptions for recoverable errors and unchecked exceptions for programming errors. 
+ 4.) Avoid catching Exception or Throwable indiscriminately, as it can make debugging difficult
+              ---> Throwable <--- 
+              |    (checked)     |
+              |                  |
+              |                  |
+      ---> Exception           Error
+      |    (checked)        (unchecked)
+      |
+RuntimeException
+  (unchecked)
+
+
+Keywords related to exception handling
+————————————————————-
+	try, catch, finally, throw, throws
+————————————————————————————
+
+Try: 
+————————————————————————————
+	The try block contains the code that might throw an exception.
+
+Catch: 
+————————————————————————————
+	The catch block is used to handle exceptions by specifying the type of exception it can catch and providing code to handle the exception.
+You can have multiple catch blocks to handle different types of exceptions.
+
+Finally Block:
+————————————————————————————
+	The finally block is used for cleanup code that needs to run whether an exception occurred or not. It's optional but often used for tasks like closing resources (e.g., file streams or database connections).
+public int getPlayerScore(String playerFile) {
+    Scanner contents;
+    try {
+        contents = new Scanner(new File(playerFile));
+        return Integer.parseInt(contents.nextLine());
+    } catch (FileNotFoundException noFile ) {
+        logger.warn("File not found, resetting score.");
+        return 0; 
+    } finally {
+        try {
+            if (contents != null) {
+                contents.close();
+            }
+        } catch (IOException io) {
+            logger.error("Couldn't close the reader!", io);
+        }
+    }
+}
+
+Throw: 
+————————————————————————————
+	You can manually throw exceptions using the throw keyword. This is often used to signal custom exceptional conditions.
+if (someCondition) {
+    throw new CustomException("An error occurred");
+}
+If CustomException is checked, we also must use the throws keyword in the signature so that callers of our method will know to handle it. (Go through checked exception info in above page
+Throws: 
+————————————————————————————
+	it informs the calling code that the method can generate these exceptions, and the calling code should be prepared to handle them or propagate them further.
+
+returnType methodName(parameters) throws ExceptionType1, ExceptionType2, ... {
+    // Method implementation
+}
+
+Try-With-Resources (AutoCloseable):
+————————————————————————————
+	Introduced in Java 7, the try-with-resources statement simplifies resource management (e.g., file handling or database connections) by automatically closing resources when they are no longer needed. Here, we don’t need to use finally block to close the resources.
+
+public int getPlayerScore(String playerFile) {
+    try (Scanner contents = new Scanner(new File(playerFile))) {
+      return Integer.parseInt(contents.nextLine());
+    } catch (FileNotFoundException e ) {
+      logger.warn("File not found, resetting score.");
+      return 0;
+    }
+}
+
+Multiple catch Blocks
+————————————————————————————
+	Sometimes, the code can throw more than one exception, and we can have more than one catch block handle each individually. Multiple catches give us the chance to handle each exception differently
+
+public int getPlayerScore(String playerFile) {
+    try (Scanner contents = new Scanner(new File(playerFile))) {
+        return Integer.parseInt(contents.nextLine());
+    } catch (IOException e) {
+        logger.warn("Player file wouldn't load!", e);
+        return 0;
+    } catch (NumberFormatException e) {
+        logger.warn("Player file was corrupted!", e);
+        return 0;
+    }
+}
+
+Multi-Catch OR Union catch Blocks(Java 7+):
+————————————————————————————
+	When we know that the way we handle errors is going to be the same, though, Java 7 introduced the ability to catch multiple exceptions in the same block:
+try {
+    // Code that may throw multiple exceptions
+} catch (ExceptionType1 | ExceptionType2 e) {
+    // Handle either ExceptionType1 or ExceptionType2
+}
+
+
+
+
+
+
+
+
+
+Rethrowing Throwable or Exception
+————————————————————————————
+	The boundary line between checked and unchecked exceptions doesn’t exist at runtime, so everything works normally when running the code.
+
+If the only possible exceptions that a given block of code could raise are unchecked exceptions, then we can catch and rethrow Throwable or Exception without adding them to our method signature
+
+public List<Player> loadAllPlayers(String playersFile) {
+    try {
+        throw new NullPointerException(); //this checked exceptions re-throw as a unchecked exception in catch block.
+    } catch (Throwable t) {
+        throw t; //unchecked exceptions,
+    }
+}
+The above code can’t throw a checked exception and because of that, even though we are rethrowing a checked exception, we don’t have to mark the signature with a throws clause.
+
+
+Inheritance RULES
+———————————————————————————— 
+	If the superclass method does not declare an exception, subclass overridden method cannot declare the checked exception but it can declare unchecked exception.
+
+If the superclass method declares an exception, subclass overridden method can declare same, subclass exception or no exception but cannot declare parent exception.
+
+subclasses can throw fewer checked exceptions than their superclass, but not more.
+
+Return in a finally Block  
+————————————————————————————
+	To return from the finally block. This is bad because, by returning abruptly, the JVM will drop the exception, even if it was thrown from by our code
+
+public int getPlayerScore(String playerFile) {
+    int score = 0;
+    try {
+        throw new IOException();
+    } finally {
+        return score; // <== the IOException is dropped
+    }
+}
+
+Using throw in a finally Block
+————————————————————————————
+	Similar to using return in a finally block, the exception thrown in a finally block will take precedence over the exception that arises in the catch block. This will “erase” the original exception from the try block, and we lose all of that valuable information
+public int getPlayerScore(String playerFile) {
+    try {
+        // ...
+    } catch ( IOException io ) {
+        throw new IllegalStateException(io); // <== eaten by the finally
+    } finally {
+        throw new OtherException();
+    }
+}
+
+Checked Exceptions
+———————————-
+
+IOException: This exception is thrown when an input/output operation fails, such as reading from or writing to files, streams, or sockets.
+FileNotFoundException: Raised when attempting to access a file that does not exist.
+ParseException: Thrown when parsing operations on date or time objects encounter errors.
+ClassNotFoundException: Occurs when trying to load a class that doesn't exist at runtime using reflection.
+NoSuchMethodException: Raised when a requested method is not found during reflection.
+InstantiationException: Thrown when an attempt to create an object using the new keyword fails, often due to abstract classes or interfaces.
+IllegalAccessException: Occurs when an attempt to access a class, method, or field is not allowed due to visibility modifiers.
+SQLException: This exception is related to database operations and is thrown when a database access error occurs.
+CloneNotSupportedException: Raised when an attempt to clone an object that does not implement the Cloneable interface is made.
+NoSuchFieldException: Thrown when a requested field is not found during reflection.
+InterruptedException: This exception is thrown when a thread is interrupted while it is in a waiting or sleeping state.
+InstantiationException: Raised when an attempt to create an object of an abstract class or interface is made.
+IllegalAccessException: Occurs when access to a class, method, or field is denied due to access modifiers.
+UnsupportedEncodingException: Thrown when a specified character encoding is not supported.
+ClassNotFoundException: Occurs when trying to load a class that doesn't exist at runtime using reflection.
+CloneNotSupportedException: Raised when attempting to clone an object that does not implement the Cloneable interface.
+
+Unchecked Exceptions
+———————————-
+NullPointerException: Thrown when you attempt to access an object or invoke a method on an object that is null.
+ArrayIndexOutOfBoundsException: Raised when trying to access an array element with an invalid index.
+ArithmeticException: Occurs when an arithmetic operation, such as division by zero, results in an error.
+ClassCastException: Thrown when an invalid cast operation is performed at runtime.
+IllegalArgumentException: Typically thrown when an illegal argument is passed to a method.
+IllegalStateException: Raised when an object is in an inappropriate state for the requested operation.
+NumberFormatException: Occurs when a string cannot be parsed into a numeric format.
+ConcurrentModificationException: Thrown when an attempt is made to modify a collection while iterating over it using an iterator.
+UnsupportedOperationException: Raised when an operation is not supported or allowed.
+IndexOutOfBoundsException: A more general exception that includes ArrayIndexOutOfBoundsException and StringIndexOutOfBoundsException.
+These unchecked exceptions are not required to be caught or declared, but it's still a good practice to handle them gracefully in your code, especially when you can anticipate and prevent them.
+
+
+
+Errors
+———-
+OutOfMemoryError: Thrown when the JVM runs out of memory, usually because the heap space is exhausted. Common subtypes include:
+java.lang.OutOfMemoryError: Java heap space
+java.lang.OutOfMemoryError: PermGen space (in older JVM versions)
+StackOverflowError: Occurs when the call stack (the stack of method invocations) exceeds its limit, usually due to excessive recursion.
+NoClassDefFoundError: Thrown when the JVM or classloader cannot find a class definition, often due to missing or incompatible class files.
+InternalError: Represents internal, unrecoverable errors within the JVM itself.
+UnknownError: A subclass of Error that represents unknown, unexpected errors.
+ThreadDeath: Thrown to stop a thread using the deprecated Thread.stop() method. This is not recommended and can lead to unpredictable results.
+LinkageError: A superclass for various errors related to classloading and linking, such as VerifyError, IncompatibleClassChangeError, and ClassCircularityError.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Error Handling for REST with Spring
+—————————————————-
+
+@ExceptionHandler
+——————————-
+We will define a method to handle exceptions and annotate that with @ExceptionHandler and specify the exception type(s) it should handle as a parameter..
+
+This approach has a major drawback: The @ExceptionHandler annotated method is only active for that particular Controller, not globally for the entire application. Of course, adding this to every controller makes it not well suited for a general exception handling mechanism.
+
+We can work around this limitation by having all Controllers extend a Base Controller class.
+
+However, this solution can be a problem for applications where, for whatever reason, that isn’t possible. For example, the Controllers may already extend from another base class, which may be in another jar or not directly modifiable, or may themselves not be directly modifiable.
+
+@Controller
+public class MyController {
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException ex) {
+        // Handle the NotFoundException and return a custom response
+        String errorMessage = "Resource not found: " + ex.getMessage();
+        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
+    }
+}
+
+
+Interface HandlerExceptionResolver
+—————————————————-
+Interface to be implemented by objects that can resolve exceptions thrown during handler mapping or execution, in the typical case to error views. Implementors are typically registered as beans in the application context.
+Error views are analogous to JSP error pages but can be used with any kind of exception including any checked exception, with potentially fine-grained mappings for specific handlers.
+
+In J2EE, mostly we never send View Page from Backend so, for now you can skip it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@ControllerAdvice
+—————————-
+One controller advice can be applied to all the controllers in the application. Eliminates exception logic duplication among multiple controller classes.
+
+The@ControllerAdvice annotation allows us to consolidate our multiple, scattered @ExceptionHandlers into a single, global error handling component.
+
+Any class annotated with @ControllerAdvice becomes a controller-advice and three types of method are supported:
+1.) @ExceptionHandler: Exception handling methods annotated with @ExceptionHandler.
+2.) @ModelAttribute: Model enhancement methods (for adding additional data to the model) annotated with @ModelAttribute. Note that these attributes are not available to the exception handling views.
+3.) @InitBinder: Binder initialization methods (used for configuring form-handling) annotated with
+@InitBinder.
+
+The actual mechanism is extremely simple but also very flexible:
+	It gives us full control over the body of the response as well as the status code.
+	It provides mapping of several exceptions to the same method, to be handled together.
+	It makes good use of the newer RESTful ResposeEntity response.
+
+One thing to keep in mind here is to match the exceptions declared with @ExceptionHandler to the exception used as the argument of the method. If these don’t match, the compiler will not complain — no reason it should — and Spring will not complain either. However, when the exception is actually thrown at runtime, the exception resolving mechanism will fail with:
+java.lang.IllegalStateException: No suitable resolver for argument [0] [type=...]
+HandlerMethod details: ...
+
+Example:
+@ControllerAdvice
+public class RestResponseEntityExceptionHandler 
+  extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(value 
+      = { IllegalArgumentException.class, IllegalStateException.class })
+    protected ResponseEntity<Object> handleConflict(
+      RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "This should be application specific";
+        return handleExceptionInternal(ex, bodyOfResponse, 
+          new HttpHeaders(), HttpStatus.CONFLICT, request);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+A default handler for any exception:
+——————————————————-
+@ControllerAdvice
+public class ControllerExceptionHandler {
+@ExceptionHandler(Exception.class)
+  public ResponseEntity<ErrorMessage> globalExceptionHandler(Exception ex, WebRequest request) {
+    ErrorMessage message = new ErrorMessage(
+        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+        new Date(),
+        ex.getMessage(),
+        request.getDescription(false));
+    
+    return new ResponseEntity<ErrorMessage>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+  } 
+}
+
+ResponseStatusException (Spring 5 and Above)  
+——————————————————————-
+We can create an instance of it providing an HttpStatus and optionally a reason and a cause
+Example:  
+@GetMapping(value = "/{id}")
+public Foo findById(@PathVariable("id") Long id, HttpServletResponse response) {
+    try {
+        Foo resourceById = RestPreconditions.checkFound(service.findOne(id));
+
+        eventPublisher.publishEvent(new SingleResourceRetrievedEvent(this, response));
+        return resourceById;
+     }
+    catch (MyResourceNotFoundException exc) {
+         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Foo Not Found", exc);
+	//why not we send MyResourceNotFoundException?
+	//when we through this exception, who will handle it? Controller Advice?
+    }
+}
+
+One type, multiple status codes: One exception type can lead to multiple different responses. This reduces tight coupling compared to the @ExceptionHandler.
+We won’t have to create as many custom exception classes.

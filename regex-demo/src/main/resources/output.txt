@@ -1,0 +1,106 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+[32m :: Spring Boot :: [39m             [2m (v2.7.15)[0;39m
+
+[2m2023-09-04 21:09:39.196[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.learn.java.regex.RegexDemoApplication [0;39m [2m:[0;39m Starting RegexDemoApplication using Java 17.0.7 on Vitthals-MacBook-Air.local with PID 33977 (/Users/vitthal/Documents/GitHub/Java/regex-demo/bin/main started by vitthal in /Users/vitthal/Documents/GitHub/Java/regex-demo)
+[2m2023-09-04 21:09:39.198[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.learn.java.regex.RegexDemoApplication [0;39m [2m:[0;39m No active profile set, falling back to 1 default profile: "default"
+[2m2023-09-04 21:09:39.490[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat initialized with port(s): 8080 (http)
+[2m2023-09-04 21:09:39.493[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.apache.catalina.core.StandardService  [0;39m [2m:[0;39m Starting service [Tomcat]
+[2m2023-09-04 21:09:39.494[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36morg.apache.catalina.core.StandardEngine [0;39m [2m:[0;39m Starting Servlet engine: [Apache Tomcat/9.0.79]
+[2m2023-09-04 21:09:39.529[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring embedded WebApplicationContext
+[2m2023-09-04 21:09:39.529[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mw.s.c.ServletWebServerApplicationContext[0;39m [2m:[0;39m Root WebApplicationContext: initialization completed in 311 ms
+[2m2023-09-04 21:09:39.645[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mo.s.b.w.embedded.tomcat.TomcatWebServer [0;39m [2m:[0;39m Tomcat started on port(s): 8080 (http) with context path ''
+[2m2023-09-04 21:09:39.650[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[           main][0;39m [36mc.learn.java.regex.RegexDemoApplication [0;39m [2m:[0;39m Started RegexDemoApplication in 0.567 seconds (JVM running for 5.866)
+[2m2023-09-04 21:09:46.588[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[nio-8080-exec-1][0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/]      [0;39m [2m:[0;39m Initializing Spring DispatcherServlet 'dispatcherServlet'
+[2m2023-09-04 21:09:46.588[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[nio-8080-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Initializing Servlet 'dispatcherServlet'
+[2m2023-09-04 21:09:46.589[0;39m [32m INFO[0;39m [35m33977[0;39m [2m---[0;39m [2m[nio-8080-exec-1][0;39m [36mo.s.web.servlet.DispatcherServlet       [0;39m [2m:[0;39m Completed initialization in 1 ms
+Pattern: foo, TextData: foo, Result Found 1 occurrences.
+Pattern: foo, TextData: foofoo, Result Found 2 occurrences.
+Pattern: foo, TextData: foofoofo, Result Found 2 occurrences.
+Pattern: foo, TextData: fofoofoofo, Result Found 2 occurrences.
+Pattern: ., TextData: fofoofoofo, Result Found 10 occurrences.
+Pattern: foo., TextData: fofoofoofo, Result Found 1 occurrences.
+Pattern: foo., TextData: fofooffoofo, Result Found 2 occurrences.
+Pattern: foo*, TextData: fofooffoofo, Result Found 4 occurrences.
+Pattern: [for], TextData: fafsrffoofo, Result Found 9 occurrences.
+Pattern: [for]at, TextData: fafsrffoofo, Result Found 0 occurrences.
+Pattern: [for]at, TextData: fafrsatfatfoofoat, Result Found 2 occurrences.
+Pattern: [A-Z], TextData: Two Uppercase alphabets 30 overall, Result Found 2 occurrences.
+Pattern: [a-z], TextData: Two Uppercase alphabets 30 overall, Result Found 26 occurrences.
+Pattern: [A-Z][a-z], TextData: Two Uppercase alphabets 30 overall, Result Found 2 occurrences.
+Pattern: [A-Za-z], TextData: Two Uppercase alphabets 30 overall, Result Found 28 occurrences.
+Pattern: [a-zA-Z], TextData: Two Uppercase alphabets 30 overall, Result Found 28 occurrences.
+Pattern: [0-9], TextData: Two Uppercase alphabets 30 overall, Result Found 2 occurrences.
+Pattern: [1-3][6-9], TextData: 12362846151231236, Result Found 3 occurrences.
+Pattern: [1-3[6-9]], TextData: 12362846151231236, Result Found 15 occurrences.
+Pattern: [1236789], TextData: 12362846151231236, Result Found 15 occurrences.
+Pattern: [1-6&&[3-9]], TextData: 123456789, Result Found 4 occurrences.
+Pattern: [3456], TextData: 123456789, Result Found 4 occurrences.
+Pattern: [0-9&&[^3-9]], TextData: 0123456789, Result Found 3 occurrences.
+Pattern: [012], TextData: 0123456789, Result Found 3 occurrences.
+Pattern: \d, TextData: 0123456789ab c@# *, Result Found 10 occurrences.
+Pattern: \D, TextData: 0123456789ab c@# *, Result Found 8 occurrences.
+Pattern: \s, TextData: as0123456789ab c@# *, Result Found 2 occurrences.
+Pattern: \S, TextData: as0123456789ab c@# *, Result Found 18 occurrences.
+Pattern: \w, TextData: 0123456789ab c@# *, Result Found 13 occurrences.
+Pattern: \W, TextData: 0123456789ab c@# *, Result Found 5 occurrences.
+Pattern: \a, TextData: 0123456789ab c@# *, Result Found 0 occurrences.
+Pattern: \a?, TextData: 0123456789ab c@# *, Result Found 19 occurrences.
+Pattern: \a{0,1}, TextData: 0123456789ab c@# *, Result Found 19 occurrences.
+Pattern: z, TextData: 0123456789ab c@# *, Result Found 0 occurrences.
+Pattern: z?, TextData: 0123456789ab c@# *, Result Found 19 occurrences.
+Pattern: z{0,1}, TextData: 0123456789ab c@# *, Result Found 19 occurrences.
+Pattern: a{0,1}, TextData: aaa3456789ab c@# *, Result Found 19 occurrences.
+Pattern: ab{0,1}, TextData: aaa3456789ab c@# *, Result Found 4 occurrences.
+Pattern: a{0,3}, TextData: aaa, Result Found 2 occurrences.
+Pattern: a{0,3}, TextData: abaab, Result Found 5 occurrences.
+Pattern: a{1,3}, TextData: abaab, Result Found 2 occurrences.
+Pattern: a*{1,3}, TextData: abaab, Result Found 5 occurrences.
+Pattern: a*{1,}, TextData: abaab, Result Found 5 occurrences.
+Pattern: a+{2,}, TextData: abaab, Result Found 2 occurrences.
+Pattern: a{3}, TextData: aa, Result Found 0 occurrences.
+Pattern: a{2,3}, TextData: aaaa, Result Found 1 occurrences.
+Pattern: (\d\d), TextData: 12, Result Found 1 occurrences.
+Pattern: (\d\d), TextData: 1234, Result Found 2 occurrences.
+Pattern: (\d\d)\1, TextData: 1212, Result Found 1 occurrences.
+Pattern: (\d\d)(\d\d), TextData: 12121212, Result Found 2 occurrences.
+Pattern: (\d\d)\1, TextData: 12121212, Result Found 2 occurrences.
+Pattern: (\d\d)\2, TextData: 12121212, Result Found 0 occurrences.
+Pattern: ^dogs, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: ^dog, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: friendly$, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern:  friendly$, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: friendly $, TextData: dogs are friendly, Result Found 0 occurrences.
+Pattern: ndly$, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: ndly\b, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: friendly\b, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: dogs\b, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: \bndly\b, TextData: dogs are friendly, Result Found 0 occurrences.
+Pattern: \bfriendly\b, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: \bdogs\b, TextData: dogs are friendly, Result Found 1 occurrences.
+Pattern: dog, TextData: DOG are friendly, Result Found 0 occurrences.
+Pattern: dog, TextData: DOG are friendly, Result Found 1 occurrences.
+Pattern: dog$ #check for word dog at end of text, TextData: This is a DOG, Result Found 0 occurrences.
+Pattern: dog$ #check for word dog at end of text, TextData: This is a dog, Result Found 1 occurrences.
+Start Index: 10
+End Index: 13
+End Index: false
+End Index: false
+Pattern: dog$, TextData: This is a dog, Result Found 1 occurrences.
+Match: false
+Pattern: dog$, TextData: This is a dog, Result Found 0 occurrences.
+Match: false
+Pattern: dog$, TextData: This is a dog, Result Found 0 occurrences.
+Match: true
+Pattern: This is a dog, TextData: This is a dog, Result Found 0 occurrences.
+Match: true
+Pattern: This is a , TextData: This is a dog, Result Found 0 occurrences.
+Match: This is a cat. dog are friendly!
+Pattern: dog, TextData: This is a dog. dog are friendly!, Result Found 0 occurrences.
+Match: This is a cat. cat are friendly!
+Pattern: dog, TextData: This is a dog. dog are friendly!, Result Found 0 occurrences.

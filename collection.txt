@@ -1,0 +1,476 @@
+Everything about Collections
+——————————————-
+	Group of individual object as a single entity.
+
+Arrays store fixe size homogeneous data by indexing. If Requirement is auto-increment or auto-decrement sized heterogeneous data then arrays can not fulfil this requirement, but Collection can.
+
+Array: 
+	1.) Indexed Collection
+	2.) Fixed size
+	3.) Homogeneous data
+	4.) Zero / Very Less readymade / build in method supports
+	5.) No Underlying Data Structure supported 
+
+Collections: 
+	1.) Indexed collection + non-indexed collections(linked list, list, map, hash table, queue) 
+	2.) Growable (Auto-increment, Auto-decrement)
+	3.) Homogeneous data + Heterogeneous data
+	4.) readymade / build in methods supports
+	5.) Every collection have underlying data structure(standard data structure)
+	6.) Easy to use
+	7.) insertion order, auto-sorting, time complexity, fast-retrieval, fast-insertion and thread-safety so on…
+
+
+Collection Interfaces and Classes
+———————————-
+1.) Collection —> All below class and interface are child of Collection Interface except Map
+2.) List —> ArrayList, LinkedList, Vector -> Stack, CopyOnWriteArrayList<E> 
+3.) Set —> HashSet, LinkedHashSet, CopyOnWriteArraySet<E>
+4.) Queue —> PriorityQueue, 
+5.) Map —> HashMap, LinkedHashMap, HashTable
+6.) SortedSet 		—> |	
+7.) Navigable Set 	—> | TreeSet, ConcurrentSkipListSet<E>
+
+8.) SortedMap 	—> |
+9.) Navigable Map 	—> | TreeMap, ConcurrentSkipListMap<K,V>	
+10.) Dequeue —>  ArrayDequeue (Extend LinkedList), ConcurrentLinkedDeque<E>
+11.) BlockingDeque<E> —> LinkedBlockingDeque<E>
+12.) BlockingQueue<E> —> SynchronousQueue<E>, ArrayBlockingQueue<E>, DelayQueue<E extends Delayed>, LinkedBlockingQueue<E>, PriorityBlockingQueue<E>, 
+13.) TransferQueue<E> —>  LinkedTransferQueue<E>
+ And so on …
+
+Collection Interface defines most common methods which are application for any collection object. It is also called root interface of collection framework. No class implement collection interface directly.
+
+Collections Class defines several utility methods for object like Collections.sort(Collection c), Searching and so on…
+
+==> Every Collection Class serialisable and cloneable. 
+==> Except Sorting Interfaces(SortedSet, NavigableSet, SortedMap, Navigable Map) and classes (TreeSet, TreeMap) in all the collection framework interfaces and classes heterogeneous objects are allowed.
+
+
+List (I):
+	0.) Child Interface of Collection(I)
+	1.) Insertion Order: Preserved (with respect to index)
+	2.) Duplicates: Allowed
+	3.) Auto-Sorted: No
+	4.) Direct Impl Classes: ArrayList, LinkedList, Vector (—> Stack)[Legacy classes 1.0v]
+	5.)
+
+
+ArrayList
+—————
+1.) Underlying Data Structure: Resizable/Growable Array
+2.) Default Capacity: anything, ( (Current Capacity * (3/2)) + 1)
+3.) Best Choice for retrieval 
+4.) Worse choice for insertion 
+5.) Implement Random Access Interface [Access with same speed(direct by index)]
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedList = Collections.synchronisedList();//if need synchronisedList
+7.) null insertion is possible
+[data store in consecutive memory location]
+
+LinkedList
+—————
+1.) Underlying Data Structure: LinkedList
+2.) Default Capacity: ———
+3.) Best Choice for insertion 
+4.) Worse choice for retrieval
+5.) Not Implement Random Access Interface
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedList = Collections.synchronisedList();//if need synchronisedList
+7.) null insertion is possible
+8.) LinkedList commonly used to create STACK(LIFO) or QUEUE(FIFO)
+
+Vector
+————-
+Same like ArrayList except it is ThreadSafe and capacity = currentCapacity*2
+
+Stack
+————-
+Child class of Vector
+Specially design class for LIFO order(stack data structure)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Set (I):
+	0.) Child Interface of Collection(I)
+	1.) Insertion Order: Not Preserved
+	2.) Duplicates: Not Allowed
+	3.) Auto-Sorted: No
+	4.) Direct Impl Classes: HashSet (—> LinkedHashSet)
+	5.) 
+
+HashSet
+—————-
+1.) Underlying Data Structure: Hash Table
+2.) Default Capacity: 16, (Default Fill Ratio: 0.75 / 75%)
+3.) Best Choice for search
+4.) Worse choice for ——
+5.) Not Implement Random Access Interface
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedSet = Collections.synchronisedSet();//if need synchronisedSet
+7.) null insertion is  possible only once??
+
+LinkedHashSet
+————————-
+Exactly same as HashSet Except following differences
+1.) Underlying Data Structure: Linked List(doubly-linked-list) + Hash Table
+2.) Best Choice for add, remove (used in developed cache based applications because cache rules are duplicates not allowed and insertion preserved)
+3.) Due to Linked List Insertion Order Preserved
+4.) LinkedList class also implement Queue Interface (follows FIFO)
+
+
+SortedSet (I):
+	0.) Child Interface of Set(I)
+	1.) Insertion Order: Preserved (Preserved according to some sorted order)
+	2.) Duplicates: Not Allowed
+	3.) Auto-Sorted: Yes
+	4.) Direct Impl Classes: No Class Directly Implement It.
+	5.) 
+
+NavigableSet (I):
+	0.) Child Interface of SortedSet(I)
+	1.) Insertion Order: Preserved (Preserved according to some sorted order)
+	2.) Duplicates: Not Allowed(Default) 
+		=> (Allowed: if we provide own Comparator for sorting)
+	3.) Auto-Sorted: Yes
+	4.) Direct Impl Classes: TreeSet
+	5.) 
+
+TreeSet
+—————-
+1.) Underlying Data Structure: BalancedTree
+2.) Default Capacity: 16, (Default Fill Ratio: 0.75 / 75%)
+3.) Best Choice for auto-sorting data
+4.) Worse choice for ——
+5.) Not Implement Random Access Interface
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedSet = Collections.synchronisedSet();//if need synchronisedSet
+7.) null insertion is NOT possible.
+    
+Map (I):(Key, Value)
+	0.) Direct child of Object class, Both key and value are Objects only.
+	1.) Insertion Order: Not Preserved?????
+	2.) Duplicate Keys: Not Allowed, Duplicate Values: Allowed
+	3.) Auto-Sorted: No	
+	4.) Direct Impl Classes: HashMap, LinkedHashMap, WeakHashMap, 
+						IdentityHashMap, Hashtable
+	5.) 
+
+Hashtable
+—————-
+1.) Underlying Data Structure: Hashtable
+2.) Default Capacity: 16, (Default Fill Ratio: 0.75 / 75%)
+3.) Best Choice for Search
+4.) Worse choice for ——
+5.) Not Implement Random Access Interface
+6.) Default: Synchronised(Thread-Safe),  
+7.) null insertion is NOT possible.
+
+
+HashMap
+—————-
+1.) Underlying Data Structure: Hash Table ( Internally uses LinkedList / Balance Binary Tree)
+2.) Default Capacity: 16, (Default Fill Ratio: 0.75 / 75%)
+3.) Best Choice for search
+4.) Worse choice for ——
+5.) Not Implement Random Access Interface
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedMap = Collections.synchronisedMap();//if need synchronisedMap
+7.) null insertion is not possible
+
+LinkedHashMap
+—————————-
+Exactly same as HashMap Except following differences
+1.) Underlying Data Structure: Linked List(doubly-linked-list) + Hash Table
+2.) Best Choice for add, remove (used in developed cache based applications because cache rules are duplicates not allowed and insertion preserved)
+3.) Due to Linked List Insertion Order Preserved
+
+IdentityHashMap
+—————————-
+Exactly same as HashMap Except following differences
+IdentityHashMap does not override .equals method. It used Object class equals methods to check duplicate, but Object class equals method always check / compare reference not content.
+Due to this, IdentityHashMap can have duplicate keys 
+27:47 => JVM will NOT use == Operator to compare two object in IdentityHashMap, It uses .equal method only.
+
+Extend IdentityHashMap and override equal method and check?
+Garbage Collector call finalize method to clear up activity(close resources) before destroying the object.
+
+
+
+
+
+
+WeakHashMap
+—————————-
+Exactly same as HashMap Except following differences
+If any Object not have any reference variable but it associated with HashMap then GC collector can not destroy this object. But If any Object not have any reference variable but it associated with WeakHashMap then GC collector can destroy this object.
+
+Note:
+Hash Table Data Structure:
+	if we print Hash Table data it will print from first bucket (bucket 0) to last bucket (bucket N).
+	if any bucket have multiple entries then those will store from left to right and print from Right to left
+
+
+Properties
+—————————————-
+Changeable resource fetch from external file using Properties Class. If we update/change resources in external file then we only need to redeploy application but no need to recompile, server restart. 
+1.) Underlying Data Structure: Internally uses a Hash table to store its properties.
+2.) Default Capacity: ——
+3.) Best Choice for    ——
+4.) Worse choice for  ——
+5.) Not Implement Random Access Interface
+6.) Default: Synchronised(Thread-Safe),  
+7.) null insertion is NOT possible.
+8.) Duplicates allowed: Not allowed for Key
+9.) Both Key and Value should be string type.
+
+SortedMap (I):(Key, Value)
+	0.) Child Interface of Map(I)
+	1.) Insertion Order: Preserved (Preserved according to some sorted order of Keys)
+	2.) Duplicate Keys: Not Allowed, Duplicate Values: Allowed
+	3.) Auto-Sorted: Yes
+	4.) Direct Impl Classes: No Class Directly Implement It.
+	5.) 
+
+NavigableMap (I):(Key, Value)
+	0.) Child Interface of SortedMap(I)
+	1.) Insertion Order: Preserved (Preserved according to some sorted order of Keys)
+	2.) Duplicate Keys: Not Allowed, Duplicate Values: Allowed
+	3.) Auto-Sorted: Yes
+	4.) Direct Impl Classes: TreeMap
+	5.) 
+
+TreeMap
+——————-
+1.) Underlying Data Structure: RED-BLACK TREE
+2.) Default Capacity: 16, (Default Fill Ratio: 0.75 / 75%) ??
+3.) Best Choice for 
+4.) Worse choice for ——
+5.) Not Implement Random Access Interface
+6.) Default: Non-Synchronised(Not Thread-Safe),  
+	synchronisedMap = Collections.synchronisedMap();//if need synchronisedMap
+7.) null insertion is not possible for key
+
+
+
+Queue (I):
+	0.) Child Interface of Collection(I)
+	1.) Insertion Order: Preserved (Default: FIFO), (Custom Priority Order)
+	2.) Duplicates: Allowed?
+	3.) Auto-Sorted: No
+	4.) Direct Impl Classes: PriorityQueue, (LinkedList also implements queue)
+	5.) 
+	6.) Prior To Processing
+	7.)
+
+PriorityQueue : Prior to precessing
+—————————————-
+1.) Underlying Data Structure: Queue?
+2.) Default Capacity: ——
+3.) Best Choice for    ——
+4.) Worse choice for  ——
+5.) Not Implement Random Access Interface
+6.) Default: Not-Synchronised(Not Thread-Safe),  
+7.) null insertion is NOT possible.
+8.) Duplicates allowed: Not Allowed
+9.) Some platform won’t support PriorityQueue and ThreadPriorities
+
+Some Important methods
+Collection Methods                              Map Methods		Queue
+add						put			add / offer
+addAll						putAll			——
+remove					remove		remove / poll	
+removeAll					——			peak / element
+clear						clear			
+retainAll		
+size						size	
+isEmpty					isEmpty	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Utility Classes
+————————-
+
+1.) Collections
+	This class defines several utility methods for collection object like sorting, searching reversing and so on…
+
+Sorting:
+	DNSO: public static void sort(List l) //given list will sort by DNSO(object should be homogeneous and comparable, list should not contain null)
+	
+	CSO(Customised Sorting Oder): public void sort( List l, Comparator c) //Provide comparator with sorting logic 
+
+Searching: 
+	public int binarySearch(List l, Object target) // List should be sorted with DSNO, if found return index of target object, if not found return index insertion point with -ve sign (where you can place target object)
+
+	public int binarySearch(List l, Object target, Comparator c) // List should be sorted with CSO, if found return index of target object, if not found return index insertion point with -ve sign (where you can place target object)
+Above two search method internally usages binarySearchAlgorithm
+
+Reverse:
+	public static void reverse (List l) //reverse given list
+	public static Comparator reverseOrder( Comparator c) //reverse the comparator order
+
+ToArray: Collection.toArray(List l)
+
+
+2.) Arrays
+———————-
+	This class defines several utility methods for Array object like sorting, searching reversing and so on…
+
+Sorting:
+	public static void sort ( primitive[] p ) // DNSO
+	public static void sort ( Object[] obj) // DNSO
+	public static void sort ( Object[] obj, Comparator c) // CSO
+
+Searching :
+public int binarySearch(primitive[] p, primitive target) // Array should be sorted with DNSO
+public int binarySearch(Object [] obj, Object target) // Array should be sorted with DNSO
+public int binarySearch(Object [] obj, Object target, Comparator c) // Array should be sorted with CSO
+
+Convert To List:  Arrays.asList(array); 
+	For existing array, we are not getting new list, we are getting list view of array
+If we change the array, that change will be reflect also to the list, and vice-versa.
+We can not do add, remove operation because this is array, array is not resizable.
+Also, we cant save/have heterogeneous object in this list because internally it is array and array can store only homogeneous object.
+
+
+
+
+
+Cursors: (Best choice to use for(Object o: ObjectList) OR Java8 Stream concept)
+—————
+If Requirement is to get the Object one by one from the collection, then we should use cursors.
+1.) Enumeration:
+——————————-
+	Enumeration e = object.elements();
+	while(e.hasMoreElements()) {
+		System.out.println(e.nextElement()) //get element
+	}	
+  	
+	Drawbacks:
+		Applicable only for legacy collection objects.
+		Forward only
+		Only Read Access, No Remove Capability
+		Not able to Add New Object and not able to Replace/Update Object
+
+2.) Iterator
+———————-
+	Applicable for all collections
+	Read + Remove
+
+   Example:			
+	Iterator iterator = cityNames.iterator(); 
+        	while (iterator.hasNext())  
+        	    System.out.print(iterator.next() + " "); 
+	     iterator.remove();    
+	}
+
+	Drawbacks:
+		Forward only
+		Not able to Add New Object and not able to Replace/Update Object
+
+3.) ListIterator
+————————-
+	BiDirectional Cursor (Forward + Backward Direction)
+	Only Read Access, No Remove Capability
+	Read + Remove + Add New Object + Replace/Update Object
+	
+Example:
+	ListIterator<String> iterator = arrlist.listIterator(5);  
+	while(iterator.hasNext ()) {	
+		if((iterator.next() == “ListIteratorDemo”)) {
+			if(hasPrevious()) {
+				if(iterator.previous() == “ListIteratorOldDemo”) {
+					iterator.remove();
+				} else {
+					iterator.set(“ListIteratorOldDemo”);
+				}
+			} else {
+				iterator.add(“ListIteratorDemo”);
+			}
+		}
+	}
+
+	Drawbacks:
+		Applicable only for List Interface.	
+
+Sorting
+————-
+1.) Comparable ( I ) :  It meant for DNSO.
+If you implement Comparable (I) then you will get DNSO
+	ts.add(“Obj1”);
+	//Internally Obje1.compareTo(ObjectWhichIsAlreadyInTreeSet)
+	{
+		if(Obje1 > ObjectWhichIsAlreadyInTreeSet) 
+			return 1; // +ve
+		else i if(Obje1 < ObjectWhichIsAlreadyInTreeSet)
+			return -1; //-ve
+		else return 0; // same data //skip
+	}	
+
+2.) Comparator ( I ): It meant for Customised Sorting Oder
+	In Collection, if you are not satisfied with DNSO or required new sorting order then implement Comparator (I) and override compare method to add new sorting logic.
+And provide Comparator instance to sorting collection like TreeSet, TreeMap and so on…
+
+Comparator ( I ) have two abstract methods, compare and equals method. We need to override only compare method not equals because like any other class or interface Comparator interface also child of Object class, and Object class have equals method so Comparator Interface have Object class equals method.
+
+Override compare method
+Input: 10, 2, 8, 9, 5, 6
+public 	int compare(Object obj1, Object obj2) { 
+	Integer firstObj = (Integer) obj1;
+	Integer secondObj = (Integer) obj2;
+
+NOTE: INTEGER class implement Comparable interface so it have its compareTo method.
+	1.) return firstObj.compareTo(secondObj); // Ascending order [2, 5, 6, 8, 9, 10]
+	2.) return - firstObj.compareTo(secondObj); // Descending order [10, 9, 8, 6, 5, 2]
+	3.) return secondObj.compareTo(firstObj); // Descending order [10, 9, 8, 6, 5, 2]
+	4.) return - secondObj.compareTo(firstObj); // Ascending order [2, 5, 6, 8, 9, 10]
+	5.) return 1 // ( +ve ) Insertion Order Preserved [10, 2, 8, 9, 5, 6]
+	6.) return -1 // ( -ve ) Reverse of Insertion Order [6, 5, 9, 8, 2, 10]
+	7.) return 0 // For 1st value, It will not compare so 1st value inserted,  [ 10 ]
+		  // After 1st value, all will found as Duplicate value and hence all will be skipped
+
+// For String DNSO is Alphabetical order
+}
+
+We can add both homogeneous and heterogeneous object in TreeSet/TreeMap(Any Sorting Collection) if object does not implement Comparable interface. If we are defining our own sorting order we can provide sorting logic to both homogeneous and heterogeneous objects. Its upto you, you may can through exception also.
+
+If you want to add user-defined classes in any collection with ( DNSO then that class must implement comparable ) or ( user-defined class required custom sorting order  then we need to provide our own sorting mechanism by implementing comparator and provide it as a argument to collection. )
+
