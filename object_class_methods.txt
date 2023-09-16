@@ -1,0 +1,85 @@
+Object class toString(), equals() and hashCode() method details
+——————————————————————————————-
+ toString():
+—————-
+The default implementation in the Object class returns a string that consists of the class name, an "@" symbol, and the hexadecimal representation of the object's memory address but by overriding the toString() method, we can get some useful information.
+
+It is recommended that classes override the toString() method to provide some concise but useful information about the instance.
+
+toString returns getClass().getName() + '@' + Integer.toHexString(hashCode())
+
+
+equals():
+————-
+Any non-null reference values x and y, this method returns true if and only if x and y refer to the same object (x == y has the value true).
+
+ x.equals(null) should return false.
+
+Note that it is generally necessary to override the hashCode method whenever this method is overridden, so as to maintain the general contract for the hashCode method, which states that equal objects must have equal hash codes.
+
+
+hashCode()
+——————-
+Returns a hash code value for the object.
+
+Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified.
+
+Rule 1: If two objects are equal according to the equals(Object) method, then hashcode of both object should be same for them, but vice-versa need not to be same. That is, if two object have same hash code then object not required to be same by equals method.
+
+If equals method override then we should override hashCode method also to fulfil Rule 1.
+If we violate rule 1 then we will get wrong bucket while storing object in hash base data structure. (HashMap or HashSet).
+
+This will lead to wrong results and will not get performance benefits of hashing. 	
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+Example:
+————-
+
+public class User {
+    private String name;
+    private int age;
+    private String passport;
+
+	//getters and setters, constructor
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof User)) {
+            return false;
+        }
+
+        User user = (User) o;
+
+        return user.name.equals(name) &&
+                user.age == age &&
+                user.passport.equals(passport);
+    }
+
+    //Idea from effective Java : Item 9
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        result = 31 * result + age;
+        result = 31 * result + passport.hashCode();
+        return result;
+    }
+
+}
+
