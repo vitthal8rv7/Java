@@ -71,6 +71,12 @@ public class Java8FeaturesService {
 		System.out.println("Ascending  Order By Eno : "+employeeList);
 		Collections.sort(employeeList, (a, b) -> -(a.eno-b.eno)); //descending b-a 
 		System.out.println("Descending Order By Eno"+employeeList);		
+
+		Collections.sort(employeeList, (a, b) -> a.name.compareTo(b.name)); //ascending a-b 
+		System.out.println("Ascending  Order By Eno : "+employeeList);
+		Collections.sort(employeeList, (a, b) -> -(a.name.compareTo(b.name))); //descending b-a 
+		System.out.println("Descending Order By Eno"+employeeList);		
+
 	}
 
 }
