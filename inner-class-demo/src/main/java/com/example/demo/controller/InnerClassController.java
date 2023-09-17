@@ -29,4 +29,9 @@ public class InnerClassController {
 		methodLocalInnerClassService.methodLocalInnerClassDemo();
 		return "Method Local Inner Class Rules Tested Successfully.";
 	}
+	@GetMapping("/anonymous-inner-class")
+	public String anonymousInnerClassDemo() {
+		methodLocalInnerClassService.anonymousInnerClassDemo();
+		return "Anonymous Inner Class Rules Tested Successfully.";
+	}
 }
