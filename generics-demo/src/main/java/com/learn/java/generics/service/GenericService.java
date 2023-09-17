@@ -150,6 +150,18 @@ public class GenericService {
 	}
 
 	public void wildCartCharacterDemo(ArrayList<?> arrayList) {
+		//ArrayList<?> arrayList 
+			//We can to addition operation with wild card character.
+		System.out.println("arrayList values: "+arrayList);
+		System.out.println("arrayList type: "+arrayList.getClass().getName());
+		System.out.println("arrayList value type: "+arrayList.get(0).getClass().getName());
+
+	}
+
+	
+	public void wildCartCharacterDemo2(ArrayList<? extends Number> arrayList) {
+		//ArrayList<?> arrayList 
+			//We can to addition operation with wild card character.
 		System.out.println("arrayList values: "+arrayList);
 		System.out.println("arrayList type: "+arrayList.getClass().getName());
 		System.out.println("arrayList value type: "+arrayList.get(0).getClass().getName());
