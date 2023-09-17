@@ -1,7 +1,10 @@
 package com.example.demo.service;
 
+import org.springframework.stereotype.Service;
+
 import com.example.demo.service.MethodLocalInnerClassService.Cricket;
 
+@Service
 public class AnonymousInnerClassService {
 
 	class BhartiyaCricket implements Cricket {
@@ -9,11 +12,11 @@ public class AnonymousInnerClassService {
 		public void fiveDayMatch() {
 			System.out.println("We play Test.");
 		}
-		
+
 		public void oneDayMatch() {
 			System.out.println("We play ODI.");
 		}
-		
+
 		public void shortDayMatch() {
 			System.out.println("We play T20.");
 		}

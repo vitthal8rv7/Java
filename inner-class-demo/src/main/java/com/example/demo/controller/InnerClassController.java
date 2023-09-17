@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.service.AnonymousInnerClassService;
 import com.example.demo.service.MethodLocalInnerClassService;
 import com.example.demo.service.RegularInnerClassService;
+import com.example.demo.service.StaticNestedClassService;
 
 @RestController
 @RequestMapping("/inner-class/demo")
@@ -21,22 +22,31 @@ public class InnerClassController {
 
 	@Autowired
 	private AnonymousInnerClassService anonymousInnerClassService;
-	
+
+	@Autowired
+	private StaticNestedClassService staticNestedClassService;
+
 	@GetMapping("/regular-inner-class")
 	public String regularInnerClassDemo() {
 		regularInnerClassService.regularInnerClassDemo();
 		return "Regular Inner Class Rules Tested Successfully.";
 	}
-	
+
 	@GetMapping("/method-local-inner-class")
 	public String methodLocalInnerClassDemo() {
 		methodLocalInnerClassService.methodLocalInnerClassDemo();
 		return "Method Local Inner Class Rules Tested Successfully.";
 	}
-	
+
 	@GetMapping("/anonymous-inner-class")
 	public String anonymousInnerClassDemo() {
 		anonymousInnerClassService.anonymousInnerClassDemo();
 		return "Anonymous Inner Class Rules Tested Successfully.";
+	}
+
+	@GetMapping("/nested-static-class")
+	public String staticNestedClassDemo() {
+		staticNestedClassService.staticNestedClassDemo();
+		return "Static Nested Class Rules Tested Successfully.";
 	}
 }
