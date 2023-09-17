@@ -19,4 +19,10 @@ public class Java8FeaturesController {
 		java8FeaturesService.lambdaExpressionMultithreadingDemo1();
 		return "Lambda Expression Multithreading Rules Tested Successfully.";
 	}
+	
+	@GetMapping("/lambda-expression-collection1")
+	public String lambdaExpressionCollectionDemo1() {
+		java8FeaturesService.lambdaExpressionCollectionDemo1();
+		return "Lambda Expression Collection Rules Tested Successfully.";
+	}
 }
