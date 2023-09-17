@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.service.AnonymousInnerClassService;
 import com.example.demo.service.MethodLocalInnerClassService;
 import com.example.demo.service.RegularInnerClassService;
 
@@ -18,6 +19,9 @@ public class InnerClassController {
 	@Autowired
 	private MethodLocalInnerClassService methodLocalInnerClassService;
 
+	@Autowired
+	private AnonymousInnerClassService anonymousInnerClassService;
+	
 	@GetMapping("/regular-inner-class")
 	public String regularInnerClassDemo() {
 		regularInnerClassService.regularInnerClassDemo();
@@ -29,9 +33,10 @@ public class InnerClassController {
 		methodLocalInnerClassService.methodLocalInnerClassDemo();
 		return "Method Local Inner Class Rules Tested Successfully.";
 	}
+	
 	@GetMapping("/anonymous-inner-class")
 	public String anonymousInnerClassDemo() {
-		methodLocalInnerClassService.anonymousInnerClassDemo();
+		anonymousInnerClassService.anonymousInnerClassDemo();
 		return "Anonymous Inner Class Rules Tested Successfully.";
 	}
 }
