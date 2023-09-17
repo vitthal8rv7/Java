@@ -150,21 +150,44 @@ public class GenericService {
 	}
 
 	public void wildCartCharacterDemo(ArrayList<?> arrayList) {
-		//ArrayList<?> arrayList 
-			//We can to addition operation with wild card character.
-		System.out.println("arrayList values: "+arrayList);
-		System.out.println("arrayList type: "+arrayList.getClass().getName());
-		System.out.println("arrayList value type: "+arrayList.get(0).getClass().getName());
+		// ArrayList<?> arrayList
+		// We can to addition operation with wild card character.
+		System.out.println("arrayList values: " + arrayList);
+		System.out.println("arrayList type: " + arrayList.getClass().getName());
+		System.out.println("arrayList value type: " + arrayList.get(0).getClass().getName());
 
 	}
 
-	
 	public void wildCartCharacterDemo2(ArrayList<? extends Number> arrayList) {
-		//ArrayList<?> arrayList 
-			//We can to addition operation with wild card character.
-		System.out.println("arrayList values: "+arrayList);
-		System.out.println("arrayList type: "+arrayList.getClass().getName());
-		System.out.println("arrayList value type: "+arrayList.get(0).getClass().getName());
+		// ArrayList<?> arrayList
+		// We can to addition operation with wild card character.
+		System.out.println("arrayList values: " + arrayList);
+		System.out.println("arrayList type: " + arrayList.getClass().getName());
+		System.out.println("arrayList value type: " + arrayList.get(0).getClass().getName());
+
+	}
+
+	public void parameterTypeScopeDemo(ArrayList<String> arrayList) { // only string parameter type allowed here, caller
+																		// type doesn`t matter
+		arrayList.add("Value2");
+		// arrayList.add(1d);
+		// The method add(String) in the type ArrayList<String> is not applicable for
+		// the arguments (double)
+		System.out.println("arrayList values: " + arrayList);
+
+	}
+
+	// Generic concept is compile time only so, run time above method and this
+	// method signature will become same
+	// So, JVM face conflict, JVM can not resolve for calling which one of them
+	// That why, we have to use diff method name here.
+	public void parameterTypeScopeDemo2(ArrayList arrayList) { // all type allowed here, caller parameter type doesn`t
+																// matter
+		arrayList.add("Value2");
+		arrayList.add(1d);
+		arrayList.add(1);
+		arrayList.add(true);
+		System.out.println("arrayList values: " + arrayList);
 
 	}
 

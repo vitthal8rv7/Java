@@ -61,4 +61,28 @@ public class GenericController {
 
 		return "Wild Card Character rules tested.";
 	}
+
+	@GetMapping("/parameter-type-scope")
+	public String parameterTypeScopeDemo() {
+		System.out.println("Inside Controller:: parameterTypeScopeDemo");
+		ArrayList<String> arrayList = new ArrayList<>();
+		arrayList.add("Value");
+		// arrayList.add(1d);
+		// The method add(String) in the type ArrayList<String> is not applicable for
+		// the arguments (double)
+
+		ArrayList arrayList2 = new ArrayList();
+		arrayList2.add("Value");
+		arrayList2.add(1d);
+		arrayList2.add(1);
+		arrayList2.add(true);
+
+		genericService.parameterTypeScopeDemo(arrayList); // caller parameter type doesn`t matter in called method
+		genericService.parameterTypeScopeDemo(arrayList2); // caller parameter type doesn`t matter in called method
+
+		genericService.parameterTypeScopeDemo2(arrayList); // caller parameter type doesn`t matter in called method
+		genericService.parameterTypeScopeDemo2(arrayList2); // caller parameter type doesn`t matter in called method
+
+		return "Parameter Type Scope rules tested.";
+	}
 }
