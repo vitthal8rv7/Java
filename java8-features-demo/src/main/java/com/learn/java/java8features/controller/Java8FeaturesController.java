@@ -31,4 +31,10 @@ public class Java8FeaturesController {
 		java8FeaturesService.defaultMethodDemo1();
 		return "Default Method Rules Tested Successfully.";
 	}
+	
+	@GetMapping("/static-method")
+	public String staticMethodDemo1() {
+		java8FeaturesService.staticMethodDemo1();
+		return "Static Method Rules Tested Successfully.";
+	}
 }

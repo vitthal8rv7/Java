@@ -112,16 +112,62 @@ public class Java8FeaturesService {
 				testMethod(); // HAS-A Relationship with TestInterface [ Inheritance ]
 
 			}
+
 			public void testMethod() {
 				System.out.println("This is test default method of TestClass2");
 				TestInterface2.super.testMethod();
 			}
 		}
-		
+
 		TestClass testClass = new TestClass();
 		testClass.defaultMethodCaller();
 		TestClass2 testClass2 = new TestClass2();
 		testClass2.defaultMethodCaller();
-		
+
+	}
+
+	public void staticMethodDemo1() {
+		interface TestInterface {
+			static void testMethod() {
+				System.out.println("This is test default method of TestInterface");
+			}
+		}
+		interface TestInterface2 {
+			static void testMethod() {
+				System.out.println("This is test default method of TestInterface2");
+			}
+		}
+
+		class TestClass implements TestInterface {
+			public void defaultMethodCaller() {
+				// testMethod(); //Invalid
+				TestInterface.testMethod(); // Valid
+				TestInterface2.testMethod(); // Valid
+
+			}
+		}
+
+		class TestClass2 implements TestInterface, TestInterface2 {
+			public void defaultMethodCaller() {
+				testMethod(); // Valid //TestClass2 Class Method // No Over Hiding Concept
+				TestInterface.testMethod(); // Valid
+				TestInterface2.testMethod(); // Valid
+
+			}
+
+			public void testMethod() {
+				System.out.println("This is test default method of TestClass2");
+				TestInterface2.testMethod();
+			}
+		}
+		TestClass testClass = new TestClass();
+		testClass.defaultMethodCaller();
+		TestClass2 testClass2 = new TestClass2();
+		testClass2.defaultMethodCaller();
+
+		// testClass.testMethod();
+		// Invalid can`t call static method without TestInterface name(No Inheritance)
+		testClass2.testMethod(); // Valid called TestClass2 method
+
 	}
 }
