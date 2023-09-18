@@ -37,4 +37,9 @@ public class Java8FeaturesController {
 		java8FeaturesService.staticMethodDemo1();
 		return "Static Method Rules Tested Successfully.";
 	}
-}
+	
+	@GetMapping("/predicate")
+	public String predicateDemo1() {
+		java8FeaturesService.predicateDemo1();
+		return "Predicate Rules Tested Successfully.";
+	}}

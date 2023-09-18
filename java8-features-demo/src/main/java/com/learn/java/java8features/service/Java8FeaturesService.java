@@ -2,6 +2,8 @@ package com.learn.java.java8features.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
@@ -170,4 +172,67 @@ public class Java8FeaturesService {
 		testClass2.testMethod(); // Valid called TestClass2 method
 
 	}
+
+	public void predicateDemo1() {
+		class Employee {
+			Integer salary;
+			String name;
+			Integer age;
+			public Employee(Integer salary, String name, Integer age) {
+				super();
+				this.salary = salary;
+				this.name = name;
+				this.age = age;
+			}
+			public Integer getSalary() {
+				return salary;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public Integer getAge() {
+				return age;
+			}
+		} //Employee
+		
+		ArrayList<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Employee(10000, "ABC", 22));
+		employeeList.add(new Employee(20000, "XYZ", 32));
+		employeeList.add(new Employee(12000, "AOP", 23));
+		employeeList.add(new Employee(11111, "ABC2", 19));
+		employeeList.add(new Employee(31000, "ABC3", 32));
+		Predicate<Employee> ageUnder25 = employee -> employee.getAge()<25;
+		Predicate<Employee> senior = employee -> employee.getAge()>25;
+		Predicate<Employee> ageGreaterThan18 = employee -> employee.getAge()>18;
+		Predicate<Employee> ageLessThan21 = employee -> employee.getAge()<21;
+		BiPredicate<Integer, Integer> seniorMember = (salary, age) -> (salary > 15000 && age > 25);
+		for(Employee e: employeeList) {
+			if(ageUnder25.test(e))
+				System.out.println("Age of "+e.getName()+ " is under 25.");
+		}
+		
+		for(Employee e: employeeList) {
+			if(seniorMember.test(e.getSalary(), e.age))
+				System.out.println(e.getName()+ " is senior member of company");
+		}
+		
+		for(Employee e: employeeList) {
+			if(ageGreaterThan18.and(ageLessThan21).test(e)) 
+				System.out.println(e.getName()+ " is new Employee.");
+		}
+		
+		for(Employee e: employeeList) {
+			if(ageLessThan21.or(senior).test(e)) 
+				System.out.println(e.getName()+ " is new Employee Or Senior.");			
+		}
+		
+		for(Employee e: employeeList) {
+			if(ageUnder25.negate().test(e)) 
+				System.out.println(e.getName()+ " is Senior Employee.");
+		}		
+	}
+
+
 }
