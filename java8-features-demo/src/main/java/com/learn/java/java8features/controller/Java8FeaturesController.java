@@ -25,4 +25,10 @@ public class Java8FeaturesController {
 		java8FeaturesService.lambdaExpressionCollectionDemo1();
 		return "Lambda Expression Collection Rules Tested Successfully.";
 	}
+	
+	@GetMapping("/default-method")
+	public String defaultMethodDemo1() {
+		java8FeaturesService.defaultMethodDemo1();
+		return "Default Method Rules Tested Successfully.";
+	}
 }
