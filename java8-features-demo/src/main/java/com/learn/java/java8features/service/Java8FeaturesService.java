@@ -13,6 +13,7 @@ import java.util.function.IntPredicate;
 import java.util.function.IntToDoubleFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.random.RandomGenerator;
 
 import org.springframework.stereotype.Service;
 
@@ -432,6 +433,68 @@ public class Java8FeaturesService {
 				System.out.println(e.getName()+ " is senior member of company");
 		}	
 		
+	}
+
+	public void referenceDemo1() {
+		class Employee {
+			private Integer salary;
+			private String name;
+			private Integer age;
+			public Employee() {
+				
+			}
+			public Employee(Integer salary, Integer age) {
+				super();
+				this.salary = salary;
+				this.name = ""+salary+age+RandomGenerator.getDefault().nextInt();
+				this.age = age;
+			}
+
+			public Integer getSalary() {
+				return salary;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public Integer getAge() {
+				return age;
+			}
+			
+			@Override
+			public String toString() {
+				return "Employee [salary=" + salary + ", name=" + name + ", age=" + age + "]";
+			}
+		} //Employee
+		
+		BiFunction<Integer, Integer, Employee> employeeSupplier = Employee::new;
+		
+		ArrayList<Employee> employeeList = new ArrayList<>();
+		employeeList.add(employeeSupplier.apply(10000, 22));
+		employeeList.add(employeeSupplier.apply(20000, 32));
+		employeeList.add(employeeSupplier.apply(12000, 23));
+		employeeList.add(employeeSupplier.apply(11111, 19));
+		employeeList.add(employeeSupplier.apply(31000, 32));
+		
+		class EmployeeUtil {
+			public boolean ageUnder25(Employee e) {
+				return e.getAge()<25;
+			}		
+
+			public boolean goodSalary(Employee e) {
+				return e.getSalary()>25000;
+			}		
+
+			public static boolean seniorMember(Employee e) {
+				return e.getAge()>30;
+			}		
+
+		}
+		EmployeeUtil employeeUtil = new EmployeeUtil();
+		employeeList.stream().filter(employeeUtil::ageUnder25).forEach(e -> System.out.println("Age of "+e.getName()+ " is under 25."));
+		employeeList.stream().filter(EmployeeUtil::seniorMember).forEach(e -> System.out.println(e.getName()+ " is senior member of company"));
+		employeeList.stream().filter(employeeUtil::goodSalary).forEach(System.out::println);		
 	}
 
 }

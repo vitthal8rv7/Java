@@ -67,4 +67,11 @@ public class Java8FeaturesController {
 		java8FeaturesService.primitiveFunctionsDemo1();
 		return "Primitive Functions Rules Tested Successfully.";
 	}
+	
+	@GetMapping("/reference")
+	public String referenceDemo1() {
+		java8FeaturesService.referenceDemo1();
+		return "Method Reference, Constructor Reference, and :: operator Rules Tested Successfully.";
+	}
+
 }
