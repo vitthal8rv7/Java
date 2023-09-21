@@ -42,4 +42,14 @@ public class Java8FeaturesController {
 	public String predicateDemo1() {
 		java8FeaturesService.predicateDemo1();
 		return "Predicate Rules Tested Successfully.";
-	}}
+	}
+
+	@GetMapping("/function")
+	public String functionDemo1() {
+		java8FeaturesService.functionDemo1();
+		return "Function Rules Tested Successfully.";
+	}
+
+	
+	
+}
