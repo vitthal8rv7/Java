@@ -74,4 +74,11 @@ public class Java8FeaturesController {
 		return "Method Reference, Constructor Reference, and :: operator Rules Tested Successfully.";
 	}
 
+	
+	@GetMapping("/joda/time/api")
+	public String dateTimeDemo1() {
+		java8FeaturesService.dateTimeDemo1();
+		return "Joda Date and Time API Tested Successfully.";
+	}
+	
 }

@@ -1,6 +1,11 @@
 package com.learn.java.java8features.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.BiConsumer;
@@ -495,6 +500,59 @@ public class Java8FeaturesService {
 		employeeList.stream().filter(employeeUtil::ageUnder25).forEach(e -> System.out.println("Age of "+e.getName()+ " is under 25."));
 		employeeList.stream().filter(EmployeeUtil::seniorMember).forEach(e -> System.out.println(e.getName()+ " is senior member of company"));
 		employeeList.stream().filter(employeeUtil::goodSalary).forEach(System.out::println);		
+	}
+
+	public void dateTimeDemo1() {
+		System.out.println("Current Time: "+LocalTime.now());
+		System.out.println("Current Hours: "+LocalTime.now().getHour());
+		System.out.println("Current Minutes: "+LocalTime.now().getMinute());
+		System.out.println("Current Seconds: "+LocalTime.now().getSecond());
+		System.out.println("Current Time(TimeZoned): "+LocalTime.now(ZoneId.of(ZoneId.getAvailableZoneIds().stream().findFirst().get())));
+		
+		System.out.println("Current Time: "+LocalDate.now());
+		System.out.println("Current Day Of Month: "+LocalDate.now().getDayOfMonth());
+		System.out.println("Current Day Of Year: "+LocalDate.now().getDayOfYear());
+		System.out.println("Current Month: "+LocalDate.now().getMonthValue());
+		System.out.println("Current Year: "+LocalDate.now().getYear());
+		System.out.println("Current Date(TimeZoned): "+LocalDate.now(ZoneId.of(ZoneId.getAvailableZoneIds().stream().findFirst().get())));
+
+
+		System.out.println("Current Time: "+LocalDateTime.now());
+		System.out.println("Current Hours: "+LocalDateTime.now().getHour());
+		System.out.println("Current Minutes: "+LocalDateTime.now().getMinute());
+		System.out.println("Current Seconds: "+LocalDateTime.now().getSecond());
+		System.out.println("Current Day Of Month: "+LocalDateTime.now().getDayOfMonth());
+		System.out.println("Current Day Of Year: "+LocalDateTime.now().getDayOfYear());
+		System.out.println("Current Month: "+LocalDateTime.now().getMonthValue());
+		System.out.println("Current Year: "+LocalDateTime.now().getYear());
+		System.out.println("Current Date(TimeZoned): "+LocalDateTime.now(ZoneId.of(ZoneId.getAvailableZoneIds().stream().findFirst().get())));
+
+
+		System.out.println("Date after 4 month, 4minute from current date: "+LocalDateTime.now().plusMonths(4).plusMinutes(4));
+		System.out.println("Date before 2 month, 12 minute from current date: "+LocalDateTime.now().minusMonths(2).minusMinutes(12));
+		
+		LocalDate birthday = LocalDate.of(1991, 9, 22);
+		System.out.println("birthday: "+birthday);
+		
+		LocalDate deathDay = LocalDate.of(1991+60, 9, 22);
+		System.out.println("deathDay: "+deathDay);
+		
+		LocalDate today = LocalDate.now();
+		System.out.println("today: "+today);
+		
+		Period livedLife = Period.between( birthday, today);		
+		System.out.println(String.format("Lived life is %d years, %d months, %d days", livedLife.getYears(), livedLife.getMonths(), livedLife.getDays()));
+		Period remainingLife = Period.between(today, deathDay);
+		System.out.println(String.format("Remaining life is %d years, %d months, %d days", remainingLife.getYears(), remainingLife.getMonths(), remainingLife.getDays()));
+
+		System.out.println("ZoneId.systemDefault() : "+ZoneId.systemDefault());
+		
+		ZoneId.getAvailableZoneIds().stream().forEach(System.out::println);
+		ZoneId zone = ZoneId.of("America/Los_Angeles");     // Get particular zone details
+		System.out.println("zoneId : "+zone);
+		ZonedDateTime zonedDateTime = ZonedDateTime.now(zone); // Current time of particular zone
+		System.out.println("zonedDateTime : "+zonedDateTime);
+
 	}
 
 }
