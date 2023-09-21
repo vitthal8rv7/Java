@@ -282,7 +282,7 @@ public class Java8FeaturesService {
 		Function<Employee, Boolean> ageUnder25 = employee -> employee.getAge()<25;
 		BiFunction<Integer, Integer, Boolean> seniorMember = (salary, age) -> (salary > 15000 && age > 25);
 
-		Function<Employee, Employee> updateAgeByTem = employee -> {employee.age = employee.getAge()+10; return employee;};
+		Function<Employee, Employee> updateAgeByTen = employee -> {employee.age = employee.getAge()+10; return employee;};
 		Function<Employee, Employee> updateSalaryBy10Percentage = employee -> {employee.setSalary(employee.getSalary() + (employee.getSalary()/10)); return employee;};
 		Function<Employee, Boolean> isPramoted = employee -> employee.getAge()>30;
 		
@@ -297,11 +297,16 @@ public class Java8FeaturesService {
 		}
 		
 		for(Employee e: employeeList) {
-			if(updateAgeByTem.andThen(updateSalaryBy10Percentage).andThen(isPramoted).apply(e))
+			if(updateAgeByTen.andThen(updateSalaryBy10Percentage).andThen(isPramoted).apply(e))
 				System.out.println(e.getName()+ " is pramoted..");
 			else 
 				System.out.println(e.getName()+ " is not pramoted..");	
 		}		
+		Function<Integer, Boolean> areBothSenior = employeeAge -> employeeAge>60;
+		BiFunction<Employee, Employee, Integer> combineAge = (employee1, employee2) -> employee1.getAge() + employee2.getAge();
+		if(combineAge.andThen(areBothSenior).apply(employeeList.get(0), employeeList.get(1)))
+			System.out.println("Both are seniors...");	
+		
 	}
 
 }
