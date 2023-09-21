@@ -2,8 +2,10 @@ package com.learn.java.java8features.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -262,15 +264,7 @@ public class Java8FeaturesService {
 			}
 			public void setSalary(Integer salary) {
 				this.salary = salary;
-			}
-			public void setName(String name) {
-				this.name = name;
-			}
-			public void setAge(Integer age) {
-				this.age = age;
-			}
-			
-			
+			}			
 		} //Employee
 		
 		ArrayList<Employee> employeeList = new ArrayList<>();
@@ -307,6 +301,70 @@ public class Java8FeaturesService {
 		if(combineAge.andThen(areBothSenior).apply(employeeList.get(0), employeeList.get(1)))
 			System.out.println("Both are seniors...");	
 		
+	}
+
+	public void consumerDemo1() {
+		class Employee {
+			private Integer salary;
+			private String name;
+			private Integer age;
+			public Employee(Integer salary, String name, Integer age) {
+				super();
+				this.salary = salary;
+				this.name = name;
+				this.age = age;
+			}
+			public Integer getSalary() {
+				return salary;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public Integer getAge() {
+				return age;
+			}
+			public void setSalary(Integer salary) {
+				this.salary = salary;
+			}
+		} //Employee
+		
+		ArrayList<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Employee(10000, "ABC", 22));
+		employeeList.add(new Employee(20000, "XYZ", 32));
+		employeeList.add(new Employee(12000, "AOP", 23));
+		employeeList.add(new Employee(11111, "ABC2", 19));
+		employeeList.add(new Employee(31000, "ABC3", 32));
+		Consumer<Employee> ageUnder25 = employee -> {
+			if(employee.getAge()<25)
+				System.out.println("Age of "+employee.getName()+ " is under 25.");
+
+		};
+
+
+		BiConsumer<Integer, Integer> seniorMember = (salary, age) -> {
+			if(salary > 15000 && age > 25) {
+				System.out.println("Senior member of company");
+			}
+		};
+
+		for(Employee e: employeeList) {
+			ageUnder25.accept(e);
+		}
+		
+		for(Employee e: employeeList) {
+			seniorMember.accept(e.getSalary(), e.age);	
+		}		
+		
+		
+		Consumer<Employee> updateSalaryBy10Percentage = employee -> {employee.setSalary(employee.getSalary() + (employee.getSalary()/10));
+			System.out.println("Salary Update By 10%");
+		};
+		employeeList.stream().forEach(updateSalaryBy10Percentage::accept);
+		
+		Predicate<Employee> isAgeUnder25 = employee -> (employee.getAge()<25);
+		employeeList.stream().filter(isAgeUnder25::test).forEach( e -> ageUnder25.andThen(updateSalaryBy10Percentage).accept(e));
 	}
 
 }

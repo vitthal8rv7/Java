@@ -50,6 +50,11 @@ public class Java8FeaturesController {
 		return "Function Rules Tested Successfully.";
 	}
 
+	@GetMapping("/consumer")
+	public String consumerDemo1() {
+		java8FeaturesService.consumerDemo1();
+		return "Consumer Rules Tested Successfully.";
+	}
 	
 	
 }
