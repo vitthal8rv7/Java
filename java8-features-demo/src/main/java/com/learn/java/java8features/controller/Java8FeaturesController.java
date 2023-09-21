@@ -61,6 +61,10 @@ public class Java8FeaturesController {
 		java8FeaturesService.supplierDemo1();
 		return "Supplier Rules Tested Successfully.";
 	}
-
 	
+	@GetMapping("/primitive/functions")
+	public String primitiveFunctionsDemo1() {
+		java8FeaturesService.primitiveFunctionsDemo1();
+		return "Primitive Functions Rules Tested Successfully.";
+	}
 }

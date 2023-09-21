@@ -8,6 +8,9 @@ import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntFunction;
+import java.util.function.IntPredicate;
+import java.util.function.IntToDoubleFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -374,6 +377,60 @@ public class Java8FeaturesService {
 		System.out.println("LocalTime is: "+timeSupplier.get());
 		
 		// we can supply singleton object and many more other object like threads, db object ...
+		
+	}
+
+	public void primitiveFunctionsDemo1() {
+		class Employee {
+			private Integer salary;
+			private String name;
+			private Integer age;
+			public Employee(Integer salary, String name, Integer age) {
+				super();
+				this.salary = salary;
+				this.name = name;
+				this.age = age;
+			}
+			public Integer getSalary() {
+				return salary;
+			}
+
+			public String getName() {
+				return name;
+			}
+
+			public Integer getAge() {
+				return age;
+			}
+			public void setSalary(Integer salary) {
+				this.salary = salary;
+			}
+		} //Employee
+		ArrayList<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Employee(10000, "ABC", 22));
+		employeeList.add(new Employee(20000, "XYZ", 32));
+		employeeList.add(new Employee(12000, "AOP", 23));
+		employeeList.add(new Employee(11111, "ABC2", 19));
+		employeeList.add(new Employee(31000, "ABC3", 32));
+
+		IntPredicate ageUnder25 = age -> age<25;
+		IntFunction<String> seniorMember = age -> ""+(age+1); //age+1 in String
+		IntToDoubleFunction seniorMember2 = age -> (1.0d + age); //age+1 in String
+		
+		for(Employee e: employeeList) {
+			if(ageUnder25.test(e.age))
+				System.out.println("Age of "+e.getName()+ " is under 25.");
+		}
+		
+		for(Employee e: employeeList) {
+			if(Integer.valueOf(seniorMember.apply(e.age)) > 30)
+				System.out.println(e.getName()+ " is senior member of company");
+		}	
+		
+		for(Employee e: employeeList) {
+			if(seniorMember2.applyAsDouble(e.age) > 30.0)
+				System.out.println(e.getName()+ " is senior member of company");
+		}	
 		
 	}
 
