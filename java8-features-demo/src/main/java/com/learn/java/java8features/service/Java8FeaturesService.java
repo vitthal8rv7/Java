@@ -1,5 +1,6 @@
 package com.learn.java.java8features.service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.BiConsumer;
@@ -8,6 +9,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.springframework.stereotype.Service;
 
@@ -365,6 +367,14 @@ public class Java8FeaturesService {
 		
 		Predicate<Employee> isAgeUnder25 = employee -> (employee.getAge()<25);
 		employeeList.stream().filter(isAgeUnder25::test).forEach( e -> ageUnder25.andThen(updateSalaryBy10Percentage).accept(e));
+	}
+
+	public void supplierDemo1() {
+		Supplier<LocalTime> timeSupplier = () -> LocalTime.now();
+		System.out.println("LocalTime is: "+timeSupplier.get());
+		
+		// we can supply singleton object and many more other object like threads, db object ...
+		
 	}
 
 }
