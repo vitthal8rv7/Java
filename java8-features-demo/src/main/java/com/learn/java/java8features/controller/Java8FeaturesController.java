@@ -81,4 +81,17 @@ public class Java8FeaturesController {
 		return "Joda Date and Time API Tested Successfully.";
 	}
 	
+	@GetMapping("/unary/binary/operator")
+	public String unaryBinaryOperatorDemo1() {
+		java8FeaturesService.unaryBinaryOperatorDemo1();
+		return "Stream Tested Successfully.";
+	}
+	
+	@GetMapping("/stream")
+	public String streamDemo1() {
+		java8FeaturesService.streamDemo1();
+		return "Stream Tested Successfully.";
+	}
+	
+	
 }
