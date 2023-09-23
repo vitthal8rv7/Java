@@ -25,5 +25,12 @@ public class InternationalisationController {
 				request.getHeader("os"));
 		return "Global Locale Format Tested Successfully.";
 	}
+	
+	@GetMapping("/currency/format")
+	public String currencyFormatDemo1() {
+		internationalisationService.currencyFormatDemo1(request.getHeader("lang"), request.getHeader("country"),
+	request.getHeader("os"));
+		return "Global Currency Format Tested Successfully.";
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.learn.java.internationalisation.service;
 
+import java.util.Currency;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -30,6 +31,18 @@ public class InternationalisationService {
 		Stream.of(locale.getISOLanguages()).forEach(System.out::println);
 		Stream.of(locale.getAvailableLocales()).forEach(System.out::println);
 		
+	}
+
+	@SuppressWarnings("static-access")
+	public void currencyFormatDemo1(String lang, String country, String os) {
+		Locale locale = new Locale(lang, country, os); //“en”, “USA”, “win”
+		Currency c = Currency.getInstance(locale); 
+		System.out.println("c.getCurrencyCode: "+c.getCurrencyCode()); // INR
+		System.out.println("c.getDisplayName: "+c.getDisplayName()); // Bharatıya Rupaiya
+		System.out.println("c.getSymbol: "+c.getSymbol()); // //R type Indian rupee sign
+		System.out.println("c.getNumericCode: "+c.getNumericCode()); // 356
+		System.out.println("c.getDefaultFractionDigits: "+c.getDefaultFractionDigits());
+		Stream.of(c.getAvailableCurrencies()).forEach(System.out::println);
 	}
 
 }
