@@ -149,7 +149,6 @@ public class InternationalisationService {
 			System.out.println("df5.parse: " + df5.parse("23-Sep-2023, 2:22:48 pm"));
 			System.out.println("df6.parse: " + df6.parse("Sep 23, 2023, 2:22:48 PM India Standard Time"));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -157,34 +156,13 @@ public class InternationalisationService {
 
 	public void languageFormatDemo1(String lang, String country, String os) {
 		Locale locale = Locale.getDefault();
+		System.out.println("locale: "+locale);
 		if ((!Strings.isBlank(lang)) && (!Strings.isBlank(country))) {
-			System.out.println("US locale");
-			locale = new Locale(lang, country); // “en”, “USA”, “win”
+			System.out.println("User specific locale.");
+			locale = new Locale(lang, country, os); // “en”, “USA”, “win”
 		}
-//		File f = new File("resource/template/lang");
-//		System.out.println("File Name: " + f.getPath() + f.getAbsolutePath() + f.getParentFile());
-//		FileInputStream fis = null;
-//		ResourceBundle resourceBundle = null;
-//
-//		try {
-//			fis = new FileInputStream(
-//					"/Users/vitthal/Documents/GitHub/Java/internationalisation-demo/src/main/resources/templates/lang.properties");
-//			// new
-//			// File("resource/template/lang"));//("resource/template/lang_en_US_win.properties");
-//			System.out.println("Test: " + fis.getChannel().toString());
-//			resourceBundle = new PropertyResourceBundle(fis);
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println("Welcome in " + country + " is : " + resourceBundle.getString("Welcome"));
-//		System.out.println("Locale: " + locale);
-//		File file = new File("skyscrapper.properties");
-//		URL[] urls = {file.toURI().toURL()};
-//		ClassLoader loader = new URLClassLoader(urls);
-		ResourceBundle resourceBundle2 = ResourceBundle.getBundle("a");
-		System.out.println("Welcome in " + country + " is : " + resourceBundle2.getString("Welcome"));
+		ResourceBundle resourceBundle = ResourceBundle.getBundle("lang", locale);
+		System.out.println("Welcome in " + country + " is : " + resourceBundle.getString("Welcome"));
 
 	}
 
