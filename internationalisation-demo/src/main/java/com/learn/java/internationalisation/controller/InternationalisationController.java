@@ -47,5 +47,13 @@ public class InternationalisationController {
 	request.getHeader("os"));
 		return "Global Date and Time Format Tested Successfully.";
 	}
-	
+
+	@GetMapping("/language/format")
+	public String languageFormatDemo1() {
+		internationalisationService.languageFormatDemo1(request.getHeader("lang"), request.getHeader("country"),
+				request.getHeader("os"));
+		return "Global Language Format Tested Successfully.";
+	}
+
+
 }
