@@ -32,5 +32,12 @@ public class InternationalisationController {
 	request.getHeader("os"));
 		return "Global Currency Format Tested Successfully.";
 	}
+	
+	@GetMapping("/number/format")
+	public String numberFormatDemo1() {
+		internationalisationService.numberFormatDemo1(request.getHeader("lang"), request.getHeader("country"),
+	request.getHeader("os"));
+		return "Global Number Format Tested Successfully.";
+	}
 
 }
