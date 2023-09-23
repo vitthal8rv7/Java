@@ -1,8 +1,10 @@
 package com.learn.java.internationalisation.service;
 
+import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Currency;
+import java.util.Date;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -47,7 +49,6 @@ public class InternationalisationService {
 		Stream.of(c.getAvailableCurrencies()).forEach(System.out::println);
 	}
 
-	@SuppressWarnings("static-access")
 	public void numberFormatDemo1(String lang, String country, String os) {
 		Locale locale = new Locale(lang, country, os); //“en”, “USA”, “win”
 		
@@ -100,6 +101,51 @@ public class InternationalisationService {
 			e.printStackTrace();
 		}
 
+	}
+
+	@SuppressWarnings("static-access")
+	public void dateTimeFormatDemo1(String lang, String country, String os) {
+		Locale locale = new Locale(lang, country, os); //“en”, “USA”, “win”
+		DateFormat df1 = DateFormat.getInstance(); //method to get normal date instance
+		DateFormat df2 = DateFormat.getDateInstance();//method to get normal date instance
+		DateFormat df3 = DateFormat.getDateInstance(0);//method to get date instance with styles
+			//within same country allowed diff date styles
+				//DateFormat.FULL // 0 (integer value) 	 // Friday, 10th September 2023
+				//DateFormat.LONG // 1 (integer value) 	// 10th September 2023
+				//DateFormat.MEDIUM // 2 (integer value)	// 10th Sept 2023
+				//DateFormat.SHORT // 3 (integer value)	// 10 | 09 | 2023	
+		DateFormat df4 = DateFormat.getDateInstance(1, locale);//get date instance with styles and locale
+		DateFormat df5 = DateFormat.getDateTimeInstance(); //method to get normal date and time instance
+		DateFormat df6 = DateFormat.getDateTimeInstance(2, 0, locale); //date time as per locale
+
+		//format() // convert java date to locale specific string
+		System.out.println("df1.format(new Date()): "+df1.format(new Date()));
+		System.out.println("df2.format(new Date()): "+df2.format(new Date()));
+		System.out.println("df3.format(new Date()): "+df3.format(new Date()));
+		df3 = DateFormat.getDateInstance(1);
+		System.out.println("df3.format(new Date()): "+df3.format(new Date()));
+		df3 = DateFormat.getDateInstance(2);
+		System.out.println("df3.format(new Date()): "+df3.format(new Date()));
+		df3 = DateFormat.getDateInstance(3);
+		System.out.println("df3.format(new Date()): "+df3.format(new Date()));
+		System.out.println("df4.format(new Date()): "+df4.format(new Date()));
+		System.out.println("df5.format(new Date()): "+df5.format(new Date()));
+		System.out.println("df6.format(new Date()): "+df6.format(new Date()));
+
+		//parse() // convert locale specific string to java date
+		try {
+			System.out.println("df1.parse: "+ df1.parse("23/09/23, 2:21 pm"));
+			System.out.println("df2.parse: "+ df2.parse("23-Sep-2023"));
+			System.out.println("df3.parse: "+ df3.parse("23/09/23"));
+			System.out.println("df4.parse: "+ df4.parse("September 23, 2023"));
+			System.out.println("df5.parse: "+ df5.parse("23-Sep-2023, 2:22:48 pm"));
+			System.out.println("df6.parse: "+ df6.parse("Sep 23, 2023, 2:22:48 PM India Standard Time"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 }

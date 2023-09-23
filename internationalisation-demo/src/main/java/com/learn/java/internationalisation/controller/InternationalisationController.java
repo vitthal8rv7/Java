@@ -40,4 +40,12 @@ public class InternationalisationController {
 		return "Global Number Format Tested Successfully.";
 	}
 
+	
+	@GetMapping("/date/time/format")
+	public String dateTimeFormatDemo1() {
+		internationalisationService.dateTimeFormatDemo1(request.getHeader("lang"), request.getHeader("country"),
+	request.getHeader("os"));
+		return "Global Date and Time Format Tested Successfully.";
+	}
+	
 }
