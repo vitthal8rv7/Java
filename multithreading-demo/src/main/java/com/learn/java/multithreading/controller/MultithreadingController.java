@@ -45,7 +45,13 @@ public class MultithreadingController {
 	@GetMapping("/wait/notify")
 	public String waitNotifyDemo1() {
 		System.out.println(multithreadingService.waitNotifyDemo1());
-		return "Wait Notidfy Method Tested Successfully.";
+		return "Wait Notify Method Tested Successfully.";
+	}
+
+	@GetMapping("/synchronized")
+	public String synchronizedDemo1() {
+		System.out.println(multithreadingService.synchronizedDemo1());
+		return "Synchronized Keyword Tested Successfully.";
 	}
 
 

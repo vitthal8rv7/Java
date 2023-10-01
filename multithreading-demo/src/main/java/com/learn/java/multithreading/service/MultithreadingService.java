@@ -201,12 +201,6 @@ public class MultithreadingService {
 			}
 		});		
 		thread1.start();
-//		try {
-//			Thread.sleep(1000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 		thread2.start();
 		try {
 			Thread.sleep(3000);
@@ -220,6 +214,38 @@ public class MultithreadingService {
 
 //		thread1.start();
 //		thread2.start();
+		return "Done.";
+	}
+
+	public String synchronizedDemo1() {
+		String data = "New Data";
+		Thread thread1 = new Thread(() -> {
+			synchronized (data) {
+				try {
+					System.out.println("Consumer: Waiting for data..."+data+System.currentTimeMillis());
+					Thread.sleep(20);
+					System.out.println("Consumer: Consuming data....."+data+System.currentTimeMillis());
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				} finally {}
+			}
+		});		
+		Thread thread2 = new Thread(() -> {
+			synchronized (data) {
+				 System.out.println("Producer: Producing data....."+data+System.currentTimeMillis());
+			}
+		});		
+
+		thread1.start();
+		thread2.start();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Part 2\n\n\n");
+		System.out.println("t1.isAlive() "+thread1.isAlive());
+		System.out.println("t2.isAlive() "+thread2.isAlive());
 		return "Done.";
 	}
 
