@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class MultithreadingService {
 
+	static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+
 	public String multithreadingByExtendingThreadClassDemo1() {
 		class MyThread extends Thread {
 			public void run() {
@@ -258,30 +260,30 @@ public class MultithreadingService {
 				+ Thread.currentThread().getThreadGroup().getName());
 		System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
 				+ Thread.currentThread().getThreadGroup().getParent().getName());
-		ThreadGroup tg = new ThreadGroup("newTG"); 
+		ThreadGroup tg = new ThreadGroup("newTG");
 		tg.setMaxPriority(7);
-		System.out.println("tg.getName(): "+ tg.getName());
-		System.out.println("tg.getParent().getName(): "+ tg.getParent().getName());
-		System.out.println("tg.getMaxPriority: "+ tg.getMaxPriority());
-		ThreadGroup tg2 = new ThreadGroup(tg, "newTG2"); 
-		System.out.println("tg2.getName(): "+ tg2.getName());
-		System.out.println("tg2.getParent().getName(): "+ tg2.getParent().getName());
-		System.out.println("tg2.getMaxPriority: "+ tg2.getMaxPriority());
-	
+		System.out.println("tg.getName(): " + tg.getName());
+		System.out.println("tg.getParent().getName(): " + tg.getParent().getName());
+		System.out.println("tg.getMaxPriority: " + tg.getMaxPriority());
+		ThreadGroup tg2 = new ThreadGroup(tg, "newTG2");
+		System.out.println("tg2.getName(): " + tg2.getName());
+		System.out.println("tg2.getParent().getName(): " + tg2.getParent().getName());
+		System.out.println("tg2.getMaxPriority: " + tg2.getMaxPriority());
+
 		Thread newThread1 = new Thread(tg, () -> {
 			System.out.println("Thread.currentThread().getThreadGroup().getName(): "
 					+ Thread.currentThread().getThreadGroup().getName());
 			System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
-					+ Thread.currentThread().getThreadGroup().getParent().getName());	
-			System.out.println("Thread.currentThread().getPriority(): "+ Thread.currentThread().getPriority());
+					+ Thread.currentThread().getThreadGroup().getParent().getName());
+			System.out.println("Thread.currentThread().getPriority(): " + Thread.currentThread().getPriority());
 		});
 		newThread1.setPriority(8);
 		Thread newThread2 = new Thread(tg2, () -> {
 			System.out.println("Thread.currentThread().getThreadGroup().getName(): "
 					+ Thread.currentThread().getThreadGroup().getName());
 			System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
-					+ Thread.currentThread().getThreadGroup().getParent().getName());			
-			System.out.println("Thread.currentThread().getPriority(): "+ Thread.currentThread().getPriority());
+					+ Thread.currentThread().getThreadGroup().getParent().getName());
+			System.out.println("Thread.currentThread().getPriority(): " + Thread.currentThread().getPriority());
 		});
 		newThread2.setPriority(8);
 		newThread1.start();
@@ -291,12 +293,14 @@ public class MultithreadingService {
 		tg.list();
 		tg2.list();
 
-		System.out.println("Thread.currentThread().getThreadGroup().activeCount(): "+Thread.currentThread().getThreadGroup().activeCount());
-		System.out.println("Thread.currentThread().getThreadGroup().activeGroupCount(): "+Thread.currentThread().getThreadGroup().activeGroupCount());
-		System.out.println("tg.activeCount(): "+tg.activeCount());
-		System.out.println("tg.activeGroupCount(): "+tg.activeGroupCount());
-		System.out.println("tg2.activeCount(): "+tg2.activeCount());
-		System.out.println("tg2.activeGroupCount(): "+tg2.activeGroupCount());
+		System.out.println("Thread.currentThread().getThreadGroup().activeCount(): "
+				+ Thread.currentThread().getThreadGroup().activeCount());
+		System.out.println("Thread.currentThread().getThreadGroup().activeGroupCount(): "
+				+ Thread.currentThread().getThreadGroup().activeGroupCount());
+		System.out.println("tg.activeCount(): " + tg.activeCount());
+		System.out.println("tg.activeGroupCount(): " + tg.activeGroupCount());
+		System.out.println("tg2.activeCount(): " + tg2.activeCount());
+		System.out.println("tg2.activeGroupCount(): " + tg2.activeGroupCount());
 
 		return "Done.";
 	}
@@ -313,21 +317,21 @@ public class MultithreadingService {
 				System.out.println("Consumer: Consuming data....." + data + System.currentTimeMillis());
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			} 
-			System.out.println("locker.isFair(): "+locker.isFair());
-			System.out.println("locker.isLocked(): "+locker.isLocked());
-			System.out.println("locker.isHeldByCurrentThread(): "+locker.isHeldByCurrentThread());
-			System.out.println("locker.getHoldCount(): "+locker.getHoldCount());
-			System.out.println("locker.getQueueLength(): "+locker.getQueueLength());
-			System.out.println("locker.hasQueuedThreads(): "+locker.hasQueuedThreads());
+			}
+			System.out.println("locker.isFair(): " + locker.isFair());
+			System.out.println("locker.isLocked(): " + locker.isLocked());
+			System.out.println("locker.isHeldByCurrentThread(): " + locker.isHeldByCurrentThread());
+			System.out.println("locker.getHoldCount(): " + locker.getHoldCount());
+			System.out.println("locker.getQueueLength(): " + locker.getQueueLength());
+			System.out.println("locker.hasQueuedThreads(): " + locker.hasQueuedThreads());
 			locker.unlock();
-			System.out.println("locker.getHoldCount(): "+locker.getHoldCount());
+			System.out.println("locker.getHoldCount(): " + locker.getHoldCount());
 			locker.unlock();
 		});
 		Thread thread2 = new Thread(() -> {
-			 locker.lock();
+			locker.lock();
 			System.out.println("Producer: Producing data....." + data + System.currentTimeMillis());
-			 locker.unlock();
+			locker.unlock();
 		});
 
 		thread1.start();
@@ -340,7 +344,7 @@ public class MultithreadingService {
 		System.out.println("Part 2\n\n\n");
 		System.out.println("t1.isAlive() " + thread1.isAlive());
 		System.out.println("t2.isAlive() " + thread2.isAlive());
-		
+
 		return "Done.";
 	}
 
@@ -348,26 +352,26 @@ public class MultithreadingService {
 		String data = "New Data";
 		ReentrantLock locker = new ReentrantLock();
 		Thread thread1 = new Thread(() -> {
-			if(locker.tryLock()) {
+			if (locker.tryLock()) {
 				try {
 					System.out.println("Consumer: Waiting for data..." + data + System.currentTimeMillis());
 					Thread.sleep(20);
 					System.out.println("Consumer: Consuming data....." + data + System.currentTimeMillis());
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				} 
-				System.out.println("locker.getHoldCount(): "+locker.getHoldCount());
-				locker.unlock();				
+				}
+				System.out.println("locker.getHoldCount(): " + locker.getHoldCount());
+				locker.unlock();
 			} else {
 				System.out.println("Didn`t get lock for Thread 1... so no action performed yet.");
 			}
 		});
 		Thread thread2 = new Thread(() -> {
-			while(true) {
-				if(locker.tryLock()) {
-				System.out.println("Producer: Producing data....." + data + System.currentTimeMillis());
-				 locker.unlock();
-				 break;
+			while (true) {
+				if (locker.tryLock()) {
+					System.out.println("Producer: Producing data....." + data + System.currentTimeMillis());
+					locker.unlock();
+					break;
 				} else {
 					System.out.println("Didn`t get lock for Thread 2... so no action performed yet.");
 					try {
@@ -389,7 +393,7 @@ public class MultithreadingService {
 		System.out.println("Part 2\n\n\n");
 		System.out.println("t1.isAlive() " + thread1.isAlive());
 		System.out.println("t2.isAlive() " + thread2.isAlive());
-		
+
 		return "Done.";
 
 	}
@@ -397,28 +401,28 @@ public class MultithreadingService {
 	public String threadPoolDemo1() {
 		ExecutorService service = Executors.newFixedThreadPool(5);
 		Thread t1 = new Thread(() -> {
-			System.out.println("New Thread: t1 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t1 " + Thread.currentThread().getName());
+		});
 
 		Thread t2 = new Thread(() -> {
-			System.out.println("New Thread: t2 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t2 " + Thread.currentThread().getName());
+		});
 
 		Thread t3 = new Thread(() -> {
-			System.out.println("New Thread: t3 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t3 " + Thread.currentThread().getName());
+		});
 
 		Thread t4 = new Thread(() -> {
-			System.out.println("New Thread: t4 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t4 " + Thread.currentThread().getName());
+		});
 
 		Thread t5 = new Thread(() -> {
-			System.out.println("New Thread: t5 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t5 " + Thread.currentThread().getName());
+		});
 
 		Thread t6 = new Thread(() -> {
-			System.out.println("New Thread: t6 "+Thread.currentThread().getName());
-		});	
+			System.out.println("New Thread: t6 " + Thread.currentThread().getName());
+		});
 		service.submit(t1);
 		service.submit(t2);
 		service.submit(t3);
@@ -439,6 +443,43 @@ public class MultithreadingService {
 		}
 		service.shutdown();
 		return "Done.";
+	}
+
+	public String threadLocalDemo1() {
+		System.out.println("Thread: " + Thread.currentThread().getName());
+		System.out.println("Default threadLocal: " + threadLocal.get());
+		System.out.println("\n\n");
+		Thread t1 = new Thread(() -> {
+			System.out.println("New Thread: t1 " + Thread.currentThread().getName());
+			System.out.println("Default threadLocal: " + threadLocal.get());
+			threadLocal.set("This Is A New Value For Thread t1");
+			System.out.println("Thread Local: " + threadLocal.get());
+			newThreadLocalMethod();
+		});
+
+		Thread t2 = new Thread(() -> {
+			System.out.println("New Thread: t2 " + Thread.currentThread().getName());
+			System.out.println("Default threadLocal: " + threadLocal.get());
+			threadLocal.set("This Is A New Value For Thread t2");
+			System.out.println("Thread Local: " + threadLocal.get());
+		});
+
+		Thread t3 = new Thread(() -> {
+			System.out.println("New Thread: t3 " + Thread.currentThread().getName());
+			System.out.println("Default threadLocal: " + threadLocal.get());
+			threadLocal.set("This Is A New Value For Thread t3");
+			System.out.println("Thread Local: " + threadLocal.get());
+		});
+		t1.start();
+		t2.start();
+		t3.start();
+		return "Done.";
+	}
+
+	private void newThreadLocalMethod() {
+		System.out.println(
+				"We can access current thread`s Thread Local(without passing as a argument) in method chaining(any method).: "
+						+ threadLocal.get());
 	}
 
 }

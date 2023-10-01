@@ -77,5 +77,10 @@ public class MultithreadingController {
 		return "Thread Pool Tested Successfully.";
 	}
 
-	
+	@GetMapping("/thread/local")
+	public String threadLocalDemo1() {
+		System.out.println(multithreadingService.threadLocalDemo1());
+		return "Thread Local Tested Successfully.";
+	}
+
 }
