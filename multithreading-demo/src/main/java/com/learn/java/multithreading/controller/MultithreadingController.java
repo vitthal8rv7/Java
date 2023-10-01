@@ -70,6 +70,12 @@ public class MultithreadingController {
 		System.out.println(multithreadingService.concurrentTrylockDemo1());
 		return "Concurrent Try-Lock Tested Successfully.";
 	}
-	
+
+	@GetMapping("/thread/pool")
+	public String threadPoolDemo1() {
+		System.out.println(multithreadingService.threadPoolDemo1());
+		return "Thread Pool Tested Successfully.";
+	}
+
 	
 }

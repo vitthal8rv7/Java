@@ -1,6 +1,9 @@
 package com.learn.java.multithreading.service;
 
-import java.util.concurrent.locks.Lock;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 import org.springframework.stereotype.Service;
@@ -389,6 +392,53 @@ public class MultithreadingService {
 		
 		return "Done.";
 
+	}
+
+	public String threadPoolDemo1() {
+		ExecutorService service = Executors.newFixedThreadPool(5);
+		Thread t1 = new Thread(() -> {
+			System.out.println("New Thread: t1 "+Thread.currentThread().getName());
+		});	
+
+		Thread t2 = new Thread(() -> {
+			System.out.println("New Thread: t2 "+Thread.currentThread().getName());
+		});	
+
+		Thread t3 = new Thread(() -> {
+			System.out.println("New Thread: t3 "+Thread.currentThread().getName());
+		});	
+
+		Thread t4 = new Thread(() -> {
+			System.out.println("New Thread: t4 "+Thread.currentThread().getName());
+		});	
+
+		Thread t5 = new Thread(() -> {
+			System.out.println("New Thread: t5 "+Thread.currentThread().getName());
+		});	
+
+		Thread t6 = new Thread(() -> {
+			System.out.println("New Thread: t6 "+Thread.currentThread().getName());
+		});	
+		service.submit(t1);
+		service.submit(t2);
+		service.submit(t3);
+		service.submit(t4);
+		service.submit(t5);
+		service.submit(t6);
+		service.submit(t1);
+		service.submit(t2);
+		service.submit(t1);
+		service.submit(t2);
+		service.submit(t1);
+		service.submit(t3);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		service.shutdown();
+		return "Done.";
 	}
 
 }
