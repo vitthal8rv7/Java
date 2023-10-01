@@ -65,4 +65,11 @@ public class MultithreadingController {
 		return "Concurrent Lock Tested Successfully.";
 	}
 
+	@GetMapping("/concurrent/trylock")
+	public String concurrentTrylockDemo1() {
+		System.out.println(multithreadingService.concurrentTrylockDemo1());
+		return "Concurrent Try-Lock Tested Successfully.";
+	}
+	
+	
 }
