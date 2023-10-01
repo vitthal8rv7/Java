@@ -298,4 +298,47 @@ public class MultithreadingService {
 		return "Done.";
 	}
 
+	public String concurrentLockDemo1() {
+		String data = "New Data";
+		ReentrantLock locker = new ReentrantLock();
+		Thread thread1 = new Thread(() -> {
+			locker.lock();
+			locker.lock();
+			try {
+				System.out.println("Consumer: Waiting for data..." + data + System.currentTimeMillis());
+				Thread.sleep(20);
+				System.out.println("Consumer: Consuming data....." + data + System.currentTimeMillis());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			} 
+			System.out.println("locker.isFair(): "+locker.isFair());
+			System.out.println("locker.isLocked(): "+locker.isLocked());
+			System.out.println("locker.isHeldByCurrentThread(): "+locker.isHeldByCurrentThread());
+			System.out.println("locker.getHoldCount(): "+locker.getHoldCount());
+			System.out.println("locker.getQueueLength(): "+locker.getQueueLength());
+			System.out.println("locker.hasQueuedThreads(): "+locker.hasQueuedThreads());
+			locker.unlock();
+			System.out.println("locker.getHoldCount(): "+locker.getHoldCount());
+			locker.lock();
+		});
+		Thread thread2 = new Thread(() -> {
+			 locker.lock();
+			System.out.println("Producer: Producing data....." + data + System.currentTimeMillis());
+			 locker.unlock();
+		});
+
+		thread1.start();
+		thread2.start();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Part 2\n\n\n");
+		System.out.println("t1.isAlive() " + thread1.isAlive());
+		System.out.println("t2.isAlive() " + thread2.isAlive());
+		
+		return "Done.";
+	}
+
 }

@@ -59,4 +59,10 @@ public class MultithreadingController {
 		return "Thread Group Tested Successfully.";
 	}
 
+	@GetMapping("/concurrent/lock")
+	public String concurrentLockDemo1() {
+		System.out.println(multithreadingService.concurrentLockDemo1());
+		return "Concurrent Lock Tested Successfully.";
+	}
+
 }
