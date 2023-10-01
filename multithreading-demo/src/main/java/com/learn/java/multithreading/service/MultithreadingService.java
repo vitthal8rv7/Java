@@ -256,27 +256,45 @@ public class MultithreadingService {
 		System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
 				+ Thread.currentThread().getThreadGroup().getParent().getName());
 		ThreadGroup tg = new ThreadGroup("newTG"); 
+		tg.setMaxPriority(7);
 		System.out.println("tg.getName(): "+ tg.getName());
 		System.out.println("tg.getParent().getName(): "+ tg.getParent().getName());
+		System.out.println("tg.getMaxPriority: "+ tg.getMaxPriority());
 		ThreadGroup tg2 = new ThreadGroup(tg, "newTG2"); 
 		System.out.println("tg2.getName(): "+ tg2.getName());
 		System.out.println("tg2.getParent().getName(): "+ tg2.getParent().getName());
-
+		System.out.println("tg2.getMaxPriority: "+ tg2.getMaxPriority());
+	
 		Thread newThread1 = new Thread(tg, () -> {
 			System.out.println("Thread.currentThread().getThreadGroup().getName(): "
 					+ Thread.currentThread().getThreadGroup().getName());
 			System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
-					+ Thread.currentThread().getThreadGroup().getParent().getName());			
+					+ Thread.currentThread().getThreadGroup().getParent().getName());	
+			System.out.println("Thread.currentThread().getPriority(): "+ Thread.currentThread().getPriority());
 		});
-		
+		newThread1.setPriority(8);
 		Thread newThread2 = new Thread(tg2, () -> {
 			System.out.println("Thread.currentThread().getThreadGroup().getName(): "
 					+ Thread.currentThread().getThreadGroup().getName());
 			System.out.println("Thread.currentThread().getThreadGroup().getParent().getName(): "
 					+ Thread.currentThread().getThreadGroup().getParent().getName());			
+			System.out.println("Thread.currentThread().getPriority(): "+ Thread.currentThread().getPriority());
 		});
+		newThread2.setPriority(8);
 		newThread1.start();
+		tg2.setMaxPriority(7);
 		newThread2.start();
+		Thread.currentThread().getThreadGroup().list();
+		tg.list();
+		tg2.list();
+
+		System.out.println("Thread.currentThread().getThreadGroup().activeCount(): "+Thread.currentThread().getThreadGroup().activeCount());
+		System.out.println("Thread.currentThread().getThreadGroup().activeGroupCount(): "+Thread.currentThread().getThreadGroup().activeGroupCount());
+		System.out.println("tg.activeCount(): "+tg.activeCount());
+		System.out.println("tg.activeGroupCount(): "+tg.activeGroupCount());
+		System.out.println("tg2.activeCount(): "+tg2.activeCount());
+		System.out.println("tg2.activeGroupCount(): "+tg2.activeGroupCount());
+
 		return "Done.";
 	}
 
