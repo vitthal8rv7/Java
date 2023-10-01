@@ -29,13 +29,12 @@ public class MultithreadingController {
 		return "Multithreading By Implementing Runnable Interface Tested Successfully.";
 	}
 
-
 	@GetMapping("/start")
 	public String startDemo1() {
 		System.out.println(multithreadingService.startDemo1());
 		return "Start Method Tested Successfully.";
 	}
-	
+
 	@GetMapping("/thread/methods")
 	public String threadMethodsDemo1() {
 		System.out.println(multithreadingService.threadMethodsDemo1());
@@ -54,5 +53,10 @@ public class MultithreadingController {
 		return "Synchronized Keyword Tested Successfully.";
 	}
 
+	@GetMapping("/thread/group")
+	public String threadGroupDemo1() {
+		System.out.println(multithreadingService.threadGroupDemo1());
+		return "Thread Group Tested Successfully.";
+	}
 
 }
