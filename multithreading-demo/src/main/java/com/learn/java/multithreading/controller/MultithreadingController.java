@@ -35,5 +35,12 @@ public class MultithreadingController {
 		System.out.println(multithreadingService.startDemo1());
 		return "Start Method Tested Successfully.";
 	}
+	
+	@GetMapping("/thread/methods")
+	public String threadMethodsDemo1() {
+		System.out.println(multithreadingService.threadMethodsDemo1());
+		return "Thread Method Tested Successfully.";
+	}
+
 
 }

@@ -82,4 +82,98 @@ public class MultithreadingService {
 		return "Done.";
 	}
 
+	@SuppressWarnings("static-access")
+	public String  threadMethodsDemo1() {
+		
+		class MyThread extends Thread {
+			static int j = 0;
+			public void run() {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.out.println("--Current Thread Name: " + Thread.currentThread().getName());
+				System.out.println("--Current Thread Class Name: " + Thread.currentThread().getClass().getName() + " of " + Thread.currentThread().getName());
+				for(int i = 0; i < 10000; i++) {
+					j = i;
+					j = j + j;
+					j = j - j - 1;
+					j = 1 + j + 123;
+					j = j - 124;
+				}
+			}
+		}
+		class MyThread2 implements Runnable {
+			static int j = 0;
+			public void run() {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+				System.out.println("t2::Current Thread Name: " + Thread.currentThread().getName());
+				System.out.println("t2::Current Thread Class Name: " + Thread.currentThread().getClass().getName());
+				for(int i = 0; i < 10000; i++) {
+					j = i;
+					j = j + j;
+					j = j - j - 1;
+					j = 1 + j + 123;
+					j = j - 124;
+				}				
+			}
+		}
+
+		Thread t1 = new Thread(new MyThread());
+		t1.setName("t1");
+		Thread t4 = new Thread(new MyThread());
+		t4.setName("t4");
+		Thread t2 = new Thread(new ThreadGroup("customThreadGroup"), new MyThread2(), "t2");
+		System.out.println("t1.getPriority() "+t1.getPriority());
+		System.out.println("t2.getPriority() "+t2.getPriority());
+		t1.setPriority(6);
+		t2.setPriority(10);
+		System.out.println("t1.getPriority() "+t1.getPriority());
+		System.out.println("t2.getPriority() "+t2.getPriority());
+		System.out.println("t1.getThreadGroup().getName() "+t1.getThreadGroup().getName());
+		System.out.println("t2.getThreadGroup().getName() "+t2.getThreadGroup().getName());
+
+		System.out.println("t1.isAlive() "+t1.isAlive());
+		System.out.println("t1.isDaemon() "+t1.isDaemon());
+		
+		System.out.println("t2.isAlive() "+t2.isAlive());
+		System.out.println("t2.isDaemon() "+t2.isDaemon());
+		
+		t2.setDaemon(false);
+		System.out.println("t1.isDaemon() "+t1.isDaemon());
+		System.out.println("t2.isDaemon() "+t2.isDaemon());
+		
+
+		t1.start();
+		t4.start();
+		t4.yield();
+		t2.start();
+		try {
+			t2.join(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Thread t3 = new Thread(new MyThread());
+		t3.start();
+		t3.suspend();
+		t3.resume();
+		t3.stop();
+		
+		
+		
+		
+		return "Done.";
+	}
+
 }
