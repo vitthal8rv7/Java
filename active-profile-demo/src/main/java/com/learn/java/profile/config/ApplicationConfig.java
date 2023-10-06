@@ -21,6 +21,7 @@ public class ApplicationConfig {
 	MyDataSource prodDataSource() {
 		return new MyDataSource("Prod");
 	}
+
 }
 
 

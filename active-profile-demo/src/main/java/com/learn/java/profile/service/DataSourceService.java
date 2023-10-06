@@ -10,6 +10,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.profile.model.MyDataSource;
+import com.learn.java.profile.model.MyDataSource2;
 
 @Service
 public class DataSourceService {
@@ -38,25 +39,33 @@ public class DataSourceService {
 	@Value("${spring.datasource.username}")
 	private String dbUser;
 
+	@Autowired
+	private MyDataSource2 myDataSource2;
+	
 	public String getInfo() {
 		String[] envs = env.getActiveProfiles();
 		System.out.println("Current Profile (set from properties file at the execution): "+Arrays.asList(envs));
 		System.out.println("spring.profiles.active: "+activeProfile);
-		System.out.println(" devDataSource is null: "+Objects.isNull(devDataSource));
-		System.out.println("prodDataSource is null: "+Objects.isNull(prodDataSource));
+		System.out.println(" devDataSource is null: "+Objects.isNull(devDataSource) + devDataSource);
+		System.out.println("prodDataSource is null: "+Objects.isNull(prodDataSource) + prodDataSource);
 
 		System.out.println("datasourceUrl: "+datasourceUrl);
 		System.out.println("dbUser: "+dbUser);
-		
+
+		System.out.println("javaHome: "+prodDataSource.getJavaHome());
+		System.out.println("myDataSource2.getName: "+myDataSource2.getName());
+
 		env.setActiveProfiles("dev", "prod");
 		envs = env.getActiveProfiles();
 		System.out.println("Updated Profile(set from code at runtime): "+Arrays.asList(envs));
 		System.out.println("spring.profiles.active: "+activeProfile);		
-		System.out.println(" devDataSource is null: "+Objects.isNull(devDataSource));
-		System.out.println("prodDataSource is null: "+Objects.isNull(prodDataSource));
+		System.out.println(" devDataSource is null: "+Objects.isNull(devDataSource) + devDataSource);
+		System.out.println("prodDataSource is null: "+Objects.isNull(prodDataSource) + prodDataSource);
 		
 		System.out.println("datasourceUrl: "+datasourceUrl);
 		System.out.println("dbUser: "+dbUser);
+
+		System.out.println("myDataSource2.getName: "+myDataSource2.getName());
 		
 		return "Active Profile Info Fetched.\n";
 	}
