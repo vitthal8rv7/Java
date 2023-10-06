@@ -52,7 +52,7 @@ public class DataSourceService {
 		System.out.println("datasourceUrl: "+datasourceUrl);
 		System.out.println("dbUser: "+dbUser);
 
-		System.out.println("javaHome: "+prodDataSource.getJavaHome());
+		System.out.println("javaHome: "+devDataSource.getJavaHome());
 		System.out.println("myDataSource2.getName: "+myDataSource2.getName());
 
 		env.setActiveProfiles("dev", "prod");
