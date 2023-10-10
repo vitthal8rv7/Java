@@ -488,12 +488,6 @@ public class MultithreadingService {
 	}
 
 	public String threadPoolExecutorDemo2() {
-		threadPoolExecutor.setCorePoolSize(7);
-		threadPoolExecutor.setKeepAliveTime(4, TimeUnit.MILLISECONDS);
-		threadPoolExecutor.setMaximumPoolSize(11);
-		System.out.println("threadPoolExecutor.: "+threadPoolExecutor);
-		System.out.println("threadPoolExecutor.: "+threadPoolExecutor);
-
 		Thread t1 = new Thread(() -> {
 			System.out.println("New Thread: t1 " + Thread.currentThread().getName());
 		});
@@ -540,25 +534,23 @@ public class MultithreadingService {
 		}
 		
 		System.out.println("threadPoolExecutor.toString: "+threadPoolExecutor.toString());
+		System.out.println("threadPoolExecutor.getCorePoolSize: "+threadPoolExecutor.getCorePoolSize());
+		System.out.println("threadPoolExecutor.getKeepAliveTime: "+threadPoolExecutor.getKeepAliveTime(TimeUnit.SECONDS));
+		System.out.println("threadPoolExecutor.getMaximumPoolSize: "+threadPoolExecutor.getMaximumPoolSize());
 		try {
 			System.out.println("threadPoolExecutor.awaitTermination: "+threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("threadPoolExecutor.getActiveCount: "+threadPoolExecutor.getActiveCount());
-		System.out.println("threadPoolExecutor.getCompletedTaskCount: "+threadPoolExecutor.getCompletedTaskCount());
-		System.out.println("threadPoolExecutor.getCorePoolSize: "+threadPoolExecutor.getCorePoolSize());
-		System.out.println("threadPoolExecutor.getKeepAliveTime: "+threadPoolExecutor.getKeepAliveTime(TimeUnit.SECONDS));
+		System.out.println("threadPoolExecutor.getCompletedTaskCount: "+threadPoolExecutor.getCompletedTaskCount());		
 		System.out.println("threadPoolExecutor.getLargestPoolSize: "+threadPoolExecutor.getLargestPoolSize());
-		System.out.println("threadPoolExecutor.getMaximumPoolSize: "+threadPoolExecutor.getMaximumPoolSize());
 		System.out.println("threadPoolExecutor.getPoolSize: "+threadPoolExecutor.getPoolSize());
 		System.out.println("threadPoolExecutor.getTaskCount: "+threadPoolExecutor.getTaskCount());
 		System.out.println("threadPoolExecutor.allowsCoreThreadTimeOut: "+threadPoolExecutor.allowsCoreThreadTimeOut());
 		try {
 			System.out.println("threadPoolExecutor.awaitTermination: "+threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS));
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("threadPoolExecutor.getQueue().isEmpty(: "+threadPoolExecutor.getQueue().isEmpty());
