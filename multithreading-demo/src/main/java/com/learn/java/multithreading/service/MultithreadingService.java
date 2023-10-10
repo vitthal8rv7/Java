@@ -539,19 +539,13 @@ public class MultithreadingService {
 			e.printStackTrace();
 		}
 		
+		System.out.println("threadPoolExecutor.toString: "+threadPoolExecutor.toString());
 		try {
 			System.out.println("threadPoolExecutor.awaitTermination: "+threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS));
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("threadPoolExecutor.isShutdown: "+threadPoolExecutor.isShutdown());
-		System.out.println("threadPoolExecutor.isTerminated: "+threadPoolExecutor.isTerminated());
-		
-		System.out.println("threadPoolExecutor.toString: "+threadPoolExecutor.toString());
-		System.out.println(""+threadPoolExecutor);
-		
-		System.out.println("threadPoolExecutor.toString: "+threadPoolExecutor.toString());
 		System.out.println("threadPoolExecutor.getActiveCount: "+threadPoolExecutor.getActiveCount());
 		System.out.println("threadPoolExecutor.getCompletedTaskCount: "+threadPoolExecutor.getCompletedTaskCount());
 		System.out.println("threadPoolExecutor.getCorePoolSize: "+threadPoolExecutor.getCorePoolSize());
@@ -571,13 +565,10 @@ public class MultithreadingService {
 		System.out.println("threadPoolExecutor.getQueue: "+threadPoolExecutor.getQueue());
 		System.out.println("threadPoolExecutor.getRejectedExecutionHandler: "+threadPoolExecutor.getRejectedExecutionHandler());
 		System.out.println("threadPoolExecutor.getThreadFactory: "+threadPoolExecutor.getThreadFactory());
-
-		System.out.println("threadPoolExecutor.isTerminating: "+threadPoolExecutor.isTerminating());
-		
 		System.out.println("threadPoolExecutor.allowsCoreThreadTimeOut: "+threadPoolExecutor.allowsCoreThreadTimeOut());
 		System.out.println("threadPoolExecutor.: prestartAllCoreThreads"+threadPoolExecutor.prestartAllCoreThreads());
-
 		threadPoolExecutor.shutdown();
+		System.out.println("threadPoolExecutor.isTerminating: "+threadPoolExecutor.isTerminating());
 		System.out.println("threadPoolExecutor.isTerminated: "+threadPoolExecutor.isTerminated());
 		System.out.println("threadPoolExecutor.isShutdown: "+threadPoolExecutor.isShutdown());
 		
