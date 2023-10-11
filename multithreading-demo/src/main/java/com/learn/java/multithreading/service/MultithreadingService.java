@@ -1,17 +1,22 @@
 package com.learn.java.multithreading.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MultithreadingService {
 
 	static ThreadLocal<String> threadLocal = new ThreadLocal<>();
+	
+	@Autowired
+	private ThreadPoolExecutor threadPoolExecutor;
+	
 
 	public String multithreadingByExtendingThreadClassDemo1() {
 		class MyThread extends Thread {
@@ -482,4 +487,84 @@ public class MultithreadingService {
 						+ threadLocal.get());
 	}
 
+	public String threadPoolExecutorDemo2() {
+		Thread t1 = new Thread(() -> {
+			System.out.println("New Thread: t1 " + Thread.currentThread().getName());
+		});
+
+		Thread t2 = new Thread(() -> {
+			System.out.println("New Thread: t2 " + Thread.currentThread().getName());
+		});
+
+		Thread t3 = new Thread(() -> {
+			System.out.println("New Thread: t3 " + Thread.currentThread().getName());
+		});
+
+		Thread t4 = new Thread(() -> {
+			System.out.println("New Thread: t4 " + Thread.currentThread().getName());
+		});
+
+		Thread t5 = new Thread(() -> {
+			System.out.println("New Thread: t5 " + Thread.currentThread().getName());
+		});
+
+		Thread t6 = new Thread(() -> {
+			System.out.println("New Thread: t6 " + Thread.currentThread().getName());
+		});
+		threadPoolExecutor.submit(t1);
+		threadPoolExecutor.submit(t2);
+		threadPoolExecutor.submit(t3);
+		threadPoolExecutor.submit(t4);
+		threadPoolExecutor.submit(t5);
+		threadPoolExecutor.submit(t6);
+		threadPoolExecutor.submit(t1);
+		threadPoolExecutor.submit(t2);
+		threadPoolExecutor.submit(t1);
+		threadPoolExecutor.submit(t2);
+		threadPoolExecutor.submit(t1);
+		threadPoolExecutor.submit(t3);
+		
+		System.out.println(""+threadPoolExecutor);
+		
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("threadPoolExecutor.toString: "+threadPoolExecutor.toString());
+		System.out.println("threadPoolExecutor.getCorePoolSize: "+threadPoolExecutor.getCorePoolSize());
+		System.out.println("threadPoolExecutor.getKeepAliveTime: "+threadPoolExecutor.getKeepAliveTime(TimeUnit.SECONDS));
+		System.out.println("threadPoolExecutor.getMaximumPoolSize: "+threadPoolExecutor.getMaximumPoolSize());
+		try {
+			System.out.println("threadPoolExecutor.awaitTermination: "+threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("threadPoolExecutor.getActiveCount: "+threadPoolExecutor.getActiveCount());
+		System.out.println("threadPoolExecutor.getCompletedTaskCount: "+threadPoolExecutor.getCompletedTaskCount());		
+		System.out.println("threadPoolExecutor.getLargestPoolSize: "+threadPoolExecutor.getLargestPoolSize());
+		System.out.println("threadPoolExecutor.getPoolSize: "+threadPoolExecutor.getPoolSize());
+		System.out.println("threadPoolExecutor.getTaskCount: "+threadPoolExecutor.getTaskCount());
+		System.out.println("threadPoolExecutor.allowsCoreThreadTimeOut: "+threadPoolExecutor.allowsCoreThreadTimeOut());
+		try {
+			System.out.println("threadPoolExecutor.awaitTermination: "+threadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("threadPoolExecutor.getQueue().isEmpty(: "+threadPoolExecutor.getQueue().isEmpty());
+		System.out.println("threadPoolExecutor.getQueue: "+threadPoolExecutor.getQueue());
+		System.out.println("threadPoolExecutor.getRejectedExecutionHandler: "+threadPoolExecutor.getRejectedExecutionHandler());
+		System.out.println("threadPoolExecutor.getThreadFactory: "+threadPoolExecutor.getThreadFactory());
+		System.out.println("threadPoolExecutor.allowsCoreThreadTimeOut: "+threadPoolExecutor.allowsCoreThreadTimeOut());
+		System.out.println("threadPoolExecutor.: prestartAllCoreThreads"+threadPoolExecutor.prestartAllCoreThreads());
+		threadPoolExecutor.shutdown();
+		System.out.println("threadPoolExecutor.isTerminating: "+threadPoolExecutor.isTerminating());
+		System.out.println("threadPoolExecutor.isTerminated: "+threadPoolExecutor.isTerminated());
+		System.out.println("threadPoolExecutor.isShutdown: "+threadPoolExecutor.isShutdown());
+		
+		
+		return "Done.";
+	}
 }
