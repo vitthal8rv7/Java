@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/demo")
 public class Controller {
+
+	@Autowired
+	private HttpServletRequest httpServletRequest;
 
 	@Autowired
 	private HttpServletResponse httpServletResponse;
@@ -136,6 +141,31 @@ public class Controller {
 		String result = String.format("all params : %s \n", id);
 		result = result + "\nMulti Valued All Params Via Request Param Tested Sucessfully.";
 		return result;
+	}	
+	
+	@GetMapping("/set-headers/with-response-entity")
+	public ResponseEntity<String> setHeadersWithResponseEntity() {
+		System.out.println("set-headers with-response-entity");
+		return ResponseEntity.ok()
+							 .header("Custom-Header", "foo")
+							 .body("Custom header set");
+	}
+	
+	@GetMapping("/set-headers/with-response-entity2")
+	public ResponseEntity<String> setHeadersWithResponseEntity2() {
+		System.out.println("set-headers with-response-entity2");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Custom-Header2", "foo2");
+		return new ResponseEntity<>("Custom header set", headers, HttpStatus.OK);
+
+	}
+	
+	@GetMapping("/set-headers/with-http-response")
+	public String setHeadersWithHttpResponse() {
+		System.out.println("set-headers with-http-response");
+		httpServletResponse.setHeader("Custom-Header3", "foo3");
+		return "Custom header set";
+
 	}
 	
 	@RequestMapping(path = "/request-header/multi-value", headers = "Accept=application/json",  method = { RequestMethod.PUT, RequestMethod.POST })
@@ -173,30 +203,36 @@ public class Controller {
 		result = result + "\nUrl Duplication With Diff Media Type(XML) Tested Sucessfully.";
 		return result;
 	}
-	
-	
-	@GetMapping("/set-headers/with-response-entity")
-	public ResponseEntity<String> setHeadersWithResponseEntity() {
-		System.out.println("set-headers with-response-entity");
-		return ResponseEntity.ok()
-							 .header("Custom-Header", "foo")
-							 .body("Custom header set");
+
+//	We can accomplish the same thing by using the name attribute:
+//	  @RequestHeader(name = HttpHeaders.ACCEPT_LANGUAGE) String language) {}
+//
+//	Next, let’s use the value attribute exactly the same way:
+//	  @RequestHeader(value = HttpHeaders.ACCEPT_LANGUAGE) String language) {}
+	@GetMapping("/set-headers/with-request-header-annotation")
+	public String setHeadersWithRequestHeaderAnnoatation(@RequestHeader(HttpHeaders.ACCEPT_LANGUAGE) String language) {
+		System.out.println("set-headers with-http-request-annotations");
+		httpServletRequest.getHeader("language");
+		return "Custom header set: "+httpServletRequest.getHeader("Accept-Language");
 	}
 	
-	@GetMapping("/set-headers/with-response-entity2")
-	public ResponseEntity<String> setHeadersWithResponseEntity2() {
-		System.out.println("set-headers with-response-entity2");
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Custom-Header2", "foo2");
-		return new ResponseEntity<>("Custom header set", headers, HttpStatus.OK);
-
+	@GetMapping("/set-headers/with-request-header-annotation2")
+	public String setHeadersWithRequestHeaderAnnoatation(@RequestHeader Map<String, String> headers) {
+		System.out.println("set-headers with-http-request-annotations");
+		httpServletRequest.getHeader("language");
+		return "Custom header set: "+httpServletRequest.getHeader("Accept-Language")+headers.values();
 	}
 	
-	@GetMapping("/set-headers/with-http-response")
-	public String setHeadersWithHttpResponse() {
-		System.out.println("set-headers with-http-response");
-		httpServletResponse.setHeader("Custom-Header3", "foo3");
-		return "Custom header set";
-
+	@GetMapping("/set-headers/with-request-header-annotation3")
+	public String setHeadersWithRequestHeaderAnnoatation3(@RequestHeader(value = HttpHeaders.ACCEPT_LANGUAGE, required = false) String language) {
+		System.out.println("set-headers with-http-request-annotations3: "+language);
+		return "Custom header set:: "+httpServletRequest.getHeader("Accept-Language")+httpServletResponse.getHeader("Accept-Language");
+	}
+	
+	@GetMapping("/set-headers/with-request-header-annotation4")
+	public ResponseEntity<String> setHeadersWithRequestHeaderAnnoatation4(@RequestHeader(value = HttpHeaders.ACCEPT_LANGUAGE, defaultValue = "3600") String language) {
+		System.out.println("set-headers with-http-request-annotations4: "+language);
+		System.out.println("set-headers with-http-request-annotations4: "+httpServletResponse.getHeader("Accept-Language")+httpServletRequest.getHeader("Accept-Language"));
+		return new ResponseEntity<String>(String.format("Optional Header is %s", language), HttpStatus.OK);
 	}
 }
