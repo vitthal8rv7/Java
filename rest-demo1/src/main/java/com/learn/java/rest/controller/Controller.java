@@ -8,22 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import com.learn.java.rest.model.Employee;
 
 @RestController
 @RequestMapping("/rest/demo")
 public class Controller {
 
+//	@Autowired
+//	private RestTemplate restTemplate;
+	
 	@Autowired
 	private HttpServletRequest httpServletRequest;
 
@@ -234,5 +245,60 @@ public class Controller {
 		System.out.println("set-headers with-http-request-annotations4: "+language);
 		System.out.println("set-headers with-http-request-annotations4: "+httpServletResponse.getHeader("Accept-Language")+httpServletRequest.getHeader("Accept-Language"));
 		return new ResponseEntity<String>(String.format("Optional Header is %s", language), HttpStatus.OK);
+	}
+	
+	@GetMapping("/employee") 
+	public Employee getEmplyoee() {
+		final String localhost = "http://localhost:8081";
+		final String id = "1234"; //path variable
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(localhost+"/rest/demo/employee/"+id);		
+        builder.queryParam("name", "Employee"+id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Object obj = new Employee("12345", "Employee12345");
+        HttpEntity<Employee> requestEntity = new HttpEntity<>(new Employee("12345", "Employee12345"), headers);
+        ResponseEntity<Employee> response = null;
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, requestEntity, Employee.class);
+        } catch (Exception e) {
+            //LOGGER.error(Constants.ERROR_OCCURRED_WHILE_CALLING_CONTENT_LOCKER_SERVICE, e);
+            //throw new InternalServerErrorException(propertyHolder.getTrmwInternalServerErrorCode(), propertyHolder.getTrmwInternalServerErrorMessage());
+        }
+        //LOGGER.info("Received response from sdvm service to upload multiple photos");
+        if (response == null) {
+          //  return new SdvmContentUploadResponse();
+        	return null;	
+        } else {
+            return response.getBody();
+        }
+	}
+	
+	@PostMapping("/employee") 
+	public Employee setEmplyoee() {
+		final String localhost = "http://localhost:8081";
+		final String id = "1234"; //path variable
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(localhost+"/rest/demo/employee");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        RequestBody requestBody;
+        Object obj = new Employee("12345", "Employee12345");
+//        HttpEntity<Employee> requestEntity = new HttpEntity<>(new Employee("12345", "Employee12345"), headers);
+        HttpEntity<Object> requestEntity = new HttpEntity<>(obj, headers);
+        ResponseEntity<Employee> response = null;
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
+        } catch (Exception e) {
+            //LOGGER.error(Constants.ERROR_OCCURRED_WHILE_CALLING_CONTENT_LOCKER_SERVICE, e);
+            //throw new InternalServerErrorException(propertyHolder.getTrmwInternalServerErrorCode(), propertyHolder.getTrmwInternalServerErrorMessage());
+        }
+        //LOGGER.info("Received response from sdvm service to upload multiple photos");
+        if (response == null) {
+          //  return new SdvmContentUploadResponse();
+        	return null;	
+        } else {
+            return response.getBody();
+        }
 	}
 }
