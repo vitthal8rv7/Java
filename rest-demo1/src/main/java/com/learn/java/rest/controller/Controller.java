@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
 
 	@Autowired
-	private HttpServletResponse response;
+	private HttpServletResponse httpServletResponse;
 	
 	@GetMapping("/info/with-rest-controller")
 	public String getWithRestController() {
@@ -175,5 +174,29 @@ public class Controller {
 		return result;
 	}
 	
+	
+	@GetMapping("/set-headers/with-response-entity")
+	public ResponseEntity<String> setHeadersWithResponseEntity() {
+		System.out.println("set-headers with-response-entity");
+		return ResponseEntity.ok()
+							 .header("Custom-Header", "foo")
+							 .body("Custom header set");
+	}
+	
+	@GetMapping("/set-headers/with-response-entity2")
+	public ResponseEntity<String> setHeadersWithResponseEntity2() {
+		System.out.println("set-headers with-response-entity2");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Custom-Header2", "foo2");
+		return new ResponseEntity<>("Custom header set", headers, HttpStatus.OK);
 
+	}
+	
+	@GetMapping("/set-headers/with-http-response")
+	public String setHeadersWithHttpResponse() {
+		System.out.println("set-headers with-http-response");
+		httpServletResponse.setHeader("Custom-Header3", "foo3");
+		return "Custom header set";
+
+	}
 }
