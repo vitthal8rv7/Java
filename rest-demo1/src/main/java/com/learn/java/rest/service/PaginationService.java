@@ -104,6 +104,7 @@ public class PaginationService {
         try {
         	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET,
                     requestEntity, String.class);
+        	//We can try to convert to to Java Model using Mapper Class?
         } catch (Exception e) {
         	System.out.println("Exception: "+e);
         	return null;
