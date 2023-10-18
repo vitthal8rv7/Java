@@ -18,6 +18,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	// https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons
+	implementation group: 'org.springframework.data', name: 'spring-data-commons', version: '3.0.3'	
 }
 
 tasks.named('test') {
