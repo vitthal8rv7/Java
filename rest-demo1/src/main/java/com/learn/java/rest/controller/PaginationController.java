@@ -34,11 +34,16 @@ public class PaginationController {
     	return paginationService.getEmployeeList(pageable);
     }
 
-//    @GetMapping(value = "/employee/list-from-app2")
-//    public EmployeeListResponse getEmployeeListFromApp2(Pageable pageable,
-//            @RequestParam(required = false) String someRequestParam) { 
-//    	System.out.println("In getEmployeeList: someRequestParam: " + someRequestParam);
-//    	System.out.println("In getEmployeeList: Pageable: " + pageable);
-//    	return paginationService.getEmployeeListFromApp2(pageable, someRequestParam);
-//    }
+    @GetMapping(value = "/employee/list-from-app2")
+    public String getEmployeeListFromApp2(Pageable pageable) { 
+    	System.out.println("In getEmployeeList: Pageable: " + pageable);
+    	return paginationService.getEmployeeListFromApp2(pageable);
+    }
+
+    @GetMapping(value = "/employee/pageable/list-from-app2")
+    public EmployeeListResponse getEmployeeListPageableFromApp2(Pageable pageable) { 
+    	System.out.println("In getEmployeeList: Pageable: " + pageable);
+    	return paginationService.getEmployeeListPageableFromApp2(pageable);
+    }
+
 }

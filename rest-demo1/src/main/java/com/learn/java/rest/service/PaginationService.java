@@ -6,7 +6,14 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.learn.java.rest.model.Employee;
 import com.learn.java.rest.model.EmployeeListResponse;
@@ -77,6 +84,58 @@ public class PaginationService {
 		employeeList.add(new Employee("id13", "ename13"));
 		employeeList.add(new Employee("id14", "ename14"));
 		return employeeList;
+	}
+
+	public String getEmployeeListFromApp2(Pageable pageable) {
+		List<Employee> employeeList = getEmployeeList();
+		System.out.println("pageable.getOffset();: "+ pageable.getOffset());
+		System.out.println("pageable.getPageSize();: "+ pageable.getPageSize());
+		System.out.println("employeeList.size();: "+ employeeList.size());
+		
+		final String localhost = "http://localhost:8081";
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(localhost+"/rest/demo/employee/list");
+		builder.queryParam("page", 4);
+		builder.queryParam("size", 3);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = null;
+        try {
+        	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET,
+                    requestEntity, String.class);
+        } catch (Exception e) {
+        	System.out.println("Exception: "+e);
+        	return null;
+        }
+		return response.getBody();
+
+	}
+	
+	public EmployeeListResponse getEmployeeListPageableFromApp2(Pageable pageable) {
+		List<Employee> employeeList = getEmployeeList();
+		System.out.println("pageable.getOffset();: "+ pageable.getOffset());
+		System.out.println("pageable.getPageSize();: "+ pageable.getPageSize());
+		System.out.println("employeeList.size();: "+ employeeList.size());
+		
+		final String localhost = "http://localhost:8081";
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(localhost+"/rest/demo/employee/list");
+		builder.queryParam("page", 4);
+		builder.queryParam("size", 3);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<EmployeeListResponse> response = null;
+        try {
+        	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET,
+                    requestEntity, EmployeeListResponse.class);
+        } catch (Exception e) {
+        	System.out.println("Exception: "+e);
+        	return null;
+        }
+		return response.getBody();
+
 	}
 
 }
