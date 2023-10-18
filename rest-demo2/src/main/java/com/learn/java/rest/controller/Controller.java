@@ -1,8 +1,8 @@
 package com.learn.java.rest.controller;
 
+import java.util.List;
 import java.util.Objects;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +36,17 @@ public class Controller {
 //	@PostMapping(value= "/employee/multipart", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE},
 //    produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping(value= "/employee/multipart")
-	public Employee setEmployeePicture(@RequestParam(value = "image", required = false) MultipartFile image) {
+	public Employee setEmployeePicture(@RequestParam(required = true) MultipartFile image) {
+		Employee employee = new Employee();
+		System.out.println("Employee Id: " + employee.getId() + "\nEmployee name: " + employee.getName());
+		System.out.println("Is Empty Image: " + Objects.isNull(image));
+		// Set Employee Logic
+		return employee;
+	}
+
+	
+	@PostMapping(value= "/employee/multipart2")
+	public Employee setEmployeePicture2(@RequestParam(required = true) List<MultipartFile> image) {
 		Employee employee = new Employee();
 		System.out.println("Employee Id: " + employee.getId() + "\nEmployee name: " + employee.getName());
 		System.out.println("Is Empty Image: " + Objects.isNull(image));

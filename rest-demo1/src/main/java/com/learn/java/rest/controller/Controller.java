@@ -262,6 +262,7 @@ public class Controller {
         try {
             response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, requestEntity, Employee.class);
         } catch (Exception e) {
+        	System.out.println("Execption: "+e);
             //LOGGER.error(Constants.ERROR_OCCURRED_WHILE_CALLING_CONTENT_LOCKER_SERVICE, e);
             //throw new InternalServerErrorException(propertyHolder.getTrmwInternalServerErrorCode(), propertyHolder.getTrmwInternalServerErrorMessage());
         }
@@ -290,6 +291,7 @@ public class Controller {
         try {
             response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
         } catch (Exception e) {
+        	System.out.println("Execption: "+e);
             //LOGGER.error(Constants.ERROR_OCCURRED_WHILE_CALLING_CONTENT_LOCKER_SERVICE, e);
             //throw new InternalServerErrorException(propertyHolder.getTrmwInternalServerErrorCode(), propertyHolder.getTrmwInternalServerErrorMessage());
         }
