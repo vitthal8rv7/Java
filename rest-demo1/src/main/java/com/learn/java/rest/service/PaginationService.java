@@ -38,6 +38,28 @@ public class PaginationService {
 		return response;
 	}
 
+	public EmployeeListResponse getEmployeeList(Pageable pageable) {
+		List<Employee> employeeList = getEmployeeList();
+		System.out.println("pageable.getOffset();: "+ pageable.getOffset());
+		System.out.println("pageable.getPageSize();: "+ pageable.getPageSize());
+		System.out.println("employeeList.size();: "+ employeeList.size());
+		
+		Integer start = (int) pageable.getOffset();
+		Integer end = Math.min(start + pageable.getPageSize(), employeeList.size());
+
+        Page<Employee> resultPage = new PageImpl<>(
+        		employeeList.subList(start, end), pageable, employeeList.size());
+        
+        Double totalPages = Math.ceil((double) employeeList.size() / pageable.getPageSize());
+
+        Pager pager = new Pager(pageable.getPageNumber(), pageable.getPageSize(),
+                pageable.getOffset(), totalPages.intValue());
+        EmployeeListResponse response = new EmployeeListResponse(resultPage.getContent(), pager);   
+        
+		return response;
+	}
+	
+	
 	private List<Employee> getEmployeeList() {
 		List<Employee> employeeList = new ArrayList<>();
 		employeeList.add(new Employee("id1", "ename1"));
