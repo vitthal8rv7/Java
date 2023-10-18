@@ -21,7 +21,7 @@ import com.learn.java.rest.model.Employee;
 
 @RestController
 @RequestMapping("/rest/demo")
-public class Controller3 {
+public class MultipartController {
 
 //	@Autowired
 //	private RestTemplate restTemplate;
