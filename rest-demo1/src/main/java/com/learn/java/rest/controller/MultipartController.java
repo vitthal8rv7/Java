@@ -2,6 +2,7 @@ package com.learn.java.rest.controller;
 
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,8 +24,8 @@ import com.learn.java.rest.model.Employee;
 @RequestMapping("/rest/demo")
 public class MultipartController {
 
-//	@Autowired
-//	private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 //	@Autowired
 //	private HttpServletRequest httpServletRequest;
@@ -52,7 +53,6 @@ public class MultipartController {
 //        HttpEntity<MultipartFile> requestEntity = new HttpEntity<>(image, headers);
 //        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(form, headers);
         ResponseEntity<Employee> response = null;
-        RestTemplate restTemplate = new RestTemplate();
         try {
             //response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
         	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
@@ -90,7 +90,6 @@ public class MultipartController {
 //        HttpEntity<MultipartFile> requestEntity = new HttpEntity<>(image, headers);
 //        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(form, headers);
         ResponseEntity<Employee> response = null;
-        RestTemplate restTemplate = new RestTemplate();
         try {
             //response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
         	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);

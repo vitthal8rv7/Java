@@ -3,6 +3,7 @@ package com.learn.java.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,9 @@ import com.learn.java.rest.model.Pager;
 @Service
 public class PaginationService {
 
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	public EmployeeListResponse getEmployeeList(Pageable pageable, String someRequestParam) {
 		List<Employee> employeeList = getEmployeeList();
 		System.out.println("pageable.getOffset();: "+ pageable.getOffset());
@@ -99,7 +103,6 @@ public class PaginationService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = null;
         try {
         	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET,
@@ -126,7 +129,6 @@ public class PaginationService {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> requestEntity = new HttpEntity<>(headers);
-        RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<EmployeeListResponse> response = null;
         try {
         	response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET,
