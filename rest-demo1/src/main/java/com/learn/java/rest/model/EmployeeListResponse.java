@@ -9,7 +9,7 @@ public class EmployeeListResponse implements Serializable {
 
 	private List<Employee> employeeList;
 	private Pager pager;
-	
+
 	public EmployeeListResponse(List<Employee> content, Pager pager) {
 		employeeList = content;
 		this.pager = pager;

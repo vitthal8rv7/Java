@@ -15,8 +15,8 @@ import com.learn.java.rest.model.Item;
 import com.learn.java.rest.model.Item2;
 
 @RestController
-@RequestMapping("/rest/demo")
-public class RequestResponseTypesController {
+@RequestMapping(value = "/rest/demo", produces = "application/vnd.item.api.v1+json")
+public class RequestResponseTypesControllerV1 {
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -27,15 +27,9 @@ public class RequestResponseTypesController {
 	@Autowired
 	private HttpServletResponse httpServletResponse;
 
-	@RequestMapping(method = RequestMethod.GET, value = "/get/items/{id}", produces = "application/vnd.item.api.v1+json")
+	@RequestMapping(method = RequestMethod.GET, value = "/controller/get/items/{id}")
 	@ResponseBody
 	public Item getItem(@PathVariable("id") String id) {
 		return new Item();
-	}
-
-	@RequestMapping(method = RequestMethod.GET, value = "/get/items/{id}", produces = "application/vnd.item.api.v2+json")
-	@ResponseBody
-	public Item2 getItemV2(@PathVariable("id") String id) {
-		return new Item2();
 	}
 }

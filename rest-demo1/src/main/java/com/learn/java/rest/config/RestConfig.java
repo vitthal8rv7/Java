@@ -15,14 +15,12 @@ public class RestConfig {
 		RestTemplate restTemplate = new RestTemplate();
 		return restTemplate;
 	}
-	
-	
+
 	@Bean
 	RestTemplate getRestTemplate(RestTemplateBuilder builder) {
-		return builder
-				.setReadTimeout(Duration.ofMillis(1000))     // Set, how many time unit it will wait for response
+		return builder.setReadTimeout(Duration.ofMillis(1000)) // Set, how many time unit it will wait for response
 				.setConnectTimeout(Duration.ofMillis(10000)) // Set, how many time unit it will wait for connection
 				.build();
 	}
 
- }
+}

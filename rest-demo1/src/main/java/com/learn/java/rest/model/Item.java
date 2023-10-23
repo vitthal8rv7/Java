@@ -3,7 +3,7 @@ package com.learn.java.rest.model;
 public class Item {
 
 	String item;
-	
+
 	public Item() {
 		this.item = this.getClass().getName();
 	}
