@@ -64,4 +64,16 @@ public class RetryController {
 		//}
 		return result;
 	}
+	
+	@GetMapping("/retry/customize-retry-template/test5")
+	String retryService5(@RequestParam String data) {
+		System.out.println("\nIn Retry Controller...");
+		String result = null;
+		//try {
+			result = retryService.retryService5(data);
+		//} catch(Exception e) {
+		//	System.out.println("Exception e: "+e);
+		//}
+		return result;
+	}
 }

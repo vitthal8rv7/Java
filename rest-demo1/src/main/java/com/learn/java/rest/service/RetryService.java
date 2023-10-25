@@ -2,14 +2,19 @@ package com.learn.java.rest.service;
 
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RetryService {
 
+	@Autowired
+	private RetryTemplate retryTemplate;
+	
 	int counter = 1;
 
 	// @Retryable is best when you want to apply @Retryable entire method 
@@ -90,4 +95,23 @@ public class RetryService {
 		}
 		return "Operation data: " + data;
 	}
+
+    public String retryService5(String data) {
+		System.out.println("\nIn Retry Service... & retryTemplate");
+		retryTemplate.execute(retryContext -> {
+		    //templateRetryService();
+			System.out.println("time: " + System.currentTimeMillis());
+			if (data.length() > 7) {
+				System.out.println("Retry Again...");
+				System.out.println("Retry Count = " + counter++);
+				if (counter > 3) {
+					counter = 1;
+				}
+				System.out.println("retryContext : "+ retryContext);
+				throw new NumberFormatException();
+			}
+		    return "Operation retryContext: " + retryContext;
+		});
+		return "Operation data: " + data;
+    }
 }
