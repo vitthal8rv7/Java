@@ -70,4 +70,20 @@ public class RetryService {
 		}
 		return "Operation data: " + data;
 	}
+	
+    @Retryable(value = {NumberFormatException.class}, maxAttemptsExpression = "${retry.maxAttempts}",
+            backoff = @Backoff(delayExpression = "${retry.maxDelay}")) 
+	public String retryService4(String data) {
+		System.out.println("\nIn Retry Service... & exceptionExpression = \"NumberFormatException.class\"");
+		System.out.println("time: " + System.currentTimeMillis());
+		if (data.length() > 7) {
+			System.out.println("Retry Again...");
+			System.out.println("Retry Count = " + counter++);
+			if (counter > 3) {
+				counter = 1;
+			}
+			throw new NumberFormatException();
+		}
+		return "Operation data: " + data;
+	}
 }

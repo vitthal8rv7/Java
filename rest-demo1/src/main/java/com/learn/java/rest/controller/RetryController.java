@@ -51,4 +51,17 @@ public class RetryController {
 		//}
 		return result;
 	}
+	
+	
+	@GetMapping("/retry/customize-spring-properties/test4")
+	String retryService4(@RequestParam String data) {
+		System.out.println("\nIn Retry Controller...");
+		String result = null;
+		//try {
+			result = retryService.retryService4(data);
+		//} catch(Exception e) {
+		//	System.out.println("Exception e: "+e);
+		//}
+		return result;
+	}
 }
