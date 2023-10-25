@@ -12,6 +12,7 @@ public class RetryService {
 
 	int counter = 1;
 
+	// @Retryable is best when you want to apply @Retryable entire method 
 	@Retryable
 	public String retryService(String data) {
 		System.out.println("\nIn Retry Service...");
@@ -41,6 +42,7 @@ public class RetryService {
 		return "" + e;
 	}
 
+	// @Retryable is best when you want to apply @Retryable entire method
 	@Retryable(value = {SQLException.class}, maxAttempts = 4, backoff = @Backoff(delay = 100))
 	public String retryService2(String data) {
 		System.out.println("\nIn Retry Service... & exceptionExpression = \"SQLException.class\"");
@@ -56,6 +58,7 @@ public class RetryService {
 		return "Operation data: " + data;
 	}
 	
+	// @Retryable is best when you want to apply @Retryable entire method
 	@Retryable(value = {NumberFormatException.class}, maxAttempts = 5, backoff = @Backoff(delay = 100))
 	public String retryService3(String data) {
 		System.out.println("\nIn Retry Service... & exceptionExpression = \"NumberFormatException.class\"");
@@ -71,6 +74,7 @@ public class RetryService {
 		return "Operation data: " + data;
 	}
 	
+	// @Retryable is best when you want to apply @Retryable entire method
     @Retryable(value = {NumberFormatException.class}, maxAttemptsExpression = "${retry.maxAttempts}",
             backoff = @Backoff(delayExpression = "${retry.maxDelay}")) 
 	public String retryService4(String data) {
