@@ -19,11 +19,11 @@ public class RetryController {
 	String retryService(@RequestParam String data) {
 		System.out.println("\nIn Retry Controller...");
 		String result = null;
-		try {
+		//try {
 			result = retryService.retryService(data);
-		} catch(Exception e) {
-			System.out.println("Exception e: "+e);
-		}
+		//} catch(Exception e) {
+		//	System.out.println("Exception e: "+e);
+		//}
 		return result;
 	}
 }
