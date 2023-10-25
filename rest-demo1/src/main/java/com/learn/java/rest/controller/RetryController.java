@@ -26,4 +26,29 @@ public class RetryController {
 		//}
 		return result;
 	}
+	
+	@GetMapping("/retry/customize/test2")
+	String retryService2(@RequestParam String data) {
+		System.out.println("\nIn Retry Controller...");
+		String result = null;
+		//try {
+			result = retryService.retryService2(data);
+		//} catch(Exception e) {
+		//	System.out.println("Exception e: "+e);
+		//}
+		return result;
+	}
+	
+	
+	@GetMapping("/retry/customize/test3")
+	String retryService3(@RequestParam String data) {
+		System.out.println("\nIn Retry Controller...");
+		String result = null;
+		//try {
+			result = retryService.retryService3(data);
+		//} catch(Exception e) {
+		//	System.out.println("Exception e: "+e);
+		//}
+		return result;
+	}
 }
