@@ -1,6 +1,5 @@
 package com.learn.java.rest.model;
 
-
 import java.io.Serializable;
 
 import org.springframework.data.domain.Pageable;
@@ -8,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 public class Pager implements Pageable, Serializable {
 
 	private static final long serialVersionUID = -5529333118243515095L;
-
 
 	private Integer pageNumber;
 	private Integer pageSize;
