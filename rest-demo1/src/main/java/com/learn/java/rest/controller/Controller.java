@@ -32,8 +32,8 @@ import com.learn.java.rest.model.Employee;
 @RequestMapping("/rest/demo")
 public class Controller {
 
-//	@Autowired
-//	private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	@Autowired
 	private HttpServletRequest httpServletRequest;
@@ -258,7 +258,7 @@ public class Controller {
         Object obj = new Employee("12345", "Employee12345");
         HttpEntity<Employee> requestEntity = new HttpEntity<>(new Employee("12345", "Employee12345"), headers);
         ResponseEntity<Employee> response = null;
-        RestTemplate restTemplate = new RestTemplate();
+        
         try {
             response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, requestEntity, Employee.class);
         } catch (Exception e) {
@@ -287,7 +287,7 @@ public class Controller {
 //        HttpEntity<Employee> requestEntity = new HttpEntity<>(new Employee("12345", "Employee12345"), headers);
         HttpEntity<Object> requestEntity = new HttpEntity<>(obj, headers);
         ResponseEntity<Employee> response = null;
-        RestTemplate restTemplate = new RestTemplate();
+        
         try {
             response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.POST, requestEntity, Employee.class);
         } catch (Exception e) {
