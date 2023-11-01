@@ -1,0 +1,42 @@
+type Address {
+	house: String		
+	line: String
+	city: String
+	pincode: Int
+	country: String
+}
+
+type Employee {
+	id: String
+	name: String
+	salary: Float
+ 	age: Int	
+	isManager: Boolean
+	address: Address
+}
+
+input AddressInput {
+	house: String		
+	line: String
+	city: String
+	pincode: Int
+	country: String
+}
+
+input EmployeeInput {
+	id: String
+	name: String
+	salary: Float
+ 	age: Int	
+	isManager: Boolean
+	address: AddressInput
+}
+
+
+type Query {
+	getEmployee(id: String!) : Employee
+}
+
+type Mutation {
+    addEmployee(employee: EmployeeInput): Employee
+}
