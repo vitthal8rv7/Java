@@ -11,7 +11,7 @@ import com.learn.java.graphql.model.Employee;
 public class Mutation {
 
 //	@MutationMapping
-	@SchemaMapping(typeName = "Mutation", field = "addEmployee")
+	@SchemaMapping(typeName = "Mutation", field = "addEmployee") 
 	public Employee addEmployee(@Argument Employee employee) {
 		System.out.println("Id: "+ employee.getId());
 		return employee;

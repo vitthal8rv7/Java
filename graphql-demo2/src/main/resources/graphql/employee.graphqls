@@ -12,7 +12,7 @@ type Employee {
 	salary: Float
  	age: Int	
 	isManager: Boolean
-	address: Address
+	address2: Address
 	#empAdd(addr: AddressInput): Address
 }
 
