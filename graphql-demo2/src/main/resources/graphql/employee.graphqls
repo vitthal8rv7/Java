@@ -13,6 +13,7 @@ type Employee {
  	age: Int	
 	isManager: Boolean
 	address: Address
+	#empAdd(addr: AddressInput): Address
 }
 
 input AddressInput {
