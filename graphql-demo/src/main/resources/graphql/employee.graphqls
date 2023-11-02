@@ -35,6 +35,7 @@ input EmployeeInput {
 
 type Query {
 	getEmployee(id: String!) : Employee
+	testQuery: String
 }
 
 type Mutation {

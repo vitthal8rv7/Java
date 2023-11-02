@@ -16,13 +16,22 @@ repositories {
 }
 
 dependencies {
+	implementation 'com.graphql-java-kickstart:graphql-java-tools:12.0.0'
+	implementation 'com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation group: 'com.graphql-java', name: 'graphql-java-tools', version: '5.2.4'
-	implementation group: 'com.graphql-java', name: 'graphiql-spring-boot-starter', version: '5.0.2'
+	//implementation group: 'com.graphql-java', name: 'graphql-java-tools', version: '5.2.4'
+	//compile group: 'com.graphql-java', name: 'graphiql-spring-boot-starter'	
+	// https://mvnrepository.com/artifact/com.graphql-java/graphql-java
+	//implementation group: 'com.graphql-java', name: 'graphql-java', version: '20.2'
+
+	// https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-autoconfigure
+	//implementation group: 'com.graphql-java', name: 'graphql-spring-boot-autoconfigure', version: '5.0.2'
+
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'
-	testImplementation 'org.springframework.graphql:spring-graphql-test'
+	//testImplementation 'org.springframework.graphql:spring-graphql-test'
 }
 
 tasks.named('test') {
