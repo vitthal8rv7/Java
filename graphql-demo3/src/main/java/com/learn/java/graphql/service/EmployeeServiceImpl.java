@@ -1,6 +1,8 @@
 package com.learn.java.graphql.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
@@ -11,32 +13,38 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	@Override
 	public Employee getEmployee(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Employee employee = new Employee();
+		employee.setId(id);
+		return employee;
 	}
 
 	@Override
 	public List<Employee> getAllEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Employee> employees = new ArrayList<>();
+		Employee employee = new Employee();
+		employees.add(employee);
+		Employee employee2 = new Employee();
+		employees.add(employee2);
+		return employees;
 	}
 
 	@Override
 	public Employee addEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		return employee;
 	}
 
 	@Override
 	public Employee updateEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		return employee;
 	}
 
 	@Override
 	public Boolean deleteEmployee(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		if(Objects.isNull(employee)) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	
