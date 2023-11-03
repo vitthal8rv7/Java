@@ -18,38 +18,38 @@ public class EmployeeResolver {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	@GraphQLQuery(name = "testQuery")
+	@GraphQLQuery(name = "testQuery", description = "test query")
 	public String testGraphqlDemo3() {
 		return "Graphql Demo 3";
 	}
 
-	@GraphQLQuery(name = "testQuery2")
+	@GraphQLQuery(name = "testQuery2", description = "test query2")
 	public String testGraphqlDemo33(@GraphQLArgument(name = "id") String id) {
 		return "Graphql Demo 33";
 	}
 	
-	@GraphQLQuery(name = "getEmployee")
+	@GraphQLQuery(name = "getEmployee", description = "get employee by id")
 	public Employee getEmployee(@GraphQLArgument(name = "id")String id) {
 		return employeeService.getEmployee(id);
 	}
 
-	@GraphQLQuery(name = "getAllEmployees")
+	@GraphQLQuery(name = "getAllEmployees", description = "get all employees")
 	public List<Employee> getAllEmployees() {
 		return employeeService.getAllEmployees();
 	}
 
-	 @GraphQLMutation(name = "addEmployee")
+	 @GraphQLMutation(name = "addEmployee", description = "add new employee")
 	public Employee addEmployee(@GraphQLArgument(name = "employee")Employee employee) {
 		System.out.println("in Add Employee");
 		return employeeService.addEmployee(employee);
 	}
 
-	 @GraphQLMutation(name = "updateEmployee")
+	 @GraphQLMutation(name = "updateEmployee", description = "updated existing employee")
 	public Employee updateEmployee(@GraphQLArgument(name = "employee")Employee employee) {
 		return employeeService.updateEmployee(employee);
 	}
 
-	 @GraphQLMutation(name = "deleteEmployee")
+	 @GraphQLMutation(name = "deleteEmployee", description = "delete employee")
 	public Boolean deleteEmployee(@GraphQLArgument(name = "employee")Employee employee) {
 		return employeeService.deleteEmployee(employee);
 	}
