@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.graphql.model.Employee;
 
+import graphql.schema.GraphQLSchema;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
@@ -17,9 +19,18 @@ import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+//	@Autowired
+//	private GraphQLSchema graphQLSchema;
+	
 	@GraphQLQuery(name = "getEmployee", description = "get employee by id")
 	@Override
 	public Employee getEmployee(@GraphQLArgument(name = "id")String id) {
+//		System.out.println("graphQLSchema: "+ graphQLSchema);
+		
+//		for (GraphQLNamedType graphQLNamedType: graphQLSchema.getAllTypesAsList()) {
+//			System.out.print("graphQLNamedType.getName(): "+ graphQLNamedType.getName());
+//			System.out.println("    graphQLNamedType.getDescription(): "+ graphQLNamedType.getDescription());
+//		}
 		Employee employee = new Employee();
 		employee.setId(id);
 		return employee;
