@@ -18,6 +18,15 @@ public class Employee implements Serializable {
 
 		//private Address address;
 		
+		public Employee(String id, String name) {
+			this.id = id;
+			this.name = name;
+		}
+
+		public Employee() {
+			// TODO Auto-generated constructor stub
+		}
+
 		public String getId() {
 			return id;
 		}
