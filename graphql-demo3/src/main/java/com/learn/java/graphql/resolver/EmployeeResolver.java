@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.learn.java.graphql.model.Employee;
 import com.learn.java.graphql.service.EmployeeService;
 
+import graphql.schema.GraphQLNamedType;
+import graphql.schema.GraphQLSchema;
+import graphql.schema.GraphQLType;
 import io.leangen.graphql.annotations.GraphQLArgument;
 import io.leangen.graphql.annotations.GraphQLMutation;
 import io.leangen.graphql.annotations.GraphQLQuery;
@@ -17,6 +20,9 @@ public class EmployeeResolver {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+//	@Autowired
+//	private GraphQLSchema graphQLSchema;
 	
 	@GraphQLQuery(name = "testQuery", description = "test query")
 	public String testGraphqlDemo3() {
@@ -30,6 +36,12 @@ public class EmployeeResolver {
 	
 	@GraphQLQuery(name = "getEmployee", description = "get employee by id")
 	public Employee getEmployee(@GraphQLArgument(name = "id")String id) {
+//		System.out.println("graphQLSchema: "+ graphQLSchema.toString());
+		
+//		for (GraphQLNamedType graphQLNamedType: graphQLSchema.getAllTypesAsList()) {
+//			System.out.print("graphQLNamedType.getName(): "+ graphQLNamedType.getName());
+//			System.out.println("    graphQLNamedType.getDescription(): "+ graphQLNamedType.getDescription());
+//		}
 		return employeeService.getEmployee(id);
 	}
 
