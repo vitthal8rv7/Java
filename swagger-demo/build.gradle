@@ -1,0 +1,44 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.learn.java'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework:spring-webflux'
+	
+	implementation group: 'org.springframework.data', name: 'spring-data-commons'		
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+	implementation group: 'org.springframework.retry', name: 'spring-retry'
+	implementation group: 'org.springframework', name: 'spring-aspects'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
+	//implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	//implementation group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.7.15'
+	
+	// https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'
+	
+	
+	
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
