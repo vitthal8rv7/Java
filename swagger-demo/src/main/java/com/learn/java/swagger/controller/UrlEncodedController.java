@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learn.java.swagger.model.Feedback;
 
 @RestController
-@RequestMapping(value = "/rest/demo")
+@RequestMapping(value = "/swagger/demo")
 public class UrlEncodedController {
 
 //	@GetMapping(path = "/feedback")

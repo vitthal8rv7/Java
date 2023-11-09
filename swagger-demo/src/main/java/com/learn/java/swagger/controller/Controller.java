@@ -29,7 +29,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.learn.java.swagger.model.Employee;
 
 @RestController
-@RequestMapping("/rest/demo")
+@RequestMapping("/swagger/demo")
 public class Controller {
 
 	@Autowired

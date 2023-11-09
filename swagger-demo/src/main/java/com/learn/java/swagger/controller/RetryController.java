@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learn.java.swagger.service.RetryService;
 
 @RestController
-@RequestMapping("/rest/demo")
+@RequestMapping("/swagger/demo")
 public class RetryController {
 
 	@Autowired

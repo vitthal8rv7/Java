@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
-@RequestMapping("/rest/demo")
+@RequestMapping("/swagger/demo")
 public class Controller2 {
 
 	@Autowired

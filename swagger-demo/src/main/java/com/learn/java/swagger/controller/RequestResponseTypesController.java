@@ -15,7 +15,7 @@ import com.learn.java.swagger.model.Item;
 import com.learn.java.swagger.model.Item2;
 
 @RestController
-@RequestMapping("/rest/demo")
+@RequestMapping("/swagger/demo")
 public class RequestResponseTypesController {
 
 	@Autowired

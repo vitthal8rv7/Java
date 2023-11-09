@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.learn.java.swagger.model.Item;
 
 @RestController
-@RequestMapping(value = "/rest/demo", produces = "application/vnd.item.api.v1+json")
+@RequestMapping(value = "/swagger/demo", produces = "application/vnd.item.api.v1+json")
 public class RequestResponseTypesControllerV1 {
 
 	@Autowired

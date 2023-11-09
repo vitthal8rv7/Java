@@ -11,7 +11,7 @@ import com.learn.java.swagger.model.EmployeeListResponse;
 import com.learn.java.swagger.service.PaginationService;
 
 @RestController
-@RequestMapping("/rest/demo")
+@RequestMapping("/swagger/demo")
 public class PaginationController {
 
 	@Autowired
