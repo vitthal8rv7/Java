@@ -1,37 +1,24 @@
-HELP.md
-.gradle
+# Add any directories, files, or patterns you don't want to be tracked by version control
+*.DS_Store
 build/
-!gradle/wrapper/gradle-wrapper.jar
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+target/
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
-
-### IntelliJ IDEA ###
-.idea
-*.iws
+.gradle/
+dependency-reduced-pom.xml
+.classpath
+.project
+.settings/
 *.iml
 *.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
+*.iws
+*.idea
+*.log
+.settings
+.factorypath
+.classpath
+.project
+.springBeans
+Thumbs.db
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-
-### VS Code ###
-.vscode/
+.sts4-cache/classpath-data.json
+.sts4-cache/
