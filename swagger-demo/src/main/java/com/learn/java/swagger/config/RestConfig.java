@@ -1,0 +1,26 @@
+package com.learn.java.swagger.config;
+
+import java.time.Duration;
+
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
+
+@Configuration
+public class RestConfig {
+
+	@Bean
+	RestTemplate getRestTemplate() {
+		RestTemplate restTemplate = new RestTemplate();
+		return restTemplate;
+	}
+
+	@Bean
+	RestTemplate getRestTemplate(RestTemplateBuilder builder) {
+		return builder.setReadTimeout(Duration.ofMillis(300)) // Set, how many time unit it will wait for response
+				.setConnectTimeout(Duration.ofMillis(100)) // Set, how many time unit it will wait for connection
+				.build();
+	}
+
+}
