@@ -9,8 +9,8 @@
     </encoder>
   </appender>
 
-  <root level="info">
+  <root level="error">
     <appender-ref ref="STDOUT"/>
   </root>
- 
+ <include resource="org/springframework/boot/logging/logback/base.xml"/>
 </configuration>
