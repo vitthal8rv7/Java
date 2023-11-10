@@ -9,6 +9,10 @@
     </encoder>
   </appender>
 
+  <logger name="com.learn.java.logger.controller.LoggerController" additivity="false" level="info">
+    <appender-ref ref="STDOUT" />
+  </logger>
+
   <logger name="com.learn.java.logger.controller" additivity="false" level="trace">
     <appender-ref ref="STDOUT" />
   </logger>
