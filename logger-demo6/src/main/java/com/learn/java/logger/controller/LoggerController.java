@@ -30,8 +30,16 @@ public class LoggerController {
 		logger.warn("Log Level : WARN");
 		logger.debug("Log Level : DEBUG");
 		logger.error("Log Level : ERROR");
-		new SimpleDateFormat();
+		logAmplify();
 		return "Log Level Checked.\n Default Log Level Is INFO.";
+	}
+	
+	private  void logAmplify() {
+		logger.info("Log Level : INFO");
+		logger.trace("Log Level : TRACE");
+		logger.warn("Log Level : WARN");
+		logger.debug("Log Level : DEBUG");
+		logger.error("Log Level : ERROR");		
 	}
 
 	@GetMapping("/employee")

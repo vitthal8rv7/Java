@@ -2,26 +2,20 @@
 <configuration>
 	<property name="Property1" value="HelloCustomFileLogger" />
 	<property name="log.path" value="src/main/resources/log" />
-	<property name="log2" value="A" />
 	<appender name="SAVE-TO-FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>${log.path}/file1.log</file>
-		<encoder>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
-				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M -
+				%msg%n
 			</Pattern>
 		</encoder>
 		<rollingPolicy
-			class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${log.path}/file1${log2}%i.log</fileNamePattern>
-			<minIndex>1</minIndex>
-			<maxIndex>5</maxIndex><!-- Maximum number of archived log files -->
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/file1_%d{dd-MM-yyyy-HH-mm}.log</fileNamePattern>
+			<maxHistory>5</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
 		</rollingPolicy>
-
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<maxFileSize>1KB</maxFileSize>
-		</triggeringPolicy>
 	</appender>
 
 	<logger name="com.learn.java.logger.controller.LoggerController"
