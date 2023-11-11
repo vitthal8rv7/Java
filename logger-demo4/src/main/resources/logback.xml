@@ -13,4 +13,5 @@
 	<root level="info">
 		<appender-ref ref="SAVE-TO-FILE" />
 	</root>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
 </configuration>
