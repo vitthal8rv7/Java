@@ -5,11 +5,21 @@
 		<file>file1.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
-				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M -
-				%msg%n
+				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
 			</Pattern>
 		</encoder>
 	</appender>
+
+	<logger name="com.learn.java.logger.controller.LoggerController"
+		additivity="false" level="trace">
+		<appender-ref ref="SAVE-TO-FILE" />
+	</logger>
+
+	<logger name="com.learn.java.logger" additivity="false"
+		level="debug">
+		<appender-ref ref="SAVE-TO-FILE" />
+	</logger>
+
 	<root level="info">
 		<appender-ref ref="SAVE-TO-FILE" />
 	</root>
