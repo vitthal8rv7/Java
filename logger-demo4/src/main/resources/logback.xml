@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<property name="Property1" value="HelloCustomFileLogger" />
+	<property name="log.path" value="src/main/resources/log" />
 	<appender name="SAVE-TO-FILE" class="ch.qos.logback.core.FileAppender">
-		<file>file1.log</file>
+		<file>${log.path}/file1.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
