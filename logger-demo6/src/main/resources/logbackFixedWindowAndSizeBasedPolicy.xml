@@ -3,15 +3,6 @@
 	<property name="Property1" value="HelloCustomFileLogger" />
 	<property name="log.path" value="src/main/resources/log" />
 	<property name="log2" value="A" />
-
-	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder>
-			<pattern>
-				${Property1} %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
-			</pattern>
-		</encoder>
-	</appender>
-
 	<appender name="SAVE-TO-FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${log.path}/file1.log</file>
@@ -36,18 +27,15 @@
 	<logger name="com.learn.java.logger.controller.LoggerController"
 		additivity="false" level="trace">
 		<appender-ref ref="SAVE-TO-FILE" />
-		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<logger name="com.learn.java.logger" additivity="false"
 		level="debug">
 		<appender-ref ref="SAVE-TO-FILE" />
-		<appender-ref ref="STDOUT" />
 	</logger>
 
 	<root level="info">
 		<appender-ref ref="SAVE-TO-FILE" />
-		<appender-ref ref="STDOUT" />
 	</root>
 	<include resource="org/springframework/boot/logging/logback/base.xml" />
 </configuration>
