@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<property name="Property1" value="HelloCustomFileLogger" />
+	<property name="log.path" value="src/main/resources/log" />
+	<appender name="SAVE-TO-FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M -
+				%msg%n
+			</Pattern>
+		</encoder>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/file1_%d{dd-MM-yyyy-HH-mm}.log</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<totalSizeCap>100MB</totalSizeCap>
+		</rollingPolicy>
+	</appender>
+
+	<logger name="com.learn.java.logger.controller.LoggerController"
+		additivity="false" level="trace">
+		<appender-ref ref="SAVE-TO-FILE" />
+	</logger>
+
+	<logger name="com.learn.java.logger" additivity="false"
+		level="debug">
+		<appender-ref ref="SAVE-TO-FILE" />
+	</logger>
+
+	<root level="info">
+		<appender-ref ref="SAVE-TO-FILE" />
+	</root>
+	<include resource="org/springframework/boot/logging/logback/base.xml" />
+</configuration>
