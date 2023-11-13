@@ -57,7 +57,7 @@ public class SampleController implements ApplicationListener<ServletWebServerIni
 		log.info("hi!");
 		Thread.sleep(this.random.nextInt(1000));
 
-		String s = this.restTemplate.getForObject("http://localhost:" + 8090 + "/hi2", String.class);
+		String s = this.restTemplate.getForObject("http://localhost:" + this.port + "/hi2", String.class);
 		return "hi/" + s;
 	}
 
@@ -85,7 +85,7 @@ public class SampleController implements ApplicationListener<ServletWebServerIni
 
 	@RequestMapping("/hi2")
 	public String hi2() throws InterruptedException {
-		log.info("hi2!");
+		log.info("Hello hi2!");
 		int millis = this.random.nextInt(1000);
 		Thread.sleep(millis);
 		this.tracer.currentSpan().tag("random-sleep-millis", String.valueOf(millis));
