@@ -18,6 +18,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'pl.project13.maven:spring-git-commit-id-plugin'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
@@ -27,4 +28,8 @@ tasks.named('bootBuildImage') {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+springBoot {
+    buildInfo()
 }
