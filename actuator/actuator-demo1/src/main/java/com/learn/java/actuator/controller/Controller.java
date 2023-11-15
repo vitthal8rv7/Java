@@ -3,6 +3,9 @@ package com.learn.java.actuator.controller;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.audit.AuditEvent;
+import org.springframework.boot.actuate.audit.InMemoryAuditEventRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +22,15 @@ import com.learn.java.actuator.model.Employee;
 @RequestMapping("/rest/demo")
 public class Controller {
 
+	@Autowired
+	InMemoryAuditEventRepository repository;
+	
 	@GetMapping("/employee/{id}")
 	public Employee getEmployee(@PathVariable String id, @RequestParam String name) {
 		System.out.println("Employee Id: " + id + "\nEmployee name: " + name);
 		// Get Employee Logic
+		AuditEvent event = new AuditEvent("auditEvent1", "auditEvent1", "auditEvent1", "A2");
+		repository.add(event);
 		Employee employee = new Employee(id, name);
 		return employee;
 	}
