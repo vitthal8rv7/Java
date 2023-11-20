@@ -1,0 +1,10 @@
+package com.learn.java.notification.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/in-app/notification")
+public class InAppNotificationController {
+
+}
