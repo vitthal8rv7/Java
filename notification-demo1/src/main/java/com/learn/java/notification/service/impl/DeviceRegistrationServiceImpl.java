@@ -31,13 +31,13 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 
 	@Autowired
 	private MongoTemplate mongoTemplate;
-	
+
 	@Autowired
 	private DeviceDetailRepository deviceDetailRepository;
-	
+
 	@Override
 	public Boolean addNewDevice(DeviceDetailsRO deviceDetails, String applicationName, String userId) {
-		
+
 		validateDeviceDetails(deviceDetails);
 		validateUserId(userId);
 		validateApplicationName(applicationName);
@@ -58,22 +58,22 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		String deviceTokenNew = deviceDetails.getDeviceTokenNew();
 		String deviceTokenOld = deviceDetails.getDeviceTokenOld();
 		if (StringUtils.isNotBlank(deviceTokenOld) && !deviceTokenNew.equals(deviceTokenOld)) {
-			//deviceDetailRepository.deleteById(deviceTokenOld);
-		}		
+			// deviceDetailRepository.deleteById(deviceTokenOld);
+		}
 	}
 
 	private void validateApplicationName(String applicationName) {
 		if (StringUtils.isBlank(applicationName)) {
 			String badRequest = "Application name should not be empty. Please provide application name.";
 			throw new BadRequestException(badRequest);
-		}		
+		}
 	}
 
 	private void validateUserId(String userId) {
 		if (StringUtils.isBlank(userId)) {
 			String badRequest = "User id should not be empty. Please provide the user id.";
 			throw new BadRequestException(badRequest);
-		}		
+		}
 	}
 
 	private void validateDeviceDetails(DeviceDetailsRO deviceDetails) {
@@ -103,7 +103,7 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		if (StringUtils.isBlank(accessToken)) {
 			String badRequest = "Access token should not be empty. Please provide the access token .";
 			throw new BadRequestException(badRequest);
-		}		
+		}
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class DeviceRegistrationServiceImpl implements DeviceRegistrationService 
 		Query query = new Query();
 		query.addCriteria(Criteria.where(Constants.ACCESS_TOKEN_FIELD).is(accessToken));
 		List<DeviceDetails> devices = mongoTemplate.findAllAndRemove(query, DeviceDetails.class);
-		if(Objects.isNull(devices) || devices.isEmpty()) {
+		if (Objects.isNull(devices) || devices.isEmpty()) {
 			return null;
 		}
 		List<DeviceDetailsVO> devicesVO = new ArrayList<>();

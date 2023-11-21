@@ -33,12 +33,12 @@ public class DeviceRegistrationController {
 	public DeviceDetails getDeviceDetails() {
 		return new DeviceDetails();
 	}
-	
+
 	@PostMapping(value = "/device/register")
 	public Boolean registerDevice(@RequestBody DeviceDetailsRO deviceDetail,
 			@RequestHeader(required = false) String applicationName, @RequestHeader(required = false) String userId) {
-		 deviceDetail.setLastActive(propertyHolder.getCurrentTimeStamp());
-		 deviceDetail.setLastNudge(propertyHolder.getCurrentTimeStamp());
+		deviceDetail.setLastActive(propertyHolder.getCurrentTimeStamp());
+		deviceDetail.setLastNudge(propertyHolder.getCurrentTimeStamp());
 		return deviceRegistrationService.addNewDevice(deviceDetail, applicationName.toLowerCase(), userId);
 	}
 
