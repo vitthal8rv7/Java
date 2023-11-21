@@ -7,10 +7,10 @@ import com.learn.java.notification.model.DeviceDetailsVO;
 
 public interface DeviceRegistrationService {
 
-	Boolean addNewDevice(DeviceDetailsRO deviceDetail, String applicationName, String userId);
+	public Boolean addNewDevice(DeviceDetailsRO deviceDetail, String applicationName, String userId);
 
-	Boolean updateLasteActiviteTimestamp(String accessToken, String applicationName);
+	public Boolean updateLasteActiviteTimestamp(String accessToken, String applicationName);
 
-	List<DeviceDetailsVO> removeDeviceDetailWithAccessToken(String accessToken, String applicationName);
+	public List<DeviceDetailsVO> removeDeviceDetailWithAccessToken(String accessToken, String applicationName);
 
 }
