@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.learn.java.notification.config.Constants;
 import com.learn.java.notification.exception.DataNotFoundException;
+import com.learn.java.notification.exception.InternalServerErrorException;
 import com.learn.java.notification.model.CountVO;
 import com.learn.java.notification.model.InAppNotification;
 import com.learn.java.notification.model.InAppNotificationVO;
@@ -84,21 +85,76 @@ public class InAppNotificationServiceImpl implements InAppNotificationService {
 
 	@Override
 	public Boolean clearAllInAppNotificationsForUser(String applicationName, String userId, Boolean calendar) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			List<InAppNotificationVO> inAppNotificationVOs = fetchInAppNotifications(applicationName, userId, calendar);
+			inAppNotificationVOs.stream().forEach(notification -> notification.setIsClear(true));
+			List<InAppNotification> inAppNotifications = new ArrayList<>();
+			inAppNotificationVOs.stream()
+					.forEach(notification -> inAppNotifications.add(notification.getInAppNotification()));
+			saveAllInAppNotifications(inAppNotifications);
+			return true;
+		} catch (Exception e) {
+			String exception = "Error occured while clearing all the notifications for user.";
+			throw new InternalServerErrorException(exception);
+		}
+	}
+
+	private void saveAllInAppNotifications(List<InAppNotification> notificationObjects) {
+		Integer fromIndex = 0;
+		Integer toIndex = 100;
+		Integer threshold = 100;
+		do {
+			List<InAppNotification> notifications = notificationObjects.subList(fromIndex, toIndex);
+			inAppNotificationsRepository.saveAll(notifications);
+			fromIndex = toIndex;
+			toIndex = ((threshold + toIndex) < notificationObjects.size()) ? (threshold + toIndex)
+					: (notificationObjects.size());
+		} while (fromIndex < notificationObjects.size());
 	}
 
 	@Override
 	public Boolean readInAppNotification(String inAppNotificationId, String pushNotificationId, String userId,
 			Boolean calendar, String applicationName) {
-		// TODO Auto-generated method stub
-		return null;
+		utilityService.validateUserId(userId);
+		utilityService.validateApplicationName(applicationName);
+		utilityService.validateNotificationId(inAppNotificationId, pushNotificationId);
+		InAppNotification notificationToRead = getNotificationToRead(userId, inAppNotificationId, pushNotificationId,
+				calendar);
+		if (!Objects.isNull(notificationToRead)) {
+			notificationToRead.setIsRead(true);
+			inAppNotificationsRepository.save(notificationToRead);
+			return true;
+		} else {
+			throw new DataNotFoundException(Constants.NO_IN_APP_NOTIFICATION_FOUND_WITH_IN_APP_OR_PUSH_NOTIFICATION_ID);
+		}
+	}
+
+	private InAppNotification getNotificationToRead(String userId, String inAppNotificationId,
+			String pushNotificationId, Boolean calendar) {
+		InAppNotification notificationToRead = null;
+		if (StringUtils.isNotEmpty(inAppNotificationId)) {
+			notificationToRead = (Boolean.TRUE.equals(calendar))
+					? (inAppNotificationsRepository.findOneByOwnerIdAndInAppNotificationId(userId, inAppNotificationId))
+					: (inAppNotificationsRepository.findOneByUserIdAndInAppNotificationId(userId, inAppNotificationId));
+		} else {
+			notificationToRead = inAppNotificationsRepository.findOneByUserIdAndPushNotificationId(userId,
+					pushNotificationId);
+		}
+		return notificationToRead;
 	}
 
 	@Override
 	public CountVO countInAppNotification(String applicationName, String userId, Boolean calendar) {
-		// TODO Auto-generated method stub
-		return null;
+		utilityService.validateUserId(userId);
+		utilityService.validateApplicationName(applicationName);
+		CountVO inAppNotificationCount = null;
+		int count = 0;
+		count = (Boolean.TRUE.equals(calendar))
+				? (inAppNotificationsRepository.countByOwnerIdAndIsReadAndIsClearAndApplicationNameIgnoreCase(userId,
+						false, false, applicationName.toLowerCase()).size())
+				: (inAppNotificationsRepository.countByUserIdAndIsReadAndIsClearAndApplicationNameIgnoreCase(userId,
+						false, false, applicationName.toLowerCase()).size());
+		inAppNotificationCount = new CountVO(count);
+		return inAppNotificationCount;
 	}
-
 }

@@ -17,7 +17,27 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CountVO implements Serializable {
 
-    private static final long serialVersionUID = -6941008488901155547L;
+    public CountVO() {
+	}
+
+    public CountVO(Integer count) {
+		this.count = count;
+	}
+
+	private static final long serialVersionUID = -6941008488901155547L;
 
     private Integer count;
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	@Override
+	public String toString() {
+		return "CountVO [count=" + count + "]";
+	}
 }
