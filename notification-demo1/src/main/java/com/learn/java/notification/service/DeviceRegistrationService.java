@@ -2,8 +2,8 @@ package com.learn.java.notification.service;
 
 import java.util.List;
 
-import com.learn.java.notification.model.DeviceDetails;
 import com.learn.java.notification.model.DeviceDetailsRO;
+import com.learn.java.notification.model.DeviceDetailsVO;
 
 public interface DeviceRegistrationService {
 
@@ -11,6 +11,6 @@ public interface DeviceRegistrationService {
 
 	Boolean updateLasteActiviteTimestamp(String accessToken, String applicationName);
 
-	List<DeviceDetails> removeDeviceDetailWithAccessToken(String accessToken, String applicationName);
+	List<DeviceDetailsVO> removeDeviceDetailWithAccessToken(String accessToken, String applicationName);
 
 }
