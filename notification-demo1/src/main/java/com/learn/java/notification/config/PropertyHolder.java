@@ -4,7 +4,6 @@
 package com.learn.java.notification.config;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -90,10 +89,10 @@ public class PropertyHolder {
 //
 //	@Value("${store.visit.tag.mail.subject}")
 //	private String storeVisitTagMailSubject;
-//
-//	@Value("${fcm.server.key}")
-//	private String firebaseServerKey;
-//
+
+	@Value("${fcm.server.key}")
+	private String firebaseServerKey;
+
 //	@Value("${repair.request.frontend.domain.name}")
 //	private String repairRequestFrontendDomainName;
 //
@@ -117,10 +116,10 @@ public class PropertyHolder {
 //
 //	@Value("${repair.request.comment.mail.subject}")
 //	private String repairRequestCommentMailSubject;
-//
-//	@Value("${fcm.notification.send.endpoint}")
-//	private String fcmEndpoint;
-//
+
+	@Value("${fcm.notification.send.endpoint}")
+	private String fcmEndpoint;
+
 	@Value("${time.unit}")
 	private String timeUnit;
 
@@ -129,9 +128,27 @@ public class PropertyHolder {
 //
 //	@Value("${authenticationkey}")
 //	private String authenticationKey;
-//
-//	@Value("${spring.application.name}")
-//	private String springApplicationName;
+
+	
+	
+	@Value("${spring.application.name}")
+	private String springApplicationName;
+
+	public String getFirebaseServerKey() {
+		return firebaseServerKey;
+	}
+
+	public String getFcmEndpoint() {
+		return fcmEndpoint;
+	}
+
+	public String getTimeUnit() {
+		return timeUnit;
+	}
+
+	public String getSpringApplicationName() {
+		return springApplicationName;
+	}
 
 	public Long getTimeStamp(Long offset) {
 		try {

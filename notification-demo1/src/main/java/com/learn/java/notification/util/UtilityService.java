@@ -13,4 +13,10 @@ public interface UtilityService {
 	public void validateAccessToken(String accessToken);
 
 	public void validateNotificationId(String inAppNotificationId, String pushNotificationId);
+	
+	public String getCommentId(String commentId);
+	
+	public String getImageId(String imageId);
+	
+	public  String getNotificationCommentId(String notificationCommentId, String userCommentId);
 }

@@ -50,5 +50,26 @@ public class UtilityServiceImpl implements UtilityService {
 			throw new BadRequestException(emptyNotificationId);
 		}
 	}
+	
+	@Override
+	public String getCommentId(String commentId) {
+		return StringUtils.isBlank(commentId) ? ("") : (commentId);
+
+	}
+
+	@Override
+	public String getImageId(String imageId) {
+		return StringUtils.isBlank(imageId) ? ("") : (imageId);
+	}
+	
+	@Override
+	public  String getNotificationCommentId(String notificationCommentId, String userCommentId) {
+		String commentId = notificationCommentId;
+		if ((StringUtils.isBlank(notificationCommentId)) && (StringUtils.isNotBlank(userCommentId))) {
+			commentId = userCommentId;
+		}
+		return commentId;
+	}
+
 
 }

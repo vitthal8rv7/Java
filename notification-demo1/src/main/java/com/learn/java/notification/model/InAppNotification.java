@@ -206,7 +206,7 @@ public class InAppNotification {
 
 	public InAppNotificationVO getNotificationVO() {
 		InAppNotificationVO inAppNotificationVO = new InAppNotificationVO();
-		inAppNotificationVO.setId(commentId);
+		inAppNotificationVO.setId(id);
 		inAppNotificationVO.setTitle(title);
 		inAppNotificationVO.setBody(body);
 		inAppNotificationVO.setType(type);
@@ -225,6 +225,32 @@ public class InAppNotification {
 		inAppNotificationVO.setOwnerId(ownerId);
 		inAppNotificationVO.setApplicationName(applicationName);
 		return inAppNotificationVO;
+	}
+
+	public static InAppNotification getInAppNotification(NotificationRequest notificationRequest,
+			Notification notification, String contentType, UserDetail user, Long currentTimeInMillies) {
+
+		InAppNotification inAppNotification = new InAppNotification();
+		inAppNotification.setId(notification.getId());
+		inAppNotification.setTitle(notificationRequest.getNotification().getTitle());
+		inAppNotification.setBody(notificationRequest.getNotification().getBody());
+		inAppNotification.setType(notification.getType());
+		inAppNotification.setImageId(notification.getImageId());
+//		inAppNotification.setCommentId(commentId);
+//		inAppNotification.setNotificationId(notificationId);
+//		inAppNotification.setContentAvailable(contentAvailable);
+//		inAppNotification.setPriority(priority);
+//		inAppNotification.setInAppNotificationId(inAppNotificationId);
+		inAppNotification.setPushNotificationId(notificationRequest.getNotification().getNotificationId());
+		inAppNotification.setIsRead(false);
+//		inAppNotification.setIsClear(isClear);
+		inAppNotification.setSentOn(currentTimeInMillies);
+		inAppNotification.setUserId(user.getWorkEmailAddress());
+		inAppNotification.setContentType(contentType);
+//		inAppNotification.setOwnerId(ownerId);
+		inAppNotification.setApplicationName(notification.getApplicationName());
+		return inAppNotification;
+
 	}
 
 }
