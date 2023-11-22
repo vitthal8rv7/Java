@@ -1,0 +1,57 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.15'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.learn.java'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '11'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.apache.commons:commons-lang3'
+	//implementation 'commons-io:commons-io:2.7'
+	implementation 'org.apache.commons:commons-collections4:4.4'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		
+//		<dependency>
+//			<groupId>org.springframework.boot</groupId>
+//			<artifactId>spring-boot-starter-data-mongodb</artifactId>
+//		</dependency>
+//		<dependency>
+//			<groupId>commons-io</groupId>
+//			<artifactId>commons-io</artifactId>
+//			<version>2.7</version>
+//		</dependency>
+//		<dependency>
+//			<groupId>org.apache.commons</groupId>
+//			<artifactId>commons-collections4</artifactId>
+//			<version>4.4</version>
+//		</dependency>
+	
+}
+
+tasks.named('bootBuildImage') {
+	builder = 'paketobuildpacks/builder-jammy-base:latest'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
