@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,7 @@ import com.learn.java.notification.service.NotificationService;
 import com.learn.java.notification.service.RestApiService;
 import com.learn.java.notification.util.UtilityService;
 
+@Primary
 @Service
 public class PushNotificationServiceImpl implements NotificationService {
 
