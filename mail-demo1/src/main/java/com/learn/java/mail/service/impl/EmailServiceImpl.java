@@ -126,7 +126,13 @@ public class EmailServiceImpl implements EmailService {
 		    messageBodyPart3.setDataHandler(new DataHandler(source3));  
 		    messageBodyPart3.setFileName(filename3);  
 
-		    
+
+			MimeBodyPart messageBodyPart4 = new MimeBodyPart();  
+		    String filename4 = "image.jpg";//change accordingly  
+		    DataSource source4 = new FileDataSource(filename4);  
+		    messageBodyPart4.setDataHandler(new DataHandler(source4));  
+		    messageBodyPart4.setFileName(filename4);  
+
 //			MimeBodyPart messageBodyPart = new MimeBodyPart();
 //			try {
 //				messageBodyPart.attachFile(new File("feedback.html"));
@@ -140,6 +146,7 @@ public class EmailServiceImpl implements EmailService {
 			 multipart.addBodyPart(messageBodyPart1);
 			 multipart.addBodyPart(messageBodyPart2);
 			 multipart.addBodyPart(messageBodyPart3);
+			 multipart.addBodyPart(messageBodyPart4);
 			message.setContent(multipart);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
