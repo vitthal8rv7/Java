@@ -6,4 +6,6 @@ public interface EmailService {
 
     public void sendMail(EmailFields emailFields);
 
+	public void sendMailWithAttachment(EmailFields emailFields);
+
 }

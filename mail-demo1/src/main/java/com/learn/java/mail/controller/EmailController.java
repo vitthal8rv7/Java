@@ -21,4 +21,10 @@ public class EmailController {
 		emailService.sendMail(emailFields);
 		return true;
 	}
+	
+	@PostMapping("/send/with-attachment")
+	public Boolean sendMailWithAttachment(@RequestBody EmailFields emailFields) {
+		emailService.sendMailWithAttachment(emailFields);
+		return true;
+	}
 }
