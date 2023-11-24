@@ -12,4 +12,6 @@ public interface EmailService {
 
 	public void readMail(EmailFields emailFields);
 
+	public void forwardMail(EmailFields emailFields);
+
 }

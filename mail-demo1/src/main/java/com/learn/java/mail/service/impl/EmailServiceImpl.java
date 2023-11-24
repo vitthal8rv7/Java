@@ -244,7 +244,7 @@ public class EmailServiceImpl implements EmailService {
 		Message[] messages = inbox.getMessages();
 		// Message message = messages[0];
 		for (Message message : messages) {
-			if((!Objects.isNull(message.getSubject())) && message.getSubject().equals("j")) {
+			if ((!Objects.isNull(message.getSubject())) && message.getSubject().equals("j")) {
 				System.out.println("Subject: " + message.getSubject());
 				System.out.println("From: " + message.getFrom()[0]);
 				System.out.println("Content: " + message.getContent());
@@ -262,21 +262,21 @@ public class EmailServiceImpl implements EmailService {
 
 	}
 
-private void readContent(Message message) throws IOException, MessagingException {
-	 Multipart multipart = (Multipart) message.getContent();  
-	   System.out.println("multipart is null: "+Objects.isNull(multipart));
-	   System.out.println("multipart.getCount: "+multipart.getCount());
-	    for (int i = 0; i < multipart.getCount(); i++) {  
-	     BodyPart bodyPart = multipart.getBodyPart(i);  
-	     InputStream stream = bodyPart.getInputStream();  
-	     BufferedReader br = new BufferedReader(new InputStreamReader(stream));  
-	     System.out.println("->"+br.readLine());  
-	      while (br.ready()) {  
-	       System.out.println("->"+br.readLine());  
-	      }  
-	     System.out.println("<---->");  
-	    }  
-		
+	private void readContent(Message message) throws IOException, MessagingException {
+		Multipart multipart = (Multipart) message.getContent();
+		System.out.println("multipart is null: " + Objects.isNull(multipart));
+		System.out.println("multipart.getCount: " + multipart.getCount());
+		for (int i = 0; i < multipart.getCount(); i++) {
+			BodyPart bodyPart = multipart.getBodyPart(i);
+			InputStream stream = bodyPart.getInputStream();
+			BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+			System.out.println("->" + br.readLine());
+			while (br.ready()) {
+				System.out.println("->" + br.readLine());
+			}
+			System.out.println("<---->");
+		}
+
 	}
 
 //	private Session getImapSession(Properties properties) {
@@ -291,6 +291,93 @@ private void readContent(Message message) throws IOException, MessagingException
 		properties.setProperty("mail.imaps.timeout", "10000");
 		properties.setProperty("mail.imaps.connectiontimeout", "10000");
 		return properties;
+	}
+
+	@Override
+	public void forwardMail(EmailFields emailFields) {
+		// Set mail server properties
+		Properties properties = getPropertiesForImap();
+
+		// Create a Session
+		Session session = getSession(properties);// getImapSession(properties);
+		try {
+			// Connect to the IMAP server
+			Store store = session.getStore("imap");
+			store.connect();
+			// store.connect("vitthalaradwad@gmail.com", "wdehlgnhodptugeh");
+
+//			Open Inbox and Print
+			readAndForwardMail(store);
+
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void readAndForwardMail(Store store) throws MessagingException, IOException {
+		// Open the INBOX folder
+		Folder inbox = store.getFolder("[Gmail]/Sent Mail");
+		inbox.open(Folder.READ_ONLY);
+
+		// Retrieve messages
+		Message[] messages = inbox.getMessages();
+		// Message message = messages[0];
+		for (Message message : messages) {
+			if ((!Objects.isNull(message.getSubject())) && message.getSubject().equals("j")) {
+
+				forwardMessage(message);
+
+				System.out.println("Subject: " + message.getSubject());
+				System.out.println("From: " + message.getFrom()[0]);
+				System.out.println("Content: " + message.getContent());
+				// readContent(message);
+				System.out.println("----------------------------------");
+				break;
+			}
+		}
+
+		// readMultipart(messages);
+
+		// Close the connection
+		inbox.close(false);
+		store.close();
+
+	}
+
+	private void forwardMessage(Message message) throws MessagingException {
+		Properties properties = getProperties();
+		Session session = getSession(properties);
+
+		// compose the message to forward
+		Message message2 = new MimeMessage(session);
+		message2.setSubject("Fwd: " + message.getSubject());
+		message2.setFrom(new InternetAddress("" + InternetAddress.toString(message.getFrom())));
+		message2.addRecipient(Message.RecipientType.TO,
+				new InternetAddress("" + InternetAddress.toString(message.getReplyTo())));
+
+		// Create your new message part
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setText("Oiginal message:\n\n");
+
+		// Create a multi-part to combine the parts
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+
+		// Create and fill part for the forwarded content
+		messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setDataHandler(message.getDataHandler());
+
+		// Add part to multi part
+		multipart.addBodyPart(messageBodyPart);
+
+		// Associate multi-part with message
+		message2.setContent(multipart);
+
+		// Send message
+		Transport.send(message2);
+
+		System.out.println("message forwarded ....");
+
 	}
 
 }

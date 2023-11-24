@@ -40,4 +40,10 @@ public class EmailController {
 		return true;
 	}
 
+	@PostMapping("/forward")
+	public Boolean forwardMail(@RequestBody EmailFields emailFields) {
+		emailService.forwardMail(emailFields);
+		return true;
+	}
+
 }
