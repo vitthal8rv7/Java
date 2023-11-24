@@ -9,11 +9,13 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
+import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -177,7 +179,8 @@ public class EmailServiceImpl implements EmailService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//messageBodyPart.setHeader("Content-Type", "text/plain; charset=\"us-ascii\"; name=\"feedback.html\"");
+			// messageBodyPart.setHeader("Content-Type", "text/plain; charset=\"us-ascii\";
+			// name=\"feedback.html\"");
 
 			Multipart multipart = new MimeMultipart();
 			multipart.addBodyPart(messageBodyPart1);
@@ -203,7 +206,59 @@ public class EmailServiceImpl implements EmailService {
 			System.out.println("Email sent successfully!");
 		} catch (MessagingException e) {
 			e.printStackTrace();
-		}		
+		}
+	}
+
+	@Override
+	public void readMail(EmailFields emailFields) {
+		// Set mail server properties
+		Properties properties = getPropertiesForImap();
+
+		// Create a Session
+		Session session = getSession(properties);// getImapSession(properties);
+		try {
+			// Connect to the IMAP server
+			Store store = session.getStore("imap");
+			store.connect();
+			// store.connect("vitthalaradwad@gmail.com", "wdehlgnhodptugeh");
+
+			// Open the INBOX folder
+
+			Folder inbox = store.getFolder("INBOX");
+			inbox.open(Folder.READ_ONLY);
+
+			// Retrieve messages
+			Message[] messages = inbox.getMessages();
+			Message message = messages[0];
+			// for (Message message : messages) {
+			System.out.println("Subject: " + message.getSubject());
+			System.out.println("From: " + message.getFrom()[0]);
+			System.out.println("Content: " + message.getContent());
+			System.out.println("----------------------------------");
+			// }
+
+			// Close the connection
+			inbox.close(false);
+			store.close();
+
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+//	private Session getImapSession(Properties properties) {
+//		return Session.getInstance(properties);
+//	}
+
+	private Properties getPropertiesForImap() {
+		Properties properties = new Properties();
+		properties.put("mail.imap.host", propertyHolder.getImapHost());
+		properties.put("mail.imap.port", propertyHolder.getImapPort());
+		properties.put("mail.imap.ssl.enable", propertyHolder.getImapSslEnable());
+		properties.setProperty("mail.imaps.timeout", "10000");
+		properties.setProperty("mail.imaps.connectiontimeout", "10000");
+		return properties;
 	}
 
 }

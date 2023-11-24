@@ -15,22 +15,29 @@ public class EmailController {
 
 	@Autowired
 	private EmailService emailService;
-	
+
 	@PostMapping("/send")
 	public Boolean sendMail(@RequestBody EmailFields emailFields) {
 		emailService.sendMail(emailFields);
 		return true;
 	}
-	
+
 	@PostMapping("/send/with-attachment")
 	public Boolean sendMailWithAttachment(@RequestBody EmailFields emailFields) {
 		emailService.sendMailWithAttachment(emailFields);
 		return true;
 	}
-	
+
 	@PostMapping("/send/with-attachment2")
 	public Boolean sendMailWithAttachment2(@RequestBody EmailFields emailFields) {
 		emailService.sendMailWithAttachment2(emailFields);
 		return true;
 	}
+
+	@PostMapping("/read")
+	public Boolean readMail(@RequestBody EmailFields emailFields) {
+		emailService.readMail(emailFields);
+		return true;
+	}
+
 }

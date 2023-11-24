@@ -10,4 +10,6 @@ public interface EmailService {
 
 	public void sendMailWithAttachment2(EmailFields emailFields);
 
+	public void readMail(EmailFields emailFields);
+
 }

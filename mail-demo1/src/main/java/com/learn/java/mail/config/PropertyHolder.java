@@ -19,26 +19,35 @@ import org.springframework.context.annotation.PropertySource;
 @ConfigurationProperties
 public class PropertyHolder {
 
-    @Value("${mail.smtp.host}")
-    String host;
+	@Value("${mail.smtp.host}")
+	String host;
 
-    @Value("${mail.smtp.port}")
-    String port;
+	@Value("${mail.smtp.port}")
+	String port;
 
-    @Value("${mail.smtp.auth}")
-    String auth;
+	@Value("${mail.smtp.auth}")
+	String auth;
 
-    @Value("${mail.smtp.starttls.enable}")
-    String startTls;
+	@Value("${mail.smtp.starttls.enable}")
+	String startTls;
 
-    @Value("${mail.from}")
-    String mailFrom;
+	@Value("${mail.from}")
+	String mailFrom;
 
-    @Value("${mail.pwd}")
-    String mailPwd;
+	@Value("${mail.pwd}")
+	String mailPwd;
 
-    @Value("${mail.to}")
-    String mailTo;
+	@Value("${mail.to}")
+	String mailTo;
+
+	@Value("${mail.imap.host}")
+	String imapHost;
+
+	@Value("${mail.imap.port}")
+	String imapPort;
+
+	@Value("${mail.imap.ssl.enable}")
+	String imapSslEnable;
 
 	public String getHost() {
 		return host;
@@ -66,5 +75,17 @@ public class PropertyHolder {
 
 	public String getMailTo() {
 		return mailTo;
+	}
+
+	public String getImapHost() {
+		return imapHost;
+	}
+
+	public String getImapPort() {
+		return imapPort;
+	}
+
+	public String getImapSslEnable() {
+		return imapSslEnable;
 	}
 }
