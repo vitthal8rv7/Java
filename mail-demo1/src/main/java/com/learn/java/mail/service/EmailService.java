@@ -14,4 +14,6 @@ public interface EmailService {
 
 	public void forwardMail(EmailFields emailFields);
 
+	public void deleteMail(EmailFields emailFields);
+
 }

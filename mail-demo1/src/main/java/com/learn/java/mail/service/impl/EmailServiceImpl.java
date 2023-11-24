@@ -25,6 +25,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import com.sun.mail.imap.protocol.FLAGS; 
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -325,7 +326,7 @@ public class EmailServiceImpl implements EmailService {
 		for (Message message : messages) {
 			if ((!Objects.isNull(message.getSubject())) && message.getSubject().equals("j")) {
 
-				forwardMessage(message);
+				forwardSpecificMail(message);
 
 				System.out.println("Subject: " + message.getSubject());
 				System.out.println("From: " + message.getFrom()[0]);
@@ -344,7 +345,7 @@ public class EmailServiceImpl implements EmailService {
 
 	}
 
-	private void forwardMessage(Message message) throws MessagingException {
+	private void forwardSpecificMail(Message message) throws MessagingException {
 		Properties properties = getProperties();
 		Session session = getSession(properties);
 
@@ -378,6 +379,60 @@ public class EmailServiceImpl implements EmailService {
 
 		System.out.println("message forwarded ....");
 
+	}
+
+	@Override
+	public void deleteMail(EmailFields emailFields) {
+		// Set mail server properties
+		Properties properties = getPropertiesForImap();
+
+		// Create a Session
+		Session session = getSession(properties);// getImapSession(properties);
+		try {
+			// Connect to the IMAP server
+			Store store = session.getStore("imap");
+			store.connect();
+			// store.connect("vitthalaradwad@gmail.com", "wdehlgnhodptugeh");
+
+//			Open Inbox and Print
+			deleteMail(store);
+
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteMail(Store store) throws MessagingException, IOException {
+		// Open the INBOX folder
+		Folder inbox = store.getFolder("[Gmail]/Spam");
+		inbox.open(Folder.READ_WRITE);
+		//inbox.open(Folder.READ_ONLY);
+
+		// Retrieve messages
+		Message[] messages = inbox.getMessages();
+		// Message message = messages[0];
+		for (Message message : messages) {
+			if ((!Objects.isNull(message.getSubject()))) { //&& message.getSubject().equals("your credit card payment is due")) {
+				System.out.println("Subject: " + message.getSubject());
+				System.out.println("From: " + message.getFrom()[0]);
+				System.out.println("Content: " + message.getContent());
+				deleteSpecoficMail(message);
+				System.out.println("----------------------------------");
+				//break;
+			}
+		}
+
+		// readMultipart(messages);
+
+		// Close the connection
+		inbox.close(true);
+		store.close();
+		
+	}
+
+	private void deleteSpecoficMail(Message message) throws MessagingException {
+		message.setFlag(FLAGS.Flag.DELETED, true);
+		
 	}
 
 }
