@@ -1,7 +1,11 @@
 package com.learn.java.mail.service.impl;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Objects;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -222,29 +226,57 @@ public class EmailServiceImpl implements EmailService {
 			store.connect();
 			// store.connect("vitthalaradwad@gmail.com", "wdehlgnhodptugeh");
 
-			// Open the INBOX folder
-
-			Folder inbox = store.getFolder("INBOX");
-			inbox.open(Folder.READ_ONLY);
-
-			// Retrieve messages
-			Message[] messages = inbox.getMessages();
-			Message message = messages[0];
-			// for (Message message : messages) {
-			System.out.println("Subject: " + message.getSubject());
-			System.out.println("From: " + message.getFrom()[0]);
-			System.out.println("Content: " + message.getContent());
-			System.out.println("----------------------------------");
-			// }
-
-			// Close the connection
-			inbox.close(false);
-			store.close();
+//			Open Inbox and Print
+			readAndPrintMail(store);
 
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void readAndPrintMail(Store store) throws MessagingException, IOException {
+		// Open the INBOX folder
+		Folder inbox = store.getFolder("INBOX");
+		inbox.open(Folder.READ_ONLY);
+
+		// Retrieve messages
+		Message[] messages = inbox.getMessages();
+		// Message message = messages[0];
+		for (Message message : messages) {
+			if((!Objects.isNull(message.getSubject())) && message.getSubject().equals("Test Email")) {
+				System.out.println("Subject: " + message.getSubject());
+				System.out.println("From: " + message.getFrom()[0]);
+				System.out.println("Content: " + message.getContent());
+				readContent(message);
+				System.out.println("----------------------------------");
+				break;
+			}
+		}
+
+		// readMultipart(messages);
+
+		// Close the connection
+		inbox.close(false);
+		store.close();
+
+	}
+
+private void readContent(Message message) throws IOException, MessagingException {
+	 Multipart multipart = (Multipart) message.getContent();  
+	   System.out.println("multipart is null: "+Objects.isNull(multipart));
+	   System.out.println("multipart.getCount: "+multipart.getCount());
+	    for (int i = 0; i < multipart.getCount(); i++) {  
+	     BodyPart bodyPart = multipart.getBodyPart(i);  
+	     InputStream stream = bodyPart.getInputStream();  
+	     BufferedReader br = new BufferedReader(new InputStreamReader(stream));  
+	     System.out.println("->"+br.readLine());  
+	      while (br.ready()) {  
+	       System.out.println("->"+br.readLine());  
+	      }  
+	     System.out.println("<---->");  
+	    }  
+		
 	}
 
 //	private Session getImapSession(Properties properties) {
