@@ -237,14 +237,14 @@ public class EmailServiceImpl implements EmailService {
 
 	private void readAndPrintMail(Store store) throws MessagingException, IOException {
 		// Open the INBOX folder
-		Folder inbox = store.getFolder("INBOX");
+		Folder inbox = store.getFolder("[Gmail]/Sent Mail");
 		inbox.open(Folder.READ_ONLY);
 
 		// Retrieve messages
 		Message[] messages = inbox.getMessages();
 		// Message message = messages[0];
 		for (Message message : messages) {
-			if((!Objects.isNull(message.getSubject())) && message.getSubject().equals("Test Email")) {
+			if((!Objects.isNull(message.getSubject())) && message.getSubject().equals("j")) {
 				System.out.println("Subject: " + message.getSubject());
 				System.out.println("From: " + message.getFrom()[0]);
 				System.out.println("Content: " + message.getContent());
