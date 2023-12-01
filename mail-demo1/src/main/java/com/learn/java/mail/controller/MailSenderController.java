@@ -23,6 +23,12 @@ public class MailSenderController {
 		return true;
 	}
 
+	@PostMapping("/send/html")
+	public Boolean sendHtmlEmail(@RequestBody EmailFields emailFields) {
+		emailSenderService.sendHtmlEmail(emailFields);
+		return true;
+	}
+
 //	@PostMapping("/send/with-attachment")
 //	public Boolean sendMailWithAttachment(@RequestBody EmailFields emailFields) {
 //		emailService.sendMailWithAttachment(emailFields);
