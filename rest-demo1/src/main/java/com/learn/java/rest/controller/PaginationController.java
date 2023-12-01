@@ -35,7 +35,7 @@ public class PaginationController {
 	}
 
 	@GetMapping(value = "/employee/list-from-app2")
-	public String getEmployeeListFromApp2(Pageable pageable) {
+	public EmployeeListResponse getEmployeeListFromApp2(Pageable pageable) {
 		System.out.println("In getEmployeeList: Pageable: " + pageable);
 		return paginationService.getEmployeeListFromApp2(pageable);
 	}

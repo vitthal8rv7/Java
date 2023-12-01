@@ -10,6 +10,10 @@ public class EmployeeListResponse implements Serializable {
 	private List<Employee> employeeList;
 	private Pager pager;
 
+	public EmployeeListResponse() {
+		super();
+	}
+
 	public EmployeeListResponse(List<Employee> content, Pager pager) {
 		employeeList = content;
 		this.pager = pager;
@@ -30,4 +34,11 @@ public class EmployeeListResponse implements Serializable {
 	public void setPager(Pager pager) {
 		this.pager = pager;
 	}
+
+	@Override
+	public String toString() {
+		return "EmployeeListResponse [employeeList=" + employeeList + ", pager=" + pager + "]";
+	}
+	
+	
 }
