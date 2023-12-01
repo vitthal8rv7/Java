@@ -3,7 +3,7 @@ package com.learn.java.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -88,7 +88,7 @@ public class PaginationService {
 		return employeeList;
 	}
 
-	public EmployeeListResponse getEmployeeListFromApp2(Pageable pageable) {
+	public String getEmployeeListFromApp2(Pageable pageable) {
 		List<Employee> employeeList = getEmployeeList();
 		System.out.println("pageable.getOffset();: " + pageable.getOffset());
 		System.out.println("pageable.getPageSize();: " + pageable.getPageSize());
@@ -111,13 +111,14 @@ public class PaginationService {
 			System.out.println("Exception: " + e);
 			return null;
 		}
+		return response.getBody();
 		// We can try to convert to to Java Model using Mapper Class?
 		
-		ModelMapper modelMapper = new ModelMapper();
-		// Map from one object to another
-		EmployeeListResponse employeeList2 = modelMapper.map(response.getBody(), EmployeeListResponse.class);
-		System.out.println("employeeList2: "+employeeList2);
-		return employeeList2;
+//		ModelMapper modelMapper = new ModelMapper();
+//		// Map from one object to another
+//		EmployeeListResponse employeeList2 = modelMapper.map(response.getBody(), EmployeeListResponse.class);
+//		System.out.println("employeeList2: "+employeeList2);
+//		return employeeList2;
 
 	}
 
