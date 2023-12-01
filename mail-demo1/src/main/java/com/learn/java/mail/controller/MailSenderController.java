@@ -29,12 +29,12 @@ public class MailSenderController {
 		return true;
 	}
 
-//	@PostMapping("/send/with-attachment")
-//	public Boolean sendMailWithAttachment(@RequestBody EmailFields emailFields) {
-//		emailService.sendMailWithAttachment(emailFields);
-//		return true;
-//	}
-//
+	@PostMapping("/send/with-attachment")
+	public Boolean sendMailWithAttachment(@RequestBody EmailFields emailFields) {
+		emailSenderService.sendMailWithAttachment(emailFields);
+		return true;
+	}
+
 //	@PostMapping("/send/with-attachment2")
 //	public Boolean sendMailWithAttachment2(@RequestBody EmailFields emailFields) {
 //		emailService.sendMailWithAttachment2(emailFields);

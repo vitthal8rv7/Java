@@ -1,9 +1,12 @@
 package com.learn.java.mail.service.impl;
 
+import java.io.File;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -19,10 +22,9 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 	@Autowired
 	private PropertyHolder propertyHolder;
 
-	
 	@Autowired(required = true)
 	private JavaMailSender javaMailSender;
-	
+
 	@Override
 	public void sendMail(EmailFields emailFields) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -37,20 +39,21 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			setMailProperties(helper, emailFields);
+			helper.setText("<html><body><h1>Hello</h1></body></html>", true);
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 		javaMailSender.send(message);
 		System.out.println("Email sent successfully!");
 	}
-	
+
 	private void setMailProperties(SimpleMailMessage simpleMailMessage, EmailFields emailFields) {
 		emailFields.getTo().stream().forEach(to -> {
 			simpleMailMessage.setTo(to);
 		});
 		simpleMailMessage.setFrom(emailFields.getFrom());
 		simpleMailMessage.setText(emailFields.getMailBody());
-		simpleMailMessage.setSubject(emailFields.getSubject());		
+		simpleMailMessage.setSubject(emailFields.getSubject());
 	}
 
 	private void setMailProperties(MimeMessageHelper helper, EmailFields emailFields) throws MessagingException {
@@ -63,8 +66,24 @@ public class EmailSenderServiceImpl implements EmailSenderService {
 			}
 		});
 		helper.setFrom(emailFields.getFrom());
-		 helper.setText("<html><body><h1>Hello</h1></body></html>", true);
-		//helper.setText(emailFields.getMailBody());
-		helper.setSubject(emailFields.getSubject());				
+		helper.setText(emailFields.getMailBody());
+		helper.setSubject(emailFields.getSubject());
+	}
+
+	@Override
+	public void sendMailWithAttachment(EmailFields emailFields) {
+		String filename = "feedback.html";
+		MimeMessage message = javaMailSender.createMimeMessage();
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true);
+			setMailProperties(helper, emailFields);
+			FileSystemResource file = new FileSystemResource(new File(filename));
+			helper.addAttachment("Invoice", file);
+		} catch (MessagingException e) {
+			e.printStackTrace();
+		}
+		javaMailSender.send(message);
+		System.out.println("Email sent successfully!");
+
 	}
 }

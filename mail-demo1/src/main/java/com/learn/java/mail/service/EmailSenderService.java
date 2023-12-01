@@ -8,6 +8,8 @@ public interface EmailSenderService {
 
 	public void sendHtmlEmail(EmailFields emailFields);
 
+	public void sendMailWithAttachment(EmailFields emailFields);
+
 //	public void sendMailWithAttachment(EmailFields emailFields);
 //
 //	public void sendMailWithAttachment2(EmailFields emailFields);
