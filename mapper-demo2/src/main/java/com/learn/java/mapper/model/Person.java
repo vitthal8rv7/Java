@@ -12,7 +12,7 @@ public class Person implements Serializable {
 
 	private Integer age;
 
-//	private Address address;
+	private Address address;
 
 	public String getFirstName() {
 		return firstName;
@@ -38,17 +38,17 @@ public class Person implements Serializable {
 		this.age = age;
 	}
 
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(Address address) {
-//		this.address = address;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", address=" + address
-//				+ "]";
-//	}
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Person [firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", address=" + address
+				+ "]";
+	}
 }
