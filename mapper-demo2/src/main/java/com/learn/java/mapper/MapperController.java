@@ -21,6 +21,7 @@ import com.learn.java.mapper.model.Person;
 import com.learn.java.mapper.model.Person2;
 import com.learn.java.mapper.model.PersonDTO;
 import com.learn.java.mapper.model.PersonDTO2;
+import com.learn.java.mapper.model.PersonDTO3;
 
 @RestController
 @RequestMapping("/mapper/demo")
@@ -122,4 +123,36 @@ public class MapperController {
 		System.out.println(personDTO2);
 		
 	}
+
+
+	@GetMapping("/test/model/mapper/destination/hierarchy/simple")
+	public void testModelMapperDestinationHierarchySimple() {
+		Address5 address5 = new Address5();
+		address5.setCity("City Name");
+		address5.setStreet("Street Name");
+		Person2 person2 = new Person2();
+		person2.setAddress(address5);
+		ModelMapper modelMapper = new ModelMapper();
+		PersonDTO3 personDTO3 = modelMapper.map(person2, PersonDTO3.class);
+		System.out.println(personDTO3);
+	}
+	
+//	@GetMapping("/test/model/mapper/destination/hierarchy/simple")
+//	public void testModelMapperDestinationHierarchySimple() {
+//		Address5 address5 = new Address5();
+//		address5.setCity("City Name");
+//		address5.setStreet("Street Name");
+//		Person2 person2 = new Person2();
+//		person2.setAddress(address5);
+//		PropertyMap<Person2, PersonDTO3> personMap = new PropertyMap<Person2, PersonDTO3>() {
+//			protected void configure() {
+//				map().getAddress().setStreet(source.getAddress().getStreet());
+//				map().getAddress().setCity(source.getAddress().getCity());
+//			}
+//		};
+//		ModelMapper modelMapper = new ModelMapper();
+//		modelMapper.addMappings(personMap);
+//		PersonDTO3 personDTO3 = modelMapper.map(person2, PersonDTO3.class);
+//		System.out.println(personDTO3);
+//	}
 }
