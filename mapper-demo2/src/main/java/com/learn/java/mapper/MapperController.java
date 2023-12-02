@@ -2,6 +2,7 @@ package com.learn.java.mapper;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -96,6 +97,27 @@ public class MapperController {
 		};
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.addMappings(personMap);
+		PersonDTO2 personDTO2 = modelMapper.map(person2, PersonDTO2.class);
+		System.out.println(personDTO2);
+		
+	}
+	
+	@GetMapping("/test/loose-matching-strategy/model/mapper")
+	public void testLooseMatchingStrategyModelMapper() {
+		Address5 address5 = new Address5();
+		address5.setCity("City Name");
+		address5.setStreet("Street Name");
+		Person2 person2 = new Person2();
+		person2.setAddress(address5);
+//		PropertyMap<Person2, PersonDTO2> personMap = new PropertyMap<Person2, PersonDTO2>() {
+//			protected void configure() {
+//				map().setStreet(source.getAddress().getStreet());
+//				map().setCity(source.getAddress().getCity());
+//			}
+//		};
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+//		modelMapper.addMappings(personMap);
 		PersonDTO2 personDTO2 = modelMapper.map(person2, PersonDTO2.class);
 		System.out.println(personDTO2);
 		
