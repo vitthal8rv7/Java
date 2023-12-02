@@ -241,6 +241,39 @@ public class MapperController {
 			//	map().getAddress().getName().setFirstName(source.getName().getFirstName());
 			//	map().getAddress().getName().setLastName(source.getName().getLastName());
 				
+				
+			}
+		};
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addMappings(personMap);
+		PersonDTO4 personDTO4 = modelMapper.map(person4, PersonDTO4.class);
+		System.out.println(personDTO4);
+	}
+
+	@GetMapping("/test/model/mapper/destination/hierarchy/complex2")
+	public void testModelMapperDestinationHierarchyComplex2() {
+		Address5 address51 = new Address5();
+		address51.setCity("City Name1");
+		address51.setStreet("Street Name1");
+		Address5 address511 = new Address5();
+		address511.setCity("City Name2");
+		address511.setStreet("Street Name2");
+		Name name = new Name();
+		name.setFirstName("fn");
+		name.setLastName("ln");
+		Person4 person4 = new Person4();
+		person4.setAddress2(address51);
+		person4.setAddress1(address511);
+		person4.setName(name);
+		
+		PropertyMap<Person4, PersonDTO4> personMap = new PropertyMap<Person4, PersonDTO4>() {
+			protected void configure() {
+				map().getAddress().setCity(source.getAddress1().getCity());
+				map().getAddress().setStreet(source.getAddress2().getStreet());
+				map().getAddress().getName().setFirstName(source.getName().getFirstName());
+				map().getAddress().getName().setLastName(source.getName().getLastName());
+				
+				
 			}
 		};
 		ModelMapper modelMapper = new ModelMapper();
