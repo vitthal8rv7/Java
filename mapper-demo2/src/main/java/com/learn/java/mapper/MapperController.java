@@ -137,6 +137,19 @@ public class MapperController {
 		System.out.println(personDTO3);
 	}
 	
+	@GetMapping("/test/model/mapper/destination/hierarchy/simple2")
+	public void testModelMapperDestinationHierarchySimple2() {
+		Address5 address5 = new Address5();
+		address5.setCity("City Name");
+		address5.setStreet("Street Name");
+//		Person2 person2 = new Person2();
+//		person2.setAddress(address5);
+		ModelMapper modelMapper = new ModelMapper();
+		PersonDTO3 personDTO3 = modelMapper.map(address5, PersonDTO3.class);
+		System.out.println(personDTO3);
+	}
+	
+	
 //	@GetMapping("/test/model/mapper/destination/hierarchy/simple")
 //	public void testModelMapperDestinationHierarchySimple() {
 //		Address5 address5 = new Address5();
