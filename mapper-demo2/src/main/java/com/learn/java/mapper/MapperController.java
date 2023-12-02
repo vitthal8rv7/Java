@@ -20,6 +20,7 @@ import com.learn.java.mapper.model.OrderDTO;
 import com.learn.java.mapper.model.Person;
 import com.learn.java.mapper.model.Person2;
 import com.learn.java.mapper.model.Person3;
+import com.learn.java.mapper.model.Person4;
 import com.learn.java.mapper.model.PersonDTO;
 import com.learn.java.mapper.model.PersonDTO2;
 import com.learn.java.mapper.model.PersonDTO3;
@@ -165,6 +166,27 @@ public class MapperController {
 		PersonDTO3 personDTO3 = modelMapper.map(person3, PersonDTO3.class);
 		System.out.println(personDTO3);
 	}
+	
+	@GetMapping("/test/model/mapper/destination/hierarchy/simple4")
+	public void testModelMapperDestinationHierarchySimple4() {
+		Address5 address51 = new Address5();
+		address51.setCity("City Name1");
+		address51.setStreet("Street Name1");
+		Address5 address511 = new Address5();
+		address511.setCity("City Name2");
+		address511.setStreet("Street Name2");
+		Name name = new Name();
+		name.setFirstName("fn");
+		name.setLastName("ln");
+		Person4 person4 = new Person4();
+		person4.setAddress2(address51);
+		person4.setAddress1(address511);
+		person4.setName(name);
+		ModelMapper modelMapper = new ModelMapper();
+		PersonDTO3 personDTO3 = modelMapper.map(person4, PersonDTO3.class);
+		System.out.println(personDTO3);
+	}
+
 	
 //	@GetMapping("/test/model/mapper/destination/hierarchy/simple")
 //	public void testModelMapperDestinationHierarchySimple() {
