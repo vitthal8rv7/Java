@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.java.rest.model.Employee;
 import com.learn.java.rest.model.EmployeeListResponse;
 import com.learn.java.rest.model.Pager;
@@ -111,6 +113,14 @@ public class PaginationService {
 			System.out.println("Exception: " + e);
 			return null;
 		}
+//		ObjectMapper mapper = new ObjectMapper();
+//		try {
+//			EmployeeListResponse effectiveJava = mapper.readValue(response.getBody(), EmployeeListResponse.class);
+//			System.out.println("effectiveJava: "+ effectiveJava);
+//		} catch (JsonProcessingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return response.getBody();
 		// We can try to convert to to Java Model using Mapper Class?
 		
