@@ -187,23 +187,35 @@ public class MapperController {
 		System.out.println(personDTO3);
 	}
 
+	@GetMapping("/test/model/mapper/destination/hierarchy/simple5")
+	public void testModelMapperDestinationHierarchySimple5() {
+		Address5 address51 = new Address5();
+		address51.setCity("City Name1");
+		address51.setStreet("Street Name1");
+		Address5 address511 = new Address5();
+		address511.setCity("City Name2");
+		address511.setStreet("Street Name2");
+		Name name = new Name();
+		name.setFirstName("fn");
+		name.setLastName("ln");
+		Person4 person4 = new Person4();
+		person4.setAddress2(address51);
+		person4.setAddress1(address511);
+		person4.setName(name);
+		
+		PropertyMap<Person4, PersonDTO3> personMap = new PropertyMap<Person4, PersonDTO3>() {
+			protected void configure() {
+				map().getAddress().setCity(source.getAddress1().getCity());
+				map().getAddress().setStreet(source.getAddress2().getStreet());
+				
+			}
+		};
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.addMappings(personMap);
+		PersonDTO3 personDTO3 = modelMapper.map(person4, PersonDTO3.class);
+		System.out.println(personDTO3);
+	}
+
 	
-//	@GetMapping("/test/model/mapper/destination/hierarchy/simple")
-//	public void testModelMapperDestinationHierarchySimple() {
-//		Address5 address5 = new Address5();
-//		address5.setCity("City Name");
-//		address5.setStreet("Street Name");
-//		Person2 person2 = new Person2();
-//		person2.setAddress(address5);
-//		PropertyMap<Person2, PersonDTO3> personMap = new PropertyMap<Person2, PersonDTO3>() {
-//			protected void configure() {
-//				map().getAddress().setStreet(source.getAddress().getStreet());
-//				map().getAddress().setCity(source.getAddress().getCity());
-//			}
-//		};
-//		ModelMapper modelMapper = new ModelMapper();
-//		modelMapper.addMappings(personMap);
-//		PersonDTO3 personDTO3 = modelMapper.map(person2, PersonDTO3.class);
-//		System.out.println(personDTO3);
-//	}
+
 }
