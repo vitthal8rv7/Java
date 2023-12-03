@@ -11,7 +11,7 @@ public class Employee implements Serializable {
 	private String name;
 
 	public Employee() {
-
+		super();
 	}
 
 	public Employee(String id, String name) {

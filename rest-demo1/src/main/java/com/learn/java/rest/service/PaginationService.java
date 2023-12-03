@@ -3,6 +3,7 @@ package com.learn.java.rest.service;
 import java.util.ArrayList;
 import java.util.List;
 
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.java.rest.model.Employee;
 import com.learn.java.rest.model.EmployeeListResponse;
 import com.learn.java.rest.model.Pager;
@@ -101,15 +104,31 @@ public class PaginationService {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		HttpEntity<String> requestEntity = new HttpEntity<>(headers);
 		ResponseEntity<String> response = null;
+		
 		try {
 			response = restTemplate.exchange(builder.build().encode().toUri(), HttpMethod.GET, requestEntity,
 					String.class);
-			// We can try to convert to to Java Model using Mapper Class?
+			System.out.println("response: "+response.getBody());
 		} catch (Exception e) {
 			System.out.println("Exception: " + e);
 			return null;
 		}
+//		ObjectMapper mapper = new ObjectMapper();
+//		try {
+//			EmployeeListResponse effectiveJava = mapper.readValue(response.getBody(), EmployeeListResponse.class);
+//			System.out.println("effectiveJava: "+ effectiveJava);
+//		} catch (JsonProcessingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return response.getBody();
+		// We can try to convert to to Java Model using Mapper Class?
+		
+//		ModelMapper modelMapper = new ModelMapper();
+//		// Map from one object to another
+//		EmployeeListResponse employeeList2 = modelMapper.map(response.getBody(), EmployeeListResponse.class);
+//		System.out.println("employeeList2: "+employeeList2);
+//		return employeeList2;
 
 	}
 
