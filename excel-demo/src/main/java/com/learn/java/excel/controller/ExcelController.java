@@ -22,7 +22,7 @@ public class ExcelController {
 
 	@GetMapping("/read/excel/file")
 	public void readExcelFile() {
-		String file = "file1.xlsx";
+		String file = "file2.xlsx";
 		excelService.readFile(file);
 	}
 }
