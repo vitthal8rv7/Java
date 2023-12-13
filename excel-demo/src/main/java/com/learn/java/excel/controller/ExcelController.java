@@ -13,10 +13,16 @@ public class ExcelController {
 
 	@Autowired
 	public ExcelService excelService;
-	
-	@GetMapping("/read/old/excel/file") 
+
+	@GetMapping("/read/old/excel/file")
 	public void readOldExcelFile() {
 		String file = "file1.xls";
-		excelService.readOldFile(file);	
+		excelService.readOldFile(file);
+	}
+
+	@GetMapping("/read/excel/file")
+	public void readExcelFile() {
+		String file = "file1.xlsx";
+		excelService.readFile(file);
 	}
 }
