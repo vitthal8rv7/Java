@@ -18,7 +18,7 @@ public class ExcelController {
 	public ExcelService excelService;
 
 	@GetMapping("/read/old/excel/file")
-	public void readOldExcelFile(@RequestParam String file) {
+	public void readOldExcelFile(@RequestParam(required = false) String file) {
 		if (StringUtils.isBlank(file)) {
 			file = "file1.xls";
 		}
@@ -26,7 +26,7 @@ public class ExcelController {
 	}
 
 	@GetMapping("/read/excel/file")
-	public void readExcelFile(@RequestParam String file) {
+	public void readExcelFile(@RequestParam(required = false) String file) {
 		if (StringUtils.isBlank(file)) {
 			file = "file2.xlsx";
 		}
