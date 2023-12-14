@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -59,6 +60,11 @@ public class ExcelServiceImpl implements ExcelService {
 					System.out.print(" " + cell.getStringCellValue());
 					break;
 				case NUMERIC:
+					if (DateUtil.isCellDateFormatted(cell)) {
+						System.out.print(" " + cell.getDateCellValue());
+					} else {
+						System.out.print(" " + cell.getNumericCellValue());
+					}
 					System.out.print(" " + cell.getNumericCellValue());
 					break;
 				case BOOLEAN:
