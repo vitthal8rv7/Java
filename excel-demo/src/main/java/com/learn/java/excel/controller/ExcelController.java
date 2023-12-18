@@ -38,7 +38,12 @@ public class ExcelController {
 	
 	@PostMapping("/write/old/excel/file")
 	public void writeOldExcelFile(@RequestBody ExcelRequest excelRequestBody) {
-		excelService.writeToOldFiles(excelRequestBody);
+		excelService.writeToOldExcelFiles(excelRequestBody);
+	}
+
+	@PostMapping("/write/excel/file")
+	public void writeExcelFile(@RequestBody ExcelRequest excelRequestBody) {
+		excelService.writeToExcelFiles(excelRequestBody);
 	}
 
 }

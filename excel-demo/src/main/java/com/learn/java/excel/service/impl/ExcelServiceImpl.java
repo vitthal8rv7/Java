@@ -94,12 +94,26 @@ public class ExcelServiceImpl implements ExcelService {
 	}
 
 	@Override
-	public void writeToOldFiles(ExcelRequest excelRequestBody) {
+	public void writeToOldExcelFiles(ExcelRequest excelRequestBody) {
 		if (verifyRequest(excelRequestBody)) {
 			for (ExcelRequestFile excelRequestFile : excelRequestBody.getExcelRequestFiles()) {
 				Workbook workbook = new HSSFWorkbook();
 				writeToWorkbook(workbook, excelRequestFile);
 				writeToExcelFile(workbook, excelRequestFile.getFileName(), ".xls");
+			}
+		} else {
+			// Bad Request Exception
+			System.out.println("Bad Request Exception");
+		}
+	}
+
+	@Override
+	public void writeToExcelFiles(ExcelRequest excelRequestBody) {
+		if (verifyRequest(excelRequestBody)) {
+			for (ExcelRequestFile excelRequestFile : excelRequestBody.getExcelRequestFiles()) {
+				Workbook workbook = new XSSFWorkbook();
+				writeToWorkbook(workbook, excelRequestFile);
+				writeToExcelFile(workbook, excelRequestFile.getFileName(), ".xlsx");
 			}
 		} else {
 			// Bad Request Exception
@@ -217,5 +231,4 @@ public class ExcelServiceImpl implements ExcelService {
 		}
 
 	}
-
 }

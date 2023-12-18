@@ -8,6 +8,8 @@ public interface ExcelService {
 
 	public void readFile(String file);
 
-	public void writeToOldFiles(ExcelRequest excelRequestBody);
+	public void writeToOldExcelFiles(ExcelRequest excelRequestBody);
+
+	public void writeToExcelFiles(ExcelRequest excelRequestBody);
 
 }
