@@ -13,7 +13,8 @@ public class LombokController {
 	@GetMapping("/employee")
 	Employee getEmplyee() {
 		Employee employee = new Employee();
-		
+		employee.setId("123");
+		employee.setName("name12123");
 		return employee;
 	}
 }
