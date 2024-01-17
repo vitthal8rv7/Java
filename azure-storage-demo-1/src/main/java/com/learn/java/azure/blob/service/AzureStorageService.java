@@ -1,13 +1,23 @@
 package com.learn.java.azure.blob.service;
 
+import java.util.List;
+
+import com.learn.java.azure.blob.model.Storage;
+
 public interface AzureStorageService {
 
-	public void getBlob(String string);
+	public byte[] readBlob(Storage storage);
+	
+	public List<String> listBlob(Storage storage);
 
-	public void addBlob(String string);
+	public String writeBlob(Storage storage);
 
-	public void updateBlob(String string);
+	public String updateBlob(Storage storage);
 
-	public void deleteBlob(String string);
+	public void deleteBlob(Storage storage);
+
+	public void createContainer();
+
+	public void deleteContainer();
 
 }

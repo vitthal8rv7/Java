@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.azure.blob.model.Storage;
 import com.learn.java.azure.blob.service.AzureStorageService;
 
 @RestController
@@ -17,29 +18,47 @@ public class AzureStorageController {
 	@Autowired 
 	private AzureStorageService azureStorageService;
 	
-	@GetMapping("/blob")
-	String getBlob() {
-		azureStorageService.getBlob("fileName");
+	@PostMapping("/create/container")
+	String createContainer() {
+		azureStorageService.createContainer();
+		return "created container.";
+	}
+
+	@DeleteMapping("/delete/container")
+	String deleteContainer() {
+		azureStorageService.deleteContainer();
+		return "delete container.";
+	}
+
+	@GetMapping("/blob/list")
+	String listBlob() {
+		azureStorageService.listBlob(new Storage());
+		return "fetched blob file.";
+	}
+
+	@GetMapping("/read/blob")
+	String readBlob() {
+		azureStorageService.readBlob(new Storage());
 		return "fetched blob file.";
 	}
 
 	@PostMapping("/blob")
 	String addBlob() {
-		azureStorageService.addBlob("fileName");
+		azureStorageService.writeBlob(new Storage());
 		return "added blob file.";
 	}
 
 	
 	@PutMapping("/blob")
 	String updateBlob() {
-		azureStorageService.updateBlob("fileName");
+		azureStorageService.updateBlob(new Storage());
 		return "updated blob file.";
 	}
 
 	
 	@DeleteMapping("/blob")
 	String deleteBlob() {
-		azureStorageService.deleteBlob("fileName");
+		azureStorageService.deleteBlob(new Storage());
 		return "deleted blob file.";
 	}
 

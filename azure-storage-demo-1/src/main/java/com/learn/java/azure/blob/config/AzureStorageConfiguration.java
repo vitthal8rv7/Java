@@ -1,4 +1,4 @@
-package com.learn.java.azure.blob;
+package com.learn.java.azure.blob.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
