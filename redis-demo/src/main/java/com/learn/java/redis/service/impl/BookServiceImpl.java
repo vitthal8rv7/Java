@@ -14,7 +14,9 @@ public class BookServiceImpl implements BookService {
 //	@Autowired 
 //	private BookRepository bookRepository;
 	
-	@Cacheable(value = "book")
+	//@Cacheable("book")
+	//@Cacheable(value = {"book"})
+	@Cacheable(value = {"book", "Book2"})
 	@Override
 	public List<String> getAllBooks() {
 		
@@ -31,6 +33,20 @@ public class BookServiceImpl implements BookService {
 		resultList.add("Book3");
 		return resultList;
 		//return bookRepository.findAll();
+	}
+
+	@Cacheable(value = {"book444", "Book44"}, key = "#id")
+	@Override
+	public String getBookById(String id) {
+		try {
+			System.out.println("Before Sleep");
+			Thread.sleep(1000);
+			System.out.println("After Sleep");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return "bookName";
+
 	}
 
 }

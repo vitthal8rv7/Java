@@ -6,4 +6,6 @@ public interface BookService {
 
 	public List<String> getAllBooks();
 
+	public String getBookById(String id);
+
 }

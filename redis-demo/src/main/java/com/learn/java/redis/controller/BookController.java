@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.redis.service.BookService;
@@ -20,4 +22,10 @@ public class BookController {
 	List<String> bookList() {
 		return bookService.getAllBooks();
 	}
+
+	@GetMapping("/book")
+	String bookList(@RequestParam(name = "id") String id) {
+		return bookService.getBookById(id);
+	}
+
 }
