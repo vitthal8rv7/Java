@@ -14,7 +14,7 @@ public class BookServiceImpl implements BookService {
 //	@Autowired 
 //	private BookRepository bookRepository;
 	
-	@Cacheable()
+	@Cacheable(value = "book", unless="" )
 	@Override
 	public List<String> getAllBooks() {
 		
