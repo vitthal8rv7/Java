@@ -35,6 +35,11 @@ public class BookController {
 		return bookService.getBookById(id);
 	}
 
+	@GetMapping("/book/total-pages")
+	Integer bookTotalPages(@RequestParam(name = "id") String id) {
+		return bookService.bookTotalPages(id);
+	}
+
 	@GetMapping("/company/name")
 	String getCompanyName() {
 		return companyService.getCompanyName();

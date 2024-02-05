@@ -49,4 +49,13 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	//cache it if unless returns false; don`t cache if unless returns true;
+	@Cacheable(value = "bookTotalPages", key = "#id", unless = "#result < 1000")
+	@Override
+	public Integer bookTotalPages(String id) {
+		System.out.println("In Get bookTotalPages Method.");
+		Integer result = 123;
+		return result;
+	}
+
 }

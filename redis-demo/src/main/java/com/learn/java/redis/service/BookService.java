@@ -8,4 +8,6 @@ public interface BookService {
 
 	public String getBookById(String id);
 
+	public Integer bookTotalPages(String id);
+
 }
