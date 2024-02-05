@@ -31,10 +31,10 @@ public class BookController {
 	}
 
 	@GetMapping("/book")
-	String bookList(@RequestParam(name = "id") String id) {
+	String bookName(@RequestParam(name = "id") String id) {
 		return bookService.getBookById(id);
 	}
-	
+
 	@GetMapping("/company/name")
 	String getCompanyName() {
 		return companyService.getCompanyName();
