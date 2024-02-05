@@ -10,17 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.redis.service.BookService;
 import com.learn.java.redis.service.CompanyService;
+import com.learn.java.redis.service.UserService;
 
 @RestController
 @RequestMapping("/redis/demo")
 public class BookController {
-
+	
 	@Autowired
 	private BookService bookService;
 	
 	@Autowired
 	private CompanyService companyService;
-	
+
+	@Autowired
+	private UserService userService;
+
 	@GetMapping("/book/list")
 	List<String> bookList() {
 		return bookService.getAllBooks();
@@ -34,6 +38,11 @@ public class BookController {
 	@GetMapping("/company/name")
 	String getCompanyName() {
 		return companyService.getCompanyName();
+	}
+
+	@GetMapping("/user/name")
+	String getUserName() {
+		return userService.getUserName();
 	}
 
 

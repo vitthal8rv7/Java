@@ -10,7 +10,7 @@ import com.learn.java.redis.service.CompanyService;
 public class CompanyServiceImpl implements CompanyService {
 	
 	
-	@Cacheable(value = "getCompanyName", keyGenerator = CacheConstants.COMMON_TO_ALL_BASED_KEY_GENERATOR)
+	@Cacheable(value = "getCompanyName", keyGenerator = CacheConstants.COMMON_TO_ALL_KEY_GENERATOR)
 	@Override
 	public String getCompanyName() {
 		System.out.println("In Get Company Name Method.");
