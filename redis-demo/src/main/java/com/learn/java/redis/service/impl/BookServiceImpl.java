@@ -3,6 +3,7 @@ package com.learn.java.redis.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -35,16 +36,10 @@ public class BookServiceImpl implements BookService {
 		//return bookRepository.findAll();
 	}
 
-	@Cacheable(value = {"book444", "Book44"}, key = "#id")
+	@Cacheable(value = {"getBookById", "getBookNameById"}, key = "#id")
 	@Override
 	public String getBookById(String id) {
-		try {
-			System.out.println("Before Sleep");
-			Thread.sleep(1000);
-			System.out.println("After Sleep");
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		System.out.println("In Get getBookById Method.");
 		return "bookName";
 
 	}
@@ -56,6 +51,13 @@ public class BookServiceImpl implements BookService {
 		System.out.println("In Get bookTotalPages Method.");
 		Integer result = 123;
 		return result;
+	}
+
+	@CachePut(value = {"getBookById", "getBookNameById"}, key = "#id")
+	@Override
+	public String updateBookNameById(String id, String updatedBookName) {
+		System.out.println("In Get updateBookNameById Method.");
+		return updatedBookName;
 	}
 
 }

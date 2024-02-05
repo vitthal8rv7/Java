@@ -10,4 +10,6 @@ public interface BookService {
 
 	public Integer bookTotalPages(String id);
 
+	public String updateBookNameById(String id, String updatedBookName);
+
 }

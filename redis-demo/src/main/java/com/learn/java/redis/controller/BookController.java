@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,11 @@ public class BookController {
 	@GetMapping("/book")
 	String bookName(@RequestParam(name = "id") String id) {
 		return bookService.getBookById(id);
+	}
+
+	@PutMapping("/book")
+	String updateBookName(@RequestParam(name = "id") String id, @RequestParam(name = "bookName") String updatedBookName) {
+		return bookService.updateBookNameById(id, updatedBookName);
 	}
 
 	@GetMapping("/book/total-pages")
