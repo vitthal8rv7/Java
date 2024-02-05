@@ -3,6 +3,8 @@ package com.learn.java.redis.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -45,6 +47,11 @@ public class BookController {
 	@PostMapping("/book")
 	String createBook(@RequestParam(name = "id") String id) {
 		return bookService.createBook(id);
+	}
+
+	@DeleteMapping("/book")
+	String deleteBook(@RequestParam(name = "id") String id) {
+		return bookService.deleteBook(id);
 	}
 
 	@GetMapping("/book/total-pages")

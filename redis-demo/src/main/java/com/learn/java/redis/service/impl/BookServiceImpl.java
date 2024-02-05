@@ -3,6 +3,7 @@ package com.learn.java.redis.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -66,5 +67,14 @@ public class BookServiceImpl implements BookService {
 		System.out.println("In Get createBook Method.");
 		return "BookVitthal1234";
 	}
+
+	@CacheEvict(value = {"getBookById", "getBookNameById"}, key = "#id")
+	@Override
+	public String deleteBook(String id) {
+		System.out.println("In Get deleteBook Method.");
+		return "cache evicted.";
+	}
+	
+	
 
 }
