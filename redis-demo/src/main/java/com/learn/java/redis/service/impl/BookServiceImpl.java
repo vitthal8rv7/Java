@@ -68,7 +68,7 @@ public class BookServiceImpl implements BookService {
 		return "BookVitthal1234";
 	}
 
-	@CacheEvict(value = {"getBookById", "getBookNameById"}, key = "#id")
+	@CacheEvict(value = {"getBookById", "getBookNameById"}, key = "#id", allEntries = true)
 	@Override
 	public String deleteBook(String id) {
 		System.out.println("In Get deleteBook Method.");

@@ -29,6 +29,13 @@ public class BookController {
 	@Autowired
 	private UserService userService;
 
+	@CacheEvict(value = "*", allEntries = true, beforeInvocation = true)
+	@GetMapping("/cacheEvictAll")
+	String cacheEvictAll() {
+		System.out.println("Inside cacheEvictAll Method.");
+		return "All Cache Evicted.";
+	}
+
 	@GetMapping("/book/list")
 	List<String> bookList() {
 		return bookService.getAllBooks();
