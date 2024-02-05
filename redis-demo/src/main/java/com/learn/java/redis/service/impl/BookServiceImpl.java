@@ -60,4 +60,11 @@ public class BookServiceImpl implements BookService {
 		return updatedBookName;
 	}
 
+	@CachePut(value = {"getBookById", "getBookNameById"}, key = "#id")
+	@Override
+	public String createBook(String id) {
+		System.out.println("In Get createBook Method.");
+		return "BookVitthal1234";
+	}
+
 }

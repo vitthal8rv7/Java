@@ -12,4 +12,6 @@ public interface BookService {
 
 	public String updateBookNameById(String id, String updatedBookName);
 
+	public String createBook(String id);
+
 }

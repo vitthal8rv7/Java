@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,6 +40,11 @@ public class BookController {
 	@PutMapping("/book")
 	String updateBookName(@RequestParam(name = "id") String id, @RequestParam(name = "bookName") String updatedBookName) {
 		return bookService.updateBookNameById(id, updatedBookName);
+	}
+
+	@PostMapping("/book")
+	String createBook(@RequestParam(name = "id") String id) {
+		return bookService.createBook(id);
 	}
 
 	@GetMapping("/book/total-pages")
