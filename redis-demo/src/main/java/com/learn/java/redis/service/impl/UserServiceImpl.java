@@ -21,4 +21,11 @@ public class UserServiceImpl implements UserService {
 		System.out.println("In Get User Name Method.");
 		return request.getHeader("userName");
 	}
+
+	@Cacheable(value = "getUserNameInCurrentLang", keyGenerator = CacheConstants.USER_AND_LANG_SPECIFIC_KEY_GENERATOR)
+	@Override
+	public String getUserNameInCurrentLang() {
+		System.out.println("In Get getUserNameInCurrentLang Method.");
+		return request.getHeader("userName")+request.getHeader("lang");
+	}
 }

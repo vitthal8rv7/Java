@@ -4,4 +4,5 @@ public interface UserService {
 
 	public String getUserName();
 
+	public String getUserNameInCurrentLang();
 }

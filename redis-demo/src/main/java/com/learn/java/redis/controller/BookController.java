@@ -45,5 +45,9 @@ public class BookController {
 		return userService.getUserName();
 	}
 
+	@GetMapping("/user-name-in-current-lang")
+	String getUserNameInCurrentLang() {
+		return userService.getUserNameInCurrentLang();
+	}
 
 }

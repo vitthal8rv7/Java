@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Component
-public class UserSpecificKeyGenerator implements KeyGenerator{
+public class UserAndLangSpecificKeyGenerator implements KeyGenerator{
 
     @Autowired
     private HttpServletRequest request;
@@ -23,12 +23,12 @@ public class UserSpecificKeyGenerator implements KeyGenerator{
 //        for (Object param : params) {
 //            key.append(param).append(":");
 //        }
-        key.append(userSpecificKeyGenerator());
+        key.append(userAndLangSpecificKeyGenerator());
         return key.toString();
 	}
 
-	private Object userSpecificKeyGenerator() {
-		return request.getHeader("userId");
+	private Object userAndLangSpecificKeyGenerator() {
+		return request.getHeader("userId")+":"+request.getHeader("lang");
 	}
 
 }
