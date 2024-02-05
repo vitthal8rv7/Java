@@ -1,4 +1,4 @@
-package com.learn.java.redis.configuration;
+package com.learn.java.redis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
