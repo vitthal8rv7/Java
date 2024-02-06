@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.kafka.model.User;
+
 @RestController
 @RequestMapping("/kafka/demo")
 public class KafkaController {
@@ -18,5 +20,11 @@ public class KafkaController {
     public String produceMessage(@RequestBody String message) {
         kafkaTemplate.send("test-topic", message);
         return "Message sent: " + message;
+    }
+    
+    @PostMapping("/produce/user")
+    public String produceMessage(@RequestBody User user) {
+        kafkaTemplate.send("test-topic", user.toString());
+        return "Message sent: " + user;
     }
 }
