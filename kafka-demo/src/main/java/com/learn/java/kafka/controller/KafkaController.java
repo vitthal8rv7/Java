@@ -27,4 +27,12 @@ public class KafkaController {
         kafkaTemplate.send("test-topic", user.toString());
         return "Message sent: " + user;
     }
+    
+    @PostMapping("/produce/programatically-created-topic")
+    public String produceMessageToCustomTopic(@RequestBody String message) {
+        kafkaTemplate.send("myTopic123", message);
+        System.out.println("Inside produceMessageToCustomTopic: "+message);
+        return "Message sent: " + message;
+    }
+
 }

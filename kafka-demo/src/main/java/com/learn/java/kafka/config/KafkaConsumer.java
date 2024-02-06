@@ -32,4 +32,9 @@ public class KafkaConsumer {
 		}
         System.out.println("Received message: " + message);
     }
+    
+    @KafkaListener(topics = "myTopic123", groupId = "test-group")
+    public void listenToMyTopic(String message) {
+        System.out.println("Received message: " + message);
+    }
 }
