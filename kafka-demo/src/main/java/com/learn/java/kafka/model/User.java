@@ -17,4 +17,10 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String salary;
+	
+	@Override
+	public String toString() {
+		return "{\"id\" : \"" + id + "\"," + "\"name\" : \"" + name + "\"," + "\"salary\" : \"" + salary + "\"}"; 
+	//	};
+	}
 }
