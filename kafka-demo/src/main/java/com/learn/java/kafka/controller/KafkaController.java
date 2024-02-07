@@ -2,6 +2,7 @@ package com.learn.java.kafka.controller;
 
 import java.util.concurrent.CompletableFuture;
 
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.kafka.model.Farewell;
 import com.learn.java.kafka.model.Greeting;
 import com.learn.java.kafka.model.User;
 
@@ -22,6 +24,9 @@ public class KafkaController {
 
 	@Autowired
 	private KafkaTemplate<String, Greeting> greetingKafkaTemplate;
+
+	@Autowired
+	private KafkaTemplate<String, Object> genericKafkaTemplate;
 
 	@PostMapping("/produce")
 	public String produceMessage(@RequestBody String message) {
@@ -87,4 +92,22 @@ public class KafkaController {
 		return "Message sent:::: " + greetingMessage;
 	}
 
+	@PostMapping("/produce/new-message-to-new-topic6")
+	public String produceMessageToNewTopic6(@RequestBody String message) {
+		System.out.println("Inside Producer");
+		ProducerRecord<String,Object> p = new ProducerRecord<>("newTopic6", new Greeting("g1","g2"));
+		genericKafkaTemplate.send(p);
+
+		ProducerRecord<String,Object> p2 = new ProducerRecord<>("newTopic6", new Farewell("f1","f2"));
+		genericKafkaTemplate.send(p2);
+
+		ProducerRecord<String,Object> p3 = new ProducerRecord<>("newTopic6", "Default String");
+		genericKafkaTemplate.send(p3);
+
+		
+		return "Message sent:::: " + message;
+	}
+
+	
+	
 }

@@ -48,4 +48,21 @@ public class KafkaProducerConfig {
 	KafkaTemplate<String, Greeting> greetingKafkaTemplate() {
 		return new KafkaTemplate<>(greetingProducerFactory());
 	}
+
+	@Bean
+	ProducerFactory<String, Object> genericProducerFactory() {
+		Map<String, Object> configProps = new HashMap<>();
+		configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+		configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+		configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
+		configProps.put(JsonSerializer.TYPE_MAPPINGS, "greeting:com.learn.java.kafka.model.Greeting, farewell:com.learn.java.kafka.model.Farewell");
+//		configProps.put(JsonSerializer.TYPE_MAPPINGS, "farewell:com.learn.java.kafka.model.Farewell");
+//		configProps.put(JsonSerializer.TYPE_MAPPINGS, "greeting:com.learn.java.kafka.model.Greeting");
+		return new DefaultKafkaProducerFactory<>(configProps);
+	}
+
+	@Bean
+	KafkaTemplate<String, Object> genericKafkaTemplate() {
+		return new KafkaTemplate<>(genericProducerFactory());
+	}
 }
