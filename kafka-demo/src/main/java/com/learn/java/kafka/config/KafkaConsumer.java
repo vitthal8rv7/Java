@@ -14,14 +14,13 @@ import com.learn.java.kafka.model.User;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "test-topic", groupId = "test-group")
-    public void listen(String message) {
+	@KafkaListener(topics = "test-topic", groupId = "test-group")
+	public void listen(String message) {
 
 //    	ModelMapper modelMapper = new ModelMapper();
 //		User userObject = modelMapper.map(message, User.class);
 //		System.out.println("Received message: userObject: " + userObject);
-	
-		
+
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			User userObj = mapper.readValue(message, User.class);
@@ -30,11 +29,17 @@ public class KafkaConsumer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        System.out.println("Received message: " + message);
-    }
-    
-    @KafkaListener(topics = "myTopic123", groupId = "test-group")
-    public void listenToMyTopic(String message) {
-        System.out.println("Received message: " + message);
-    }
+		System.out.println("Received message: " + message);
+	}
+
+	@KafkaListener(topics = "myTopic123", groupId = "test-group")
+	public void listenToMyTopic(String message) {
+		System.out.println("Received message: " + message);
+	}
+
+	@KafkaListener(topics = {"newTopic1", "newTopic2"}, groupId = "test-group")
+	public void listenToMultipleTopics(String message) {
+		System.out.println("Received message:: " + message);
+	}
+
 }
