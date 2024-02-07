@@ -1,13 +1,13 @@
 package com.learn.java.kafka.config;
 
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learn.java.kafka.model.Greeting;
 import com.learn.java.kafka.model.User;
 
 @Component
@@ -49,6 +49,11 @@ public class KafkaConsumer {
 	@KafkaListener(topics = "newTopic4", containerFactory = "filterKafkaListenerContainerFactory")
 	public void listenWithFilter(String message) {
 		System.out.println("Received Message in filtered listener: " + message);
+	}
+
+	@KafkaListener(topics = "newTopic5", containerFactory = "greetingKafkaListenerContainerFactory", groupId = "test-group")
+	public void greetingListener(Greeting greetingMessage) {
+		 System.out.println("Received Message in filtered listener: " + greetingMessage);
 	}
 
 }

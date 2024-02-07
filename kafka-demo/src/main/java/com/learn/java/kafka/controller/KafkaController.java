@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.kafka.model.Greeting;
 import com.learn.java.kafka.model.User;
 
 @RestController
@@ -18,6 +19,9 @@ public class KafkaController {
 
 	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
+
+	@Autowired
+	private KafkaTemplate<String, Greeting> greetingKafkaTemplate;
 
 	@PostMapping("/produce")
 	public String produceMessage(@RequestBody String message) {
@@ -74,6 +78,13 @@ public class KafkaController {
 	public String produceMessageToNewTopic4(@RequestBody String message) {
 		kafkaTemplate.send("newTopic4", message);
 		return "Message sent:::: " + message;
+	}
+
+	@PostMapping("/produce/new-message-to-new-topic5")
+	public String produceMessageToNewTopic5(@RequestBody Greeting greetingMessage) {
+		System.out.println("Inside Producer");
+		greetingKafkaTemplate.send("newTopic5", greetingMessage);
+		return "Message sent:::: " + greetingMessage;
 	}
 
 }
