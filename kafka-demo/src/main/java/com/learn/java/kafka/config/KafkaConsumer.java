@@ -1,13 +1,12 @@
 package com.learn.java.kafka.config;
 
-import java.util.Map;
-
-import org.modelmapper.ModelMapper;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learn.java.kafka.model.User;
 
@@ -37,9 +36,14 @@ public class KafkaConsumer {
 		System.out.println("Received message: " + message);
 	}
 
-	@KafkaListener(topics = {"newTopic1", "newTopic2"}, groupId = "test-group")
+	@KafkaListener(topics = { "newTopic1", "newTopic2" }, groupId = "test-group")
 	public void listenToMultipleTopics(String message) {
 		System.out.println("Received message:: " + message);
+	}
+
+	@KafkaListener(topics = "newTopic3")
+	public void listenWithHeaders(@Payload String message, @Header(name = "number") int partition) {
+		System.out.println("Received Message::: " + message + "from partition: " + partition);
 	}
 
 }

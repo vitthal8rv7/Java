@@ -64,4 +64,10 @@ public class KafkaController {
 		return "Message sent: " + message;
 	}
 
+	@PostMapping("/produce/new-message-to-new-topic3")
+	public String produceMessageToNewTopic3(@RequestBody String message) {
+		kafkaTemplate.send("newTopic3", message);
+		return "Message sent::: " + message;
+	}
+
 }
