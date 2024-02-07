@@ -46,4 +46,9 @@ public class KafkaConsumer {
 		System.out.println("Received Message::: " + message + "from partition: " + partition);
 	}
 
+	@KafkaListener(topics = "newTopic4", containerFactory = "filterKafkaListenerContainerFactory")
+	public void listenWithFilter(String message) {
+		System.out.println("Received Message in filtered listener: " + message);
+	}
+
 }

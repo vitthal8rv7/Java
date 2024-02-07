@@ -35,9 +35,16 @@ public class KafkaConsumerConfig {
 
 	@Bean
 	ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
-
 		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
 		factory.setConsumerFactory(consumerFactory());
+		return factory;
+	}
+
+	@Bean
+	ConcurrentKafkaListenerContainerFactory<String, String> filterKafkaListenerContainerFactory() {
+		ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
+		factory.setConsumerFactory(consumerFactory());
+		factory.setRecordFilterStrategy(record -> record.value().contains("World"));
 		return factory;
 	}
 }
