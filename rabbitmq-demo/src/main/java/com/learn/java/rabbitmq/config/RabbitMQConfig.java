@@ -26,32 +26,46 @@ public class RabbitMQConfig {
 	@Value("${spring.rabbitmq.password}")
 	private String password;
 
-	@Bean
-	Queue myQueue() {
-		return new Queue(RabbitmqConstants.queueName, true); // Declare a durable queue
-	}
+	@Value("${rabbitmq.queue.name}")
+	private String queueName;
+
+	@Value("${rabbitmq.exchange.name}")
+	private String exchangeName;
+
+	@Value("${rabbitmq.routing_key}")
+	private String routingKey;
 
 	@Bean
-	RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
-		return new RabbitAdmin(connectionFactory);
+	Queue myQueue() {
+		return new Queue(queueName, true); // Declare a durable queue
 	}
+
+//	@Bean
+//	RabbitAdmin rabbitAdmin(ConnectionFactory connectionFactory) {
+//		return new RabbitAdmin(connectionFactory);
+//	}
 
 	@Bean
 	TopicExchange exchange() {
-		return new TopicExchange(RabbitmqConstants.topicExchangeName);
+		return new TopicExchange(exchangeName);
 	}
 
 	@Bean
-	Binding binding(Queue queue, TopicExchange exchange) {
-		return BindingBuilder.bind(queue).to(exchange).with("foo.bar.#");
+	Binding binding() {
+		return BindingBuilder.bind(myQueue()).to(exchange()).with(routingKey);
 	}
 
-	@Bean
-	ConnectionFactory connectionFactory() {
-		final CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname, port);
-		connectionFactory.setUsername(username);
-		connectionFactory.setPassword(password);
-		return connectionFactory;
-	}
+//	@Bean
+//	Binding binding(Queue queue, TopicExchange exchange) {
+//		return BindingBuilder.bind(queue).to(exchange).with("rounting_key_1");
+//	}
+
+//	@Bean
+//	ConnectionFactory connectionFactory() {
+//		final CachingConnectionFactory connectionFactory = new CachingConnectionFactory(hostname, port);
+//		connectionFactory.setUsername(username);
+//		connectionFactory.setPassword(password);
+//		return connectionFactory;
+//	}
 
 }

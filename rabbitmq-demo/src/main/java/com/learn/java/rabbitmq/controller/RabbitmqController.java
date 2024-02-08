@@ -17,7 +17,8 @@ public class RabbitmqController {
 
 	@PostMapping("/produce")
 	public String produceMessage(@RequestBody String message) {
-		messageProducer.sendMessage(message);
+		messageProducer.sendMessageWithQueueName(message);
+		messageProducer.sendMessageWithExchangeAndRoutingKey(message);
 		return "Message sent: " + message;
 	}
 }
