@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.rabbitmq.model.User;
 import com.learn.java.rabbitmq.service.MessageProducer;
 
 @RestController
@@ -21,4 +22,12 @@ public class RabbitmqController {
 		messageProducer.sendMessageWithExchangeAndRoutingKey(message);
 		return "Message sent: " + message;
 	}
+	
+	@PostMapping("/produce/user")
+	public String produceMessage(@RequestBody User message) {
+		messageProducer.sendJsonMessageWithQueueName(message);
+		messageProducer.sendJsonMessageWithExchangeAndRoutingKey(message);
+		return "Message sent: " + message;
+	}
+
 }

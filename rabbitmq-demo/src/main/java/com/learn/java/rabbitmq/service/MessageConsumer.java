@@ -1,11 +1,9 @@
 package com.learn.java.rabbitmq.service;
 
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.learn.java.rabbitmq.config.RabbitmqConstants;
+import com.learn.java.rabbitmq.model.User;
 
 @Service
 public class MessageConsumer {
@@ -24,4 +22,20 @@ public class MessageConsumer {
     public void receiveMessage3(String message) {
         System.out.println("Message received: 3 " + message);
     }
+	
+	@RabbitListener(queues = "${rabbitmq.json.queue.name}")
+    public void receiveJsonMessage(User message) {
+        System.out.println("Message Json received: 1 " + message);
+    }
+
+	@RabbitListener(queues = "${rabbitmq.json.queue.name}")
+    public void receiveJsonMessage2(User message) {
+        System.out.println("Message Json received: 2 " + message);
+    }
+
+	@RabbitListener(queues = "${rabbitmq.json.queue.name}")
+    public void receiveJsonMessag3(User message) {
+        System.out.println("Message Json received: 3 " + message);
+    }
+
 }
