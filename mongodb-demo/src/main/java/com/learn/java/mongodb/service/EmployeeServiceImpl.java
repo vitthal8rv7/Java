@@ -112,6 +112,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		LOGGER.info("find all By name: " + empApisDeclRepo.findByName("name11"));
 		LOGGER.info("find first By name: " + empApisDeclRepo.findFirstByName("name11"));
+		LOGGER.info("find Top By name: " + empApisDeclRepo.findTopByName("name11"));
 		LOGGER.info("find first By name Ordered by name DESC: " + empApisDeclRepo.findFirstByNameOrderByNameDesc("name11"));
 		LOGGER.info("find first By name Ordered by id DESC: " + empApisDeclRepo.findFirstByNameOrderByIdDesc("name11"));
 		LOGGER.info("find first By name Ignore case Ordered by id DESC : " + empApisDeclRepo.findFirstByNameIgnoreCaseOrderByIdDesc("namE11"));
@@ -124,10 +125,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("find All By name is not Ignore Case: " + empApisDeclRepo.findAllByNameIsNotIgnoreCase("aNAME"));
 		LOGGER.info("find All By name is not Ignore Case: " + empApisDeclRepo.findAllByNameIsNotIgnoreCase("name1"));
 
-//		List<String> names = new ArrayList<>();
-//		names.add("name1");
-//		names.add("name11");
-//		names.add("name3");
+		LOGGER.info("find Distinct By name: " + empApisDeclRepo.findDistinctByName("name11"));
+		LOGGER.info("count by name: " + empApisDeclRepo.countByName("name11"));
+		LOGGER.info("count by Name Containing: " + empApisDeclRepo.countByNameContaining("name"));
+		LOGGER.info("find By name Regex: " + empApisDeclRepo.findByNameRegex("^name.*"));
+		//The ^ in the regex pattern represents the start of the string, and .* represents any characters after "name".
+		
+		List<String> names = new ArrayList<>();
+		names.add("name4");
+		names.add("name130");
+		names.add("name3");
+		LOGGER.info("find By list of names: " + empApisDeclRepo.findByNameIn(names));
+		LOGGER.info("find By which are not from list of names: " + empApisDeclRepo.findByNameIsNotIn(names));
 //		LOGGER.info("find All By list of names: " + empApisDeclRepo.findByNames(names));
 
 //		LOGGER.info("find First By name Ignore Case and Not Starts With: " + empApisDeclRepo.findFirstByNameIsNotIgnoreCaseStartsWith("NAME"));		
