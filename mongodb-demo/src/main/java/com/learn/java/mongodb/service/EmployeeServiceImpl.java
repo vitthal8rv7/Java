@@ -1,5 +1,6 @@
 package com.learn.java.mongodb.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String deleteEmployee(String id) {
 		employeeRepository.deleteById(id);
 		return "Employee Deleted Successfully";
+	}
+
+	@Override
+	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary) {
+		return employeeRepository.findBySalaryBetween(minSalary, maxSalary);
 	}
 
 }
