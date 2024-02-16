@@ -6,10 +6,8 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import lombok.AllArgsConstructor;
@@ -42,6 +40,7 @@ public class Employee implements Serializable {
 	 * control over the mapping between Java objects and JSON.
 	 */
 	// change field name addresses to address in response view
+
 	@JsonProperty("address")
 	private List<Address> addresses;
 
