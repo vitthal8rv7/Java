@@ -52,4 +52,9 @@ public interface EmployeeAPIsDeclarationRepository extends MongoRepository<Emplo
 	List<Employee> findByNameAndDepartment(String name, String deparment);
 	List<Employee> findByNameInAndDepartment(List<String> name, String deparment);
 	Employee findFirstByNameAndDepartmentAllIgnoreCaseOrderByIdDesc(String name, String deparment);
+	
+//	List<Employee> findByEmployee_Addresses_CityIn(String city);
+	List<Employee> findByAddresses_CityIn(String city);
+	List<Employee> findByAddresses_CityAndAddresses_Address1(String city, String address1);
+	List<Employee> findByNameAndAddresses_CityAndAddresses_Address1(String name, String city, String address1);
 }
