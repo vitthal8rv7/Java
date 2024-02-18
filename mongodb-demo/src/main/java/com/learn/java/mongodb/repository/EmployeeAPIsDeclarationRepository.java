@@ -48,6 +48,8 @@ public interface EmployeeAPIsDeclarationRepository extends MongoRepository<Emplo
 	
 	//Declare APIs to access Data by more than one field
 //	List<Employee> findByNameNullOrDepartment(String name, String deparment);
-//	List<Employee> findByNameOrDepartment(String name, String deparment);
-//	List<Employee> findByNameAndDepartment(String name, String deparment);
+	List<Employee> findByNameOrDepartment(String name, String deparment);
+	List<Employee> findByNameAndDepartment(String name, String deparment);
+	List<Employee> findByNameInAndDepartment(List<String> name, String deparment);
+	Employee findFirstByNameAndDepartmentAllIgnoreCaseOrderByIdDesc(String name, String deparment);
 }

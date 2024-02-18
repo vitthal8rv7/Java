@@ -151,6 +151,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 //		LOGGER.info("find last By department: " + empApisDeclRepo.findLastByDepartment("department1"));
 		// Exception saying => returned non unique result
 
+		
+		System.out.println();
+		System.out.println();
+		LOGGER.info("find all By name and department: " + empApisDeclRepo.findByNameAndDepartment("name1", "department1"));
+		
+		System.out.println();
+		System.out.println();
+		LOGGER.info("find all By name or department: " + empApisDeclRepo.findByNameOrDepartment("name1", "department1"));
+		
+//		System.out.println();
+//		System.out.println();
+//		LOGGER.info("find all By name null or department: " + empApisDeclRepo.findByNameNullOrDepartment("name1", "department1"));
+//		LOGGER.info("find all By name null or department: " + empApisDeclRepo.findByNameNullOrDepartment("name1", null));
+//		LOGGER.info("find all By name null or department: " + empApisDeclRepo.findByNameNullOrDepartment(null, "department1"));
+//		LOGGER.info("find all By name null or department: " + empApisDeclRepo.findByNameNullOrDepartment(null, null));
+		
+		names.add("name1");
+		LOGGER.info("find all By names or department: " + empApisDeclRepo.findByNameInAndDepartment(names, "department1"));
+		LOGGER.info("find all By names and department ignore case and order by id: " + empApisDeclRepo.findFirstByNameAndDepartmentAllIgnoreCaseOrderByIdDesc("name11", "department1"));
 	}
 
 }
