@@ -1,6 +1,7 @@
 package com.learn.java.mongodb.collection;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -52,4 +53,6 @@ public class Employee implements Serializable {
 	// change field name salary to sal in response view
 	@JsonSetter("sal")
 	private Float salary;
+	
+	private Date dateOfJoining;
 }

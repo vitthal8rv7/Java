@@ -1,6 +1,7 @@
 package com.learn.java.mongodb.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee saveEmployee(Employee employee) {
-		// TODO Auto-generated method stub
+		employee.setDateOfJoining(new Date(System.currentTimeMillis()));
 		return employeeRepository.save(employee);
 	}
 
@@ -202,6 +203,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String department = "department1";
 		Sort sort = Sort.by(Sort.Direction.ASC, "name");
 		PageRequest pageRequest = PageRequest.of(0, 3);
+		Integer limit = 2;
 		LOGGER.info("Find by salary between min salary and max salary : "+ empApisDeclWithQueryRepo.findBySalaryBetween(minSalary, maxSalary));
 		LOGGER.info("Find by salary : "+ empApisDeclWithQueryRepo.findBySalary(salary));
 		LOGGER.info("Find by name, department and salary : "+ empApisDeclWithQueryRepo.findByNameAndDepartmentAndSalary(name, department, salary));
@@ -209,6 +211,52 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("Find by salary pagination: "+ empApisDeclWithQueryRepo.findBySalaryPagination(salary, pageRequest));
 //		LOGGER.info("Find by salary sorted and pagination: "+ empApisDeclWithQueryRepo.findBySalaryPaginationSorted(salary, pageRequest, sort));
 
+		LOGGER.info("Find by salary sorted and limited: "+ empApisDeclWithQueryRepo.findBySalarySortedAndLimited(salary, sort, limit));
+		LOGGER.info("find Projected By Name And Salary: "+ empApisDeclWithQueryRepo.findProjectedByNameAndSalary(salary));
+
+		String key = "name1"; //"name1"; "department1";
+		LOGGER.info("find By Name Or Department: "+ empApisDeclWithQueryRepo.findByNameOrDepartment(key));
+		
+		LOGGER.info("find By name Regex: " + empApisDeclWithQueryRepo.findByNameRegex("^name.*")); 
+		
+		List<String> names = new ArrayList<>();
+		names.add("name11");
+		names.add("game");
+		names.add("lol");
+		LOGGER.info("find By names In: " + empApisDeclWithQueryRepo.findByNamesIn(names));
+		
+		LOGGER.info("find By Addresses Exists: " + empApisDeclWithQueryRepo.findByAddressesExists(false));
+		
+		LOGGER.info("find Projected By Name And Department: " + empApisDeclWithQueryRepo.findProjectedByNameAndDepartment(salary, sort));
+		
+//		LOGGER.info("find By Text Search: " + empApisDeclWithQueryRepo.findByTextSearch("1"));
+//		 Command failed with error 27 (IndexNotFound): 'text index required for $text query' 
+		
+		LOGGER.info("Find by salary between min salary and max salary : "+ empApisDeclWithQueryRepo.findBySalaryBetweenEq(minSalary, maxSalary));
+		
+		LOGGER.info("find By Salary And Department : "+ empApisDeclWithQueryRepo.findBySalaryAndDepartment(salary, department));
+		
+		LOGGER.info("find By Salary1 Or Salary2 : "+ empApisDeclWithQueryRepo.findBySalary1OrSalary2(salary, maxSalary));
+		
+		LOGGER.info("find By Not Matched Salary : "+ empApisDeclWithQueryRepo.findByNotMatchedSalary(salary));
+		
+		LOGGER.info("find By Number Of Addresses : "+ empApisDeclWithQueryRepo.findByNumberOfAddresses(2));
+		
+		LOGGER.info("find By Addresses_City : "+ empApisDeclWithQueryRepo.findByAddressesCity("city3"));
+		
+		LOGGER.info("find By Name Or Department Regex : "+ empApisDeclWithQueryRepo.findByNameOrDepartmentRegex(".*me.*"));
+		
+		List<String> cities = new ArrayList<>();
+		cities.add("city3");
+		cities.add("city11");
+		LOGGER.info("find By Addresses Cities : "+ empApisDeclWithQueryRepo.findByAddressesCities(cities));
+		
+		LOGGER.info("Find by salary between min salary and max salary : "+ empApisDeclWithQueryRepo.findBySalaryBetweenEq(minSalary, maxSalary));
+		LOGGER.info("Find by salary between min salary and max salary : "+ empApisDeclWithQueryRepo.findBySalaryBetweenUsingNor(minSalary, maxSalary));
+		
+		LOGGER.info("find By Joining Date Before : "+ empApisDeclWithQueryRepo.findByJoiningDateBefore(new Date(System.currentTimeMillis())));
+		
+		LOGGER.info("find By Joining Date In Between Given Time : "+ empApisDeclWithQueryRepo.findByJoiningDateBetween(new Date(System.currentTimeMillis()-900000), new Date(System.currentTimeMillis())));
 		
 	
 	}
