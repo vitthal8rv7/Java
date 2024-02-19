@@ -20,4 +20,6 @@ public interface EmployeeService {
 
 	public void testDeclAPIs();
 
+	public void testDeclAPIsWithQuery();
+
 }

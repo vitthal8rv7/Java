@@ -59,5 +59,11 @@ public class EmployeeController {
 		employeeService.testDeclAPIs();
 		return "Tested All Declared APIs.";
 	}
+	
+	@GetMapping("/test/decl-apis-with-query-annotation")
+	public String testDeclAPIsWithQuery() {
+		employeeService.testDeclAPIsWithQuery();
+		return "Tested All Declared APIs with @query.";
+	}
 
 }
