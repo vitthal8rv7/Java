@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mongodb.collection.Employee;
@@ -56,7 +57,7 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		if (Objects.isNull(employee)) {
 			return "Employee not found.";
 		} else {
-			return employeeRepository.deleteById(employee) + " Employee Deleted Successfully";
+			return employeeRepository.delete(employee) + " Employee Deleted Successfully";
 		}
 	}
 
@@ -75,10 +76,29 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 	@Override
 	public void testCriteriaWithMongoTemplate() {
 		Query query = null;
+
+		//Update
+		query = new Query(Criteria.where("_id").is("45"));
+		Update update = new Update().set("name", "name450");
+		LOGGER.info("[Update] : Update by id. Updated employee count is : " + employeeRepository.update(query, update, Employee.class));
+
+		//Delete
+//		query = new Query(Criteria.where("_id").is("45"));
+//		LOGGER.info("[Delete] : Delete by id. delete employee count is : " + employeeRepository.delete(query, Employee.class));
 		
 		// Regex
 		query = new Query(Criteria.where("name").regex("^g"));
 		LOGGER.info("[Regex] : Employee list whose name starts with g : " + employeeRepository.getDataInList(query, Employee.class)); 
+		
+		// Field Include (use when few field need to Include.)
+		query = new Query(Criteria.where("salary").gte(12345.0f));
+		query.fields().include("name", "salary");
+		LOGGER.info("[Include] : Employee list whose salary greater than given salary and include name, salary : " + employeeRepository.getDataInList(query, Employee.class));
+		
+		// Field Exclude (use when few field need to Exclude.)
+		query = new Query(Criteria.where("salary").gte(12345.0f));
+		query.fields().exclude("addresses");
+		LOGGER.info("[Exclude] : Employee list whose salary greater than given salary and Exclude addresses: " + employeeRepository.getDataInList(query, Employee.class));
 		
 		
 	}
