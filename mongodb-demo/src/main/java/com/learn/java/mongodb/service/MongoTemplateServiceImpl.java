@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mongodb.collection.Employee;
@@ -54,7 +56,30 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		if (Objects.isNull(employee)) {
 			return "Employee not found.";
 		} else {
-			return employeeRepository.deleteById(employee)+" Employee Deleted Successfully";
+			return employeeRepository.deleteById(employee) + " Employee Deleted Successfully";
 		}
+	}
+
+	@Override
+	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary) {
+		Query query = new Query(Criteria.where("salary").gte(minSalary).and("salary").lt(maxSalary));
+		 return employeeRepository.getDataInList(query, Employee.class);
+	}
+
+	@Override
+	public List<Employee> getEmployeeBySalary(Float salary) {
+		Query query = new Query(Criteria.where("salary").gte(salary));
+		return employeeRepository.getDataInList(query, Employee.class);
+	}
+
+	@Override
+	public void testCriteriaWithMongoTemplate() {
+		Query query = null;
+		
+		// Regex
+		query = new Query(Criteria.where("name").regex("^g"));
+		LOGGER.info("[Regex] : Employee list whose name starts with g : " + employeeRepository.getDataInList(query, Employee.class)); 
+		
+		
 	}
 }
