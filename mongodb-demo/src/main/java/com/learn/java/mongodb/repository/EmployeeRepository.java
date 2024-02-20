@@ -5,6 +5,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -60,6 +62,12 @@ public class EmployeeRepository {
 			LOGGER.error("No Data Found.");
 			return null;
 		}
+	}
+
+	public PageImpl<Employee> getDateWithPagination(Query query, Pageable pageable, Class<Employee> class1) {
+		List<Employee> employees = getDataInList(query, Employee.class);
+		Long count = mongoTemplate.count(query, Employee.class);
+		return new PageImpl<>(employees, pageable, count);
 	}
 
 	

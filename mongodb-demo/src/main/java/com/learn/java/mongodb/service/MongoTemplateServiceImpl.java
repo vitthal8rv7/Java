@@ -7,6 +7,10 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -64,7 +68,7 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 	@Override
 	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary) {
 		Query query = new Query(Criteria.where("salary").gte(minSalary).and("salary").lt(maxSalary));
-		 return employeeRepository.getDataInList(query, Employee.class);
+		return employeeRepository.getDataInList(query, Employee.class);
 	}
 
 	@Override
@@ -77,28 +81,44 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 	public void testCriteriaWithMongoTemplate() {
 		Query query = null;
 
-		//Update
+		// Update
 		query = new Query(Criteria.where("_id").is("45"));
 		Update update = new Update().set("name", "name450");
-		LOGGER.info("[Update] : Update by id. Updated employee count is : " + employeeRepository.update(query, update, Employee.class));
+		LOGGER.info("[Update] : Update by id. Updated employee count is : "
+				+ employeeRepository.update(query, update, Employee.class));
 
-		//Delete
+		// Delete
 //		query = new Query(Criteria.where("_id").is("45"));
 //		LOGGER.info("[Delete] : Delete by id. delete employee count is : " + employeeRepository.delete(query, Employee.class));
-		
+
 		// Regex
 		query = new Query(Criteria.where("name").regex("^g"));
-		LOGGER.info("[Regex] : Employee list whose name starts with g : " + employeeRepository.getDataInList(query, Employee.class)); 
-		
+		LOGGER.info("[Regex] : Employee list whose name starts with g : "
+				+ employeeRepository.getDataInList(query, Employee.class));
+
 		// Field Include (use when few field need to Include.)
 		query = new Query(Criteria.where("salary").gte(12345.0f));
 		query.fields().include("name", "salary");
-		LOGGER.info("[Include] : Employee list whose salary greater than given salary and include name, salary : " + employeeRepository.getDataInList(query, Employee.class));
-		
+		LOGGER.info("[Include] : Employee list whose salary greater than given salary and include name, salary : "
+				+ employeeRepository.getDataInList(query, Employee.class));
+
 		// Field Exclude (use when few field need to Exclude.)
 		query = new Query(Criteria.where("salary").gte(12345.0f));
 		query.fields().exclude("addresses");
-		LOGGER.info("[Exclude] : Employee list whose salary greater than given salary and Exclude addresses: " + employeeRepository.getDataInList(query, Employee.class));
+		LOGGER.info("[Exclude] : Employee list whose salary greater than given salary and Exclude addresses: "
+				+ employeeRepository.getDataInList(query, Employee.class));
+
+		Sort sort = Sort.by(Sort.Direction.DESC, "salary");
+		Pageable pageable = PageRequest.of(0, 2, sort);
+		query = new Query(Criteria.where("salary").gte(12345.0f)).with(pageable);
+		LOGGER.info("[SortAndPageable] : Employee list whose salary greater than given salary with Sort and Pageable: "
+				+ employeeRepository.getDataInList(query, Employee.class));
+		PageImpl<Employee> employees = employeeRepository.getDateWithPagination(query, pageable, Employee.class);
+		LOGGER.info(
+				"[SortAndPageableCompleteResponse] : Employee list whose salary greater than given salary with Sort and Pageable: "
+						+ employees.getPageable() + " Size : " + employees.getSize() + " Total Pages : "
+						+ employees.getTotalPages() + " Data: " + employees.getContent());
+//		Page<Document> docPage = PageableExecutionUtils.getPage(books, pageable, () -> mongoTemplate.count (query, "books"));
 		
 		
 	}
