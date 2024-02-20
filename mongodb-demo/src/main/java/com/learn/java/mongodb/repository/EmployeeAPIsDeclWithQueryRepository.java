@@ -134,4 +134,23 @@ public interface EmployeeAPIsDeclWithQueryRepository extends MongoRepository<Emp
 	@Query("{ 'salary' : { $type : ?0 } }")
 	List<Employee> findBySalaryType(List<String> salaryTypes);
 
+	@Query("{ 'salary' : { $type : ?0, $eq : ?1 } }")
+	List<Employee> findBySalaryTypeAndEq(String salaryType, Float salary);
+
+//	@Query("{ $text: { $search: ?0 } }")
+//	List<Employee> findByTextSearch(String searchText);
+//	'text index required for $text query' on server localhost:27017
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

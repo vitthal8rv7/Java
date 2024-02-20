@@ -298,7 +298,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		 * int =>    	16
 		 * long =>   	18
 		 * */
+		LOGGER.info("find By salary type and equal : " + empApisDeclWithQueryRepo.findBySalaryTypeAndEq("double", 12345.0f));
+
+//		LOGGER.info("find By Text Search : " + empApisDeclWithQueryRepo.findByTextSearch("12345"));
+//		'text index required for $text query' on server localhost:27017
 		
+	
+	
 	}
 
 }
