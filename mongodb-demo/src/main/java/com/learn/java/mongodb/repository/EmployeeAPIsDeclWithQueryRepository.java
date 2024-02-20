@@ -105,9 +105,33 @@ public interface EmployeeAPIsDeclWithQueryRepository extends MongoRepository<Emp
 	List<Employee> findByJoiningDateBefore(Date date);
 
 	@Query("{ 'dateOfJoining' : { $gte : ?0, $lte : ?1 } }")
-    List<Employee> findByJoiningDateBetween(Date startDate, Date endDate);
+	List<Employee> findByJoiningDateBetween(Date startDate, Date endDate);
 
-	
-	
-	
+	@Query("{ 'name' : ?0 }")
+	List<Employee> findByNamesNotIn(List<String> names);
+
+	@Query("{ 'addresses.0.city' : ?0 }")
+	List<Employee> findByAddressesCityIndex0(String city);
+
+	@Query("{ 'addresses' : { $elemMatch : { 'address1' : ?0, 'address2' : ?1, 'city' : ?2} } }")
+	List<Employee> findByAddressesAddress1AndAddress2AndCity(String adddress1, String address2, String city);
+
+	@Query(value = "{ 'addresses' : { $elemMatch : { 'address1' : ?0, 'address2' : ?1, 'city' : ?2} } }", fields = "{'addresses.$': 1}")
+	List<Employee> findByAddressesElectmentsWithProjection(String adddress1, String address2, String city);
+
+	@Query("{ 'name' : { $type : ?0 } }")
+	List<Employee> findByNameType(String nameType);
+
+	@Query("{ 'name' : { $type : ?0 } }")
+	List<Employee> findByNameType(Integer nameType);
+
+	@Query("{ 'salary' : { $type : ?0 } }")
+	List<Employee> findBySalaryType(String salaryType);
+
+	@Query("{ 'salary' : { $type : ?0 } }")
+	List<Employee> findBySalaryType(Integer salaryType);
+
+	@Query("{ 'salary' : { $type : ?0 } }")
+	List<Employee> findBySalaryType(List<String> salaryTypes);
+
 }

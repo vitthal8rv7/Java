@@ -258,7 +258,47 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		LOGGER.info("find By Joining Date In Between Given Time : "+ empApisDeclWithQueryRepo.findByJoiningDateBetween(new Date(System.currentTimeMillis()-900000), new Date(System.currentTimeMillis())));
 		
-	
+		names = new ArrayList<>();
+		names.add("name4");
+		names.add("name1");
+		names.add("name3");
+		LOGGER.info("find By names not In: " + empApisDeclWithQueryRepo.findByNamesNotIn(names));
+		
+		LOGGER.info("find By Addresses_City : "+ empApisDeclWithQueryRepo.findByAddressesCity("city11"));
+		LOGGER.info("find By Addresses_City at Index 0 : "+ empApisDeclWithQueryRepo.findByAddressesCityIndex0("city11"));
+
+		LOGGER.info("find By Addresses_Address1_Address2_City : "+ empApisDeclWithQueryRepo.findByAddressesAddress1AndAddress2AndCity("address111", "address2", "city11"));
+		LOGGER.info("find By Addresses_Address1_Address2_City : "+ empApisDeclWithQueryRepo.findByAddressesAddress1AndAddress2AndCity("address11", "address22", "city1"));
+		LOGGER.info("find By Addresses_Address1_Address2_City : "+ empApisDeclWithQueryRepo.findByAddressesAddress1AndAddress2AndCity("address11", "address22", "city11"));
+		
+		LOGGER.info("find By Addresses_Address1_Address2_City : "+ empApisDeclWithQueryRepo.findByAddressesElectmentsWithProjection("address111", "address2", "city11"));
+		
+		
+		LOGGER.info("find By name type: " + empApisDeclWithQueryRepo.findByNameType("string"));
+		LOGGER.info("find By name type in number: " + empApisDeclWithQueryRepo.findByNameType(2));
+		
+		LOGGER.info("find By salary type: " + empApisDeclWithQueryRepo.findBySalaryType("int"));
+		LOGGER.info("find By salary type: " + empApisDeclWithQueryRepo.findBySalaryType("long"));
+		LOGGER.info("find By salary type: " + empApisDeclWithQueryRepo.findBySalaryType("double"));
+		LOGGER.info("find By salary type in number: " + empApisDeclWithQueryRepo.findBySalaryType(1));
+		
+		List<String> types = new ArrayList<>();
+		types.add("int");
+		types.add("double");
+		types.add("long");
+		LOGGER.info("find By salary type: " + empApisDeclWithQueryRepo.findBySalaryType(types));
+		/* Type and In Number
+		 * double => 	1
+		 * string => 	2
+		 * object => 	3
+		 * array =>  	4
+		 * objectId => 	7
+		 * bool => 		8
+		 * date => 		9
+		 * int =>    	16
+		 * long =>   	18
+		 * */
+		
 	}
 
 }
