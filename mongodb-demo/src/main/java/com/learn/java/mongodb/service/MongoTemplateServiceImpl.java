@@ -67,7 +67,8 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 
 	@Override
 	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary) {
-		Query query = new Query(Criteria.where("salary").gte(minSalary).and("salary").lt(maxSalary));
+		Query query = new Query();
+		query.addCriteria(Criteria.where("salary").gte(minSalary).andOperator(Criteria.where("salary").lt(maxSalary)));
 		return employeeRepository.getDataInList(query, Employee.class);
 	}
 
@@ -119,7 +120,43 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 						+ employees.getPageable() + " Size : " + employees.getSize() + " Total Pages : "
 						+ employees.getTotalPages() + " Data: " + employees.getContent());
 //		Page<Document> docPage = PageableExecutionUtils.getPage(books, pageable, () -> mongoTemplate.count (query, "books"));
-		
-		
+
+		Float minSalary = 12345.0f;
+		Float maxSalary = 41345.0f;
+		query = new Query().with(Sort.by(Sort.Direction.DESC, "salary"));
+		query.addCriteria(new Criteria().andOperator(Criteria.where("salary").gte(minSalary),
+				Criteria.where("salary").lt(maxSalary)));
+		query.fields().exclude("addresses");
+		LOGGER.info("[AndOperator]" + employeeRepository.getDataInList(query, Employee.class));
+
+		query = new Query().with(Sort.by(Sort.Direction.DESC, "salary"));
+		query.addCriteria(Criteria.where("salary").gte(minSalary).orOperator(Criteria.where("salary").lt(maxSalary)));
+		query.fields().exclude("addresses");
+		LOGGER.info("[WrongWay-OrOperator]" + employeeRepository.getDataInList(query, Employee.class));
+		// only one value in Or Operator, here criteria outside Or operator filter the
+		// result(all data will come in this case)
+		// then or operator filter data where some of the data got lost
+		// if we put both both criteria in or operator then that both condition become 1
+		// filter, check below correct Or Operator, here we will get correct result.
+
+		query = new Query().with(Sort.by(Sort.Direction.DESC, "salary"));
+		query.addCriteria(new Criteria().orOperator(Criteria.where("salary").gte(minSalary),
+				Criteria.where("salary").lt(maxSalary)));
+		query.fields().exclude("addresses");
+		LOGGER.info("[OrOperator]" + employeeRepository.getDataInList(query, Employee.class));
+
+		query = new Query().with(Sort.by(Sort.Direction.DESC, "salary"));
+		query.addCriteria(new Criteria().andOperator(new Criteria().orOperator(Criteria.where("salary").gte(minSalary),
+				Criteria.where("salary").lt(maxSalary)), Criteria.where("name").is("name450")));
+		query.fields().exclude("addresses");
+		LOGGER.info("[AndOperatorAndOrOperator]" + employeeRepository.getDataInList(query, Employee.class));
+
+//		query = new Query().with(Sort.by(Sort.Direction.DESC, "salary"));
+//		query.addCriteria(Criteria.where("name").is("name450"));
+//		query.addCriteria(Criteria.where("salary").gte(12345.0f));
+
+//        criterias.add(Criteria.where(Constants.STARTDATE).lte(currentTime).andOperator(
+//                new Criteria().orOperator(Criteria.where(Constants.ENDDATE).is(0), Criteria.where(Constants.ENDDATE).gte(currentTime))));
+
 	}
 }
