@@ -54,8 +54,7 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		if (Objects.isNull(employee)) {
 			return "Employee not found.";
 		} else {
-			employeeRepository.deleteById(employee);
-			return "Employee Deleted Successfully";
+			return employeeRepository.deleteById(employee)+" Employee Deleted Successfully";
 		}
 	}
 }

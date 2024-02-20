@@ -26,8 +26,8 @@ public class EmployeeRepository {
 		return mongoTemplate.findAll(Employee.class);
 	}
 
-	public void deleteById(Employee employee) {
-		mongoTemplate.remove(employee);
+	public Long deleteById(Employee employee) {
+		return mongoTemplate.remove(employee).getDeletedCount();
 	}
 
 }
