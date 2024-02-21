@@ -15,4 +15,10 @@ public interface MongoTemplateService {
 	public Employee updateEmployee(String id, String name);
 
 	public String deleteEmployee(String id);
+
+	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary);
+
+	public List<Employee> getEmployeeBySalary(Float salary);
+
+	public void testCriteriaWithMongoTemplate();
 }

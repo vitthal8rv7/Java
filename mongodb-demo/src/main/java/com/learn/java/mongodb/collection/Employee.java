@@ -32,7 +32,7 @@ public class Employee implements Serializable {
 
 	// It's used to indicate that a particular property of a Java class should be
 	// ignored during JSON (de)serialization.
-	@JsonIgnore
+//	@JsonIgnore
 	private String department;
 
 	/*
@@ -51,7 +51,7 @@ public class Employee implements Serializable {
 	 * the value of a property from JSON.
 	 */
 	// change field name salary to sal in response view
-	@JsonSetter("sal")
+//	@JsonSetter("sal")
 	private Float salary;
 	
 	private Date dateOfJoining;
