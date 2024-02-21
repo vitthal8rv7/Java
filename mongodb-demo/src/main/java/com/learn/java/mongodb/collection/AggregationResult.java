@@ -18,5 +18,5 @@ public class AggregationResult implements Serializable {
 	private String _id;
 	private Float totalSalary;
 	private Float averageSalary;
-//	private String name;
+	private String length;
 }
