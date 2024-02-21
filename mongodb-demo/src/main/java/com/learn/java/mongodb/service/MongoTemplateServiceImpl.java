@@ -367,7 +367,6 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
 		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
 
-
 		// Match + Group + Project (Not Working)
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
@@ -376,6 +375,5 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				Aggregation.project("_id", "totalSalary", "salary"));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
 		LOGGER.info("group: " + agrResult.getMappedResults());
-
 	}
 }
