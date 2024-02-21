@@ -72,10 +72,10 @@ public class EmployeeRepository {
 		return new PageImpl<>(employees, pageable, count);
 	}
 
-	public AggregationResults<String> aggregate(Aggregation aggregation, Class<String> classType) {
+	public <T> AggregationResults<T> aggregate(Aggregation aggregation,
+			Class<T> classType) {
 		return mongoTemplate.aggregate(aggregation, Employee.class, classType);
 	}
-
 	
 	
 	

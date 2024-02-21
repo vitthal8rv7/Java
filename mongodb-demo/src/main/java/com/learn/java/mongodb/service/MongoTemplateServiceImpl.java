@@ -19,6 +19,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mongodb.collection.AggregationResult;
 import com.learn.java.mongodb.collection.Employee;
 import com.learn.java.mongodb.repository.EmployeeRepository;
 
@@ -280,16 +281,94 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				"[Criteria_List] Fetch employees whose city = city142, name=name450, salary=gt(12345) And lt(51234) "
 						+ employeeRepository.getDataInList(query, Employee.class));
 
-		Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
-				Aggregation.group("department").avg("salary").as("averageSalary"));
-		AggregationResults<String> s = employeeRepository.aggregate(aggregation, String.class);
-		LOGGER.info("avg: "+ s.getRawResults().toJson());
+		Aggregation aggregation = null;
+		AggregationResults<Employee> agrEmployeeResult = null;
+		AggregationResults<AggregationResult> agrResult = null;
 		
+		// Match + Group + Average
+		aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
+				Aggregation.group("department").avg("salary").as("averageSalary"));
+		agrResult = employeeRepository.aggregate(aggregation,
+				AggregationResult.class);
+		LOGGER.info("avg: " + agrResult.getRawResults().toJson());
+
+		// Match + Group + Sum
 		aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
 				Aggregation.group("department").sum("salary").as("totalSalary"));
-		aggregation.sort(Sort.by(Sort.Direction.DESC, "salary"));
-		s = employeeRepository.aggregate(aggregation, String.class);
-		LOGGER.info("sum: "+ s.getRawResults().toJson());
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("sum: " + agrResult.getMappedResults());
 
+		// Match + Group + Average + . Operator
+		aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
+				Aggregation.group("addresses.city").avg("salary").as("averageSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("avg: " + agrResult.getMappedResults());
+
+		// Match + Group + Sum + AndOperator
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department").sum("salary").as("totalSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("sum: " + agrResult.getMappedResults());
+
+		// Match + Group 
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("group: " + agrResult.getMappedResults());
+		
+		// Match + Group + Group (all possible combinations of name and department as a Id field for group)
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department", "name"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("group + group: " + agrResult.getMappedResults());
+		
+		//Group Them Match (not Recommended)
+		aggregation = Aggregation.newAggregation(Aggregation.group("salary"), 
+				Aggregation.match(new Criteria().andOperator(Criteria.where("_id").gte(12345.0),
+						Criteria.where("_id").lte(42345.0))));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("match then group: " + agrResult.getMappedResults());
+
+		// Match + Group + Sort
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("group: " + agrResult.getMappedResults());
+
+		// Match + Group + Sort
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("group: " + agrResult.getMappedResults());
+
+		
+		// Match + Group + Limit + Skip
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))), Aggregation.limit(4), Aggregation.skip(1));
+		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
+		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
+
+		//Employee.class response
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(41234.0))),
+				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
+		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
+		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
+
+		
+		
+		
 	}
 }
