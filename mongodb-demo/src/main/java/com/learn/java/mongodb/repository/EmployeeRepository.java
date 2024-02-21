@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
@@ -64,12 +66,17 @@ public class EmployeeRepository {
 		}
 	}
 
-	public PageImpl<Employee> getDateWithPagination(Query query, Pageable pageable, Class<Employee> class1) {
+	public PageImpl<Employee> getDateWithPagination(Query query, Pageable pageable, Class<Employee> classType) {
 		List<Employee> employees = getDataInList(query, Employee.class);
 		Long count = mongoTemplate.count(query, Employee.class);
 		return new PageImpl<>(employees, pageable, count);
 	}
 
+	public AggregationResults<String> aggregate(Aggregation aggregation, Class<String> classType) {
+		return mongoTemplate.aggregate(aggregation, Employee.class, classType);
+	}
+
+	
 	
 	
 }

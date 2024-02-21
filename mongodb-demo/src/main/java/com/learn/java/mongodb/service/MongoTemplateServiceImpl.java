@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -277,6 +279,17 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		LOGGER.info(
 				"[Criteria_List] Fetch employees whose city = city142, name=name450, salary=gt(12345) And lt(51234) "
 						+ employeeRepository.getDataInList(query, Employee.class));
+
+		Aggregation aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
+				Aggregation.group("department").avg("salary").as("averageSalary"));
+		AggregationResults<String> s = employeeRepository.aggregate(aggregation, String.class);
+		LOGGER.info("avg: "+ s.getRawResults().toJson());
+		
+		aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("salary").gte(12345.0)),
+				Aggregation.group("department").sum("salary").as("totalSalary"));
+		aggregation.sort(Sort.by(Sort.Direction.DESC, "salary"));
+		s = employeeRepository.aggregate(aggregation, String.class);
+		LOGGER.info("sum: "+ s.getRawResults().toJson());
 
 	}
 }
