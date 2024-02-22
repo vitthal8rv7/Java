@@ -1,8 +1,8 @@
 package com.learn.java.mongodb.repository;
 
 import java.util.List;
-import java.util.function.LongSupplier;
 
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,6 +87,10 @@ public class EmployeeRepository {
 		return mongoTemplate.aggregate(aggregation, Employee.class, classType);
 	}
 	
+	public AggregationResults<Document> aggregateDoc(Aggregation aggregation) {
+		return mongoTemplate.aggregate(aggregation, Employee.class, Document.class);
+	}
 	
+		
 	
 }

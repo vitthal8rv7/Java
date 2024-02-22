@@ -15,6 +15,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.core.aggregation.GroupOperation;
+import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
+import org.springframework.data.mongodb.core.aggregation.SortOperation;
+import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.support.PageableExecutionUtils;
@@ -328,7 +333,6 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		LOGGER.info("---Employee-Page----getPageable : " + employeesPage.getPageable());
 		LOGGER.info("---Employee-Page----getSort : " + employeesPage.getSort());
 
-
 		Aggregation aggregation = null;
 		AggregationResults<Employee> agrEmployeeResult = null;
 		AggregationResults<AggregationResult> agrResult = null;
@@ -503,6 +507,30 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				Aggregation.group("department").max("salary").as("totalSalary"));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
 		LOGGER.info("Type : " + agrResult.getMappedResults());
+
+		UnwindOperation unwindOperation = Aggregation.unwind("addresses");
+		SortOperation sortOperation = Aggregation.sort(Sort.Direction.DESC, "salary");
+		GroupOperation groupOperation = Aggregation.group("addresses.city").first(Aggregation.ROOT).as("highestPaid");
+		Aggregation newAggregation = Aggregation.newAggregation(unwindOperation, sortOperation, groupOperation);
+		LOGGER.info("newAggregation way : " + employeeRepository.aggregateDoc(newAggregation).getMappedResults());
+		aggregation = Aggregation.newAggregation(Aggregation.unwind("addresses"),
+				Aggregation.sort(Sort.Direction.DESC, "salary"),
+				Aggregation.group("addresses.city").first(Aggregation.ROOT).as("highestPaid"));
+		LOGGER.info("oldAggregation way : " + employeeRepository.aggregateDoc(aggregation).getMappedResults());
+
+//		UnwindOperation unwindOperation2 = Aggregation.unwind("addresses");
+//		SortOperation sortOperation2 = Aggregation.sort(Sort.Direction.DESC, "salary");
+//		GroupOperation groupOperation2 = Aggregation.group("addresses.city").first(Aggregation.ROOT).as("highestPaid");
+//		Aggregation newAggregation2 = Aggregation.newAggregation(sortOperation2, groupOperation2);
+//		LOGGER.info("newAggregation2 : " +employeeRepository.aggregateDoc(newAggregation2).getMappedResults());
+
+		UnwindOperation unwindOperation2 = Aggregation.unwind("addresses");
+		SortOperation sortOperation2 = Aggregation.sort(Sort.Direction.DESC, "salary");
+		GroupOperation groupOperation2 = Aggregation.group("addresses.city").first(Aggregation.ROOT).as("highestPaid");
+		ProjectionOperation projectionOperation2 = Aggregation.project().andExpression("_id").as("id")
+				.andExpression("highestPaid", "hp").as("newProjection");
+		Aggregation newAggregation2 = Aggregation.newAggregation(unwindOperation2, sortOperation2, groupOperation2, projectionOperation2);
+		LOGGER.info("newAggregation2 : " + employeeRepository.aggregateDoc(newAggregation2).getMappedResults());
 
 	}
 }
