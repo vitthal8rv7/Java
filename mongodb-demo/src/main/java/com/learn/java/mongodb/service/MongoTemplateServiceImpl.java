@@ -87,10 +87,10 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		Query query = null;
 
 		// Update
-		query = new Query(Criteria.where("_id").is("45"));
-		Update update = new Update().set("name", "name450");
-		LOGGER.info("[Update] : Update by id. Updated employee count is : "
-				+ employeeRepository.update(query, update, Employee.class));
+//		query = new Query(Criteria.where("_id").is("45"));
+//		Update update = new Update().set("name", "name450");
+//		LOGGER.info("[Update] : Update by id. Updated employee count is : "
+//				+ employeeRepository.update(query, update, Employee.class));
 
 		// Delete
 //		query = new Query(Criteria.where("_id").is("45"));
@@ -332,20 +332,33 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
 		LOGGER.info("match then group: " + agrResult.getMappedResults());
 
-		// Match + Group + Sort
+		// Sort
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
 						Criteria.where("salary").lt(41234.0))),
 				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group: " + agrResult.getMappedResults());
+		LOGGER.info("Sort: " + agrResult.getMappedResults());
 
-		// Match + Group + Limit + Skip
+		// Limit + Skip (apply limit on result)
+		// Limit how many result document you want to in return.
 		aggregation = Aggregation.newAggregation(Aggregation.match(new Criteria()
 				.andOperator(Criteria.where("salary").gte(12345.0), Criteria.where("salary").lt(41234.0))),
 				Aggregation.limit(4), Aggregation.skip(1));
 		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
-		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
+		LOGGER.info("Limit + Skip: " + agrEmployeeResult.getMappedResults());
+
+		// Limit the input --> apply aggregation on limited documents
+		// Instead of all documents Limit the documents which application pick from the
+		// collection for this testing/execution of this aggregation
+		aggregation = Aggregation.newAggregation(Aggregation.limit(3),
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(51234.0))),
+				Aggregation.group("department").sum("salary").as("totalSalary"),
+				Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalSalary")),
+				Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")), Aggregation.out("temp"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Mlti-sort + Store in temp collection + limit : " + agrResult.getMappedResults());
 
 		// Employee.class response
 		aggregation = Aggregation.newAggregation(
@@ -353,17 +366,26 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 						Criteria.where("salary").lt(41234.0))),
 				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
 		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
-		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
+		LOGGER.info("Employee.class response : " + agrEmployeeResult.getMappedResults());
 
-		// Match + Group + Count
+		// Count-TotalCountOfGroups (number of groups in collection)
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
 						Criteria.where("salary").lt(41234.0))),
 				Aggregation.group("department"), Aggregation.count().as("length"));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group: " + agrResult.getMappedResults());
+		LOGGER.info("Number of groups in collection: " + agrResult.getMappedResults());
 
-		// Match + Group + Sort by totalSalary if totalSalary is same then sort by _id
+		// Count-GroupWiseTotalDocumentsCount (Number of documents in each group)
+		aggregation = Aggregation
+				.newAggregation(
+						Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+								Criteria.where("salary").lt(41234.0))),
+						Aggregation.group("department").count().as("length"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Number of documents in each group: " + agrResult.getMappedResults());
+
+		// Multiple Sort by totalSalary if totalSalary is same then sort by _id
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
 						Criteria.where("salary").lt(51234.0))),
@@ -371,9 +393,9 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				Aggregation.project("_id", "totalSalary", "salary"),
 				Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalSalary", "_id")));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group + multi-sort: " + agrResult.getMappedResults());
+		LOGGER.info("Multiple-Sort: " + agrResult.getMappedResults());
 
-		// Applied only final sort which is sort by _id
+		// Multilevel Sort : applied only final sort which is sort by _id
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
 						Criteria.where("salary").lt(51234.0))),
@@ -382,40 +404,56 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalSalary")),
 				Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group+ multi-sort: " + agrResult.getMappedResults());
+		LOGGER.info("Multilevel-Sort: " + agrResult.getMappedResults());
 
-		
-		// Match + Group + Project (Not Working)
+		// Project (Not Working)
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
 						Criteria.where("salary").lt(41234.0))),
-				Aggregation.group("department"), 
-				Aggregation.project("_id", "totalSalary", "salary"));
+				Aggregation.group("department"), Aggregation.project("_id", "totalSalary", "salary"));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group: " + agrResult.getMappedResults());
+		LOGGER.info("Project : " + agrResult.getMappedResults());
 
-		// Match + Group + Limit + Skip
+		// Applied only final sort which is sort by _id and Store in collection temp
 		aggregation = Aggregation.newAggregation(
 				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
-						Criteria.where("salary").lt(41234.0))), Aggregation.limit(4), Aggregation.skip(1));
-		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
-		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
-
-		//Employee.class response
-		aggregation = Aggregation.newAggregation(
-				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
-						Criteria.where("salary").lt(41234.0))),
-				Aggregation.group("department"), Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")));
-		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
-		LOGGER.info("group: " + agrEmployeeResult.getMappedResults());
-
-		// Match + Group + Project (Not Working)
-		aggregation = Aggregation.newAggregation(
-				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
-						Criteria.where("salary").lt(41234.0))),
-				Aggregation.group("department"), 
-				Aggregation.project("_id", "totalSalary", "salary"));
+						Criteria.where("salary").lt(51234.0))),
+				Aggregation.group("department").sum("salary").as("totalSalary"),
+				Aggregation.project("_id", "totalSalary", "salary"),
+				Aggregation.sort(Sort.by(Sort.Direction.DESC, "totalSalary")),
+				Aggregation.sort(Sort.by(Sort.Direction.DESC, "_id")), Aggregation.out("temp"));
 		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
-		LOGGER.info("group: " + agrResult.getMappedResults());
+		LOGGER.info("Multi-Sort + Store in temp collection : " + agrResult.getMappedResults());
+
+		// Unwind
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(51234.0))),
+				Aggregation.unwind("addresses"), Aggregation.group("addresses").sum("salary").as("totalSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Unwind : " + agrResult.getMappedResults());
+
+		// Min
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(51234.0))),
+				Aggregation.group("department").min("salary").as("totalSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Min : " + agrResult.getMappedResults());
+
+		// Max
+		aggregation = Aggregation.newAggregation(
+				Aggregation.match(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
+						Criteria.where("salary").lt(51234.0))),
+				Aggregation.group("department").max("salary").as("totalSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Max : " + agrResult.getMappedResults());
+
+		// Type
+		aggregation = Aggregation.newAggregation(Aggregation.match(Criteria.where("name").type(16)),
+				Aggregation.group("department").max("salary").as("totalSalary"));
+		agrResult = employeeRepository.aggregate(aggregation, AggregationResult.class);
+		LOGGER.info("Type : " + agrResult.getMappedResults());
+
 	}
 }
