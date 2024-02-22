@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,11 +17,13 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mongodb.collection.AggregationResult;
 import com.learn.java.mongodb.collection.Employee;
 import com.learn.java.mongodb.repository.EmployeeRepository;
+import com.learn.java.mongodb.util.MongoUtility;
 
 @Service
 public class MongoTemplateServiceImpl implements MongoTemplateService {
@@ -71,7 +74,9 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 	@Override
 	public List<Employee> getEmployeeBySalaryBetween(Float minSalary, Float maxSalary) {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("salary").gte(minSalary).andOperator(Criteria.where("salary").lt(maxSalary)));
+//		query.addCriteria(Criteria.where("salary").gte(minSalary).andOperator(Criteria.where("salary").lt(maxSalary)));
+		query.addCriteria(Criteria.where("salary").gte(minSalary).lt(maxSalary));
+		query.fields().include("salary");
 		return employeeRepository.getDataInList(query, Employee.class);
 	}
 
@@ -125,11 +130,11 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				"[Sort_And_Pageable] : Employee list whose salary greater than given salary with Sort and Pageable: "
 						+ employeeRepository.getDataInList(query, Employee.class));
 		PageImpl<Employee> employees = employeeRepository.getDateWithPagination(query, pageable, Employee.class);
+//		Page<Employee> employeesPage = employeeRepository.getDateWithPage(query, pageable, Employee.class);
 		LOGGER.info(
 				"[Sort_And_Pageable_Complete_Response] : Employee list whose salary greater than given salary with Sort and Pageable: "
 						+ employees.getPageable() + " Size : " + employees.getSize() + " Total Pages : "
 						+ employees.getTotalPages() + " Data: " + employees.getContent());
-//		Page<Document> docPage = PageableExecutionUtils.getPage(books, pageable, () -> mongoTemplate.count (query, "books"));
 
 		// AND
 		Float minSalary = 12345.0f;
@@ -264,24 +269,66 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 
 		// The $elemMatch operator matches documents that contain an array field with at
 		// least one element that matches all the specified query criteria.
-
 		query = new Query();
-		List<Criteria> criterias = new ArrayList<>();
-		criterias.add(Criteria.where("addresses.city").is("city142"));
-		criterias.add(Criteria.where("name").is("name450"));
-		criterias.add(new Criteria().andOperator(Criteria.where("salary").gte(12345.0),
-				Criteria.where("salary").lt(51234.0)));
-		if (criterias.size() > 0) {
-			query.addCriteria(new Criteria().andOperator(criterias.toArray(new Criteria[criterias.size()])));
-		}
-		query.fields().include("name", "salary", "addresses.city");
 		query.with(Sort.by(Sort.Direction.DESC, "salary"));
+		query.addCriteria(new Criteria().andOperator(Criteria.where("salary").gte(12345.0f),
+				Criteria.where("salary").lt(51234.0f)));
+		query.addCriteria(Criteria.where("name").is("name450"));
+		query.addCriteria(Criteria.where("addresses").elemMatch(Criteria.where("city").is("city142")));
+		query.fields().include("name", "salary", "addresses.city");
 		LOGGER.info(
 				"[Criteria_List] Fetch employees whose city = city142, name=name450, salary=gt(12345) And lt(51234) "
 						+ employeeRepository.getDataInList(query, Employee.class));
 
-		
-		
+//		modify, if emtpy all data should printed, use util class for more readable code
+		Sort newSort = Sort.by(Sort.Direction.DESC, "salary");
+		Pageable newPageable = PageRequest.of(1, 3, newSort);
+		Query newQuery = new Query();
+		List<Criteria> criterias = new ArrayList<>();
+
+		String newCity = "city141";
+		if (MongoUtility.isStringNotEmpty(newCity)) {
+			LOGGER.info("------in new city------");
+			criterias.add(Criteria.where("addresses.city").is(newCity));
+		}
+
+		String newName = "name44";
+		if (MongoUtility.isStringNotEmpty(newName)) {
+			LOGGER.info("------in new name------");
+			criterias.add(Criteria.where("name").is(newName));
+		}
+
+		Float newMinSalary = 12345.0f;
+		Float newMaxSalary = 51234.0f;
+		if (MongoUtility.isFloatNotEmpty(newMinSalary) && MongoUtility.isFloatNotEmpty(newMaxSalary)) { // 1 & 1
+			LOGGER.info("------in new salary------");
+			criterias.add(new Criteria().andOperator(Criteria.where("salary").gte(newMinSalary),
+					Criteria.where("salary").lt(newMaxSalary)));
+		} else if (MongoUtility.isFloatNotEmpty(newMinSalary)) { // 1 & 0
+			criterias.add(new Criteria().andOperator(Criteria.where("salary").gte(newMinSalary)));
+		} else if (MongoUtility.isFloatNotEmpty(newMaxSalary)) { // 0 & 1
+			criterias.add(new Criteria().andOperator(Criteria.where("salary").lt(newMaxSalary)));
+		} // else 0 & 0
+
+		if (MongoUtility.isCriteriaNotEmpty(criterias)) {
+			LOGGER.info("------in new criterias------");
+			newQuery.addCriteria(new Criteria().andOperator(criterias.toArray(new Criteria[criterias.size()])));
+		}
+		newQuery.fields().include("salary");
+		Page<Employee> employeesPage = employeeRepository.getDateWithPage(newQuery, pageable, Employee.class);
+		LOGGER.info("---Employee-Page----: " + employeesPage);
+		LOGGER.info("---Employee-Page----getContent : " + employeesPage.getContent());
+		LOGGER.info("[Criteria_List] " + employeeRepository.getDataInList(newQuery, Employee.class));
+		LOGGER.info("---Employee-Page----getNumber : " + employeesPage.getNumber());
+		LOGGER.info("---Employee-Page----getNumberOfElements : " + employeesPage.getNumberOfElements());
+		LOGGER.info("---Employee-Page----getSize : " + employeesPage.getSize());
+		LOGGER.info("---Employee-Page----getTotalElements : " + employeesPage.getTotalElements());
+		LOGGER.info("---Employee-Page----getTotalPages : " + employeesPage.getTotalPages());
+		LOGGER.info("---Employee-Page----Stream : " + employeesPage.get().distinct());
+		LOGGER.info("---Employee-Page----getPageable : " + employeesPage.getPageable());
+		LOGGER.info("---Employee-Page----getSort : " + employeesPage.getSort());
+
+
 		Aggregation aggregation = null;
 		AggregationResults<Employee> agrEmployeeResult = null;
 		AggregationResults<AggregationResult> agrResult = null;

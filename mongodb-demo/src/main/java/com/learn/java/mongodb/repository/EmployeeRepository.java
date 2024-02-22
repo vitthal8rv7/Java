@@ -1,10 +1,12 @@
 package com.learn.java.mongodb.repository;
 
 import java.util.List;
+import java.util.function.LongSupplier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -12,6 +14,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
 
 import com.learn.java.mongodb.collection.Employee;
@@ -70,6 +73,13 @@ public class EmployeeRepository {
 		List<Employee> employees = getDataInList(query, Employee.class);
 		Long count = mongoTemplate.count(query, Employee.class);
 		return new PageImpl<>(employees, pageable, count);
+	}
+	
+	public Page<Employee> getDateWithPage(Query query, Pageable pageable, Class<Employee> classType) {
+		return PageableExecutionUtils.getPage(mongoTemplate.find(query, Employee.class), 
+				pageable, () -> mongoTemplate.count(query.skip(0).limit(0), Employee.class));
+//				() -> {return 0l;});
+//		LongSupplier ls =  () -> {return 0l;};
 	}
 
 	public <T> AggregationResults<T> aggregate(Aggregation aggregation,
