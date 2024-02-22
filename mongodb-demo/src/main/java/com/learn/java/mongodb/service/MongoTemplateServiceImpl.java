@@ -16,7 +16,6 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mongodb.collection.AggregationResult;
@@ -281,6 +280,8 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 				"[Criteria_List] Fetch employees whose city = city142, name=name450, salary=gt(12345) And lt(51234) "
 						+ employeeRepository.getDataInList(query, Employee.class));
 
+		
+		
 		Aggregation aggregation = null;
 		AggregationResults<Employee> agrEmployeeResult = null;
 		AggregationResults<AggregationResult> agrResult = null;
@@ -348,6 +349,7 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		agrEmployeeResult = employeeRepository.aggregate(aggregation, Employee.class);
 		LOGGER.info("Limit + Skip: " + agrEmployeeResult.getMappedResults());
 
+		// Limit + Out
 		// Limit the input --> apply aggregation on limited documents
 		// Instead of all documents Limit the documents which application pick from the
 		// collection for this testing/execution of this aggregation
