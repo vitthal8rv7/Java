@@ -19,10 +19,13 @@ import org.springframework.data.mongodb.core.aggregation.GroupOperation;
 import org.springframework.data.mongodb.core.aggregation.ProjectionOperation;
 import org.springframework.data.mongodb.core.aggregation.SortOperation;
 import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.support.PageableExecutionUtils;
+import org.springframework.data.mongodb.core.query.TextCriteria;
+import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mongodb.collection.AggregationResult;
@@ -532,5 +535,84 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		Aggregation newAggregation2 = Aggregation.newAggregation(unwindOperation2, sortOperation2, groupOperation2, projectionOperation2);
 		LOGGER.info("newAggregation2 : " + employeeRepository.aggregateDoc(newAggregation2).getMappedResults());
 
+		
+		
+		
+		//Indexing
+		/*
+		 * 1.) Create Index: DONE
+		 * 2.) List Index: DONE
+		 * 3.) Queries using indexes: 
+		 * 4.) Performance difference between index and non-index search operation (explain query + theory)
+		 * 5.) Tips
+		 * */
+		
+		
+//		1.) Create Index
+//		String indexFieldName = "name";
+//		LOGGER.info("Index created with name: "+ employeeRepository.createIndex(indexFieldName, Sort.Direction.ASC, Employee.class));
+	
+//		2.) List Index
+		LOGGER.info("List all indexes created for Employee collection: "+ employeeRepository.listIndex(Employee.class));
+		
+//		3.) Queries using indexes:
+		query = new Query();
+		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));
+		LOGGER.info("select Employees whose name is name14: "+ employeeRepository.getData(query, Employee.class));
+		
+		query = new Query();
+		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));		
+			
+/*
+ * 
+ * Query with Text Search and Projection:
+@Query(value = "{ $text : { $search : ?0 } }", fields = "{ 'score': { $meta: 'textScore' } }")
+    List<User> findByTextSearchWithProjection(String keyword);
+}
+This query performs a text search across multiple fields in the document and projects the text score in the result.
+
+Query with Inverse Text Search:
+ @Query("{ $text : { $search : ?0 }, 'username' : { $nin : [?0] } }")
+    List<User> findByTextSearchExcludingUsername(String keyword);
+}
+This query performs a text search across multiple fields in the document but excludes users whose username matches the search keyword.
+
+Query with Text Search and Score:
+ @Query(value = "{ $text : { $search : ?0 }, $meta: 'textScore' }", sort = "{ 'score': { $meta: 'textScore' } }")
+    List<User> findByTextSearchWithScore(String keyword);
+}
+This query performs a text search across multiple fields in the document and sorts the results by text score.
+ * */
+
+		/*
+		 * Indexing
+		 * 
+		 * Create Index
+		 * 	1.) separate data structure will created with (indexing field and memory location of each document which match with it)  
+		 * 		a.) created index on field_1 and unique then 1 field_1 link to 1 memory location of document
+		 * 		b.) created index on field_1 and not unique then group by (field_1) link to 1/multiple memory location of document
+		 * 		c.) data is always sorted.
+		 * 		d.) used B-tree (balance tree) to store index
+		 * 		e.) very fast searching operation and very low add/update/delete operation 
+		 * 
+		 * 		If In Find query finding on index, with projection value only index field then MongoDB will not go to collection for finding 
+		 * 			document, it will directly searches from indexes and return the result.
+		 * 
+		 * Type
+		 * 	2.) 
+		 * 		a.) Single Field Indexes
+		 * 		b.) Compound Indexes
+		 * 		c.) Multikey Indexes (Indexes on Array Fields)
+		 * 		d.) Text Indexes
+		 * 		e.) Clustered Indexes
+		 * 		f.) Geospatial Indexes
+		 * 		g.) Unique Indexes
+		 * 		h.) Search Indexes 
+		 * */
+		 
+		
+		
+		
+		
 	}
 }
