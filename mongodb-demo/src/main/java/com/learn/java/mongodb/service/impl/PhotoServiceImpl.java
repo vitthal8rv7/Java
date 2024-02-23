@@ -25,10 +25,6 @@ public class PhotoServiceImpl implements PhotoService {
 	@Override
 	public String addPhoto(MultipartFile image) {
 
-		LOGGER.info("image.getName(): " + image.getName());
-		LOGGER.info("image.getOriginalFilename(): " + image.getOriginalFilename());
-		LOGGER.info("image.getSize(): " + image.getSize());
-
 		Photo photo = new Photo();
 		photo.setTitle(image.getOriginalFilename());
 		try {
