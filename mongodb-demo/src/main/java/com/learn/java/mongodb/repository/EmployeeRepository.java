@@ -9,21 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.index.Index;
-import org.springframework.data.mongodb.core.index.IndexFilter;
 import org.springframework.data.mongodb.core.index.IndexInfo;
-import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.index.TextIndexDefinition;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.TextCriteria;
-import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
-import org.springframework.util.StringUtils;
 
 import com.learn.java.mongodb.collection.Employee;
 
@@ -61,17 +58,6 @@ public class EmployeeRepository {
 
 	public <T> List<T> getDataInList(Query query, Class<T> classType) {
 		try {
-			return mongoTemplate.find(query, classType);			
-		} catch (Exception e) {
-			LOGGER.error("No Data Found.");
-			return null;
-		}
-	}
-	
-	public <T> List<T> getDataInListWithQueryExplain(Query query, Class<T> classType) {
-		try {
-			System.out.println("\n\n\n\n"+ mongoTemplate.getCollection(""+classType).find(query.getQueryObject()).explain());
-//			System.out.println("\n\n\n\n"+ mongoTemplate.getCollection(""+classType).find(query.getQueryObject()).explain().toJson());
 			return mongoTemplate.find(query, classType);
 		} catch (Exception e) {
 			LOGGER.error("No Data Found.");
@@ -79,6 +65,17 @@ public class EmployeeRepository {
 		}
 	}
 
+	public <T> List<T> getDataInListWithQueryExplain(Query query, Class<T> classType) {
+		try {
+			System.out.println(
+					"\n\n\n\n" + mongoTemplate.getCollection("" + classType).find(query.getQueryObject()).explain());
+//			System.out.println("\n\n\n\n"+ mongoTemplate.getCollection(""+classType).find(query.getQueryObject()).explain().toJson());
+			return mongoTemplate.find(query, classType);
+		} catch (Exception e) {
+			LOGGER.error("No Data Found.");
+			return null;
+		}
+	}
 
 	public <T> T getData(Query query, Class<T> classType) {
 		try {
@@ -143,23 +140,25 @@ public class EmployeeRepository {
 //		Index index = new Index();
 //		index.on(indexFieldName, sortingOrder).background().unique().partial(indexFilter);
 //		return mongoTemplate.indexOps(collectionType).ensureIndex(index);
-		
+
 		Index index = new Index();
 		index.on(indexFieldName, sortingOrder).background().unique();
-		return mongoTemplate.indexOps(collectionType).ensureIndex(index);
+		return mongoTemplate.indexOps(collectionType.getClass().getName()).ensureIndex(index);
 	}
 
 	public <T> List<IndexInfo> listIndex(Class<T> collectionType) {
-		return mongoTemplate.indexOps(collectionType).getIndexInfo();
+		return mongoTemplate.indexOps(collectionType.getClass().getName()).getIndexInfo();
 	}
 
-	public <T> List<IndexInfo> listIndex2(Class<T> collectionType) {
+	public <T> String createTextIndex(Class<T> collectionType, String... fieldNames) {
+		TextIndexDefinition textIndex = new TextIndexDefinition.TextIndexDefinitionBuilder()
+				.onFields(fieldNames)
+				.build();
+		return mongoTemplate.indexOps(collectionType.getClass().getName()).ensureIndex(textIndex);
+	}
 
-		// Query
-		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny("name");
-		Query query = TextQuery.queryText(criteria);		
-		mongoTemplate.find(query, collectionType);
-		return mongoTemplate.indexOps(collectionType).getIndexInfo();
+	public <T> List<T> textSearch(Query query, Class<T> collectionType) {
+		return mongoTemplate.find(query, collectionType);
 	}
 
 }

@@ -560,9 +560,25 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));
 		LOGGER.info("select Employees whose name is name14: "+ employeeRepository.getDataInListWithQueryExplain(query, Employee.class));
 		
-		query = new Query();
-		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));		
-			
+		//create text index
+//		employeeRepository.createTextIndex(Employee.class, "name", "department");
+		// Query
+//		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny("name");
+//		query = TextQuery.queryText(criteria);		
+//		LOGGER.info("text search: "+ employeeRepository.textSearch(query, Employee.class));
+
+		
+		
+//		@CompoundIndexes({
+//			@CompoundIndex(name = "customIndex", def = "{'fieldOne' : 1, 'fieldTwo': 1}")
+//			})
+//			public class Entity {}
+//			In spring boot JPA Mongo repository.
+//
+//			I think it depends from the Spring Data Mongodb version used in the project, from 3.0 automatic index creation is turned off by default. 
+//			You can enable it from configurations with spring.data.mongodb.auto-index-creation=true 
+
+		
 /*
  * 
  * Query with Text Search and Projection:
@@ -584,47 +600,6 @@ Query with Text Search and Score:
 This query performs a text search across multiple fields in the document and sorts the results by text score.
  * */
 
-		/*
-		 * Indexing
-		 * 
-		 * 
-		 * Type
-		 * 	2.) 
-		 * 		a.) Single Field Indexes
-		 * 		b.) Compound Indexes
-		 * 		c.) Multikey Indexes (Indexes on Array Fields)
-		 * 		d.) Text Indexes
-		 * 		e.) Clustered Indexes
-		 * 		f.) Geospatial Indexes
-		 * 		g.) Unique Indexes
-		 * 		h.) Search Indexes 
-		 * 
-		 * 
-		 * 
-		 *                     
-I think this is the more appropriate approach.
-@CompoundIndexes({
-@CompoundIndex(name = "customIndex", def = "{'fieldOne' : 1, 'fieldTwo': 1}")
-})
-public class Entity {}
-In spring boot JPA Mongo repository.
-
-I think it depends from the Spring Data Mongodb version used in the project, from 3.0 automatic index creation is turned off by default. 
-You can enable it from configurations with spring.data.mongodb.auto-index-creation=true 
-		 *      
-		 *      
-		 *      
- Create index: https://www.baeldung.com/spring-data-mongodb-index-annotations-converter
-		 *      
-		 *      
-		 *      
-		 *      
-		 *      
-		 * */
-		 
-		
-		
-		
 		
 	}
 }
