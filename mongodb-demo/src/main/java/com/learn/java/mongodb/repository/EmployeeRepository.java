@@ -2,8 +2,6 @@ package com.learn.java.mongodb.repository;
 
 import java.util.List;
 
-import javax.print.attribute.standard.Sides;
-
 import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,19 +14,18 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.index.Index;
+import org.springframework.data.mongodb.core.index.IndexFilter;
 import org.springframework.data.mongodb.core.index.IndexInfo;
-import org.springframework.data.mongodb.core.index.IndexOperations;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition;
-import org.springframework.data.mongodb.core.index.TextIndexDefinition.TextIndexDefinitionBuilder;
+import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.core.query.TextQuery;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import com.learn.java.mongodb.collection.Employee;
-import com.learn.java.mongodb.service.Product;
 
 @Repository
 public class EmployeeRepository {
@@ -64,12 +61,24 @@ public class EmployeeRepository {
 
 	public <T> List<T> getDataInList(Query query, Class<T> classType) {
 		try {
+			return mongoTemplate.find(query, classType);			
+		} catch (Exception e) {
+			LOGGER.error("No Data Found.");
+			return null;
+		}
+	}
+	
+	public <T> List<T> getDataInListWithQueryExplain(Query query, Class<T> classType) {
+		try {
+			System.out.println("\n\n\n\n"+ mongoTemplate.getCollection(""+classType).find(query.getQueryObject()).explain());
+//			System.out.println("\n\n\n\n"+ mongoTemplate.getCollection(""+classType).find(query.getQueryObject()).explain().toJson());
 			return mongoTemplate.find(query, classType);
 		} catch (Exception e) {
 			LOGGER.error("No Data Found.");
 			return null;
 		}
 	}
+
 
 	public <T> T getData(Query query, Class<T> classType) {
 		try {
@@ -85,46 +94,72 @@ public class EmployeeRepository {
 		Long count = mongoTemplate.count(query, Employee.class);
 		return new PageImpl<>(employees, pageable, count);
 	}
-	
+
 	public Page<Employee> getDateWithPage(Query query, Pageable pageable, Class<Employee> classType) {
-		return PageableExecutionUtils.getPage(mongoTemplate.find(query, Employee.class), 
-				pageable, () -> mongoTemplate.count(query.skip(0).limit(0), Employee.class));
+		return PageableExecutionUtils.getPage(mongoTemplate.find(query, Employee.class), pageable,
+				() -> mongoTemplate.count(query.skip(0).limit(0), Employee.class));
 //				() -> {return 0l;});
 //		LongSupplier ls =  () -> {return 0l;};
 	}
 
-	public <T> AggregationResults<T> aggregate(Aggregation aggregation,
-			Class<T> classType) {
+	public <T> AggregationResults<T> aggregate(Aggregation aggregation, Class<T> classType) {
 		return mongoTemplate.aggregate(aggregation, Employee.class, classType);
 	}
-	
+
 	public AggregationResults<Document> aggregateDoc(Aggregation aggregation) {
 		return mongoTemplate.aggregate(aggregation, Employee.class, Document.class);
 	}
 
 	public <T> String createIndex(String indexFieldName, Direction sortingOrder, Class<T> collectionType) {
-		return mongoTemplate.indexOps(collectionType).ensureIndex(new Index().on(indexFieldName, sortingOrder));
+//		Document document = new Document();
+//		  if (StringUtils.hasText(indexFieldName)) {
+//		    document.put("name", indexFieldName+"_1");
+//		  }
+//		  
+//		  Boolean unique = true; //set false if you want duplicates 
+//		  if (unique) {
+//		    document.put("unique", true);
+//		  }
+//		  
+//		  Boolean sparse = true; 
+//		  if (sparse) {
+//		    document.put("sparse", true);
+//		  }
+//		  
+//		  Boolean background = true; //create index in background
+//		  if (background) {
+//		    document.put("background", true);
+//		  }
+//		  
+//		  document.put("size", indexFieldName.length());
+//		  //works with date field only
+////		  Date expire = new Date();
+////		  if (expire >= 0) {
+////		    document.put("expireAfterSeconds", expire);
+////		  }
+//		  
+//		IndexFilter indexFilter = () -> { return document; };
+//		
+//		Index index = new Index();
+//		index.on(indexFieldName, sortingOrder).background().unique().partial(indexFilter);
+//		return mongoTemplate.indexOps(collectionType).ensureIndex(index);
+		
+		Index index = new Index();
+		index.on(indexFieldName, sortingOrder).background().unique();
+		return mongoTemplate.indexOps(collectionType).ensureIndex(index);
 	}
 
-	public <T>  List<IndexInfo> listIndex(Class<T> collectionType) {
+	public <T> List<IndexInfo> listIndex(Class<T> collectionType) {
 		return mongoTemplate.indexOps(collectionType).getIndexInfo();
 	}
-	
-	public <T>  List<IndexInfo> listIndex2(Class<T> collectionType) {
-		// Create text index
-//		TextIndexDefinition textIndex = new TextIndexDefinitionBuilder()
-//		    .onField("name").onField("addresses")
-//		    .build();
-//		IndexOperations indexOps = mongoTemplate.indexOps(Employee.class);
-//		indexOps.ensureIndex(textIndex);
+
+	public <T> List<IndexInfo> listIndex2(Class<T> collectionType) {
 
 		// Query
 		TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny("name");
-		Query query = TextQuery.queryText(criteria);
+		Query query = TextQuery.queryText(criteria);		
 		mongoTemplate.find(query, collectionType);
 		return mongoTemplate.indexOps(collectionType).getIndexInfo();
 	}
 
-		
-	
 }

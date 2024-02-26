@@ -551,14 +551,14 @@ public class MongoTemplateServiceImpl implements MongoTemplateService {
 //		1.) Create Index
 //		String indexFieldName = "name";
 //		LOGGER.info("Index created with name: "+ employeeRepository.createIndex(indexFieldName, Sort.Direction.ASC, Employee.class));
-	
+//		
 //		2.) List Index
 		LOGGER.info("List all indexes created for Employee collection: "+ employeeRepository.listIndex(Employee.class));
 		
 //		3.) Queries using indexes:
 		query = new Query();
 		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));
-		LOGGER.info("select Employees whose name is name14: "+ employeeRepository.getData(query, Employee.class));
+		LOGGER.info("select Employees whose name is name14: "+ employeeRepository.getDataInListWithQueryExplain(query, Employee.class));
 		
 		query = new Query();
 		query.addCriteria(new Criteria().andOperator(Criteria.where("name").is("name4")));		
@@ -587,16 +587,6 @@ This query performs a text search across multiple fields in the document and sor
 		/*
 		 * Indexing
 		 * 
-		 * Create Index
-		 * 	1.) separate data structure will created with (indexing field and memory location of each document which match with it)  
-		 * 		a.) created index on field_1 and unique then 1 field_1 link to 1 memory location of document
-		 * 		b.) created index on field_1 and not unique then group by (field_1) link to 1/multiple memory location of document
-		 * 		c.) data is always sorted.
-		 * 		d.) used B-tree (balance tree) to store index
-		 * 		e.) very fast searching operation and very low add/update/delete operation 
-		 * 
-		 * 		If In Find query finding on index, with projection value only index field then MongoDB will not go to collection for finding 
-		 * 			document, it will directly searches from indexes and return the result.
 		 * 
 		 * Type
 		 * 	2.) 
@@ -608,6 +598,28 @@ This query performs a text search across multiple fields in the document and sor
 		 * 		f.) Geospatial Indexes
 		 * 		g.) Unique Indexes
 		 * 		h.) Search Indexes 
+		 * 
+		 * 
+		 * 
+		 *                     
+I think this is the more appropriate approach.
+@CompoundIndexes({
+@CompoundIndex(name = "customIndex", def = "{'fieldOne' : 1, 'fieldTwo': 1}")
+})
+public class Entity {}
+In spring boot JPA Mongo repository.
+
+I think it depends from the Spring Data Mongodb version used in the project, from 3.0 automatic index creation is turned off by default. 
+You can enable it from configurations with spring.data.mongodb.auto-index-creation=true 
+		 *      
+		 *      
+		 *      
+ Create index: https://www.baeldung.com/spring-data-mongodb-index-annotations-converter
+		 *      
+		 *      
+		 *      
+		 *      
+		 *      
 		 * */
 		 
 		
