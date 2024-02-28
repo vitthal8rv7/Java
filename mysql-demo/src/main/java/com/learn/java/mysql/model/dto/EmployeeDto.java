@@ -21,5 +21,7 @@ public class EmployeeDto {
 	private String name;
 	private Double salary;
 	private Date joiningDate;
+	private Date createdAt;
+	private Date updatedAt;
 //	private List<Address> addresses;
 }
