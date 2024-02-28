@@ -15,9 +15,14 @@ public class EmployeeUtil {
 		return modelMapper.map(employee, EmployeeDto.class);
 	}
 
-	public static List<EmployeeDto> getEmployees(List<Employee> employees) {
+	public static List<EmployeeDto> convertEmployeeListToEmployeeDtoList(List<Employee> employees) {
 		ModelMapper modelMapper = new ModelMapper();
 		return Arrays.asList(modelMapper.map(employees, EmployeeDto[].class));
+	}
+
+	public static List<Employee> convertEmployeeDtoListToEmployeeList(List<EmployeeDto> employees) {
+		ModelMapper modelMapper = new ModelMapper();
+		return Arrays.asList(modelMapper.map(employees, Employee[].class));
 	}
 
 }

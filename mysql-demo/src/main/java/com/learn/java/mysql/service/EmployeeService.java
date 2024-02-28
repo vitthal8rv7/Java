@@ -9,4 +9,10 @@ public interface EmployeeService {
 	public EmployeeDto readEmployee(String employeeId);
 
 	public List<EmployeeDto> readAllEmployee();
+
+	public List<EmployeeDto> saveEmployees(List<EmployeeDto> employees);
+
+	public EmployeeDto updateEmployee(String id, String name);
+
+	public String deleteEmployee(String id);
 }

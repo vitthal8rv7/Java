@@ -2,11 +2,12 @@ package com.learn.java.mysql.model.dto;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,9 +15,11 @@ import lombok.NoArgsConstructor;
 @Builder
 public class EmployeeDto {
 
-	private String employee_id;
-	private String department_id;
+	@JsonIgnore
+	private Long id;
+//	private String departmentId;
 	private String name;
 	private Double salary;
-	private Date hire_date;
+	private Date joiningDate;
+//	private List<Address> addresses;
 }

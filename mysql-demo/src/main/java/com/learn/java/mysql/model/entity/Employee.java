@@ -3,6 +3,9 @@ package com.learn.java.mysql.model.entity;
 import java.util.Date;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,10 +18,14 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Employee {
 
-	@jakarta.persistence.Id
-	private String employee_id;
-	private String department_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+//	@ForeignKey
+//	private String departmentId;
 	private String name;
 	private Double salary;
-	private Date hire_date;
+	private Date joiningDate;
+//	private List<Address> addresses;
 }
