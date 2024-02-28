@@ -32,14 +32,15 @@ public class Employee {
 	private Double salary;
 	
 	@CreationTimestamp
+	@Column(name = "joining_date")
 	private Date joiningDate;
 //	private List<Address> addresses;
 	
 	@CreationTimestamp
-	@Column(nullable = false, updatable = false)
+	@Column(name = "created_at", nullable = false, updatable = false)
 	private Date createdAt;
 	
 	@UpdateTimestamp
-	@Column(nullable = false, updatable = true)
+	@Column(name = "updated_at", nullable = false, updatable = true)
 	private Date updatedAt;
 }
