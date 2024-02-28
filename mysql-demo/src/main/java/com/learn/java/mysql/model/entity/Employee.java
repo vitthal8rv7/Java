@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,16 +27,23 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-//	@ForeignKey
-//	private String departmentId;
+	
+	@NotNull
+	private Integer age;
+	
+	@NotNull(message = "Employee name should not be null")
 	private String name;
+	
 	private Double salary;
+	
+	@NotNull(message = "Employee`s email should not be null")
+	@Email(message = "Please enter the valid email address.")
+	private String Email;
 	
 	@CreationTimestamp
 	@Column(name = "joining_date")
 	private Date joiningDate;
-//	private List<Address> addresses;
+
 	
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
@@ -43,4 +52,11 @@ public class Employee {
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false, updatable = true)
 	private Date updatedAt;
+	
+
+//	@ForeignKey
+//	private String departmentId;
+	
+//	private List<Address> addresses;
+
 }

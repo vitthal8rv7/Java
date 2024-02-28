@@ -17,11 +17,19 @@ public class EmployeeDto {
 
 	@JsonIgnore
 	private Long id;
-//	private String departmentId;
+	
+	@Builder.Default
+	private Integer age = 0;
+	
 	private String name;
+	
+	private String Email;
+
 	private Double salary;
 	private Date joiningDate;
 	private Date createdAt;
 	private Date updatedAt;
+	
+//	private String departmentId;	
 //	private List<Address> addresses;
 }

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/mysql/demo")
 public class MysqlController {
@@ -34,12 +36,12 @@ public class MysqlController {
 	}
 
 	@PostMapping("/employee")
-	public List<EmployeeDto> saveEmployee(@RequestBody List<EmployeeDto> employees) {
+	public List<EmployeeDto> saveEmployee(@Valid @RequestBody List<EmployeeDto> employees) {
 		return employeeService.saveEmployees(employees);
 	}
 
 	@PutMapping("/employee")
-	public EmployeeDto updateEmployee(@RequestParam(name = "id") String id, @RequestParam(name = "name") String name) {
+	public EmployeeDto updateEmployee(@RequestParam(name = "id") String id, @RequestParam(name = "name", required = true) String name) {
 		return employeeService.updateEmployee(id, name);
 	}
 
