@@ -23,7 +23,7 @@ public class EmployeeDto {
 	
 	private String name;
 	
-	private String Email;
+	private String email;
 
 	private Double salary;
 	private Date joiningDate;

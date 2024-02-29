@@ -28,7 +28,8 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer age;
+	@Builder.Default
+	private Integer age = 0;
 	
 	@NotBlank(message = "Employee name should not be null")
 	private String name;
@@ -37,7 +38,7 @@ public class Employee {
 	
 	@NotBlank(message = "Employee`s email should not be null")
 	@Email(message = "Please enter the valid email address.")
-	private String Email;
+	private String email;
 	
 	@CreationTimestamp
 	@Column(name = "joining_date")
