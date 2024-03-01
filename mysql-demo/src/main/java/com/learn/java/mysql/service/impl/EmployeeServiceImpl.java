@@ -118,15 +118,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		LOGGER.info("Find By NameIsNot And AgeGreaterThanEqual: "+ employeeRepository.findByNameIsNotAndAgeGreaterThanEqual("name1", 25));
 		
-		LOGGER.info("Find By NameIsNot And GreaterThanEqualOrderByNameDesc: "+ employeeRepository.findByNameIsNotOrAgeGreaterThanEqualOrderByNameDesc("name1", 25));
-		
+		LOGGER.info("Find By NameIsNot Or GreaterThanEqualOrderByNameDesc: "+ employeeRepository.findByNameIsNotOrAgeGreaterThanEqualOrderByNameDesc("name1", 25));
+
 		LOGGER.info("Find By NameIn And AgeBetween: "+ employeeRepository.findByNameInAndAgeBetween(names, 10, 21));
 		
 		List<String> emails = new ArrayList<>();
 		emails.add("A@B.com");
 		emails.add("A1@B.com");
 		LOGGER.info("Find By Name And EmailAllIgnoreCase: "+ employeeRepository.findByNameAndEmailInAllIgnoreCase("name1", emails));
+
+//		 Reason: Index position must be greater zero
+//		LOGGER.info("Find By Name RegexIgnoreCase And Email Ends With: "+ employeeRepository.findByNameRegexIgnoreCaseAndEmailEndsWith("com", ".*me.*"));
 		
+//		LOGGER.info("Find By NameStartsWithCase And EmailEndsWith: "+ employeeRepository.findByNameStartsWithCaseAndEmailEndsWith("name", "com"));
+		
+		LOGGER.info("Find By Names Query: "+ employeeRepository.findByNameIns(names));
 	}
 
 }
