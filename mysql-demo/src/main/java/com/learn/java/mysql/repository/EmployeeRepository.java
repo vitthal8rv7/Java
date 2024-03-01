@@ -40,7 +40,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 	
 	public List<Employee> findByNameIn(List<String> names);
 	
-	public List<Employee> findByNameOrderByNameDesc(String name);
+	public List<Employee> findByNameOrderByAgeDesc(String name);
 	
 	public List<Employee> findByNameIsNotAndAgeLessThan(String name, Integer age);
 	
@@ -54,5 +54,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 	
 	public List<Employee> findByNameInAndAgeBetween(List<String> names, Integer lowerAgeLimit, Integer upperAgeLimit);
 	
-	public List<Employee> findByNameAndEmailAllIgnoreCase(String name, String email);
+	public List<Employee> findByNameAndEmailInAllIgnoreCase(String name, List<String> emails);
 }
