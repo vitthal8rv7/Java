@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.model.entity.Employee;
+import com.learn.java.mysql.repository.EmployeeJpqlRepository;
 import com.learn.java.mysql.repository.EmployeePagingAndSortingRepository;
 import com.learn.java.mysql.repository.EmployeeRepository;
 import com.learn.java.mysql.service.EmployeeService;
@@ -32,7 +33,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeePagingAndSortingRepository empPagingAndSortingRepo;
 
-	
+	@Autowired
+	private EmployeeJpqlRepository employeeJpqlRepository;
+
 	private Employee findById(String employeeId) {
 		Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
 		if (employeeOptional.isPresent()) {
@@ -137,11 +140,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 //		 Reason: Index position must be greater zero
 //		LOGGER.info("Find By Name RegexIgnoreCase And Email Ends With: "+ employeeRepository.findByNameRegexIgnoreCaseAndEmailEndsWith("com", ".*me.*"));
-		
-//		LOGGER.info("Find By NameStartsWithCase And EmailEndsWith: "+ employeeRepository.findByNameStartsWithCaseAndEmailEndsWith("name", "com"));
-//		LOGGER.info("Find By Names Query: "+ employeeRepository.findByNameIns());
-		
-		
+				
 		Sort sort = Sort.by(Direction.ASC, "name", "salary");
 		PageRequest pageRequest = PageRequest.of(0, 3);
 		LOGGER.info("Find By Names with Sort: "+ empPagingAndSortingRepo.findByNameContaining("name", sort));
@@ -149,7 +148,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		PageRequest pageAndSortRequest = PageRequest.of(0, 3, sort);
 		LOGGER.info("Find By Names with Pagination and Sorting: "+ empPagingAndSortingRepo.findByNameContaining("name", pageAndSortRequest));
-		
 	}
 
+	@Override
+	public void testJpqlQueries() {
+		LOGGER.info("Find All Using JPQL Query: "+ employeeJpqlRepository.findAllUsingJpqlQuery());
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("Find By Name And Email Using JPQL Query: "+ employeeJpqlRepository.findByNameAndEmail("name1", "com"));
+		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameOrEmail("name1", "com"));
+//		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameLikeOrEmail("name1", "com"));
+
+	}
+
+	
+	
 }

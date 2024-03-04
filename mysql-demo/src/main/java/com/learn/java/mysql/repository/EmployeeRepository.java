@@ -57,15 +57,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
 	public List<Employee> findByNameAndEmailInAllIgnoreCase(String name, List<String> emails);
 
-	// Reason: Index position must be greater zero
-//	@Query("{'$and':[{'email': ?0}, {'name':{'$regex':?1, $options:'i'}} ]}")
-//	public List<Employee> findByNameRegexIgnoreCaseAndEmailEndsWith(String email, String name);
-
-	
-//	@Query("{'$and':[{'name': ?0}, {'email': ?1} ]}")
-//	public List<Employee> findByNameStartsWithCaseAndEmailEndsWith(String email, String name);
-
-	
-//	@Query(value = "select * from employee", nativeQuery = true)
-//	public List<Employee> findByNameIns();
 }

@@ -56,4 +56,11 @@ public class MysqlController {
 		return "Tested auto-generated-spring-data-queries";
 	}
 
+	
+	@GetMapping("/test/jpql-queries")
+	public String testJpqlQueries() {
+		employeeService.testJpqlQueries();
+		return "Tested jpql-queries";
+	}
+
 }
