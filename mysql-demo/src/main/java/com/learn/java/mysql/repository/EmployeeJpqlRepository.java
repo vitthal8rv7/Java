@@ -20,7 +20,7 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, String> 
 	@Query(value = "from Employee where name= :name or email= :email")
 	public List<Employee> findByNameOrEmail(@Param("name") String name, @Param("email") String email);
 
-	@Query(value = "from Employee where name= :name or email= :email")
-	public List<Employee> findByNameLikeOrEmail(@Param("name") String name, @Param("email") String email);
+//	@Query(value = "from Employee where name= :name or email= :email")
+//	public List<Employee> findByNameLikeOrEmail(@Param("name") String name, @Param("email") String email);
 
 }
