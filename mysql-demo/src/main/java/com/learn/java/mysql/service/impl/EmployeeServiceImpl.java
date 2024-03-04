@@ -9,10 +9,14 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.model.entity.Employee;
+import com.learn.java.mysql.repository.EmployeePagingAndSortingRepository;
 import com.learn.java.mysql.repository.EmployeeRepository;
 import com.learn.java.mysql.service.EmployeeService;
 import com.learn.java.mysql.util.EmployeeUtil;
@@ -25,6 +29,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	@Autowired
+	private EmployeePagingAndSortingRepository empPagingAndSortingRepo;
+
+	
 	private Employee findById(String employeeId) {
 		Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
 		if (employeeOptional.isPresent()) {
@@ -131,8 +139,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 //		LOGGER.info("Find By Name RegexIgnoreCase And Email Ends With: "+ employeeRepository.findByNameRegexIgnoreCaseAndEmailEndsWith("com", ".*me.*"));
 		
 //		LOGGER.info("Find By NameStartsWithCase And EmailEndsWith: "+ employeeRepository.findByNameStartsWithCaseAndEmailEndsWith("name", "com"));
+//		LOGGER.info("Find By Names Query: "+ employeeRepository.findByNameIns());
 		
-		LOGGER.info("Find By Names Query: "+ employeeRepository.findByNameIns(names));
+		
+		Sort sort = Sort.by(Direction.ASC, "name", "salary");
+		PageRequest pageRequest = PageRequest.of(0, 3);
+		LOGGER.info("Find By Names with Sort: "+ empPagingAndSortingRepo.findByNameContaining("name", sort));
+		LOGGER.info("Find By Names with Pagination: "+ empPagingAndSortingRepo.findByNameContaining("name", pageRequest));
+		
+		PageRequest pageAndSortRequest = PageRequest.of(0, 3, sort);
+		LOGGER.info("Find By Names with Pagination and Sorting: "+ empPagingAndSortingRepo.findByNameContaining("name", pageAndSortRequest));
+		
 	}
 
 }

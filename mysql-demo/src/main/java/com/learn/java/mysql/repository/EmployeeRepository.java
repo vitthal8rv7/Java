@@ -66,6 +66,6 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 //	public List<Employee> findByNameStartsWithCaseAndEmailEndsWith(String email, String name);
 
 	
-	@Query("select * from Employee")
-	public List<Employee> findByNameIns(List<String> names);
+//	@Query(value = "select * from employee", nativeQuery = true)
+//	public List<Employee> findByNameIns();
 }
