@@ -15,13 +15,25 @@ import com.learn.java.mysql.model.entity.Employee;
 @Repository
 public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	
-	@Query(value = "select * from employee", nativeQuery = true)
+//	@Query("select * from Employee") //Not Working
+//	@Query("from employee") //Not Working
+	@Query("from Employee") // Working
 	public List<Employee> findAllUsingJpqlQuery();
 
-	@Query(value = "from Employee where name= :name and email= :email")
-	public List<Employee> findByNameAndEmail(@Param("name") String name, @Param("email") String email);
+	//Works
+//	@Query(value = "from Employee where name= :name and email= :email")
+//	public List<Employee> findByNameAndEmail(@Param("name") String name, @Param("email") String email);
 
-	@Query(value = "from Employee where name= :name or email= :email")
+	//Also Works
+	@Query(value = "from Employee where name= ?1 and email= ?2")
+	public List<Employee> findByNameAndEmail(String name, String email);
+
+	//Works
+//	@Query(value = "from Employee where name= :name or email= :email")
+//	public List<Employee> findByNameOrEmail(@Param("name") String name, @Param("email") String email);
+
+	//Also Works
+	@Query(value = "from Employee e where e.name= ?1 or email= ?2")
 	public List<Employee> findByNameOrEmail(@Param("name") String name, @Param("email") String email);
 
 	
