@@ -160,7 +160,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("");
 		LOGGER.info("Find By Name And Email Using JPQL Query: "+ employeeJpqlRepository.findByNameAndEmail("name1", "com"));
 		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameOrEmail("name1", "com"));
-//		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameLikeOrEmail("name1", "com"));
+		LOGGER.info("Delete By Name Using JPQL Query: "+ employeeJpqlRepository.deleteByName("name91"));
 
 	}
 
