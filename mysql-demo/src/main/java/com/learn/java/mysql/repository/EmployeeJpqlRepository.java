@@ -2,6 +2,8 @@ package com.learn.java.mysql.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -64,5 +66,11 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	//Empty Result, CONCAT issue?
 	@Query(value = "from Employee e where e.name like CONCAT('%', '?1', '%')")
 	public List<Employee> findByNameContaining3(String name);
+	
+	@Query(value = "from Employee e where e.name like %?1%")
+	public List<Employee> findByNameContainingWithPageable(String name, Pageable pageable);
+
+	@Query(value = "from Employee e where e.name like %?1%")
+	public Page<List<Employee>> findByNameContainingWithPageable2(String name, Pageable pageable);
 
 }

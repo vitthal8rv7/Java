@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
@@ -164,10 +165,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("Find All Sort by salary Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName());
 		Sort sort = Sort.by(Direction.ASC, "name", "salary");
 		LOGGER.info("Find All with Sort object Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName(sort));
-		LOGGER.info("findByNameContaining Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining("name1"));
-		LOGGER.info("findByNameContaining 2 Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining2("name1"));
-		LOGGER.info("findByNameContaining 3 Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining3("name1"));
-	
+		LOGGER.info("findByNameContaining Without wrap by %  Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining("name1"));
+		LOGGER.info("findByNameContaining wrap by % Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining2("name1"));
+		LOGGER.info("findByNameContaining CONCAT Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining3("name1"));
+		Pageable pageRequest = PageRequest.of(0, 3);
+		LOGGER.info("findByNameContaining Page 1 Size 3 Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
+		LOGGER.info("findByNameContaining Page Object Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable2("name1", pageRequest));
+
+		pageRequest = PageRequest.of(0, 10, sort);
+		LOGGER.info("findByNameContaining Page 1 Size 5 and Sort by name and salary Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
+
 	}
 
 	
