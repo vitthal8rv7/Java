@@ -45,6 +45,10 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query(value = "delete from Employee where name= :name")
 	public Integer deleteByName(@Param("name") String name);
 
+	//Sorting
+	@Query("from Employee Order by salary ASC") // Working
+	public List<Employee> findAllSortByName();
+
 	
 	
 }
