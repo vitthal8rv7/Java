@@ -3,6 +3,7 @@ package com.learn.java.mysql.model.entity;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NamedNativeQuery;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -22,6 +23,10 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
+@NamedNativeQuery(
+		name = "Employee.findBySalaryLessThan42000", 
+		query = "SELECT * FROM Employee WHERE salary < 42000", 
+		resultClass = Employee.class)
 public class Employee {
 
 	@Id

@@ -180,6 +180,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("sumOfSalaryByNameLike Using JPQL Query: "+ employeeJpqlRepository.sumOfSalaryByNameLike("name11"));
 		
 		LOGGER.info("findDTOs Using JPQL Query: "+ employeeJpqlRepository.findDTOs());
+		LOGGER.info("findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameIgnoreCase("name1"));
+		
+		LOGGER.info("findBySalaryLessThan42000 Using JPQL Query: "+ employeeJpqlRepository.findBySalaryLessThan42000());
 	}
 
 	
