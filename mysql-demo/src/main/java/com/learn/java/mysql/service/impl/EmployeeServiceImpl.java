@@ -9,10 +9,16 @@ import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.model.entity.Employee;
+import com.learn.java.mysql.repository.EmployeeJpqlRepository;
+import com.learn.java.mysql.repository.EmployeePagingAndSortingRepository;
 import com.learn.java.mysql.repository.EmployeeRepository;
 import com.learn.java.mysql.service.EmployeeService;
 import com.learn.java.mysql.util.EmployeeUtil;
@@ -24,6 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private EmployeePagingAndSortingRepository empPagingAndSortingRepo;
+
+	@Autowired
+	private EmployeeJpqlRepository employeeJpqlRepository;
 
 	private Employee findById(String employeeId) {
 		Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
@@ -129,10 +141,47 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 //		 Reason: Index position must be greater zero
 //		LOGGER.info("Find By Name RegexIgnoreCase And Email Ends With: "+ employeeRepository.findByNameRegexIgnoreCaseAndEmailEndsWith("com", ".*me.*"));
+				
+		Sort sort = Sort.by(Direction.ASC, "name", "salary");
+		PageRequest pageRequest = PageRequest.of(0, 3);
+		LOGGER.info("Find By Names with Sort: "+ empPagingAndSortingRepo.findByNameContaining("name", sort));
+		LOGGER.info("Find By Names with Pagination: "+ empPagingAndSortingRepo.findByNameContaining("name", pageRequest));
 		
-//		LOGGER.info("Find By NameStartsWithCase And EmailEndsWith: "+ employeeRepository.findByNameStartsWithCaseAndEmailEndsWith("name", "com"));
-		
-		LOGGER.info("Find By Names Query: "+ employeeRepository.findByNameIns(names));
+		PageRequest pageAndSortRequest = PageRequest.of(0, 3, sort);
+		LOGGER.info("Find By Names with Pagination and Sorting: "+ empPagingAndSortingRepo.findByNameContaining("name", pageAndSortRequest));
 	}
 
+	@Override
+	public void testJpqlQueries() {
+		LOGGER.info("Find All Using JPQL Query: "+ employeeJpqlRepository.findAllUsingJpqlQuery());
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("");
+		LOGGER.info("Find By Name And Email Using JPQL Query: "+ employeeJpqlRepository.findByNameAndEmail("name1", "com"));
+		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameOrEmail("name1", "com"));
+		LOGGER.info("Delete By Name Using JPQL Query: "+ employeeJpqlRepository.deleteByName("name91"));
+		LOGGER.info("Find All Sort by salary Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName());
+		Sort sort = Sort.by(Direction.ASC, "name", "salary");
+		LOGGER.info("Find All with Sort object Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName(sort));
+		LOGGER.info("findByNameContaining Without wrap by %  Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining("name1"));
+		LOGGER.info("findByNameContaining wrap by % Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining2("name1"));
+		LOGGER.info("findByNameContaining CONCAT Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining3("name1"));
+		Pageable pageRequest = PageRequest.of(0, 3);
+		LOGGER.info("findByNameContaining Page 1 Size 3 Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
+		LOGGER.info("findByNameContaining Page Object Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable2("name1", pageRequest));
+		pageRequest = PageRequest.of(0, 10, sort);
+		LOGGER.info("findByNameContaining Page 1 Size 5 and Sort by name and salary Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
+
+		LOGGER.info("findDistinctNames Using JPQL Query: "+ employeeJpqlRepository.findDistinctNames());
+		LOGGER.info("countAllEntities Using JPQL Query: "+ employeeJpqlRepository.countAllEntities());
+		LOGGER.info("countAllDistinctNameEntities Using JPQL Query: "+ employeeJpqlRepository.countAllDistinctNameEntities());
+		LOGGER.info("sumOfSalaryByNameLike Using JPQL Query: "+ employeeJpqlRepository.sumOfSalaryByNameLike("name11"));
+		
+		LOGGER.info("findDTOs Using JPQL Query: "+ employeeJpqlRepository.findDTOs());
+	}
+
+	
+	
 }
