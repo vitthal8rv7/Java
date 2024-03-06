@@ -73,4 +73,17 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query(value = "from Employee e where e.name like %?1%")
 	public Page<List<Employee>> findByNameContainingWithPageable2(String name, Pageable pageable);
 
+	@Query("SELECT DISTINCT e.name FROM Employee e")
+	List<String> findDistinctNames();
+
+	@Query("SELECT COUNT(e) FROM Employee e")
+	long countAllEntities();
+
+	@Query("SELECT COUNT(DISTINCT e.name) FROM Employee e")
+	long countAllDistinctNameEntities();
+
+	@Query("SELECT SUM(e.salary) FROM Employee e Where e.name in (SELECT e.name FROM Employee e Where e.name like %?1%)")
+	long sumOfSalaryByNameLike(String name);
+
+
 }

@@ -171,10 +171,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Pageable pageRequest = PageRequest.of(0, 3);
 		LOGGER.info("findByNameContaining Page 1 Size 3 Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
 		LOGGER.info("findByNameContaining Page Object Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable2("name1", pageRequest));
-
 		pageRequest = PageRequest.of(0, 10, sort);
 		LOGGER.info("findByNameContaining Page 1 Size 5 and Sort by name and salary Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingWithPageable("name1", pageRequest));
 
+		LOGGER.info("findDistinctNames Using JPQL Query: "+ employeeJpqlRepository.findDistinctNames());
+		LOGGER.info("countAllEntities Using JPQL Query: "+ employeeJpqlRepository.countAllEntities());
+		LOGGER.info("countAllDistinctNameEntities Using JPQL Query: "+ employeeJpqlRepository.countAllDistinctNameEntities());
+		LOGGER.info("sumOfSalaryByNameLike Using JPQL Query: "+ employeeJpqlRepository.sumOfSalaryByNameLike("name11"));
 	}
 
 	
