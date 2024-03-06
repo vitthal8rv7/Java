@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.model.entity.Employee;
 
 @Repository
@@ -85,5 +86,7 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query("SELECT SUM(e.salary) FROM Employee e Where e.name in (SELECT e.name FROM Employee e Where e.name like %?1%)")
 	long sumOfSalaryByNameLike(String name);
 
+	@Query("SELECT NEW com.learn.java.mysql.model.dto.EmployeeDto(e.id, e.name, e.salary, e.joiningDate) FROM Employee e")
+	List<EmployeeDto> findDTOs();
 
 }

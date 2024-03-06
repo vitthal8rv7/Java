@@ -178,6 +178,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("countAllEntities Using JPQL Query: "+ employeeJpqlRepository.countAllEntities());
 		LOGGER.info("countAllDistinctNameEntities Using JPQL Query: "+ employeeJpqlRepository.countAllDistinctNameEntities());
 		LOGGER.info("sumOfSalaryByNameLike Using JPQL Query: "+ employeeJpqlRepository.sumOfSalaryByNameLike("name11"));
+		
+		LOGGER.info("findDTOs Using JPQL Query: "+ employeeJpqlRepository.findDTOs());
 	}
 
 	

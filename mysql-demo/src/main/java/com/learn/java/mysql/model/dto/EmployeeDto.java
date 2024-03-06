@@ -30,6 +30,17 @@ public class EmployeeDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
+	public EmployeeDto(Long id, String name, Double salary, Date joiningDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.salary = salary;
+		this.joiningDate = joiningDate;
+	}
+	
 //	private String departmentId;	
 //	private List<Address> addresses;
+
+	
+
 }
