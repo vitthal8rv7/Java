@@ -2,12 +2,12 @@ package com.learn.java.mysql.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.learn.java.mysql.model.entity.Employee;
@@ -49,6 +49,8 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query("from Employee Order by salary ASC") // Working
 	public List<Employee> findAllSortByName();
 
+	@Query("from Employee") // Working
+	public List<Employee> findAllSortByName(Sort sort);
 	
 	
 }
