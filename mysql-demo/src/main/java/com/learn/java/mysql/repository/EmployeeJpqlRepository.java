@@ -52,5 +52,17 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query("from Employee") // Working
 	public List<Employee> findAllSortByName(Sort sort);
 	
-	
+	//Don`t Work as a Like Clause, it work as a 'is/equal' clause 
+	//, like clause work if placeholder wrap with '%' sign, like this  %?1% 
+	@Query(value = "from Employee e where e.name like ?1")
+	public List<Employee> findByNameContaining(String name);
+
+	//Works, like clause work if placeholder wrap with '%' sign, like this  %?1%
+	@Query(value = "from Employee e where e.name like %?1%")
+	public List<Employee> findByNameContaining2(String name);
+
+	//Empty Result, CONCAT issue?
+	@Query(value = "from Employee e where e.name like CONCAT('%', '?1', '%')")
+	public List<Employee> findByNameContaining3(String name);
+
 }

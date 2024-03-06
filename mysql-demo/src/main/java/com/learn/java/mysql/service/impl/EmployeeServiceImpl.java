@@ -164,6 +164,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("Find All Sort by salary Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName());
 		Sort sort = Sort.by(Direction.ASC, "name", "salary");
 		LOGGER.info("Find All with Sort object Using JPQL Query: "+ employeeJpqlRepository.findAllSortByName(sort));
+		LOGGER.info("findByNameContaining Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining("name1"));
+		LOGGER.info("findByNameContaining 2 Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining2("name1"));
+		LOGGER.info("findByNameContaining 3 Using JPQL Query: "+ employeeJpqlRepository.findByNameContaining3("name1"));
+	
 	}
 
 	
