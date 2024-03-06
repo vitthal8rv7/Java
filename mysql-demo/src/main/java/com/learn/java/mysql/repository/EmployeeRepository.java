@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.learn.java.mysql.model.entity.Employee;
 
+@Repository
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
 	public Employee findOneByNameIs(String name);
@@ -57,15 +59,4 @@ public interface EmployeeRepository extends JpaRepository<Employee, String> {
 
 	public List<Employee> findByNameAndEmailInAllIgnoreCase(String name, List<String> emails);
 
-	// Reason: Index position must be greater zero
-//	@Query("{'$and':[{'email': ?0}, {'name':{'$regex':?1, $options:'i'}} ]}")
-//	public List<Employee> findByNameRegexIgnoreCaseAndEmailEndsWith(String email, String name);
-
-	
-//	@Query("{'$and':[{'name': ?0}, {'email': ?1} ]}")
-//	public List<Employee> findByNameStartsWithCaseAndEmailEndsWith(String email, String name);
-
-	
-	@Query("select * from Employee")
-	public List<Employee> findByNameIns(List<String> names);
 }
