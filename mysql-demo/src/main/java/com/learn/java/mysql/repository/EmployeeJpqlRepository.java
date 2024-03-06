@@ -104,4 +104,8 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 
 	List<Employee> findByAgeGreaterThanEqualTo24();
 
+	
+	@Query("SELECT e FROM Employee e WHERE UPPER(e.name) Like %?#{[0].toUpperCase()}%")
+	List<Employee> findByNameContainingIgnoreCase(@Param("name") String name);
+
 }

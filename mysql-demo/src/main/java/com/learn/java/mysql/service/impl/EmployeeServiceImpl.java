@@ -176,12 +176,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("sumOfSalaryByNameLike Using JPQL Query: "+ employeeJpqlRepository.sumOfSalaryByNameLike("name11"));
 		
 		LOGGER.info("findDTOs Using JPQL Query: "+ employeeJpqlRepository.findDTOs());
-		LOGGER.info("findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameIgnoreCase("name1"));
+		LOGGER.info("findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameIgnoreCase("NAme1"));
 		
 		LOGGER.info("findBySalaryLessThan42000 Using Named Native Queries : "+ employeeJpqlRepository.findBySalaryLessThan42000());
 		LOGGER.info("findBySalaryGreaterThan42000 Using Named Native Queries : "+ employeeJpqlRepository.findBySalaryGreaterThan42000());
 		LOGGER.info("findByAgeLessThan24 Using Named JPQL Queries : "+ employeeJpqlRepository.findByAgeLessThan24());
 		LOGGER.info("findByAgeGreaterThanEqualTo24 Using Named JPQL Queries : "+ employeeJpqlRepository.findByAgeGreaterThanEqualTo24());
+		
+		LOGGER.info("Line: "+Thread.currentThread().getStackTrace()[1].getLineNumber()+" findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingIgnoreCase("NAme1"));
 	}
 
 	
