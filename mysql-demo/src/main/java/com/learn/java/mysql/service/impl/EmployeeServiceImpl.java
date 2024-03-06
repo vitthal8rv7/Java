@@ -153,12 +153,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public void testJpqlQueries() {
+		LOGGER.info("Find All Using Native Query: "+ employeeJpqlRepository.findAllUsingNativeQuery());
 		LOGGER.info("Find All Using JPQL Query: "+ employeeJpqlRepository.findAllUsingJpqlQuery());
-		LOGGER.info("");
-		LOGGER.info("");
-		LOGGER.info("");
-		LOGGER.info("");
-		LOGGER.info("");
 		LOGGER.info("Find By Name And Email Using JPQL Query: "+ employeeJpqlRepository.findByNameAndEmail("name1", "com"));
 		LOGGER.info("Find By Name Or Email Using JPQL Query: "+ employeeJpqlRepository.findByNameOrEmail("name1", "com"));
 		LOGGER.info("Delete By Name Using JPQL Query: "+ employeeJpqlRepository.deleteByName("name91"));
@@ -182,7 +178,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		LOGGER.info("findDTOs Using JPQL Query: "+ employeeJpqlRepository.findDTOs());
 		LOGGER.info("findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameIgnoreCase("name1"));
 		
-		LOGGER.info("findBySalaryLessThan42000 Using JPQL Query: "+ employeeJpqlRepository.findBySalaryLessThan42000());
+		LOGGER.info("findBySalaryLessThan42000 Using Named Native Queries : "+ employeeJpqlRepository.findBySalaryLessThan42000());
+		LOGGER.info("findBySalaryGreaterThan42000 Using Named Native Queries : "+ employeeJpqlRepository.findBySalaryGreaterThan42000());
+		LOGGER.info("findByAgeLessThan24 Using Named JPQL Queries : "+ employeeJpqlRepository.findByAgeLessThan24());
+		LOGGER.info("findByAgeGreaterThanEqualTo24 Using Named JPQL Queries : "+ employeeJpqlRepository.findByAgeGreaterThanEqualTo24());
 	}
 
 	

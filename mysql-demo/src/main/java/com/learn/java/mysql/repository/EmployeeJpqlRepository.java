@@ -19,6 +19,9 @@ import com.learn.java.mysql.model.entity.Employee;
 @Repository
 public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 
+	@Query(value = "select * from Employee", nativeQuery = true)
+	public List<Employee> findAllUsingNativeQuery();
+
 //	@Query("select * from Employee") //Not Working
 //	@Query("from employee") //Not Working
 	@Query("from Employee") // Working
@@ -93,6 +96,12 @@ public interface EmployeeJpqlRepository extends JpaRepository<Employee, Long> {
 	@Query("SELECT e FROM Employee e WHERE UPPER(e.name) = UPPER(?1)")
 	List<Employee> findByNameIgnoreCase(@Param("name") String name);
 
-//	@Query(nativeQuery = true)
 	List<Employee> findBySalaryLessThan42000();
+	
+	List<Employee> findBySalaryGreaterThan42000();
+
+	List<Employee> findByAgeLessThan24();
+
+	List<Employee> findByAgeGreaterThanEqualTo24();
+
 }

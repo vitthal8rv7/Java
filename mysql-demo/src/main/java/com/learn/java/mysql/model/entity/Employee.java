@@ -3,7 +3,10 @@ package com.learn.java.mysql.model.entity;
 import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
@@ -23,10 +26,26 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@NamedNativeQuery(
+@NamedNativeQueries({
+		@NamedNativeQuery(
 		name = "Employee.findBySalaryLessThan42000", 
 		query = "SELECT * FROM Employee WHERE salary < 42000", 
+		resultClass = Employee.class),
+		@NamedNativeQuery(
+		name = "Employee.findBySalaryGreaterThan42000", 
+		query = "SELECT * FROM Employee WHERE salary > 42000", 
 		resultClass = Employee.class)
+})
+@NamedQueries({
+	@NamedQuery(
+		name = "Employee.findByAgeLessThan24",
+		query = "FROM Employee WHERE age < 24" 
+	),
+	@NamedQuery(
+		name = "Employee.findByAgeGreaterThanEqualTo24",
+		query = "FROM Employee WHERE age >= 24" 			
+	)
+})
 public class Employee {
 
 	@Id
