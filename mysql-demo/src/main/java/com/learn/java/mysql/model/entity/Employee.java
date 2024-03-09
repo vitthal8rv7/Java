@@ -14,12 +14,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -64,19 +67,34 @@ public class Employee {
 	@Email(message = "Please enter the valid email address.")
 	private String email;
 	
+	@Temporal(TemporalType.TIME)
 	@CreationTimestamp
 	@Column(name = "joining_date")
 	private Date joiningDate;
 
-	
+	@Temporal(TemporalType.DATE)
 	@CreationTimestamp
 	@Column(name = "created_at", nullable = false, updatable = false)
 	private Date createdAt;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	@UpdateTimestamp
 	@Column(name = "updated_at", nullable = false, updatable = true)
 	private Date updatedAt;
-	
+
+//  Check and Test LocalDate, LocalTime, LocalDateTime??	
+//	@CreatedDate
+//	@Column(name = "joining_date")
+//	private LocalDateTime joiningDate;
+//
+//	@CreationTimestamp
+//	@Column(name = "created_at", nullable = false, updatable = false)
+//	private LocalTime createdAt;
+//	
+//	@UpdateTimestamp
+//	@Column(name = "updated_at", nullable = false, updatable = true)
+//	private LocalDate updatedAt;
+
 
 //	@ForeignKey
 //	private String departmentId;
