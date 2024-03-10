@@ -54,7 +54,7 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Builder.Default
