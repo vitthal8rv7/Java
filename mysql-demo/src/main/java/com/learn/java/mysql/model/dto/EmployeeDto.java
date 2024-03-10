@@ -30,6 +30,9 @@ public class EmployeeDto {
 	private Date createdAt;
 	private Date updatedAt;
 	
+//	@JsonIgnore
+	private String gender;
+	
 	public EmployeeDto(Long id, String name, Double salary, Date joiningDate) {
 		super();
 		this.id = id;
