@@ -23,6 +23,11 @@ import com.learn.java.mysql.repository.EmployeeRepository;
 import com.learn.java.mysql.service.EmployeeService;
 import com.learn.java.mysql.util.EmployeeUtil;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -37,6 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeJpqlRepository employeeJpqlRepository;
 
+	@Autowired
+	EntityManagerFactory entityManagerFactory;
+	
 	private Employee findById(String employeeId) {
 		Optional<Employee> employeeOptional = employeeRepository.findById(employeeId);
 		if (employeeOptional.isPresent()) {
@@ -185,7 +193,76 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		LOGGER.info("Line: "+Thread.currentThread().getStackTrace()[1].getLineNumber()+" findByNameIgnoreCase Using JPQL Query: "+ employeeJpqlRepository.findByNameContainingIgnoreCase("NAme1"));
 	}
+	 
+	@Override
+	public void testEntityManagerAPIs() {		
+//		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("");
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		
+		entityTransaction.begin();
+		
+		System.out.println("1------------");
+		Employee employee = Employee.builder()
+									.age(22)
+									.email("a@b.com")
+									.name("name00")
+									.salary(1234.44)
+									.gender("male")
+									.build();
+		System.out.println(""+employee);
+		
+		System.out.println();
+		System.out.println("2------------");
+		entityManager.persist(employee);
+		System.out.println(""+employee);
 
-	
-	
+		System.out.println();
+		System.out.println("3------------");	
+		employee.setName("NameABC++");
+		
+		entityManager.detach(employee);
+		entityManager.merge(employee);
+//		entityManager.find(Employee.class, employee.getId());
+		employee.setName("NameABC+++");
+//		entityManager.persist(employee);
+		
+		System.out.println();
+		System.out.println("4------------");	
+		entityTransaction.commit();
+		
+		System.out.println();
+		System.out.println("5------------");
+		entityManager.clear();
+		entityManager.close();
+		
+//		entityManagerFactory.close();
+		
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -63,4 +63,10 @@ public class MysqlController {
 		return "Tested jpql-queries";
 	}
 
+	@GetMapping("/test/entiry-manager-operations")
+	public String testEntityManagerAPIs() {
+		employeeService.testEntityManagerAPIs();
+		return "Tested entiry-manager-operations";
+	}
+
 }
