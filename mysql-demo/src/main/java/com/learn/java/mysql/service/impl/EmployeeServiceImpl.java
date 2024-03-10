@@ -228,6 +228,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println("3------------");	
 //		employee.setName("NameABC++");
 		
+		// If employee is not found in persistence context, 
+			//it will check in db* 
+				//if found get it to persistence context, if not create new one
 		employee = entityManager.merge(employee);
 		employee.setName("Update2");
 		
@@ -266,6 +269,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println("3------------");	
 //		employee.setName("NameABC++");
 		
+		// If employee is not found in persistence context,  create new one
+		//it will not check in db* 
 		employee = entityManager.merge(employee);
 		employee.setName("NotUpdate");
 		//Because merge will create new object and return its reference
