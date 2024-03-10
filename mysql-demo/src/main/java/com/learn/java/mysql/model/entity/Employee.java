@@ -9,6 +9,8 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -82,6 +84,11 @@ public class Employee {
 	@Column(name = "updated_at", nullable = false, updatable = true)
 	private Date updatedAt;
 
+//	@JsonIgnore
+//	@org.springframework.data.annotation.Transient // Not Working
+	@jakarta.persistence.Transient//Working	
+ 	private String gender;
+	
 //  Check and Test LocalDate, LocalTime, LocalDateTime??	
 //	@CreatedDate
 //	@Column(name = "joining_date")
