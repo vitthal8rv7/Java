@@ -210,7 +210,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		System.out.println("1------------");
 		Employee employee = Employee.builder()
-									.id(12346L)
+//									.id(12346L)
 									.age(22)
 									.email("a@b.com")
 									.name("nameMerge")
