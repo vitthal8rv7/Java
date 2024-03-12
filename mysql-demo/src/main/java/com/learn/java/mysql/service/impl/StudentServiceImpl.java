@@ -23,28 +23,30 @@ public class StudentServiceImpl implements StudentService {
 		Student student = studentRepository.save(Student.builder().age(2).name("3").auditing(new Auditing()).build());
 		System.out.println("Student data saved.");
 
-		sleepFor10Sec();
+		sleepFor1Sec();
 
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Updating student data start...");
 		student.setAge(10);
 		student.setName("new Name");
-		studentRepository.save(student);
+		Student student2 = studentRepository.save(student);
 		System.out.println("Student data updated.");
 
-		sleepFor10Sec();
+		sleepFor1Sec();
 		
 		System.out.println("");
 		System.out.println("");
 		System.out.println("Deleting student data start...");
 		studentRepository.delete(student);
 		System.out.println("Student data deleted.");
+		
+		studentRepository.save(student2);
 	}
 
-	private void sleepFor10Sec() {
+	private void sleepFor1Sec() {
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

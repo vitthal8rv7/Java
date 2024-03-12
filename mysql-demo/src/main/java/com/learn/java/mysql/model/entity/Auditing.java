@@ -8,6 +8,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostRemove;
@@ -30,33 +37,54 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class Auditing {
 	
-//	public static final Logger logger = LoggerFactory.getLogger(Auditing.class);
+
+	@CreationTimestamp
 	private LocalDate createdDate;
 
+	@CreationTimestamp
 	private LocalTime createdTime;
 
+	@CreationTimestamp
 	private LocalDateTime createdDateTime;
 
 	@Temporal(TemporalType.DATE)
+	@UpdateTimestamp
 	private Date updatedDate;
 	
 	@Temporal(TemporalType.TIME)
+	@UpdateTimestamp
 	private Date updatedTime;
 	
 //	@Temporal(TemporalType.TIMESTAMP) //default
+	@UpdateTimestamp
 	private Date updatedDateTime;
 
+	
+	
+	
+	
+	@CreatedDate // not working ==> null
+	private Date createdDateAt;
+
+	@LastModifiedDate// not working ==> null
+	private Date modifiedDateAt;
+
+	@CreatedBy // not working ==> null
+	private String createdBy;
+
+	@LastModifiedBy// not working ==> null
+	private String modifiedBy;
 
 	@PrePersist
 	void setCreationData() {
 		System.out.println("pre presist start...");
-		createdDate = java.time.LocalDate.now();
-		createdTime = java.time.LocalTime.now();
-		createdDateTime = java.time.LocalDateTime.now();
+//		createdDate = java.time.LocalDate.now();
+//		createdTime = java.time.LocalTime.now();
+//		createdDateTime = java.time.LocalDateTime.now();
 	
-		updatedDate = new Date(currentTimeMillis());
-		updatedTime = new Date(currentTimeMillis());
-		updatedDateTime = new Date(currentTimeMillis());
+//		updatedDate = new Date(currentTimeMillis());
+//		updatedTime = new Date(currentTimeMillis());
+//		updatedDateTime = new Date(currentTimeMillis());
 		
 		System.out.println("pre presist end.");
 	}
@@ -72,9 +100,9 @@ public class Auditing {
 	@PreUpdate
 	void setUpdationData() {
 		System.out.println("pre update start...");
-		updatedDate = new Date(currentTimeMillis());
-		updatedTime = new Date(currentTimeMillis());
-		updatedDateTime = new Date(currentTimeMillis());
+//		updatedDate = new Date(currentTimeMillis());
+//		updatedTime = new Date(currentTimeMillis());
+//		updatedDateTime = new Date(currentTimeMillis());
 		System.out.println("pre update end.");
 	}
 	
