@@ -1,8 +1,6 @@
 package com.learn.java.mysql.model.entity;
 
 
-import static java.lang.System.currentTimeMillis;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -67,7 +65,7 @@ public class Auditing {
 	private Date createdDateAt;
 
 	@LastModifiedDate// not working ==> null
-	private Date modifiedDateAt;
+	private LocalDateTime modifiedDateAt;
 
 	@CreatedBy // not working ==> null
 	private String createdBy;

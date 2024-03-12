@@ -23,7 +23,9 @@ public class StudentServiceImpl implements StudentService {
 		Student student = studentRepository.save(Student.builder().age(2).name("3").auditing(new Auditing()).build());
 		System.out.println("Student data saved.");
 
-		sleepFor1Sec();
+		System.out.println("1: "+studentRepository.findAll());
+		
+		sleepFor10Sec();
 
 		System.out.println("");
 		System.out.println("");
@@ -33,7 +35,9 @@ public class StudentServiceImpl implements StudentService {
 		Student student2 = studentRepository.save(student);
 		System.out.println("Student data updated.");
 
-		sleepFor1Sec();
+		System.out.println("2: "+studentRepository.findAll());
+		
+		sleepFor10Sec();
 		
 		System.out.println("");
 		System.out.println("");
@@ -41,12 +45,16 @@ public class StudentServiceImpl implements StudentService {
 		studentRepository.delete(student);
 		System.out.println("Student data deleted.");
 		
+		System.out.println("3: "+studentRepository.findAll());
+		
 		studentRepository.save(student2);
+		
+		System.out.println("4: "+studentRepository.findAll());
 	}
 
-	private void sleepFor1Sec() {
+	private void sleepFor10Sec() {
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
