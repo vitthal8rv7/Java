@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.service.EmployeeService;
+import com.learn.java.mysql.service.StudentService;
 
 import jakarta.validation.Valid;
 
@@ -24,6 +25,9 @@ public class MysqlController {
 
 	@Autowired
 	private EmployeeService employeeService;
+
+	@Autowired
+	private StudentService studentService;
 
 	@GetMapping("/employee/{employeeId}")
 	public EmployeeDto readEmployee(@PathVariable String employeeId) {
@@ -62,5 +66,19 @@ public class MysqlController {
 		employeeService.testJpqlQueries();
 		return "Tested jpql-queries";
 	}
+
+	@GetMapping("/test/entiry-manager-operations")
+	public String testEntityManagerAPIs() {
+		employeeService.testEntityManagerAPIs();
+		return "Tested entiry-manager-operations";
+	}
+	
+	@GetMapping("/test/callback-methods")
+	public String testCallbackMethods() {
+		studentService.testCallbackMethods();
+		return "Tested callback-methods";
+	}
+	
+	
 
 }
