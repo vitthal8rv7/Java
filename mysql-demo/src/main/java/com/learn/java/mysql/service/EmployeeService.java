@@ -21,4 +21,5 @@ public interface EmployeeService {
 	public void testJpqlQueries();
 
 	public void testEntityManagerAPIs();
+
 }
