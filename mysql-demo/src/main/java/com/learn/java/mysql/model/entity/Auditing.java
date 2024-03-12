@@ -13,6 +13,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PostRemove;
@@ -61,16 +62,20 @@ public class Auditing {
 	
 	
 	
-	@CreatedDate // not working ==> null
+	@CreatedDate 
+	@Column(updatable = false, nullable = false)
 	private Date createdDateAt;
 
-	@LastModifiedDate// not working ==> null
+	@LastModifiedDate
+	@Column(updatable = true, nullable = false)
 	private LocalDateTime modifiedDateAt;
 
-	@CreatedBy // not working ==> null
+	@CreatedBy 
+	@Column(updatable = false, nullable = false)
 	private String createdBy;
 
-	@LastModifiedBy// not working ==> null
+	@LastModifiedBy
+	@Column(updatable = true, nullable = false)
 	private String modifiedBy;
 
 	@PrePersist
