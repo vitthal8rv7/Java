@@ -16,6 +16,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
@@ -89,23 +90,6 @@ public class Employee {
 	@jakarta.persistence.Transient//Working	
  	private String gender;
 	
-//  Check and Test LocalDate, LocalTime, LocalDateTime??	
-//	@CreatedDate
-//	@Column(name = "joining_date")
-//	private LocalDateTime joiningDate;
-//
-//	@CreationTimestamp
-//	@Column(name = "created_at", nullable = false, updatable = false)
-//	private LocalTime createdAt;
-//	
-//	@UpdateTimestamp
-//	@Column(name = "updated_at", nullable = false, updatable = true)
-//	private LocalDate updatedAt;
-
-
-//	@ForeignKey
-//	private String departmentId;
-	
-//	private List<Address> addresses;
-
+	@ManyToOne
+	private Department department;
 }

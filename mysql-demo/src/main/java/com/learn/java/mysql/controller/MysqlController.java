@@ -79,6 +79,11 @@ public class MysqlController {
 		return "Tested callback-methods";
 	}
 	
+	@GetMapping("/test/many-to-one")
+	public String testManyToOne() {
+		employeeService.testManyToOne();
+		return "Tested many-to-one";
+	}
 	
 
 }
