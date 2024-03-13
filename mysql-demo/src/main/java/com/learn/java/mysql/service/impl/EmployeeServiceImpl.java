@@ -16,22 +16,26 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
+import com.learn.java.mysql.model.entity.Department;
 import com.learn.java.mysql.model.entity.Employee;
 import com.learn.java.mysql.repository.EmployeeJpqlRepository;
 import com.learn.java.mysql.repository.EmployeePagingAndSortingRepository;
 import com.learn.java.mysql.repository.EmployeeRepository;
+import com.learn.java.mysql.service.DepartmentService;
 import com.learn.java.mysql.service.EmployeeService;
 import com.learn.java.mysql.util.EmployeeUtil;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+	@Autowired
+	private DepartmentService departmentService;
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -330,6 +334,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 //		entityManagerFactory.close();
 		
+	}
+
+	@Override
+	public void testManyToOne() {
+		Department department = departmentService.addOneDepartment();
+		employeeRepository.save(Employee.builder().name("name123").age(22).email("a@bb.com").gender("Male").salary(1234.2)
+				.department(department).build());
+
 	}
 }
 

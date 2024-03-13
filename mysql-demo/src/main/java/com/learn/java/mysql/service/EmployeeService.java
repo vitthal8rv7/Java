@@ -22,4 +22,6 @@ public interface EmployeeService {
 
 	public void testEntityManagerAPIs();
 
+	public void testManyToOne();
+
 }
