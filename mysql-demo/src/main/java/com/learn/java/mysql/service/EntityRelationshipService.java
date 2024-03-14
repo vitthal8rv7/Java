@@ -6,4 +6,6 @@ public interface EntityRelationshipService {
 
 	public void testManyToOneBidirection();
 
+	public void testOneToManyUnidirection();
+
 }
