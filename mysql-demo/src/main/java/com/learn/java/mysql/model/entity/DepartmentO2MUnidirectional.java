@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +26,7 @@ public class DepartmentO2MUnidirectional {
 	
 	private String name;
 	
-	@OneToMany
+	@OneToMany //primary  key of department entity will be saved in employee entity as a foreign key
+	@JoinColumn(name = "department_id") // foreign key name in employee entity
 	private List<EmployeeO2MUnidirectional> employees;
 }
