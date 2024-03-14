@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.mysql.model.dto.EmployeeDto;
 import com.learn.java.mysql.service.EmployeeService;
+import com.learn.java.mysql.service.EntityRelationshipService;
 import com.learn.java.mysql.service.StudentService;
 
 import jakarta.validation.Valid;
@@ -22,6 +23,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/mysql/demo")
 public class MysqlController {
+
+	@Autowired
+	private EntityRelationshipService entityRelationshipService;
 
 	@Autowired
 	private EmployeeService employeeService;
@@ -85,5 +89,17 @@ public class MysqlController {
 		return "Tested many-to-one";
 	}
 	
+	@GetMapping("/test/many-to-one-unidirection")
+	public String testManyToOneUnidirection() {
+		entityRelationshipService.testManyToOneUnidirection();
+		return "Tested many-to-unidirection";
+	}
+
+	@GetMapping("/test/many-to-one-bidirection")
+	public String testManyToOneBidirection() {
+		entityRelationshipService.testManyToOneBidirection();
+		return "Tested many-to-bidirection";
+	}
+
 
 }
