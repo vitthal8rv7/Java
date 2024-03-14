@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -90,6 +91,11 @@ public class Employee {
  	private String gender;
 	
 	@ManyToOne
-	@JoinColumn(name = "dp_id")
+//	@JoinColumn(name = "dp_id")
+	@JoinTable(
+	        name = "employee_department",   // Name of the join table
+	        joinColumns = @JoinColumn(name = "employee_id"),   // Foreign key column in the join table referencing Employee
+	        inverseJoinColumns = @JoinColumn(name = "department_id")  // Foreign key column in the join table referencing Department
+	    )
 	private Department department;
 }
