@@ -141,5 +141,13 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 	}
 
+	@Override
+	public void testOneToOneBi() {
+		AddressO2OUni addressO2OUni = addressO2OUniRepo.save(AddressO2OUni.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OUni departmentO2OUni = departmentO2OUniRepo.save(DepartmentO2OUni.builder().name("Maths").address(addressO2OUni).build());
+		System.out.println("Address : "+addressO2OUni);
+		System.out.println("Department : "+departmentO2OUni);		
+	}
+
 	
 }

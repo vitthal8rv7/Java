@@ -10,4 +10,6 @@ public interface EntityRelationshipService {
 
 	public void testOneToOneUni();
 
+	public void testOneToOneBi();
+
 }

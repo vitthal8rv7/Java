@@ -113,4 +113,10 @@ public class MysqlController {
 		return "Tested one-to-one-unidirectional";
 	}
 
+	@GetMapping("/test/one-to-one-bidirectional")
+	public String testOneToOneBi() {
+		entityRelationshipService.testOneToOneBi();
+		return "Tested one-to-one-bidirectional";
+	}
+
 }
