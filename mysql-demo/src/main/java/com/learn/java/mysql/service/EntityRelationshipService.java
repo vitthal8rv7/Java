@@ -14,4 +14,6 @@ public interface EntityRelationshipService {
 
 	public void testOneToOneUniSharedPk();
 
+	public void testManyToManyUni();
+
 }

@@ -125,5 +125,10 @@ public class MysqlController {
 		return "Tested one-to-one-uni-shared-pk";
 	}
 
+	@GetMapping("/test/many-to-many-uni")
+	public String testManyToManyUni() {
+		entityRelationshipService.testManyToManyUni();
+		return "Tested many-to-many-uni";
+	}
 
 }

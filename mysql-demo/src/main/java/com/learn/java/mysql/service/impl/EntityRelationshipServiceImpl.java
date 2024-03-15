@@ -6,9 +6,11 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.entity.AddressM2MUni;
 import com.learn.java.mysql.model.entity.AddressO2OBi;
 import com.learn.java.mysql.model.entity.AddressO2OUni;
 import com.learn.java.mysql.model.entity.AddressO2OUniShared;
+import com.learn.java.mysql.model.entity.DepartmentM2MUni;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.DepartmentM2OUnidirectional;
 import com.learn.java.mysql.model.entity.DepartmentO2MUnidirectional;
@@ -18,9 +20,11 @@ import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.repository.AddressM2MUniRepository;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
 import com.learn.java.mysql.repository.AddressO2OUniRepository;
 import com.learn.java.mysql.repository.AddressO2OUniSharedRepository;
+import com.learn.java.mysql.repository.DepartmentM2MUniRepository;
 import com.learn.java.mysql.repository.DepartmentM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.DepartmentO2MUnidirectionalRepository;
@@ -34,6 +38,12 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private AddressM2MUniRepository addressM2MUniRepo;
+
+	@Autowired
+	private DepartmentM2MUniRepository departmentM2MUniRepo;
 
 	@Autowired
 	private AddressO2OUniSharedRepository addressO2OUniSharedRepo;
@@ -175,6 +185,23 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		DepartmentO2OUniShared departmentO2OUniShared = departmentO2OUniSharedRepo.save(DepartmentO2OUniShared.builder().name("Maths").address(addressO2OUniShared).build());
 		System.out.println("Address : "+addressO2OUniShared);
 		System.out.println("Department : "+departmentO2OUniShared);
+	}
+
+	@Override
+	public void testManyToManyUni() {
+		// TODO Auto-generated method stub
+		AddressM2MUni addressM2MUni = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar1").city("Pune1").build());
+		AddressM2MUni addressM2MUni2 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar2").city("Pune2").build());
+		AddressM2MUni addressM2MUni3 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar3").city("Pune3").build());
+		
+		DepartmentM2MUni departmentM2MUni = departmentM2MUniRepo.save(DepartmentM2MUni.builder().name("Maths1")
+				.addresses(Arrays.asList(addressM2MUni, addressM2MUni2)).build());
+		DepartmentM2MUni departmentM2MUni2 = departmentM2MUniRepo.save(DepartmentM2MUni.builder().name("Maths2")
+				.addresses(Arrays.asList(addressM2MUni2, addressM2MUni3)).build());
+		
+		System.out.println("Department1 : "+departmentM2MUni);
+		System.out.println("Department2 : "+departmentM2MUni2);
+
 	}
 
 	
