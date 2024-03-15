@@ -137,4 +137,10 @@ public class MysqlController {
 		return "Tested many-to-many-bi";
 	}
 
+	@GetMapping("/test/many-to-many-bi-with-cascade")
+	public String testManyToManyBiCascade() {
+		entityRelationshipService.testManyToManyBiCascade();
+		return "Tested many-to-many-bi-with-cascade";
+	}
+
 }

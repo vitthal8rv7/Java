@@ -18,4 +18,6 @@ public interface EntityRelationshipService {
 
 	public void testManyToManyBi();
 
+	public void testManyToManyBiCascade();
+
 }

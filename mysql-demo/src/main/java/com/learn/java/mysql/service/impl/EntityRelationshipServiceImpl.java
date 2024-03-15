@@ -226,13 +226,24 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		DepartmentM2MBi departmentM2MBi3 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths3")
 				.build());
 
-		// not mapping from address side because we mentioned mappedBy (mapping at department side) ??
-//		AddressM2MBi addressM2MBi = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar4").city("Pune4")
-//				.departments(Arrays.asList(departmentM2MBi3)).build());
-		
 		System.out.println("Department1 : "+departmentM2MBi1);
 		System.out.println("Department2 : "+departmentM2MBi2);
 		System.out.println("Department3 : "+departmentM2MBi3);
+	}
+
+	@Override
+	public void testManyToManyBiCascade() {
+		AddressM2MBi addressM2MBi1 = AddressM2MBi.builder().street("Ram Nagar1").city("Pune1").build();
+		AddressM2MBi addressM2MBi2 = AddressM2MBi.builder().street("Ram Nagar2").city("Pune2").build();
+		AddressM2MBi addressM2MBi3 = AddressM2MBi.builder().street("Ram Nagar3").city("Pune3").build();
+		DepartmentM2MBi departmentM2MBi1 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths1")
+				.addresses(Arrays.asList(addressM2MBi1, addressM2MBi2)).build());
+		DepartmentM2MBi departmentM2MBi2 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths2")
+				.addresses(Arrays.asList(addressM2MBi2, addressM2MBi3)).build());
+		System.out.println("Department1 : "+departmentM2MBi1);
+		System.out.println("Department2 : "+departmentM2MBi2);
+
+
 	}
 
 	
