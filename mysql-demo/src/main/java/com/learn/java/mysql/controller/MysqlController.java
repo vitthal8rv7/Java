@@ -107,4 +107,34 @@ public class MysqlController {
 		return "Tested one-to-many-unidirection";
 	}
 
+	@GetMapping("/test/one-to-one-unidirectional")
+	public String testOneToOneUni() {
+		entityRelationshipService.testOneToOneUni();
+		return "Tested one-to-one-unidirectional";
+	}
+
+	@GetMapping("/test/one-to-one-bidirectional")
+	public String testOneToOneBi() {
+		entityRelationshipService.testOneToOneBi();
+		return "Tested one-to-one-bidirectional";
+	}
+	
+	@GetMapping("/test/one-to-one-uni-shared-pk")
+	public String testOneToOneUniSharedPk() {
+		entityRelationshipService.testOneToOneUniSharedPk();
+		return "Tested one-to-one-uni-shared-pk";
+	}
+
+	@GetMapping("/test/many-to-many-uni")
+	public String testManyToManyUni() {
+		entityRelationshipService.testManyToManyUni();
+		return "Tested many-to-many-uni";
+	}
+
+	@GetMapping("/test/many-to-many-bi")
+	public String testManyToManyBi() {
+		entityRelationshipService.testManyToManyBi();
+		return "Tested many-to-many-bi";
+	}
+
 }

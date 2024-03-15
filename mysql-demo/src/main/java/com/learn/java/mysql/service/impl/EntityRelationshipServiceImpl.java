@@ -6,15 +6,35 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.entity.AddressM2MBi;
+import com.learn.java.mysql.model.entity.AddressM2MUni;
+import com.learn.java.mysql.model.entity.AddressO2OBi;
+import com.learn.java.mysql.model.entity.AddressO2OUni;
+import com.learn.java.mysql.model.entity.AddressO2OUniShared;
+import com.learn.java.mysql.model.entity.DepartmentM2MBi;
+import com.learn.java.mysql.model.entity.DepartmentM2MUni;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.DepartmentM2OUnidirectional;
 import com.learn.java.mysql.model.entity.DepartmentO2MUnidirectional;
+import com.learn.java.mysql.model.entity.DepartmentO2OBi;
+import com.learn.java.mysql.model.entity.DepartmentO2OUni;
+import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.repository.AddressM2MBiRepository;
+import com.learn.java.mysql.repository.AddressM2MUniRepository;
+import com.learn.java.mysql.repository.AddressO2OBiRepository;
+import com.learn.java.mysql.repository.AddressO2OUniRepository;
+import com.learn.java.mysql.repository.AddressO2OUniSharedRepository;
+import com.learn.java.mysql.repository.DepartmentM2MBiRepository;
+import com.learn.java.mysql.repository.DepartmentM2MUniRepository;
 import com.learn.java.mysql.repository.DepartmentM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.DepartmentO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.DepartmentO2OBiRepository;
+import com.learn.java.mysql.repository.DepartmentO2OUniRepository;
+import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
@@ -22,6 +42,36 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private AddressM2MBiRepository addressM2MBiRepo;
+
+	@Autowired
+	private DepartmentM2MBiRepository departmentM2MBiRepo;
+
+	@Autowired
+	private AddressM2MUniRepository addressM2MUniRepo;
+
+	@Autowired
+	private DepartmentM2MUniRepository departmentM2MUniRepo;
+
+	@Autowired
+	private AddressO2OUniSharedRepository addressO2OUniSharedRepo;
+
+	@Autowired
+	private DepartmentO2OUniSharedRepository departmentO2OUniSharedRepo;
+
+	@Autowired
+	private AddressO2OBiRepository addressO2OBiRepo;
+
+	@Autowired
+	private DepartmentO2OBiRepository departmentO2OBiRepo;
+
+	@Autowired
+	private AddressO2OUniRepository addressO2OUniRepo;
+
+	@Autowired
+	private DepartmentO2OUniRepository departmentO2OUniRepo;
 
 	@Autowired
 	private DepartmentO2MUnidirectionalRepository departmentO2MUnidirectionalRepo;
@@ -120,6 +170,69 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("Department : "+department);
 		
 		
+	}
+
+	@Override
+	public void testOneToOneUni() {
+		AddressO2OUni addressO2OUni = addressO2OUniRepo.save(AddressO2OUni.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OUni departmentO2OUni = departmentO2OUniRepo.save(DepartmentO2OUni.builder().name("Maths").address(addressO2OUni).build());
+		System.out.println("Address : "+addressO2OUni);
+		System.out.println("Department : "+departmentO2OUni);
+		
+	}
+
+	@Override
+	public void testOneToOneBi() {
+		AddressO2OBi addressO2OBi = addressO2OBiRepo.save(AddressO2OBi.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OBi departmentO2OBi = departmentO2OBiRepo.save(DepartmentO2OBi.builder().name("Maths").address(addressO2OBi).build());
+		System.out.println("Address : "+addressO2OBi);
+		System.out.println("Department : "+departmentO2OBi);		
+	}
+
+	@Override
+	public void testOneToOneUniSharedPk() {
+		AddressO2OUniShared addressO2OUniShared = addressO2OUniSharedRepo.save(AddressO2OUniShared.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OUniShared departmentO2OUniShared = departmentO2OUniSharedRepo.save(DepartmentO2OUniShared.builder().name("Maths").address(addressO2OUniShared).build());
+		System.out.println("Address : "+addressO2OUniShared);
+		System.out.println("Department : "+departmentO2OUniShared);
+	}
+
+	@Override
+	public void testManyToManyUni() {
+		AddressM2MUni addressM2MUni = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar1").city("Pune1").build());
+		AddressM2MUni addressM2MUni2 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar2").city("Pune2").build());
+		AddressM2MUni addressM2MUni3 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar3").city("Pune3").build());
+		
+		DepartmentM2MUni departmentM2MUni = departmentM2MUniRepo.save(DepartmentM2MUni.builder().name("Maths1")
+				.addresses(Arrays.asList(addressM2MUni, addressM2MUni2)).build());
+		DepartmentM2MUni departmentM2MUni2 = departmentM2MUniRepo.save(DepartmentM2MUni.builder().name("Maths2")
+				.addresses(Arrays.asList(addressM2MUni2, addressM2MUni3)).build());
+		
+		System.out.println("Department1 : "+departmentM2MUni);
+		System.out.println("Department2 : "+departmentM2MUni2);
+
+	}
+
+	@Override
+	public void testManyToManyBi() {
+		AddressM2MBi addressM2MBi1 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar1").city("Pune1").build());
+		AddressM2MBi addressM2MBi2 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar2").city("Pune2").build());
+		AddressM2MBi addressM2MBi3 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar3").city("Pune3").build());
+		
+		DepartmentM2MBi departmentM2MBi1 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths1")
+				.addresses(Arrays.asList(addressM2MBi1, addressM2MBi2)).build());
+		DepartmentM2MBi departmentM2MBi2 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths2")
+				.addresses(Arrays.asList(addressM2MBi2, addressM2MBi3)).build());
+		DepartmentM2MBi departmentM2MBi3 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths3")
+				.build());
+
+		// not mapping from address side because we mentioned mappedBy (mapping at department side) ??
+//		AddressM2MBi addressM2MBi = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar4").city("Pune4")
+//				.departments(Arrays.asList(departmentM2MBi3)).build());
+		
+		System.out.println("Department1 : "+departmentM2MBi1);
+		System.out.println("Department2 : "+departmentM2MBi2);
+		System.out.println("Department3 : "+departmentM2MBi3);
 	}
 
 	
