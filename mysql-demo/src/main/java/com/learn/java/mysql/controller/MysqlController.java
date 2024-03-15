@@ -131,4 +131,10 @@ public class MysqlController {
 		return "Tested many-to-many-uni";
 	}
 
+	@GetMapping("/test/many-to-many-bi")
+	public String testManyToManyBi() {
+		entityRelationshipService.testManyToManyBi();
+		return "Tested many-to-many-bi";
+	}
+
 }

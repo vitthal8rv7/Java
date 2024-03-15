@@ -6,10 +6,12 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.entity.AddressM2MBi;
 import com.learn.java.mysql.model.entity.AddressM2MUni;
 import com.learn.java.mysql.model.entity.AddressO2OBi;
 import com.learn.java.mysql.model.entity.AddressO2OUni;
 import com.learn.java.mysql.model.entity.AddressO2OUniShared;
+import com.learn.java.mysql.model.entity.DepartmentM2MBi;
 import com.learn.java.mysql.model.entity.DepartmentM2MUni;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.DepartmentM2OUnidirectional;
@@ -20,10 +22,12 @@ import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.repository.AddressM2MBiRepository;
 import com.learn.java.mysql.repository.AddressM2MUniRepository;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
 import com.learn.java.mysql.repository.AddressO2OUniRepository;
 import com.learn.java.mysql.repository.AddressO2OUniSharedRepository;
+import com.learn.java.mysql.repository.DepartmentM2MBiRepository;
 import com.learn.java.mysql.repository.DepartmentM2MUniRepository;
 import com.learn.java.mysql.repository.DepartmentM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentM2OUnidirectionRepository;
@@ -38,6 +42,12 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private AddressM2MBiRepository addressM2MBiRepo;
+
+	@Autowired
+	private DepartmentM2MBiRepository departmentM2MBiRepo;
 
 	@Autowired
 	private AddressM2MUniRepository addressM2MUniRepo;
@@ -189,7 +199,6 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 
 	@Override
 	public void testManyToManyUni() {
-		// TODO Auto-generated method stub
 		AddressM2MUni addressM2MUni = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar1").city("Pune1").build());
 		AddressM2MUni addressM2MUni2 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar2").city("Pune2").build());
 		AddressM2MUni addressM2MUni3 = addressM2MUniRepo.save(AddressM2MUni.builder().street("Ram Nagar3").city("Pune3").build());
@@ -202,6 +211,28 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("Department1 : "+departmentM2MUni);
 		System.out.println("Department2 : "+departmentM2MUni2);
 
+	}
+
+	@Override
+	public void testManyToManyBi() {
+		AddressM2MBi addressM2MBi1 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar1").city("Pune1").build());
+		AddressM2MBi addressM2MBi2 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar2").city("Pune2").build());
+		AddressM2MBi addressM2MBi3 = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar3").city("Pune3").build());
+		
+		DepartmentM2MBi departmentM2MBi1 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths1")
+				.addresses(Arrays.asList(addressM2MBi1, addressM2MBi2)).build());
+		DepartmentM2MBi departmentM2MBi2 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths2")
+				.addresses(Arrays.asList(addressM2MBi2, addressM2MBi3)).build());
+		DepartmentM2MBi departmentM2MBi3 = departmentM2MBiRepo.save(DepartmentM2MBi.builder().name("Maths3")
+				.build());
+
+		// not mapping from address side because we mentioned mappedBy (mapping at department side) ??
+//		AddressM2MBi addressM2MBi = addressM2MBiRepo.save(AddressM2MBi.builder().street("Ram Nagar4").city("Pune4")
+//				.departments(Arrays.asList(departmentM2MBi3)).build());
+		
+		System.out.println("Department1 : "+departmentM2MBi1);
+		System.out.println("Department2 : "+departmentM2MBi2);
+		System.out.println("Department3 : "+departmentM2MBi3);
 	}
 
 	

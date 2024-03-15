@@ -16,4 +16,6 @@ public interface EntityRelationshipService {
 
 	public void testManyToManyUni();
 
+	public void testManyToManyBi();
+
 }
