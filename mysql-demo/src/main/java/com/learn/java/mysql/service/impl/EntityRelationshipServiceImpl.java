@@ -6,15 +6,19 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.entity.AddressO2OUni;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.DepartmentM2OUnidirectional;
 import com.learn.java.mysql.model.entity.DepartmentO2MUnidirectional;
+import com.learn.java.mysql.model.entity.DepartmentO2OUni;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.repository.AddressO2OUniRepository;
 import com.learn.java.mysql.repository.DepartmentM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.DepartmentO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.DepartmentO2OUniRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
@@ -22,6 +26,12 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private AddressO2OUniRepository addressO2OUniRepo;
+
+	@Autowired
+	private DepartmentO2OUniRepository departmentO2OUniRepo;
 
 	@Autowired
 	private DepartmentO2MUnidirectionalRepository departmentO2MUnidirectionalRepo;
@@ -119,6 +129,15 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("Employee 6 : "+employee6);
 		System.out.println("Department : "+department);
 		
+		
+	}
+
+	@Override
+	public void testOneToOneUni() {
+		AddressO2OUni addressO2OUni = addressO2OUniRepo.save(AddressO2OUni.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OUni departmentO2OUni = departmentO2OUniRepo.save(DepartmentO2OUni.builder().name("Maths").address(addressO2OUni).build());
+		System.out.println("Address : "+addressO2OUni);
+		System.out.println("Department : "+departmentO2OUni);
 		
 	}
 

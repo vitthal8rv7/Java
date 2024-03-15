@@ -8,4 +8,6 @@ public interface EntityRelationshipService {
 
 	public void testOneToManyUnidirection();
 
+	public void testOneToOneUni();
+
 }

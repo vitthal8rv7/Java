@@ -107,4 +107,10 @@ public class MysqlController {
 		return "Tested one-to-many-unidirection";
 	}
 
+	@GetMapping("/test/one-to-one-unidirectional")
+	public String testOneToOneUni() {
+		entityRelationshipService.testOneToOneUni();
+		return "Tested one-to-one-unidirectional";
+	}
+
 }
