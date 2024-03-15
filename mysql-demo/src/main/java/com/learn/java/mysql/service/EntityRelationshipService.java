@@ -8,4 +8,14 @@ public interface EntityRelationshipService {
 
 	public void testOneToManyUnidirection();
 
+	public void testOneToOneUni();
+
+	public void testOneToOneBi();
+
+	public void testOneToOneUniSharedPk();
+
+	public void testManyToManyUni();
+
+	public void testManyToManyBi();
+
 }
