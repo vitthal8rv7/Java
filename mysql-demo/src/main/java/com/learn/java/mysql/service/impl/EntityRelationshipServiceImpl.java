@@ -8,21 +8,25 @@ import org.springframework.stereotype.Service;
 
 import com.learn.java.mysql.model.entity.AddressO2OBi;
 import com.learn.java.mysql.model.entity.AddressO2OUni;
+import com.learn.java.mysql.model.entity.AddressO2OUniShared;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.DepartmentM2OUnidirectional;
 import com.learn.java.mysql.model.entity.DepartmentO2MUnidirectional;
 import com.learn.java.mysql.model.entity.DepartmentO2OBi;
 import com.learn.java.mysql.model.entity.DepartmentO2OUni;
+import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
 import com.learn.java.mysql.repository.AddressO2OUniRepository;
+import com.learn.java.mysql.repository.AddressO2OUniSharedRepository;
 import com.learn.java.mysql.repository.DepartmentM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.DepartmentO2MUnidirectionalRepository;
 import com.learn.java.mysql.repository.DepartmentO2OBiRepository;
 import com.learn.java.mysql.repository.DepartmentO2OUniRepository;
+import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
@@ -30,6 +34,12 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private AddressO2OUniSharedRepository addressO2OUniSharedRepo;
+
+	@Autowired
+	private DepartmentO2OUniSharedRepository departmentO2OUniSharedRepo;
 
 	@Autowired
 	private AddressO2OBiRepository addressO2OBiRepo;
@@ -157,6 +167,14 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		DepartmentO2OBi departmentO2OBi = departmentO2OBiRepo.save(DepartmentO2OBi.builder().name("Maths").address(addressO2OBi).build());
 		System.out.println("Address : "+addressO2OBi);
 		System.out.println("Department : "+departmentO2OBi);		
+	}
+
+	@Override
+	public void testOneToOneUniSharedPk() {
+		AddressO2OUniShared addressO2OUniShared = addressO2OUniSharedRepo.save(AddressO2OUniShared.builder().street("Ram Nagar").city("Pune").build());
+		DepartmentO2OUniShared departmentO2OUniShared = departmentO2OUniSharedRepo.save(DepartmentO2OUniShared.builder().name("Maths").address(addressO2OUniShared).build());
+		System.out.println("Address : "+addressO2OUniShared);
+		System.out.println("Department : "+departmentO2OUniShared);
 	}
 
 	

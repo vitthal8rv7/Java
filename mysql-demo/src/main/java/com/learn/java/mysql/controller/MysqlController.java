@@ -118,5 +118,12 @@ public class MysqlController {
 		entityRelationshipService.testOneToOneBi();
 		return "Tested one-to-one-bidirectional";
 	}
+	
+	@GetMapping("/test/one-to-one-uni-shared-pk")
+	public String testOneToOneUniSharedPk() {
+		entityRelationshipService.testOneToOneUniSharedPk();
+		return "Tested one-to-one-uni-shared-pk";
+	}
+
 
 }
