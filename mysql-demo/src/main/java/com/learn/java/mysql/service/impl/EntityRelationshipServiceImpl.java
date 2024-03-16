@@ -11,6 +11,7 @@ import com.learn.java.mysql.model.entity.AddressM2MUni;
 import com.learn.java.mysql.model.entity.AddressO2OBi;
 import com.learn.java.mysql.model.entity.AddressO2OUni;
 import com.learn.java.mysql.model.entity.AddressO2OUniShared;
+import com.learn.java.mysql.model.entity.Car;
 import com.learn.java.mysql.model.entity.DepartmentM2MBi;
 import com.learn.java.mysql.model.entity.DepartmentM2MUni;
 import com.learn.java.mysql.model.entity.DepartmentM2OAndO2MBidirectional;
@@ -22,6 +23,8 @@ import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.model.entity.Truck;
+import com.learn.java.mysql.model.entity.Vehicle;
 import com.learn.java.mysql.repository.AddressM2MBiRepository;
 import com.learn.java.mysql.repository.AddressM2MUniRepository;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
@@ -38,11 +41,15 @@ import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.VehicleRepository;
 import com.learn.java.mysql.service.EntityRelationshipService;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
 
+	@Autowired
+	private VehicleRepository vehicleRepository;
+	
 	@Autowired
 	private AddressM2MBiRepository addressM2MBiRepo;
 
@@ -244,6 +251,20 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("Department2 : "+departmentM2MBi2);
 
 
+	}
+
+	@Override
+	public void testIMSingleTable() {
+		Vehicle tataCar = new Car("TATA", 120, "No");
+		Vehicle tataTruck = new Truck("TATA", 100, 1200);
+		
+		Vehicle mahindraCar = new Car("Mahindra", 125, "Yes");
+		Vehicle mahindraTruck = new Truck("Mahindra", 90, 1000);
+
+		vehicleRepository.save(tataCar);
+		vehicleRepository.save(tataTruck);
+		vehicleRepository.save(mahindraCar);
+		vehicleRepository.save(mahindraTruck);
 	}
 
 	

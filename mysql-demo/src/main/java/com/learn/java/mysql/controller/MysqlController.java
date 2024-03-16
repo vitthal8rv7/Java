@@ -143,4 +143,25 @@ public class MysqlController {
 		return "Tested many-to-many-bi-with-cascade";
 	}
 
+	@GetMapping("/test/inheritance-mapping-type-single-table")
+	public String testIMSingleTable() {
+		//1 Default Discriminator : Commit 1
+		entityRelationshipService.testIMSingleTable();
+		
+		//2 Custom Discriminator  : Commit 2
+		return "Tested inheritance-mapping-type-single-table";
+	}
+
+	@GetMapping("/test/inheritance-mapping-type-joined-table")
+	public String testIMJoinedTable() {
+		//
+		return "Tested inheritance-mapping-type-joined-table";
+	}
+
+	@GetMapping("/test/inheritance-mapping-type-table-per-class")
+	public String testIMTablePerClass() {
+		//
+		return "Tested inheritance-mapping-type-table-per-class";
+	}
+
 }

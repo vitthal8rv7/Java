@@ -20,4 +20,6 @@ public interface EntityRelationshipService {
 
 	public void testManyToManyBiCascade();
 
+	public void testIMSingleTable();
+
 }
