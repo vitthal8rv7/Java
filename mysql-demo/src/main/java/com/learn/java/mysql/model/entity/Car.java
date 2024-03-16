@@ -13,12 +13,11 @@ public class Car extends Vehicle {
 
 	private Integer topSpeed;
 	
-    private String sunroof;
+	private String sunroof;
 
 	public Car(String manufacturer, Integer topSpeed, String sunroof) {
 		super(manufacturer);
 		this.topSpeed = topSpeed;
 		this.sunroof = sunroof;
 	}
-
 }

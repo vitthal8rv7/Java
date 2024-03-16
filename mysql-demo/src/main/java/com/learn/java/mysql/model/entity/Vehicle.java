@@ -25,7 +25,7 @@ public class Vehicle {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-    private String manufacturer;
+	private String manufacturer;
 
 	public Vehicle(String manufacturer) {
 		this.manufacturer = manufacturer;
