@@ -1,5 +1,6 @@
 package com.learn.java.mysql.model.entity;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 //@EqualsAndHashCode(callSuper=false)
 @Entity
+@DiscriminatorValue("big_vehicle")
 public class Truck extends Vehicle {
 
 	private Integer topSpeed;
