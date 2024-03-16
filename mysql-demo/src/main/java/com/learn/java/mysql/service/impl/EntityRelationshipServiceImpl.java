@@ -264,6 +264,11 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 	}
 
+	@Override
+	public void testIMTablePerClass() {
+		addVehicles();
+	}
+
 	private void addVehicles() {
 		Vehicle tataCar = new Car("TATA", 120, "No");
 		Vehicle tataTruck = new Truck("TATA", 100, 1200);

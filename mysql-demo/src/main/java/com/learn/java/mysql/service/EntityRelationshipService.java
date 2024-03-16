@@ -24,4 +24,6 @@ public interface EntityRelationshipService {
 
 	public void testIMJoinedTable();
 
+	public void testIMTablePerClass();
+
 }

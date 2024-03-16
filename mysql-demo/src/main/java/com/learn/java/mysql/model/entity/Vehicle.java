@@ -17,11 +17,22 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "Vehicle_Type")
+
+//@Inheritance(strategy = InheritanceType.JOINED)
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Vehicle {
 
+	
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// MappingException: Cannot use identity column key generation with <union-subclass> mapping for
+	//do not GenerationType.IDENTITY with InheritanceType.TABLE_PER_CLASS
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
 	private String manufacturer;
@@ -35,17 +46,3 @@ public class Vehicle {
 
 
 
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-//@DiscriminatorColumn(name = "Vehicle_Type")
-//public class Vehicle {
-//
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Long id;
-//
-//	private String manufacturer;
-//
-//	public Vehicle(String manufacturer) {
-//		this.manufacturer = manufacturer;
-//	}
-//}

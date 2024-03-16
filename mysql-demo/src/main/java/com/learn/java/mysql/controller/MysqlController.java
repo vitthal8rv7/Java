@@ -157,7 +157,7 @@ public class MysqlController {
 
 	@GetMapping("/test/inheritance-mapping-type-table-per-class")
 	public String testIMTablePerClass() {
-		//
+		entityRelationshipService.testIMTablePerClass();
 		return "Tested inheritance-mapping-type-table-per-class";
 	}
 
