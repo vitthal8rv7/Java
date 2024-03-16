@@ -255,6 +255,16 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 
 	@Override
 	public void testIMSingleTable() {
+		addVehicles();
+	}
+
+	@Override
+	public void testIMJoinedTable() {
+		addVehicles();
+		
+	}
+
+	private void addVehicles() {
 		Vehicle tataCar = new Car("TATA", 120, "No");
 		Vehicle tataTruck = new Truck("TATA", 100, 1200);
 		
@@ -264,7 +274,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		vehicleRepository.save(tataCar);
 		vehicleRepository.save(tataTruck);
 		vehicleRepository.save(mahindraCar);
-		vehicleRepository.save(mahindraTruck);
+		vehicleRepository.save(mahindraTruck);		
 	}
 
 	

@@ -145,16 +145,13 @@ public class MysqlController {
 
 	@GetMapping("/test/inheritance-mapping-type-single-table")
 	public String testIMSingleTable() {
-		//1 Default Discriminator : Commit 1
 		entityRelationshipService.testIMSingleTable();
-		
-		//2 Custom Discriminator  : Commit 2
 		return "Tested inheritance-mapping-type-single-table";
 	}
 
 	@GetMapping("/test/inheritance-mapping-type-joined-table")
 	public String testIMJoinedTable() {
-		//
+		entityRelationshipService.testIMJoinedTable();
 		return "Tested inheritance-mapping-type-joined-table";
 	}
 

@@ -22,4 +22,6 @@ public interface EntityRelationshipService {
 
 	public void testIMSingleTable();
 
+	public void testIMJoinedTable();
+
 }

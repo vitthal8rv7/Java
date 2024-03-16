@@ -17,8 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "Vehicle_Type")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Vehicle {
 
 	@Id
@@ -31,3 +30,22 @@ public class Vehicle {
 		this.manufacturer = manufacturer;
 	}
 }
+
+
+
+
+
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn(name = "Vehicle_Type")
+//public class Vehicle {
+//
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Long id;
+//
+//	private String manufacturer;
+//
+//	public Vehicle(String manufacturer) {
+//		this.manufacturer = manufacturer;
+//	}
+//}
