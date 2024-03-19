@@ -2,6 +2,7 @@ package com.learn.java.mysql.model.entity;
 
 import java.util.List;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -37,5 +38,6 @@ public class Customer {
 //	@LazyCollection(LazyCollectionOption.EXTRA)
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id")
+	@BatchSize(size = 10) // sol-3 for N+1 problem
 	private List<Book> books;
 }

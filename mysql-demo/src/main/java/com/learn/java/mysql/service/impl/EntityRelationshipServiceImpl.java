@@ -332,22 +332,22 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		Book book6 = Book.builder().name("book6").author(author6).build();
 //		Book book1 = Book.builder().name("book1").author(author1).build();
 
-		List<Book> books1 = Arrays.asList(book1, book3, book5);
-		List<Book> books2 = Arrays.asList(book2, book4, book6);
-		List<Book> books3 = Arrays.asList(book1, book4, book6);
-		List<Book> books4 = Arrays.asList(book2, book3, book5);
-		List<Book> books5 = Arrays.asList(book4, book5, book6);
-		List<Book> books6 = Arrays.asList(book5, book6);
+		List<Book> books1 = Arrays.asList(book1, book2);
+		List<Book> books2 = Arrays.asList(book3, book4);
+		List<Book> books3 = Arrays.asList(book5, book6);
+//		List<Book> books4 = Arrays.asList(book2, book3, book5);
+//		List<Book> books5 = Arrays.asList(book4, book5, book6);
+//		List<Book> books6 = Arrays.asList(book5, book6);
 		Customer cust1 = Customer.builder().name("cname1").address(address1).books(books1).build();
 		Customer cust2 = Customer.builder().name("cname2").address(address2).books(books2).build();
 		Customer cust3 = Customer.builder().name("cname3").address(address3).books(books3).build();
-		Customer cust4 = Customer.builder().name("cname4").address(address4).books(books4).build();
-		Customer cust5 = Customer.builder().name("cname5").address(address5).books(books5).build();
-		Customer cust6 = Customer.builder().name("cname6").address(address6).books(books6).build();
+//		Customer cust4 = Customer.builder().name("cname4").address(address4).books(books4).build();
+//		Customer cust5 = Customer.builder().name("cname5").address(address5).books(books5).build();
+//		Customer cust6 = Customer.builder().name("cname6").address(address6).books(books6).build();
 
 		// save all
 //		try {
-//			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3, cust4, cust5, cust6));
+//			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3));
 //		} catch (Exception e) {
 //			System.out.println("saveAll"+e);
 //		}
@@ -381,10 +381,24 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		/*
 		 * Solution 2
 		 */
+//		try {
+//			System.out.println("");
+//			System.out.println("");
+//			showCustomersWithJoinFetch();
+//			System.out.println("");
+//			System.out.println("");
+//		} catch (Exception e) {
+//			System.out.println("showCustomersWithJoinFetch"+e);
+//		}
+
+	
+		/*
+		 * Solution 3
+		 */		
 		try {
 			System.out.println("");
 			System.out.println("");
-			showCustomersWithJoinFetch();
+			showCustomers(); // but field are annotated with @BatchSize
 			System.out.println("");
 			System.out.println("");
 		} catch (Exception e) {
@@ -441,21 +455,27 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 
 	private void showCustomers() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c", Customer.class)
-//                    .setHint("jakarta.persistence.fetchgraph", graph)
-				.getResultList();
-		System.out.println("is cust empty" + Objects.isNull(customers));
+		List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+		System.out.println("is cust empty : " + Objects.isNull(customers));
+		
+		System.out.println("");
+		System.out.println("");
 		customers.stream().forEach(d -> {
-
-			System.out.println("customer name : " + d.getName());
-			System.out.println("address : " + d.getAddress());
+			System.out.println("\n customer name : " + d.getName());
+			System.out.println("\n address : " + d.getAddress());
 			d.getBooks().stream().forEach(b -> {
-				System.out.println("book name: " + b.getName());
-				System.out.println("book author : " + b.getAuthor());
-
+				System.out.println("\n book name: " + b.getName());
+				System.out.println("\n book author : " + b.getAuthor());
 			});
+			try {
+				Thread.sleep(1000);
+			} catch(Exception e) {
+				
+			}
 
 		});
+		System.out.println("");
+		System.out.println("");
 		entityManager.clear();
 		entityManager.clear();
 
