@@ -161,4 +161,31 @@ public class MysqlController {
 		return "Tested inheritance-mapping-type-table-per-class";
 	}
 
+
+	@GetMapping("/test/n-plus-1-problem-entity-graph")
+	public String testEntityGraph() {
+		entityRelationshipService.testEntityGraph();
+		return "Tested n-plus-1-problem-entity-graph";
+	}
+	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+//
+//	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+//
+//	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+
 }
