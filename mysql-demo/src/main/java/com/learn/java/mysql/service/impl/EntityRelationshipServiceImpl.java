@@ -345,37 +345,73 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		Customer cust5 = Customer.builder().name("cname5").address(address5).books(books5).build();
 		Customer cust6 = Customer.builder().name("cname6").address(address6).books(books6).build();
 
-		try {
-			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3, cust4, cust5, cust6));
-		} catch (Exception e) {
-			System.out.println("saveAll"+e);
-		}
+		// save all
+//		try {
+//			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3, cust4, cust5, cust6));
+//		} catch (Exception e) {
+//			System.out.println("saveAll"+e);
+//		}
 
-		try {
-			System.out.println("");
-			System.out.println("");
-			showCustomers();
-			System.out.println("");
-			System.out.println("");
-		} catch (Exception e) {
-			System.out.println("showCustomers"+e);
-		}
+		/*
+		 *  N+1 Problem 
+		 */
+//		try {
+//			System.out.println("");
+//			System.out.println("");
+//			showCustomers();
+//			System.out.println("");
+//			System.out.println("");
+//		} catch (Exception e) {
+//			System.out.println("showCustomers"+e);
+//		}
 
 		/*
 		 * Solution 1
 		 */
+//		try {
+//			System.out.println("");
+//			System.out.println("");
+//			showCustomersWithEntityGraph();
+//			System.out.println("");
+//			System.out.println("");
+//		} catch (Exception e) {
+//			System.out.println("showCustomersWithEntityGraph"+e);
+//		}
+
+		/*
+		 * Solution 2
+		 */
 		try {
 			System.out.println("");
 			System.out.println("");
-			showCustomersWithEntityGraph();
+			showCustomersWithJoinFetch();
 			System.out.println("");
 			System.out.println("");
 		} catch (Exception e) {
-			System.out.println("showCustomersWithEntityGraph"+e);
+			System.out.println("showCustomersWithJoinFetch"+e);
 		}
 
 		System.out.println("testedEntityGraph");
 
+	}
+
+	private void showCustomersWithJoinFetch() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c join fetch c.address addr join fetch c.books b join fetch b.author a", Customer.class).getResultList();
+		System.out.println("is cust empty" + Objects.isNull(customers));
+		customers.stream().forEach(d -> {
+
+			System.out.println("customer name : " + d.getName());
+			System.out.println("address : " + d.getAddress());
+			d.getBooks().stream().forEach(b -> {
+				System.out.println("book name: " + b.getName());
+				System.out.println("book author : " + b.getAuthor());
+
+			});
+
+		});
+		entityManager.clear();
+		entityManager.clear();		
 	}
 
 	private void showCustomersWithEntityGraph() {
@@ -384,7 +420,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		graph.addAttributeNodes("address");
 		graph.addSubgraph("books").addAttributeNodes("author");
 
-		List<Customer> customers = entityManager.createQuery("SELECT d FROM Customer d", Customer.class)
+		List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c", Customer.class)
 				.setHint("jakarta.persistence.fetchgraph", graph).getResultList();
 		System.out.println("is cust empty" + Objects.isNull(customers));
 		customers.stream().forEach(d -> {
@@ -405,7 +441,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 
 	private void showCustomers() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		List<Customer> customers = entityManager.createQuery("SELECT d FROM Customer d", Customer.class)
+		List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c", Customer.class)
 //                    .setHint("jakarta.persistence.fetchgraph", graph)
 				.getResultList();
 		System.out.println("is cust empty" + Objects.isNull(customers));
