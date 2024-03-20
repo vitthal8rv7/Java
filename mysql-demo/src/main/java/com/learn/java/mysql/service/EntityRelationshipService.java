@@ -18,4 +18,14 @@ public interface EntityRelationshipService {
 
 	public void testManyToManyBi();
 
+	public void testManyToManyBiCascade();
+
+	public void testIMSingleTable();
+
+	public void testIMJoinedTable();
+
+	public void testIMTablePerClass();
+
+	public void testNPlus1ProblemAndSolutions();
+
 }
