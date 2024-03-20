@@ -162,10 +162,10 @@ public class MysqlController {
 	}
 
 
-	@GetMapping("/test/n-plus-1-problem-entity-graph")
-	public String testEntityGraph() {
-		entityRelationshipService.testEntityGraph();
-		return "Tested n-plus-1-problem-entity-graph";
+	@GetMapping("/test/n-plus-1-problem-and-solutions")
+	public String testNPlus1ProblemAndSolutions() {
+		entityRelationshipService.testNPlus1ProblemAndSolutions();
+		return "Tested n-plus-1-problem-and-solutions";
 	}
 	
 //	@GetMapping("/test/n-plus-1-problem-entity-graph")

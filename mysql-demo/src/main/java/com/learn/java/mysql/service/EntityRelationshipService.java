@@ -26,6 +26,6 @@ public interface EntityRelationshipService {
 
 	public void testIMTablePerClass();
 
-	public void testEntityGraph();
+	public void testNPlus1ProblemAndSolutions();
 
 }

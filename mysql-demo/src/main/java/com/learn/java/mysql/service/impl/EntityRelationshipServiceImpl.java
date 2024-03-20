@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -309,48 +311,8 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 	}
 
 	@Override
-	public void testEntityGraph() {
-		AddressNPlus1Problem address1 = AddressNPlus1Problem.builder().city("Pune1").street("Katraj Road 1").build();
-		AddressNPlus1Problem address2 = AddressNPlus1Problem.builder().city("Pune2").street("Katraj Road 2").build();
-		AddressNPlus1Problem address3 = AddressNPlus1Problem.builder().city("Pune3").street("Katraj Road 3").build();
-		AddressNPlus1Problem address4 = AddressNPlus1Problem.builder().city("Pune4").street("Katraj Road 4").build();
-		AddressNPlus1Problem address5 = AddressNPlus1Problem.builder().city("Pune5").street("Katraj Road 5").build();
-		AddressNPlus1Problem address6 = AddressNPlus1Problem.builder().city("Pune6").street("Katraj Road 6").build();
-
-		Author author1 = Author.builder().name("author1").build();
-		Author author2 = Author.builder().name("author2").build();
-		Author author3 = Author.builder().name("author3").build();
-		Author author4 = Author.builder().name("author4").build();
-		Author author5 = Author.builder().name("author5").build();
-		Author author6 = Author.builder().name("author6").build();
-
-		Book book1 = Book.builder().name("book1").author(author1).build();
-		Book book2 = Book.builder().name("book2").author(author2).build();
-		Book book3 = Book.builder().name("book3").author(author3).build();
-		Book book4 = Book.builder().name("book4").author(author4).build();
-		Book book5 = Book.builder().name("book5").author(author5).build();
-		Book book6 = Book.builder().name("book6").author(author6).build();
-//		Book book1 = Book.builder().name("book1").author(author1).build();
-
-		List<Book> books1 = Arrays.asList(book1, book2);
-		List<Book> books2 = Arrays.asList(book3, book4);
-		List<Book> books3 = Arrays.asList(book5, book6);
-//		List<Book> books4 = Arrays.asList(book2, book3, book5);
-//		List<Book> books5 = Arrays.asList(book4, book5, book6);
-//		List<Book> books6 = Arrays.asList(book5, book6);
-		Customer cust1 = Customer.builder().name("cname1").address(address1).books(books1).build();
-		Customer cust2 = Customer.builder().name("cname2").address(address2).books(books2).build();
-		Customer cust3 = Customer.builder().name("cname3").address(address3).books(books3).build();
-//		Customer cust4 = Customer.builder().name("cname4").address(address4).books(books4).build();
-//		Customer cust5 = Customer.builder().name("cname5").address(address5).books(books5).build();
-//		Customer cust6 = Customer.builder().name("cname6").address(address6).books(books6).build();
-
-		// save all
-//		try {
-//			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3));
-//		} catch (Exception e) {
-//			System.out.println("saveAll"+e);
-//		}
+	public void testNPlus1ProblemAndSolutions() {
+//		saveCustomers();
 
 		/*
 		 *  N+1 Problem 
@@ -392,21 +354,75 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 //		}
 
 	
+//		/*
+//		 * Solution 3
+//		 */		
+//		try {
+//			System.out.println("");
+//			System.out.println("");
+//			showCustomers(); // but fields are annotated with @BatchSize
+//			System.out.println("");
+//			System.out.println("");
+//		} catch (Exception e) {
+//			System.out.println("showCustomersWithJoinFetch"+e);
+//		}
+
+		
 		/*
-		 * Solution 3
+		 * Solution 4
 		 */		
 		try {
 			System.out.println("");
 			System.out.println("");
-			showCustomers(); // but field are annotated with @BatchSize
+			showCustomers(); // but fields are annotated with @Fetch(FetchMode.SUBSELECT)
 			System.out.println("");
 			System.out.println("");
 		} catch (Exception e) {
 			System.out.println("showCustomersWithJoinFetch"+e);
 		}
 
+		
 		System.out.println("testedEntityGraph");
 
+	}
+
+	private void saveCustomers() {
+		AddressNPlus1Problem address1 = AddressNPlus1Problem.builder().city("Pune1").street("Katraj Road 1").build();
+		AddressNPlus1Problem address2 = AddressNPlus1Problem.builder().city("Pune2").street("Katraj Road 2").build();
+		AddressNPlus1Problem address3 = AddressNPlus1Problem.builder().city("Pune3").street("Katraj Road 3").build();
+		AddressNPlus1Problem address4 = AddressNPlus1Problem.builder().city("Pune4").street("Katraj Road 4").build();
+		AddressNPlus1Problem address5 = AddressNPlus1Problem.builder().city("Pune5").street("Katraj Road 5").build();
+		AddressNPlus1Problem address6 = AddressNPlus1Problem.builder().city("Pune6").street("Katraj Road 6").build();
+
+		Author author1 = Author.builder().name("author1").build();
+		Author author2 = Author.builder().name("author2").build();
+		Author author3 = Author.builder().name("author3").build();
+		Author author4 = Author.builder().name("author4").build();
+		Author author5 = Author.builder().name("author5").build();
+		Author author6 = Author.builder().name("author6").build();
+
+		Book book1 = Book.builder().name("book1").author(author1).build();
+		Book book2 = Book.builder().name("book2").author(author2).build();
+		Book book3 = Book.builder().name("book3").author(author3).build();
+		Book book4 = Book.builder().name("book4").author(author4).build();
+		Book book5 = Book.builder().name("book5").author(author5).build();
+		Book book6 = Book.builder().name("book6").author(author6).build();
+
+		List<Book> books1 = Arrays.asList(book1, book2);
+		List<Book> books2 = Arrays.asList(book3, book4);
+		List<Book> books3 = Arrays.asList(book5, book6);
+
+		Customer cust1 = Customer.builder().name("cname1").address(address1).books(books1).build();
+		Customer cust2 = Customer.builder().name("cname2").address(address2).books(books2).build();
+		Customer cust3 = Customer.builder().name("cname3").address(address3).books(books3).build();
+
+		// save all
+		try {
+			customerRepo.saveAll(Arrays.asList(cust1, cust2, cust3));
+		} catch (Exception e) {
+			System.out.println("saveAll"+e);
+		}
+		
 	}
 
 	private void showCustomersWithJoinFetch() {
