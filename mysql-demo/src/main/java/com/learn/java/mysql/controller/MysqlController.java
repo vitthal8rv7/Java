@@ -137,4 +137,55 @@ public class MysqlController {
 		return "Tested many-to-many-bi";
 	}
 
+	@GetMapping("/test/many-to-many-bi-with-cascade")
+	public String testManyToManyBiCascade() {
+		entityRelationshipService.testManyToManyBiCascade();
+		return "Tested many-to-many-bi-with-cascade";
+	}
+
+	@GetMapping("/test/inheritance-mapping-type-single-table")
+	public String testIMSingleTable() {
+		entityRelationshipService.testIMSingleTable();
+		return "Tested inheritance-mapping-type-single-table";
+	}
+
+	@GetMapping("/test/inheritance-mapping-type-joined-table")
+	public String testIMJoinedTable() {
+		entityRelationshipService.testIMJoinedTable();
+		return "Tested inheritance-mapping-type-joined-table";
+	}
+
+	@GetMapping("/test/inheritance-mapping-type-table-per-class")
+	public String testIMTablePerClass() {
+		entityRelationshipService.testIMTablePerClass();
+		return "Tested inheritance-mapping-type-table-per-class";
+	}
+
+
+	@GetMapping("/test/n-plus-1-problem-and-solutions")
+	public String testNPlus1ProblemAndSolutions() {
+		entityRelationshipService.testNPlus1ProblemAndSolutions();
+		return "Tested n-plus-1-problem-and-solutions";
+	}
+	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+//
+//	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+//
+//	
+//	@GetMapping("/test/n-plus-1-problem-entity-graph")
+//	public String testEntityGraph() {
+//		entityRelationshipService.testEntityGraph();
+//		return "Tested n-plus-1-problem-entity-graph";
+//	}
+
 }

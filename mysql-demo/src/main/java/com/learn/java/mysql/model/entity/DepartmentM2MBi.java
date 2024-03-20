@@ -2,6 +2,7 @@ package com.learn.java.mysql.model.entity;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,7 +28,7 @@ public class DepartmentM2MBi {
 	
 	private String name;
 	
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
 	        	name = "department_address_bi",
 	        	joinColumns = @JoinColumn(name = "department_id"),  
