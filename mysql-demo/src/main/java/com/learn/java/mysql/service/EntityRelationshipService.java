@@ -30,4 +30,6 @@ public interface EntityRelationshipService {
 
 	public void testCompositePK();
 
+	public void testCompositeFK();
+
 }

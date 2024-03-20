@@ -173,4 +173,10 @@ public class MysqlController {
 		return "Tested composite-primary-key";
 	}
 
+	@GetMapping("/test/composite-foreign-key")
+	public String testCompositeFK() {
+		entityRelationshipService.testCompositeFK();
+		return "Tested composite-foreign-key";
+	}
+
 }

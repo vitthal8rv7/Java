@@ -1,8 +1,10 @@
 package com.learn.java.mysql.model.entity;
 
-import jakarta.persistence.EmbeddedId;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,4 +23,7 @@ public class Person {
 	
 	@Email(message = "please provide valid email address.")
 	private String email;
+	
+	@OneToMany(mappedBy = "person")
+	private List<PersonAddress> addresses;
 }

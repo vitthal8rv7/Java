@@ -30,6 +30,7 @@ import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
 import com.learn.java.mysql.model.entity.Name;
 import com.learn.java.mysql.model.entity.Person;
+import com.learn.java.mysql.model.entity.PersonAddress;
 import com.learn.java.mysql.model.entity.Truck;
 import com.learn.java.mysql.model.entity.Vehicle;
 import com.learn.java.mysql.repository.AddressM2MBiRepository;
@@ -49,6 +50,7 @@ import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.PersonAddressRepository;
 import com.learn.java.mysql.repository.PersonRepository;
 import com.learn.java.mysql.repository.VehicleRepository;
 import com.learn.java.mysql.service.EntityRelationshipService;
@@ -59,6 +61,9 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+	
+	@Autowired
+	private PersonAddressRepository personAddressRepo;
 
 	@Autowired
 	private PersonRepository personRepo;
@@ -508,6 +513,17 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		personRepo.save(person);
 		personRepo.findAll();
 		
+	}
+
+	@Override
+	public void testCompositeFK() {
+		Name name1 = Name.builder().firstName("fn1").lastName("ln1").build();
+		Person person = Person.builder().email("a@b.com").name(name1).build();
+		personRepo.save(person);
+		personAddressRepo.save(PersonAddress.builder().city("pune").street("sb road").person(person).build());
+		
+		personRepo.findAll();		
+		personAddressRepo.findAll();
 	}
 
 }
