@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +28,8 @@ import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.model.entity.Name;
+import com.learn.java.mysql.model.entity.Person;
 import com.learn.java.mysql.model.entity.Truck;
 import com.learn.java.mysql.model.entity.Vehicle;
 import com.learn.java.mysql.repository.AddressM2MBiRepository;
@@ -49,6 +49,7 @@ import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.PersonRepository;
 import com.learn.java.mysql.repository.VehicleRepository;
 import com.learn.java.mysql.service.EntityRelationshipService;
 
@@ -58,6 +59,9 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+
+	@Autowired
+	private PersonRepository personRepo;
 
 	@Autowired
 	private CustomerRepository customerRepo;
@@ -495,6 +499,15 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		entityManager.clear();
 		entityManager.clear();
 
+	}
+
+	@Override
+	public void testCompositePK() {
+		Name name1 = Name.builder().firstName("fn1").lastName("ln1").build();
+		Person person = Person.builder().email("a@b.com").name(name1).build();
+		personRepo.save(person);
+		personRepo.findAll();
+		
 	}
 
 }

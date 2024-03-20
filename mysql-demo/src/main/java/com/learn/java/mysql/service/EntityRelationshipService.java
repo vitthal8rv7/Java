@@ -28,4 +28,6 @@ public interface EntityRelationshipService {
 
 	public void testNPlus1ProblemAndSolutions();
 
+	public void testCompositePK();
+
 }
