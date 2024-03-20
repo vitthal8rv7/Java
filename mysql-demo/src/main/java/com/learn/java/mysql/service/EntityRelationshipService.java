@@ -32,4 +32,6 @@ public interface EntityRelationshipService {
 
 	public void testCompositeFK();
 
+	public void testJoins();
+
 }

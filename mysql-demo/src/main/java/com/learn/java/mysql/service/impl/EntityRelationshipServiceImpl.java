@@ -28,7 +28,9 @@ import com.learn.java.mysql.model.entity.DepartmentO2OUniShared;
 import com.learn.java.mysql.model.entity.EmployeeM2OAndO2MBidirectional;
 import com.learn.java.mysql.model.entity.EmployeeM2OUnidirectional;
 import com.learn.java.mysql.model.entity.EmployeeO2MUnidirectional;
+import com.learn.java.mysql.model.entity.House;
 import com.learn.java.mysql.model.entity.Name;
+import com.learn.java.mysql.model.entity.ParkingSpace;
 import com.learn.java.mysql.model.entity.Person;
 import com.learn.java.mysql.model.entity.PersonAddress;
 import com.learn.java.mysql.model.entity.Truck;
@@ -50,6 +52,8 @@ import com.learn.java.mysql.repository.DepartmentO2OUniSharedRepository;
 import com.learn.java.mysql.repository.EmployeeM2OAndO2MBidirectionalRepository;
 import com.learn.java.mysql.repository.EmployeeM2OUnidirectionRepository;
 import com.learn.java.mysql.repository.EmployeeO2MUnidirectionalRepository;
+import com.learn.java.mysql.repository.HouseJpqlRepository;
+import com.learn.java.mysql.repository.ParkingSpaceRepository;
 import com.learn.java.mysql.repository.PersonAddressRepository;
 import com.learn.java.mysql.repository.PersonRepository;
 import com.learn.java.mysql.repository.VehicleRepository;
@@ -61,6 +65,12 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
+	
+	@Autowired
+	private ParkingSpaceRepository parkingSpaceRepo;
+
+	@Autowired
+	private HouseJpqlRepository houseJpqlRepo;
 	
 	@Autowired
 	private PersonAddressRepository personAddressRepo;
@@ -524,6 +534,45 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 		personRepo.findAll();		
 		personAddressRepo.findAll();
+	}
+
+	
+	@Override
+	public void testJoins() {
+//		saveHouseAndParking();
+//		houseJpqlRepo.save(House.builder().ownerName("owner7").build());
+//		parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking7").build());
+		System.out.println("Inner Join: "+houseJpqlRepo.findHouseAndParking());
+		System.out.println("\n");
+		System.out.println("Left Join: "+houseJpqlRepo.leftJoin());
+		System.out.println("\n");
+		System.out.println("Right Join: "+houseJpqlRepo.rightJoin());
+		System.out.println("\n");
+		System.out.println("Full Join: "+houseJpqlRepo.fullJoin());
+		System.out.println("\n");
+
+	}
+
+	private void saveHouseAndParking() {
+		ParkingSpace parking1 = parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking1").build());
+		ParkingSpace parking2 = parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking2").build());
+		ParkingSpace parking3 = parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking3").build());
+		ParkingSpace parking4 = parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking4").build());
+		ParkingSpace parking5 = parkingSpaceRepo.save(ParkingSpace.builder().parkingName("Parking5").build());
+		
+		houseJpqlRepo.save(House.builder().ownerName("owner2").parking(parking3).build());
+
+		
+		houseJpqlRepo.save(House.builder().ownerName("owner2").parking(parking2).build());
+
+		
+		houseJpqlRepo.save(House.builder().ownerName("owner3").parking(parking4).build());
+
+		
+		houseJpqlRepo.save(House.builder().ownerName("owner4").parking(parking1).build());
+		
+		
+		houseJpqlRepo.save(House.builder().ownerName("owner5").parking(parking5).build());
 	}
 
 }

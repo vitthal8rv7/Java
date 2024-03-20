@@ -179,4 +179,11 @@ public class MysqlController {
 		return "Tested composite-foreign-key";
 	}
 
+	
+	@GetMapping("/test/joins")
+	public String testJoins() {
+		entityRelationshipService.testJoins();
+		return "Tested joins";
+	}
+
 }
