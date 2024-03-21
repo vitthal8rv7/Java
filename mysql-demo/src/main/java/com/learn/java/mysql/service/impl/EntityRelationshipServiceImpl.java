@@ -587,15 +587,15 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		System.out.println("1");
-		CriteriaQuery<House> criteriaQuery =  criteriaBuilder.createQuery(House.class);
+		CriteriaQuery<Object[]> criteriaQuery =  criteriaBuilder.createQuery(Object[].class);
 		System.out.println("2");
-		Root<House> houseClass = criteriaQuery.from(House.class);
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
 		
 		// Conditions ( Predicates(filtering), selecting, orderings ...)
 		System.out.println("3");
-		Order descOrder = criteriaBuilder.desc(houseClass.get("ownerName"));
-		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(houseClass.get("id"), 3);
-		criteriaQuery.multiselect(houseClass.get("id"), houseClass.get("ownerName"));
+		Order descOrder = criteriaBuilder.desc(fromHouseClass.get("ownerName"));
+		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(fromHouseClass.get("id"), 3);
+		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName"));
 		criteriaQuery.orderBy(descOrder);
 		criteriaQuery.where(idGreaterThanEqualTo3);
 		
@@ -603,7 +603,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("");
 		System.out.println("");
 		System.out.println("4");
-		List<House> houses = entityManager.createQuery(criteriaQuery).getResultList();
+		List<Object[]> houses = entityManager.createQuery(criteriaQuery).getResultList();
 		
 		
 		
@@ -615,7 +615,10 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("");
 		System.out.println("5");
 		try {
-			houses.stream().forEach(System.out::println);
+			houses.stream().forEach(obj -> {
+				Arrays.asList(obj).stream().forEach(System.out::print);
+				System.out.println("");
+			});
 			System.out.println("6");
 		} catch (Exception e) {
 			
