@@ -64,6 +64,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Root;
 
 @Service
@@ -591,10 +592,13 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 		// Conditions ( Predicates(filtering), selecting, orderings ...)
 		System.out.println("3");
+		Order descOrder = criteriaBuilder.desc(houseClass.get("ownerName"));
 		criteriaQuery.select(houseClass);
-		
+		criteriaQuery.orderBy(descOrder);
 		
 		// Execute
+		System.out.println("");
+		System.out.println("");
 		System.out.println("4");
 		List<House> houses = entityManager.createQuery(criteriaQuery).getResultList();
 		
@@ -604,6 +608,8 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 		
 		// Print Output
+		System.out.println("");
+		System.out.println("");
 		System.out.println("5");
 		try {
 			houses.stream().forEach(System.out::println);
