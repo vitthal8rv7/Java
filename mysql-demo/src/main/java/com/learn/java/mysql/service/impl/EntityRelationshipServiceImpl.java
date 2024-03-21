@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.dto.HouseDto;
 import com.learn.java.mysql.model.entity.AddressM2MBi;
 import com.learn.java.mysql.model.entity.AddressM2MUni;
 import com.learn.java.mysql.model.entity.AddressNPlus1Problem;
@@ -587,7 +588,8 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 		System.out.println("1");
-		CriteriaQuery<Object[]> criteriaQuery =  criteriaBuilder.createQuery(Object[].class);
+//		CriteriaQuery<Object[]> criteriaQuery =  criteriaBuilder.createQuery(Object[].class);
+		CriteriaQuery<HouseDto> criteriaQuery =  criteriaBuilder.createQuery(HouseDto.class);
 		System.out.println("2");
 		Root<House> fromHouseClass = criteriaQuery.from(House.class);
 		
@@ -603,9 +605,8 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("");
 		System.out.println("");
 		System.out.println("4");
-		List<Object[]> houses = entityManager.createQuery(criteriaQuery).getResultList();
-		
-		
+//		List<Object[]> houses = entityManager.createQuery(criteriaQuery).getResultList();
+		List<HouseDto> houseDtoList = entityManager.createQuery(criteriaQuery).getResultList();
 		
 		
 		
@@ -615,10 +616,11 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("");
 		System.out.println("5");
 		try {
-			houses.stream().forEach(obj -> {
-				Arrays.asList(obj).stream().forEach(System.out::print);
-				System.out.println("");
-			});
+			houseDtoList.stream().forEach(System.out::println);
+//			houses.stream().forEach(obj -> {
+//				Arrays.asList(obj).stream().forEach(System.out::print);
+//				System.out.println("");
+//			});
 			System.out.println("6");
 		} catch (Exception e) {
 			
