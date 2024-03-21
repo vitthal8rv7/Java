@@ -65,6 +65,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -596,14 +597,19 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		// Conditions ( Predicates(filtering), selecting, orderings ...)
 		System.out.println("3");
 		Order descOrder = criteriaBuilder.desc(fromHouseClass.get("ownerName"));
+		
 		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(fromHouseClass.get("id"), 3);
-		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName"), fromHouseClass.get("parking"));
+		Expression<Number> sum = criteriaBuilder.sum(fromHouseClass.get("id"));
+		criteriaQuery.multiselect(sum, fromHouseClass.get("ownerName"));//, fromHouseClass.get("parking"));
 		// If ParkingSpace Object is null that record is not selected even condition is true => why like this?
 		
 //		If id or ownerName field is null that recode is selected depends on condition => correct way
 //		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName")
 		
+		// group by and order by column should be same 
+		// while grouping, do not include other Object/Entities.
 		criteriaQuery.orderBy(descOrder);
+		criteriaQuery.groupBy(fromHouseClass.get("ownerName"));
 		criteriaQuery.where(idGreaterThanEqualTo3);
 		
 		// Execute
