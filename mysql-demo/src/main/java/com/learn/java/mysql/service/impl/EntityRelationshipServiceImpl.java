@@ -65,6 +65,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Order;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 
 @Service
@@ -593,8 +594,10 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		// Conditions ( Predicates(filtering), selecting, orderings ...)
 		System.out.println("3");
 		Order descOrder = criteriaBuilder.desc(houseClass.get("ownerName"));
+		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(houseClass.get("id"), 3);
 		criteriaQuery.select(houseClass);
 		criteriaQuery.orderBy(descOrder);
+		criteriaQuery.where(idGreaterThanEqualTo3);
 		
 		// Execute
 		System.out.println("");
