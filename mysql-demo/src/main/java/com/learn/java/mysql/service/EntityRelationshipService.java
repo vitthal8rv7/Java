@@ -34,4 +34,6 @@ public interface EntityRelationshipService {
 
 	public void testJoins();
 
+	public void testCriteriaQueries();
+
 }

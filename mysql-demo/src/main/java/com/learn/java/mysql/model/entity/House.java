@@ -27,4 +27,11 @@ public class House {
 	@OneToOne
 	@JoinColumn(name = "pid")
 	private ParkingSpace parking;
+
+	public House(House house) {
+		super();
+		this.id = house.id;
+		this.ownerName = house.ownerName;
+		this.parking = house.parking;
+	}
 }

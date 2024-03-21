@@ -186,4 +186,10 @@ public class MysqlController {
 		return "Tested joins";
 	}
 
+	@GetMapping("/test/criteria-queries")
+	public String testCriteriaQueries() {
+		entityRelationshipService.testCriteriaQueries();
+		return "Tested criteria-queries";
+	}
+
 }

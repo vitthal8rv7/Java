@@ -62,6 +62,9 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
@@ -573,6 +576,43 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 		
 		houseJpqlRepo.save(House.builder().ownerName("owner5").parking(parking5).build());
+	}
+
+	@Override
+	public void testCriteriaQueries() {
+		
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+		CriteriaQuery<House> criteriaQuery =  criteriaBuilder.createQuery(House.class);
+		System.out.println("2");
+		Root<House> houseClass = criteriaQuery.from(House.class);
+		
+		// Conditions ( Predicates(filtering), selecting, orderings ...)
+		System.out.println("3");
+		criteriaQuery.select(houseClass);
+		
+		
+		// Execute
+		System.out.println("4");
+		List<House> houses = entityManager.createQuery(criteriaQuery).getResultList();
+		
+		
+		
+		
+		
+		
+		// Print Output
+		System.out.println("5");
+		try {
+			houses.stream().forEach(System.out::println);
+			System.out.println("6");
+		} catch (Exception e) {
+			
+		}
+		System.out.println("7");
+		
 	}
 
 }
