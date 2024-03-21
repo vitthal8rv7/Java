@@ -1,5 +1,7 @@
 package com.learn.java.mysql.model.entity;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,7 +18,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-public class House {
+public class House implements Serializable {
+
+	private static final long serialVersionUID = -9122332886908734874L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,5 +37,11 @@ public class House {
 		this.id = house.id;
 		this.ownerName = house.ownerName;
 		this.parking = house.parking;
+	}
+	
+	public House(Integer id, String ownerName) {
+		super();
+		this.id = id;
+		this.ownerName = ownerName;
 	}
 }

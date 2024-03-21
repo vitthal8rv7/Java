@@ -595,7 +595,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("3");
 		Order descOrder = criteriaBuilder.desc(houseClass.get("ownerName"));
 		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(houseClass.get("id"), 3);
-		criteriaQuery.select(houseClass);
+		criteriaQuery.multiselect(houseClass.get("id"), houseClass.get("ownerName"));
 		criteriaQuery.orderBy(descOrder);
 		criteriaQuery.where(idGreaterThanEqualTo3);
 		
