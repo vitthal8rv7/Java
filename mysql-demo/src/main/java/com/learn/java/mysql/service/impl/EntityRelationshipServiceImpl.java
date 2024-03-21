@@ -597,7 +597,12 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		System.out.println("3");
 		Order descOrder = criteriaBuilder.desc(fromHouseClass.get("ownerName"));
 		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(fromHouseClass.get("id"), 3);
-		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName"));
+		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName"), fromHouseClass.get("parking"));
+		// If ParkingSpace Object is null that record is not selected even condition is true => why like this?
+		
+//		If id or ownerName field is null that recode is selected depends on condition => correct way
+//		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName")
+		
 		criteriaQuery.orderBy(descOrder);
 		criteriaQuery.where(idGreaterThanEqualTo3);
 		

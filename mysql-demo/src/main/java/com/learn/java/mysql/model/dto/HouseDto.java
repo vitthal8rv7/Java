@@ -2,6 +2,8 @@ package com.learn.java.mysql.model.dto;
 
 import java.io.Serializable;
 
+import com.learn.java.mysql.model.entity.ParkingSpace;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +21,18 @@ public class HouseDto implements Serializable {
 	
 	private String ownerName;
 	
-//	public HouseDto(Integer id, String ownerName) {
-//		this.id = id;
-//		this.ownerName = ownerName;
-//	}
+	private ParkingSpaceDto parking;
+
+	public HouseDto(Integer id, String ownerName) {
+		super();
+		this.id = id;
+		this.ownerName = ownerName;
+	}
+	
+	public HouseDto(Integer id, String ownerName, ParkingSpace parking) {
+		super();
+		this.id = id;
+		this.ownerName = ownerName;
+		this.parking = new ParkingSpaceDto(parking.getId(), parking.getParkingName());
+	}
 }
