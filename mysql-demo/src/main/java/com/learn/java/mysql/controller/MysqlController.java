@@ -161,31 +161,29 @@ public class MysqlController {
 		return "Tested inheritance-mapping-type-table-per-class";
 	}
 
-
 	@GetMapping("/test/n-plus-1-problem-and-solutions")
 	public String testNPlus1ProblemAndSolutions() {
 		entityRelationshipService.testNPlus1ProblemAndSolutions();
 		return "Tested n-plus-1-problem-and-solutions";
 	}
+
+	@GetMapping("/test/composite-primary-key")
+	public String testCompositePK() {
+		entityRelationshipService.testCompositePK();
+		return "Tested composite-primary-key";
+	}
+
+	@GetMapping("/test/composite-foreign-key")
+	public String testCompositeFK() {
+		entityRelationshipService.testCompositeFK();
+		return "Tested composite-foreign-key";
+	}
+
 	
-//	@GetMapping("/test/n-plus-1-problem-entity-graph")
-//	public String testEntityGraph() {
-//		entityRelationshipService.testEntityGraph();
-//		return "Tested n-plus-1-problem-entity-graph";
-//	}
-//
-//	
-//	@GetMapping("/test/n-plus-1-problem-entity-graph")
-//	public String testEntityGraph() {
-//		entityRelationshipService.testEntityGraph();
-//		return "Tested n-plus-1-problem-entity-graph";
-//	}
-//
-//	
-//	@GetMapping("/test/n-plus-1-problem-entity-graph")
-//	public String testEntityGraph() {
-//		entityRelationshipService.testEntityGraph();
-//		return "Tested n-plus-1-problem-entity-graph";
-//	}
+	@GetMapping("/test/joins")
+	public String testJoins() {
+		entityRelationshipService.testJoins();
+		return "Tested joins";
+	}
 
 }
