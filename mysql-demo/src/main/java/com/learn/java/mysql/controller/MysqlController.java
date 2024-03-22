@@ -186,4 +186,16 @@ public class MysqlController {
 		return "Tested joins";
 	}
 
+	@GetMapping("/test/criteria-queries")
+	public String testCriteriaQueries() {
+		entityRelationshipService.testCriteriaQueries();
+		return "Tested criteria-queries";
+	}
+
+	@GetMapping("/test/blob-storage")
+	public String testBlobStorage() {
+		entityRelationshipService.testBlobStorage();
+		return "Tested blob-storage";
+	}
+
 }

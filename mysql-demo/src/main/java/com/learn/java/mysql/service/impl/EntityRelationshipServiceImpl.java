@@ -1,5 +1,6 @@
 package com.learn.java.mysql.service.impl;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +8,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.mysql.model.dto.HouseDto;
 import com.learn.java.mysql.model.entity.AddressM2MBi;
 import com.learn.java.mysql.model.entity.AddressM2MUni;
 import com.learn.java.mysql.model.entity.AddressNPlus1Problem;
@@ -35,6 +37,7 @@ import com.learn.java.mysql.model.entity.Person;
 import com.learn.java.mysql.model.entity.PersonAddress;
 import com.learn.java.mysql.model.entity.Truck;
 import com.learn.java.mysql.model.entity.Vehicle;
+import com.learn.java.mysql.model.entity.VehicleBrochure;
 import com.learn.java.mysql.repository.AddressM2MBiRepository;
 import com.learn.java.mysql.repository.AddressM2MUniRepository;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
@@ -56,16 +59,33 @@ import com.learn.java.mysql.repository.HouseJpqlRepository;
 import com.learn.java.mysql.repository.ParkingSpaceRepository;
 import com.learn.java.mysql.repository.PersonAddressRepository;
 import com.learn.java.mysql.repository.PersonRepository;
+import com.learn.java.mysql.repository.VehicleBrochureRepository;
 import com.learn.java.mysql.repository.VehicleRepository;
 import com.learn.java.mysql.service.EntityRelationshipService;
+import com.learn.java.mysql.util.FileUtils;
 
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Order;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
 	
+	
+	@Autowired
+	private VehicleBrochureRepository vehicleBrochureRepo;
+
 	@Autowired
 	private ParkingSpaceRepository parkingSpaceRepo;
 
@@ -573,6 +593,146 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		
 		
 		houseJpqlRepo.save(House.builder().ownerName("owner5").parking(parking5).build());
+	}
+
+	@Override
+	public void testCriteriaQueries() {
+//		testBasicCriteriaQueries();	
+//		testJoinCriteriaQueries();
+		testSubQueryCriteriaQueries();
+	}
+
+	private void testSubQueryCriteriaQueries() {
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+		CriteriaQuery<HouseDto> criteriaQuery =  criteriaBuilder.createQuery(HouseDto.class);
+		System.out.println("2");
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
+		
+		Subquery<Long> subQuery = criteriaQuery.subquery(Long.class);
+		Root<House> subQueryRoot = subQuery.correlate(fromHouseClass);
+//		Join<House, ParkingSpace> join = subQueryRoot.join("parking", JoinType.INNER);
+//		subQuery.select(criteriaBuilder.count(join));
+		subQuery.select(criteriaBuilder.count(subQueryRoot.get("ownerName")));
+		subQuery.groupBy(subQueryRoot.get("ownerName"));
+//		subQuery.select(subQuery);
+		
+		
+		System.out.println("3");
+//		Predicate numberOfEntriesForEachUserName = criteriaBuilder.ge(subQuery, 2L);
+//	    criteriaQuery.where(numberOfEntriesForEachUserName);
+		criteriaQuery.having(criteriaBuilder.ge(subQuery, 2L));
+	    System.out.println("4");
+//		criteriaQuery.multiselect(criteriaBuilder.count(fromHouseClass), fromHouseClass.get("ownerName"));
+		criteriaQuery.groupBy(fromHouseClass.get("ownerName"));
+	    System.out.println("5");
+		criteriaQuery.multiselect(criteriaBuilder.count(fromHouseClass.get("ownerName")), fromHouseClass.get("ownerName"));
+		
+		
+		System.out.println("6");
+//		criteriaQuery.where(criteriaBuilder.ge(hroot.get("number"), 2L));
+//		
+		TypedQuery<HouseDto> houses = entityManager.createQuery(criteriaQuery);
+		
+		System.out.println("");
+		houses.getResultStream().forEach(System.out::println);
+	}
+	
+	private void testJoinCriteriaQueries() {
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+		CriteriaQuery<Tuple> criteriaQuery =  criteriaBuilder.createTupleQuery();
+		System.out.println("2");
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
+//		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.INNER);
+//		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.LEFT);
+		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.RIGHT);
+		
+		criteriaQuery.multiselect(fromHouseClass, join);
+		
+		TypedQuery<Tuple> tuple = entityManager.createQuery(criteriaQuery);
+		
+		System.out.println("");
+		tuple.getResultStream().forEach(t -> {
+			System.out.print(" T[0]:"+ t.get(0));
+			System.out.print(" T[1]:"+ t.get(1));
+			System.out.println("");
+		});
+	}
+
+	private void testBasicCriteriaQueries() {
+		
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+//		CriteriaQuery<Object[]> criteriaQuery =  criteriaBuilder.createQuery(Object[].class);
+		CriteriaQuery<HouseDto> criteriaQuery =  criteriaBuilder.createQuery(HouseDto.class);
+		System.out.println("2");
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
+		
+		// Conditions ( Predicates(filtering), selecting, orderings ...)
+		System.out.println("3");
+		Order descOrder = criteriaBuilder.desc(fromHouseClass.get("ownerName"));
+		
+		Predicate idGreaterThanEqualTo3 = criteriaBuilder.ge(fromHouseClass.get("id"), 3);
+		Expression<Number> sum = criteriaBuilder.sum(fromHouseClass.get("id"));
+		criteriaQuery.multiselect(sum, fromHouseClass.get("ownerName"));//, fromHouseClass.get("parking"));
+		// If ParkingSpace Object is null that record is not selected even condition is true => why like this?
+		
+//		If id or ownerName field is null that recode is selected depends on condition => correct way
+//		criteriaQuery.multiselect(fromHouseClass.get("id"), fromHouseClass.get("ownerName")
+		
+		// group by and order by column should be same 
+		// while grouping, do not include other Object/Entities.
+		criteriaQuery.orderBy(descOrder);
+		criteriaQuery.groupBy(fromHouseClass.get("ownerName"));
+		criteriaQuery.where(idGreaterThanEqualTo3);
+		
+		// Execute
+		System.out.println("");
+		System.out.println("");
+		System.out.println("4");
+//		List<Object[]> houses = entityManager.createQuery(criteriaQuery).getResultList();
+		List<HouseDto> houseDtoList = entityManager.createQuery(criteriaQuery).getResultList();
+		
+		
+		
+		
+		// Print Output
+		System.out.println("");
+		System.out.println("");
+		System.out.println("5");
+		try {
+			houseDtoList.stream().forEach(System.out::println);
+//			houses.stream().forEach(obj -> {
+//				Arrays.asList(obj).stream().forEach(System.out::print);
+//				System.out.println("");
+//			});
+			System.out.println("6");
+		} catch (Exception e) {
+			
+		}
+		System.out.println("7");		
+	}
+
+	@Override
+	public void testBlobStorage() {
+		byte[] textBlobStorage = null;
+		try {
+			textBlobStorage = FileUtils.loadFileContent("./dropTable.sql");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VehicleBrochure vehicleBrochure = VehicleBrochure.builder().brouchureTitle("dropTable.sql").brouchureData(textBlobStorage).build();
+		vehicleBrochureRepo.save(vehicleBrochure);
+		
 	}
 
 }
