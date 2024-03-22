@@ -63,12 +63,18 @@ import com.learn.java.mysql.service.EntityRelationshipService;
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Tuple;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
+import jakarta.persistence.metamodel.EntityType;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
@@ -584,6 +590,74 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 
 	@Override
 	public void testCriteriaQueries() {
+//		testBasicCriteriaQueries();	
+//		testJoinCriteriaQueries();
+		testSubQueryCriteriaQueries();
+	}
+
+	private void testSubQueryCriteriaQueries() {
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+		CriteriaQuery<HouseDto> criteriaQuery =  criteriaBuilder.createQuery(HouseDto.class);
+		System.out.println("2");
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
+		
+		Subquery<Long> subQuery = criteriaQuery.subquery(Long.class);
+		Root<House> subQueryRoot = subQuery.correlate(fromHouseClass);
+//		Join<House, ParkingSpace> join = subQueryRoot.join("parking", JoinType.INNER);
+//		subQuery.select(criteriaBuilder.count(join));
+		subQuery.select(criteriaBuilder.count(subQueryRoot.get("ownerName")));
+		subQuery.groupBy(subQueryRoot.get("ownerName"));
+//		subQuery.select(subQuery);
+		
+		
+		System.out.println("3");
+//		Predicate numberOfEntriesForEachUserName = criteriaBuilder.ge(subQuery, 2L);
+//	    criteriaQuery.where(numberOfEntriesForEachUserName);
+		criteriaQuery.having(criteriaBuilder.ge(subQuery, 2L));
+	    System.out.println("4");
+//		criteriaQuery.multiselect(criteriaBuilder.count(fromHouseClass), fromHouseClass.get("ownerName"));
+		criteriaQuery.groupBy(fromHouseClass.get("ownerName"));
+	    System.out.println("5");
+		criteriaQuery.multiselect(criteriaBuilder.count(fromHouseClass.get("ownerName")), fromHouseClass.get("ownerName"));
+		
+		
+		System.out.println("6");
+//		criteriaQuery.where(criteriaBuilder.ge(hroot.get("number"), 2L));
+//		
+		TypedQuery<HouseDto> houses = entityManager.createQuery(criteriaQuery);
+		
+		System.out.println("");
+		houses.getResultStream().forEach(System.out::println);
+	}
+	
+	private void testJoinCriteriaQueries() {
+		// Declaration
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		System.out.println("1");
+		CriteriaQuery<Tuple> criteriaQuery =  criteriaBuilder.createTupleQuery();
+		System.out.println("2");
+		Root<House> fromHouseClass = criteriaQuery.from(House.class);
+//		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.INNER);
+//		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.LEFT);
+		Join<House, ParkingSpace> join = fromHouseClass.join("parking", JoinType.RIGHT);
+		
+		criteriaQuery.multiselect(fromHouseClass, join);
+		
+		TypedQuery<Tuple> tuple = entityManager.createQuery(criteriaQuery);
+		
+		System.out.println("");
+		tuple.getResultStream().forEach(t -> {
+			System.out.print(" T[0]:"+ t.get(0));
+			System.out.print(" T[1]:"+ t.get(1));
+			System.out.println("");
+		});
+	}
+
+	private void testBasicCriteriaQueries() {
 		
 		// Declaration
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -636,8 +710,7 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		} catch (Exception e) {
 			
 		}
-		System.out.println("7");
-		
+		System.out.println("7");		
 	}
 
 }
