@@ -36,4 +36,6 @@ public interface EntityRelationshipService {
 
 	public void testCriteriaQueries();
 
+	public void testBlobStorage();
+
 }

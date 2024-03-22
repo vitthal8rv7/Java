@@ -192,4 +192,10 @@ public class MysqlController {
 		return "Tested criteria-queries";
 	}
 
+	@GetMapping("/test/blob-storage")
+	public String testBlobStorage() {
+		entityRelationshipService.testBlobStorage();
+		return "Tested blob-storage";
+	}
+
 }

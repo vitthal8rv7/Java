@@ -1,5 +1,6 @@
 package com.learn.java.mysql.service.impl;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -36,6 +37,7 @@ import com.learn.java.mysql.model.entity.Person;
 import com.learn.java.mysql.model.entity.PersonAddress;
 import com.learn.java.mysql.model.entity.Truck;
 import com.learn.java.mysql.model.entity.Vehicle;
+import com.learn.java.mysql.model.entity.VehicleBrochure;
 import com.learn.java.mysql.repository.AddressM2MBiRepository;
 import com.learn.java.mysql.repository.AddressM2MUniRepository;
 import com.learn.java.mysql.repository.AddressO2OBiRepository;
@@ -57,8 +59,10 @@ import com.learn.java.mysql.repository.HouseJpqlRepository;
 import com.learn.java.mysql.repository.ParkingSpaceRepository;
 import com.learn.java.mysql.repository.PersonAddressRepository;
 import com.learn.java.mysql.repository.PersonRepository;
+import com.learn.java.mysql.repository.VehicleBrochureRepository;
 import com.learn.java.mysql.repository.VehicleRepository;
 import com.learn.java.mysql.service.EntityRelationshipService;
+import com.learn.java.mysql.util.FileUtils;
 
 import jakarta.persistence.EntityGraph;
 import jakarta.persistence.EntityManager;
@@ -74,11 +78,14 @@ import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
-import jakarta.persistence.metamodel.EntityType;
 
 @Service
 public class EntityRelationshipServiceImpl implements EntityRelationshipService {
 	
+	
+	@Autowired
+	private VehicleBrochureRepository vehicleBrochureRepo;
+
 	@Autowired
 	private ParkingSpaceRepository parkingSpaceRepo;
 
@@ -711,6 +718,21 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 			
 		}
 		System.out.println("7");		
+	}
+
+	@Override
+	public void testBlobStorage() {
+		byte[] textBlobStorage = null;
+		try {
+			textBlobStorage = FileUtils.loadFileContent("./dropTable.sql");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		VehicleBrochure vehicleBrochure = VehicleBrochure.builder().brouchureTitle("dropTable.sql").brouchureData(textBlobStorage).build();
+		vehicleBrochureRepo.save(vehicleBrochure);
+		
 	}
 
 }
