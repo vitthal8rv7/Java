@@ -8,4 +8,6 @@ import com.learn.java.multidb.model.collection.UserMongoDB;
 @Repository
 public interface UserMongoDBRepository extends MongoRepository<UserMongoDB, String> {
 
+	public UserMongoDB findByUserNameIgnoreCase(String userName);
+
 }

@@ -8,4 +8,6 @@ import com.learn.java.multidb.model.entity.UserMysqlDB;
 @Repository
 public interface UserMysqlDBRepository extends JpaRepository<UserMysqlDB, String> {
 
+	public UserMysqlDB findByUserNameIgnoreCase(String userName);
+
 }

@@ -20,4 +20,9 @@ public class MysqlController {
 		return multiDBService.addUser();
 	}
 
+	@GetMapping("/read")
+	public UserDto readEntityFromMultipleDatabases() {
+		return multiDBService.readUser();
+	}
+
 }

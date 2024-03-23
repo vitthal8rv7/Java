@@ -31,4 +31,12 @@ public class MultiDBServiceImpl implements MultiDBService {
 		UserDto userDto = UserDto.builder().userMysqlDB(userMysqlDB).userMongoDB(userMongoDB).build();
 		return userDto;
 	}
+
+	@Override
+	public UserDto readUser() {
+		UserMongoDB userMongoDB = userMongoDBRepo.findByUserNameIgnoreCase("Ram123");
+		UserMysqlDB userMysqlDB = userMysqlDBRepo.findByUserNameIgnoreCase("Ram123");
+		UserDto userDto = UserDto.builder().userMysqlDB(userMysqlDB).userMongoDB(userMongoDB).build();
+		return userDto;
+	}
 }
