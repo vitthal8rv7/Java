@@ -8,4 +8,6 @@ import com.learn.java.mysql.model.entity.VehicleBrochure;
 @Repository
 public interface VehicleBrochureRepository extends JpaRepository<VehicleBrochure, Long>{
 
+	VehicleBrochure findFirstByBrouchureTitle(String string);
+
 }
