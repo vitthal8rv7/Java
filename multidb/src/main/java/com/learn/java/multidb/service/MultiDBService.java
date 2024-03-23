@@ -8,4 +8,6 @@ public interface MultiDBService {
 
 	public UserDto readUser();
 
+	public UserDto updateUser();
+
 }

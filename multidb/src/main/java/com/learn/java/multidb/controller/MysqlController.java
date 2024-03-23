@@ -25,4 +25,8 @@ public class MysqlController {
 		return multiDBService.readUser();
 	}
 
+	@GetMapping("/update")
+	public UserDto updateEntityFromMultipleDatabases() {
+		return multiDBService.updateUser();
+	}
 }
