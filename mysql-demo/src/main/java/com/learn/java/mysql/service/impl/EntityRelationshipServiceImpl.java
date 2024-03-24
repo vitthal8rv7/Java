@@ -732,6 +732,9 @@ public class EntityRelationshipServiceImpl implements EntityRelationshipService 
 		}
 		VehicleBrochure vehicleBrochure = VehicleBrochure.builder().brouchureTitle("dropTable.sql").brouchureData(textBlobStorage).build();
 		vehicleBrochureRepo.save(vehicleBrochure);
+		VehicleBrochure result = 	vehicleBrochureRepo.findFirstByBrouchureTitle("dropTable.sql");
+		System.out.println(" title: "+ result.getBrouchureTitle());
+		System.out.println(" Data Length: "+ result.getBrouchureData().length);
 		
 	}
 
