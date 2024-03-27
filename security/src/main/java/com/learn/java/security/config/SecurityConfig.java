@@ -26,8 +26,12 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(request -> {
-			request.requestMatchers("/", "/home").permitAll()
-					.requestMatchers("/user-specific").hasRole("ADMIN");
+			request.requestMatchers("/", "/home").permitAll();
+			request.requestMatchers("/user/**").hasRole("USER");
+			request.requestMatchers("/user-specific-readonly").hasAnyAuthority("USER_READ");
+			request.requestMatchers("/admin-specific").hasRole("ADMIN");
+			request.requestMatchers("/update-api").hasAnyAuthority("ADMIN_WRITE",  "USER_WRITE");
+			request.requestMatchers("/update-admin-api/**").hasAnyAuthority("ADMIN_WRITE");
 			request.anyRequest().authenticated();
 		});
 
@@ -79,18 +83,45 @@ public class SecurityConfig {
 			 User
 				.withUsername("user1")
 				.password("$2a$10$czKLroWcWHEF3ZQH4LiYkusUCDIv0rf5aqK5qAYHA9a/eSObVTtbK")
-				.roles("USER")
+				.authorities("USER_READ")
+				.roles("USER") 
 				.build();
+		
+		
+		/*
+		 		WHY ?
+		 		
+		 		When you apply ROLES, Spring Security consider ROLES
+				When you apply AUTHORITIES, Spring Security consider AUTHORITIES
+				When you apply ROLES and AUTHORITIES, Spring Security consider AUTHORITIES ONLY. NOT ROLES
+				When you apply AUTHORITIES and ,ROLES  Spring Security consider ROLES ONLY. NOT AUTHORITIES 
+				
+				that means Spring Security consider last applied value between ROLES and AUTHORITIES
+				
+			==>	SPRING SECURITY SHOULD CONSIDER BOTH ROLES AND AUTHORITIES........
+		*/
+		
+		
 		UserDetails user2 =
 				 User
 					.withUsername("user2")
 					.password("$2a$10$RGYVyLz8tEdvUSmo9d1gUuG.ZyBdcXdvUuVfpGwggwmkOLgjIBlOO")
+					.authorities("ADMIN_READ")
 					.roles("ADMIN")
 					.build();
-				
+		
+		UserDetails user3 =
+				 User
+					.withUsername("user3")
+					.password("$2a$10$qZhZY5ZypIb0PiKf9fW8gOEhMMH22ym/ljJPGJmT1S3IUjkkoe9cW")
+					.roles("ADMIN", "USER")
+					.authorities("USER_READ", "USER_WRITE", "ADMIN_READ", "ADMIN_WRITE")
+					.build();
+					
 		List<UserDetails> users = new ArrayList<>();
 		users.add(user);
 		users.add(user2);
+		users.add(user3);
 		return new InMemoryUserDetailsManager(users);
 	}
 

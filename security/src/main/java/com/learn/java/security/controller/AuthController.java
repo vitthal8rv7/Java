@@ -1,6 +1,7 @@
 package com.learn.java.security.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,5 +37,20 @@ public class AuthController {
 		return "user-specific";
 	}
 	
+	@GetMapping("/user-specific-readonly")
+	public String userSpecificReadonly() {
+		return "user-specific-readonly";
+	}
+	
+	@GetMapping("/admin-specific")
+	public String adminSpecific() {
+		return "admin-specific";
+	}
+	
+
+	@GetMapping("/update-api")
+	public String updateApi() {
+		return "update-api";
+	}
 
 }
