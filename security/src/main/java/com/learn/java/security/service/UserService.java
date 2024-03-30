@@ -16,4 +16,8 @@ public interface UserService {
 
 	public org.springframework.security.core.userdetails.User postAuthorizeTest1();
 
+	public void secureMethod1();
+
+	public void secureMethod2(String userName);
+
 }

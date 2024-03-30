@@ -25,8 +25,10 @@ public class AuthController {
 		System.out.println("username: "+username);
 //		userService.preAuthorizeTest2(null);
 		
-		userService.postAuthorizeTest1();
+//		userService.postAuthorizeTest1();
 		
+		userService.secureMethod1();
+		userService.secureMethod2("u1");
 		return "tested enable-method-security";
 	}
 

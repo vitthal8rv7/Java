@@ -3,6 +3,7 @@ package com.learn.java.security.service.impl;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -77,6 +78,20 @@ public class UserServiceImpl implements UserService {
 		System.out.println("user: "+user);
 		return user;
 
+		
+	}
+
+	@Secured("ROLE_USER")
+	@Override
+	public void secureMethod1() {
+		System.out.println("inside secureMethod1: true");
+		
+	}
+
+	@Secured({"ROLE_USER", "ROLE_ADMIN"})
+	@Override
+	public void secureMethod2(String userName) {
+		System.out.println("inside secureMethod2: true");
 		
 	}
 }
