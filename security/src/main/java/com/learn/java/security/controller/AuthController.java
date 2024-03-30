@@ -23,11 +23,10 @@ public class AuthController {
 		User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		user.getUsername();
 		System.out.println("username: "+username);
-		userService.preAuthorizeTest2(null);
-//		userService.preAuthorizeTest3("", "");
-//		userService.preAuthorizeTest4(Arrays.asList("", ""));
-//		userService.preAuthorizeTest5(Arrays.asList("", ""), Arrays.asList("", ""));
-//		userService.preAuthorizeTest1();
+//		userService.preAuthorizeTest2(null);
+		
+		userService.postAuthorizeTest1();
+		
 		return "tested enable-method-security";
 	}
 

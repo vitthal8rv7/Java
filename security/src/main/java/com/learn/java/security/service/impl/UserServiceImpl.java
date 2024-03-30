@@ -3,7 +3,9 @@ package com.learn.java.security.service.impl;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,8 +14,6 @@ import com.learn.java.security.config.PropertyHolder;
 import com.learn.java.security.model.entity.User;
 import com.learn.java.security.repository.UserRepository;
 import com.learn.java.security.service.UserService;
-
-import org.springframework.security.authentication.*;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -67,6 +67,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void preAuthorizeTest2(String userName) {
 		System.out.println("#userName == authentication.principal.username");
+		
+	}
+
+	@PostAuthorize("returnObject.username == authentication.principal.username")
+	@Override
+	public org.springframework.security.core.userdetails.User postAuthorizeTest1() {
+		org.springframework.security.core.userdetails.User user =  (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		System.out.println("user: "+user);
+		return user;
+
 		
 	}
 }

@@ -39,7 +39,7 @@ public class SecurityConfig {
 
 		http.sessionManagement(session -> {
 			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-					.invalidSessionUrl("/invalidSession.html")
+//					.invalidSessionUrl("/invalidSession.html")
 					.maximumSessions(1)
 					.maxSessionsPreventsLogin(true)
 					.expiredUrl("/expiredUrl.html");
