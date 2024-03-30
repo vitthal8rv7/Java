@@ -33,7 +33,8 @@ public class AuthController {
 //		userService.secureMethod2("u1");
 		
 //		userService.preFilterTest1(Arrays.asList("u1", "u3"));
-		userService.preFilterTest2(Arrays.asList("u1", "u3"), Arrays.asList("u1", "u2"));
+//		userService.preFilterTest2(Arrays.asList("u1", "u3"), Arrays.asList("u1", "u2"));
+		userService.postFilterTest1(Arrays.asList("u1", "u3"));
 		return "tested enable-method-security";
 	}
 

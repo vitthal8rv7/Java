@@ -3,6 +3,7 @@ package com.learn.java.security.service;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 
 public interface UserService {
 
@@ -25,5 +26,7 @@ public interface UserService {
 	public void preFilterTest1(List<String> asList);
 	
 	public void preFilterTest2(List<String> asList, List<String> asList2);
+
+	public List<String> postFilterTest1(List<String> asList);
 
 }

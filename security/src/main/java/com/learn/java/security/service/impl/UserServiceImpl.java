@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -109,5 +110,11 @@ public class UserServiceImpl implements UserService {
 	public void preFilterTest2(List<String> asList, List<String> asList2) {
 		System.out.println("inside preFilterTest2: true");
 		
+	}
+
+	@PostFilter("filterObject != authentication.principal.username")
+	@Override
+	public List<String> postFilterTest1(List<String> asList) {
+		return asList;
 	}
 }
