@@ -1,5 +1,7 @@
 package com.learn.java.security.service;
 
+import java.util.List;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 
 public interface UserService {
@@ -19,5 +21,9 @@ public interface UserService {
 	public void secureMethod1();
 
 	public void secureMethod2(String userName);
+
+	public void preFilterTest1(List<String> asList);
+	
+	public void preFilterTest2(List<String> asList, List<String> asList2);
 
 }

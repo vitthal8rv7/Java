@@ -1,5 +1,7 @@
 package com.learn.java.security.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -27,8 +29,11 @@ public class AuthController {
 		
 //		userService.postAuthorizeTest1();
 		
-		userService.secureMethod1();
-		userService.secureMethod2("u1");
+//		userService.secureMethod1();
+//		userService.secureMethod2("u1");
+		
+//		userService.preFilterTest1(Arrays.asList("u1", "u3"));
+		userService.preFilterTest2(Arrays.asList("u1", "u3"), Arrays.asList("u1", "u2"));
 		return "tested enable-method-security";
 	}
 

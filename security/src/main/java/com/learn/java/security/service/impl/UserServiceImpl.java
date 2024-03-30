@@ -1,11 +1,13 @@
 package com.learn.java.security.service.impl;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -92,6 +94,20 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void secureMethod2(String userName) {
 		System.out.println("inside secureMethod2: true");
+		
+	}
+
+	@PreFilter("filterObject == authentication.principal.username")
+	@Override
+	public void preFilterTest1(List<String> asList) {
+		System.out.println("inside preFilterTest1: true");
+		
+	}
+	
+	@PreFilter(value = "filterObject != authentication.principal.username", filterTarget = "asList2")
+	@Override
+	public void preFilterTest2(List<String> asList, List<String> asList2) {
+		System.out.println("inside preFilterTest2: true");
 		
 	}
 }
