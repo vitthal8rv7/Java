@@ -1,5 +1,7 @@
 package com.learn.java.security.controller;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +16,13 @@ public class AuthController {
 
 	@GetMapping("/test/enable-method-security")
 	public String testEnableMethodSecurity() {
-		userService.testEnableMethodSecurity();
+//		userService.testEnableMethodSecurity();
+		userService.preAuthorizeTest1();
+//		userService.preAuthorizeTest2("");
+//		userService.preAuthorizeTest3("", "");
+//		userService.preAuthorizeTest4(Arrays.asList("", ""));
+//		userService.preAuthorizeTest5(Arrays.asList("", ""), Arrays.asList("", ""));
+//		userService.preAuthorizeTest1();
 		return "tested enable-method-security";
 	}
 
