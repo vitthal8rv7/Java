@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -19,7 +20,8 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity
+@EnableWebSecurity//(debug = true)
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
 	@Bean
@@ -81,8 +83,8 @@ public class SecurityConfig {
 	public UserDetailsService userDetailsService() {
 		UserDetails user =
 			 User
-				.withUsername("user1")
-				.password("$2a$10$czKLroWcWHEF3ZQH4LiYkusUCDIv0rf5aqK5qAYHA9a/eSObVTtbK")
+				.withUsername("u1")
+				.password("$2a$10$O0kdPzuVoI172n0dBdsf0OHRAMzdpwU8izzmOOxUPqTXd.CW5k91C")
 				.authorities("USER_READ")
 				.roles("USER") 
 				.build();
@@ -104,16 +106,16 @@ public class SecurityConfig {
 		
 		UserDetails user2 =
 				 User
-					.withUsername("user2")
-					.password("$2a$10$RGYVyLz8tEdvUSmo9d1gUuG.ZyBdcXdvUuVfpGwggwmkOLgjIBlOO")
+					.withUsername("u2")
+					.password("$2a$10$RSuJuEWGqMno9/R0s4Wj5.lbL7XFB/VT1LsMmLBxVSOND8RxauiY2")
 					.authorities("ADMIN_READ")
 					.roles("ADMIN")
 					.build();
 		
 		UserDetails user3 =
 				 User
-					.withUsername("user3")
-					.password("$2a$10$qZhZY5ZypIb0PiKf9fW8gOEhMMH22ym/ljJPGJmT1S3IUjkkoe9cW")
+					.withUsername("u3")
+					.password("$2a$10$o3mCDX.QURdIf8qKGqqQc.f6K1RqKAIdHuK41a8zxZMLY2hOwKG7y")
 					.roles("ADMIN", "USER")
 					.authorities("USER_READ", "USER_WRITE", "ADMIN_READ", "ADMIN_WRITE")
 					.build();

@@ -9,16 +9,17 @@ public class SpringSecurityApplication {
 
 	public static void main(String[] args) {
 		
-//		System.out.println(""+ new BCryptPasswordEncoder().encode("password1"));
-//		$2a$10$czKLroWcWHEF3ZQH4LiYkusUCDIv0rf5aqK5qAYHA9a/eSObVTtbK 
+//		System.out.println("p1: "+ new BCryptPasswordEncoder().encode("p1"));
+//		System.out.println("p2: "+ new BCryptPasswordEncoder().encode("p2"));
+//		System.out.println("p3: "+ new BCryptPasswordEncoder().encode("p3"));
+//		p1: $2a$10$O0kdPzuVoI172n0dBdsf0OHRAMzdpwU8izzmOOxUPqTXd.CW5k91C
+//		p2: $2a$10$RSuJuEWGqMno9/R0s4Wj5.lbL7XFB/VT1LsMmLBxVSOND8RxauiY2
+//		p3: $2a$10$o3mCDX.QURdIf8qKGqqQc.f6K1RqKAIdHuK41a8zxZMLY2hOwKG7y
 		
-//		System.out.println(""+ new BCryptPasswordEncoder().encode("password2"));
-//		$2a$10$RGYVyLz8tEdvUSmo9d1gUuG.ZyBdcXdvUuVfpGwggwmkOLgjIBlOO
 		
-//		System.out.println(""+ new BCryptPasswordEncoder().encode("password3"));
-//		$2a$10$qZhZY5ZypIb0PiKf9fW8gOEhMMH22ym/ljJPGJmT1S3IUjkkoe9cW
 		SpringApplication.run(SpringSecurityApplication.class, args);
 		
+
 		
 	}
 

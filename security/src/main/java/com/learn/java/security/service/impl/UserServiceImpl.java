@@ -3,6 +3,7 @@ package com.learn.java.security.service.impl;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PropertyHolder propertyHolder;
 	
+//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply to interface 
+	// else if the requirement is implementation specific then apply to implementation class
 	@Override
 	public void registerUser() {
 		String password = "pass@user@123";
@@ -39,5 +42,22 @@ public class UserServiceImpl implements UserService {
 				.password(password)
 				.build());
 		System.out.println("User: "+user);		
+	}
+
+	@Override
+	public void testEnableMethodSecurity() {
+		preAuthorizeTest1();
+//		preAuthorizeTest1("");
+//		preAuthorizeTest1("", "");
+//		preAuthorizeTest1(list);
+//		preAuthorizeTest1(list1, list2);
+		
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	@Override
+	public void preAuthorizeTest1() {
+		System.out.println("@PreAuthorize hasRole('ADMIN')");
+		
 	}
 }

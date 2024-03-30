@@ -11,6 +11,13 @@ public class AuthController {
 
 	@Autowired
 	private UserService userService;
+
+	@GetMapping("/test/enable-method-security")
+	public String testEnableMethodSecurity() {
+		userService.testEnableMethodSecurity();
+		return "tested enable-method-security";
+	}
+
 	
 	@GetMapping("/registerUser")
 	public String registerUser() {
