@@ -13,6 +13,8 @@ import com.learn.java.security.model.entity.User;
 import com.learn.java.security.repository.UserRepository;
 import com.learn.java.security.service.UserService;
 
+import org.springframework.security.authentication.*;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -58,6 +60,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void preAuthorizeTest1() {
 		System.out.println("@PreAuthorize hasRole('ADMIN')");
+		
+	}
+	
+	@PreAuthorize("#userName != authentication.principal.username")
+	@Override
+	public void preAuthorizeTest2(String userName) {
+		System.out.println("#userName == authentication.principal.username");
 		
 	}
 }

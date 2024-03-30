@@ -1,8 +1,9 @@
 package com.learn.java.security.controller;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,12 @@ public class AuthController {
 	@GetMapping("/test/enable-method-security")
 	public String testEnableMethodSecurity() {
 //		userService.testEnableMethodSecurity();
-		userService.preAuthorizeTest1();
-//		userService.preAuthorizeTest2("");
+//		userService.preAuthorizeTest1();
+		String username = "u1";
+		User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		user.getUsername();
+		System.out.println("username: "+username);
+		userService.preAuthorizeTest2(null);
 //		userService.preAuthorizeTest3("", "");
 //		userService.preAuthorizeTest4(Arrays.asList("", ""));
 //		userService.preAuthorizeTest5(Arrays.asList("", ""), Arrays.asList("", ""));

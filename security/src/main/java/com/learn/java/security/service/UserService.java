@@ -14,7 +14,7 @@ public interface UserService {
 
 	public void preAuthorizeTest1();
 
-//	public void preAuthorizeTest2(String string);
+	public void preAuthorizeTest2(String userName);
 //
 //	public void preAuthorizeTest3(String string, String string2);
 //
