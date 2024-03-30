@@ -87,6 +87,7 @@ public class SecurityConfig {
 				.password("$2a$10$O0kdPzuVoI172n0dBdsf0OHRAMzdpwU8izzmOOxUPqTXd.CW5k91C")
 				.authorities("USER_READ")
 				.roles("USER") 
+				.username("u1")
 				.build();
 		
 		
@@ -110,6 +111,7 @@ public class SecurityConfig {
 					.password("$2a$10$RSuJuEWGqMno9/R0s4Wj5.lbL7XFB/VT1LsMmLBxVSOND8RxauiY2")
 					.authorities("ADMIN_READ")
 					.roles("ADMIN")
+					.username("u1")
 					.build();
 		
 		UserDetails user3 =
@@ -118,6 +120,7 @@ public class SecurityConfig {
 					.password("$2a$10$o3mCDX.QURdIf8qKGqqQc.f6K1RqKAIdHuK41a8zxZMLY2hOwKG7y")
 					.roles("ADMIN", "USER")
 					.authorities("USER_READ", "USER_WRITE", "ADMIN_READ", "ADMIN_WRITE")
+					.username("u1")
 					.build();
 					
 		List<UserDetails> users = new ArrayList<>();

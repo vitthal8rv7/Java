@@ -25,7 +25,7 @@ public class AuthController {
 		User user =  (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		user.getUsername();
 		System.out.println("username: "+username);
-//		userService.preAuthorizeTest2(null);
+		userService.preAuthorizeTest2("u1");
 		
 //		userService.postAuthorizeTest1();
 		
@@ -34,7 +34,7 @@ public class AuthController {
 		
 //		userService.preFilterTest1(Arrays.asList("u1", "u3"));
 //		userService.preFilterTest2(Arrays.asList("u1", "u3"), Arrays.asList("u1", "u2"));
-		userService.postFilterTest1(Arrays.asList("u1", "u3"));
+//		userService.postFilterTest1(Arrays.asList("u1", "u3"));
 		return "tested enable-method-security";
 	}
 
