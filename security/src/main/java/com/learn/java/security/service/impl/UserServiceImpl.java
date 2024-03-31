@@ -1,7 +1,9 @@
 package com.learn.java.security.service.impl;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -9,7 +11,11 @@ import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.access.prepost.PreFilter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,32 +26,33 @@ import com.learn.java.security.repository.UserRepository;
 import com.learn.java.security.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-
-	@Autowired
 	private PropertyHolder propertyHolder;
 	
-//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply to interface 
+	@Autowired
+    public PasswordEncoder passwordEncoder;    
+
+	//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply to interface 
 	// else if the requirement is implementation specific then apply to implementation class
 	@Override
-	public void registerUser() {
-		String password = "pass@user@123";
+	public void registerUser(String userName, String password) {
+//		String password = "p11";
 		String salting = BCrypt.gensalt();
 		String peppering = propertyHolder.getPeppering();
-		
-		password = passwordEncoder.encode(""+password+salting+peppering);
-		
+//		password = passwordEncoder.encode(password);		
+		password = passwordEncoder.encode(password+salting+peppering);
+
 		User user = userRepository.save(User.builder()
-				.userName("user_123")
+				.userName(userName)
 				.roles(Arrays.asList("USER", "ADMIN"))
 				.authorities(Arrays.asList("USER_READ", "ADMIN_READ", "USER_WRITE", "ADMIN_WRITE"))
 				.password(password)
+				.salt(salting)
 				.build());
 		System.out.println("User: "+user);		
 	}
@@ -116,5 +123,35 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<String> postFilterTest1(List<String> asList) {
 		return asList;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		System.out.println("loadUserByUsername: "+username);
+		User user = userRepository.findByUserNameIgnoreCase(username);
+		if(Objects.isNull(user)) {
+			System.out.println("USER NOT FOUND");
+			return null;
+		}
+		String[] roles = new String[user.getRoles().size()];
+		for(int i = 0; i < user.getRoles().size(); i++) {
+			roles[i] = user.getRoles().get(i);
+		}
+
+		
+		String[] authorities = new String[user.getAuthorities().size()];
+		for(int i = 0; i < user.getAuthorities().size(); i++) {
+			authorities[i] = user.getAuthorities().get(i);
+		}
+		
+		UserDetails userDetails =
+		 org.springframework.security.core.userdetails.User
+			.withUsername(user.getUserName())
+			.password(user.getPassword())
+			.authorities(authorities)
+			.roles(roles)
+			.username(user.getUserName())
+			.build();
+		return userDetails;
 	}
 }
