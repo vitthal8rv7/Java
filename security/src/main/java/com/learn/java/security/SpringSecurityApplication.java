@@ -2,11 +2,19 @@ package com.learn.java.security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class SpringSecurityApplication {
 
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // You can use any password encoder you prefer
+    }
+    
 	public static void main(String[] args) {
 		
 //		System.out.println("p1: "+ new BCryptPasswordEncoder().encode("p1"));
