@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
@@ -40,8 +41,9 @@ public class AuthController {
 
 	
 	@GetMapping("/registerUser")
-	public String registerUser() {
-		userService.registerUser();
+	public String registerUser(@RequestParam(required = true, name = "userName") String userName,
+			@RequestParam(required = true, name = "password") String password) {
+		userService.registerUser(userName, password);
 		return "userRegistered";
 	}
 	

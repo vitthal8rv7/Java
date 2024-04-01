@@ -8,5 +8,6 @@ import com.learn.java.security.model.entity.User;
 @Repository
 public interface UserRepository extends MongoRepository<User, String> {
 
+	public User findByUserNameIgnoreCase(String userName);
 	
 }

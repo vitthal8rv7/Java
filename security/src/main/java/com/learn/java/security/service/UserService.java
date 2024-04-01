@@ -3,13 +3,12 @@ package com.learn.java.security.service;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.userdetails.User;
 
 public interface UserService {
 
-	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply here to interface 
+//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply here to interface 
 									// else if the requirement is implementation specific then apply to implementation class
-	public void registerUser();
+	public void registerUser(String userName, String password);
 
 	public void testEnableMethodSecurity();
 
