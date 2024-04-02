@@ -7,7 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.slf4j.Marker;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.learn.java.security.util.ThreadLocalUtilityService;
 
 import io.micrometer.common.util.StringUtils;
 
@@ -30,6 +33,9 @@ public class StatsFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StatsFilter.class);
 
+	@Autowired
+	private ThreadLocalUtilityService threadLocalUtilityService;
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -40,24 +46,22 @@ public class StatsFilter implements Filter {
 		updatedMDCFields(req);
 		Long startTime = System.currentTimeMillis();
 		System.out.println("request start time: "+startTime);
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		chain.doFilter(request, response);
+		
 		Long endTime = System.currentTimeMillis();
 		Long totalRequestTime = (endTime - startTime);
-		System.out.println("request end time: "+endTime);
-		System.out.println("request total time: "+totalRequestTime);
+		Long totalDatabaseTime = (threadLocalUtilityService.getT2().get() - threadLocalUtilityService.getT1().get());
+		Long totalBETime = totalRequestTime - totalDatabaseTime;
 		
-		LOGGER.info("BE_PERF_STAT : "+totalRequestTime);
-		Marker marker = Markers.append("Marker:BE_PERF_STAT_MS", totalRequestTime);
-        marker.add(Markers.append("Marker:TOTAL_PERF_STAT_MS", totalRequestTime));
-        
-
-        LOGGER.info(marker, "Marker");
+//		LOGGER.info("BE_PERF_STAT_MS: "+totalBETime);
+//		LOGGER.info("Database_PERF_STAT_MS: "+totalDatabaseTime);
+//		LOGGER.info("REQUEST_PERF_STAT_MS: "+totalRequestTime);
+		
+		Marker marker = Markers.append("BE_PERF_STAT_MS: ", totalBETime);
+        marker.add(Markers.append("Database_PERF_STAT_MS: ", totalDatabaseTime));
+        marker.add(Markers.append("REQUEST_PERF_STAT_MS: ", totalRequestTime));
+        LOGGER.info(marker, "X-STAT-PERF");
 		
 	}
 	

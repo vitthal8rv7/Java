@@ -71,6 +71,13 @@ public class AuthController {
 		return "thread-local";
 	}
 	
+	@GetMapping("/user")
+	public com.learn.java.security.model.entity.User getUser() {
+		com.learn.java.security.model.entity.User user = userService.getUser();
+		return user;
+	}
+
+	
 	@GetMapping("/test")
 	public String test() {
 		return "test";

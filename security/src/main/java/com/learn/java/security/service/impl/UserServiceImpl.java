@@ -172,4 +172,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		threadLocalService.printThreadLocals();
 		
 	}
+
+	@Override
+	public User getUser() {
+		threadLocalUtilityService.getT1().set(System.currentTimeMillis());
+		User user = userRepository.findByUserNameIgnoreCase("u22");
+		threadLocalUtilityService.getT2().set(System.currentTimeMillis());
+		return user;
+	}
 }

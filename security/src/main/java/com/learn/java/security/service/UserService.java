@@ -3,6 +3,7 @@ package com.learn.java.security.service;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
 
 public interface UserService {
 
@@ -29,5 +30,7 @@ public interface UserService {
 	public List<String> postFilterTest1(List<String> asList);
 
 	public void threadLocal();
+
+	public com.learn.java.security.model.entity.User getUser();
 
 }
