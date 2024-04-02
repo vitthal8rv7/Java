@@ -23,7 +23,9 @@ import org.springframework.stereotype.Service;
 import com.learn.java.security.config.PropertyHolder;
 import com.learn.java.security.model.entity.User;
 import com.learn.java.security.repository.UserRepository;
+import com.learn.java.security.service.ThreadLocalService;
 import com.learn.java.security.service.UserService;
+import com.learn.java.security.util.ThreadLocalUtilityService;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -36,6 +38,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	@Autowired
     public PasswordEncoder passwordEncoder;    
+
+	@Autowired
+	private ThreadLocalService threadLocalService;
+
+	@Autowired
+	private ThreadLocalUtilityService threadLocalUtilityService;
 
 	//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply to interface 
 	// else if the requirement is implementation specific then apply to implementation class
@@ -153,5 +161,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 			.username(user.getUserName())
 			.build();
 		return userDetails;
+	}
+
+	@Override
+	public void threadLocal() {
+		threadLocalService.printThreadLocals();
+		threadLocalService.updateThreadLocals();
+		threadLocalService.printThreadLocals();
+		threadLocalUtilityService.getT1().set(111L);
+		threadLocalService.printThreadLocals();
+		
 	}
 }

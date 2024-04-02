@@ -1,23 +1,21 @@
 package com.learn.java.security.controller;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
+import com.learn.java.security.util.ThreadLocalUtilityService;
 
 @RestController
 public class AuthController {
 
 	@Autowired
 	private UserService userService;
-
+	
 	@GetMapping("/test/enable-method-security")
 	public String testEnableMethodSecurity() {
 //		userService.testEnableMethodSecurity();
@@ -65,6 +63,12 @@ public class AuthController {
 	@GetMapping("/home")
 	public String home() {
 		return "HomePage";
+	}
+	
+	@GetMapping("/thread-local")
+	public String threadLocal() {
+		userService.threadLocal();
+		return "thread-local";
 	}
 	
 	@GetMapping("/test")

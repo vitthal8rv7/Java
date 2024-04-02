@@ -63,7 +63,7 @@ public class DatabaseBasedSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/ignore-request");
+        return (web) -> web.ignoring().requestMatchers("/ignore-request", "/thread-local");
     }
 
     

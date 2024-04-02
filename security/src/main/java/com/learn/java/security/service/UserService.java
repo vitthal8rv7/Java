@@ -28,4 +28,6 @@ public interface UserService {
 
 	public List<String> postFilterTest1(List<String> asList);
 
+	public void threadLocal();
+
 }
