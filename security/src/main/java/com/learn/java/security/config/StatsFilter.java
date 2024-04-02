@@ -35,6 +35,7 @@ public class StatsFilter implements Filter {
 			throws IOException, ServletException {
 
 		MDC.clear();
+		MDC.put("testKey", "testValue");
 		 HttpServletRequest req = (HttpServletRequest) request;
 		updatedMDCFields(req);
 		Long startTime = System.currentTimeMillis();
