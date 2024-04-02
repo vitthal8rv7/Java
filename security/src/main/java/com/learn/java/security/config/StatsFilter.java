@@ -15,16 +15,24 @@ import jakarta.servlet.annotation.WebFilter;
 
 @Component
 @WebFilter(urlPatterns = "/*")
-//@Order(1)
-@Order(Ordered.HIGHEST_PRECEDENCE)
-public class securityFilter implements Filter {
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+public class StatsFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("securityFilter: request start time: "+System.currentTimeMillis());
-		System.out.println("request: "+request.toString());
+		Long startTime = System.currentTimeMillis();
+		System.out.println("request start time: "+startTime);
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		chain.doFilter(request, response);
+		Long endTime = System.currentTimeMillis();
+		System.out.println("request end time: "+endTime);
+		System.out.println("request total time: "+(endTime - startTime));
 		
 	}
 
