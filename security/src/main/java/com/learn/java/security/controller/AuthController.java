@@ -18,6 +18,7 @@ import com.learn.java.security.service.UserService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class AuthController {
@@ -129,6 +130,27 @@ public class AuthController {
 			LOGGER.info("cookie name: userName " + " \tcookie value:"+ userName);
 			LOGGER.info("cookie name: Authorization " + " \tcookie value:"+ authorization);
 		return "tested get cookies";
+	}
+
+	
+	@GetMapping("/get-session")
+	public String getSession(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession(true);
+		List<Cookie> cookies = Arrays.asList(request.getCookies());
+		cookies.stream().forEach(cookie -> {
+			if(cookie.getName().equalsIgnoreCase("JSESSIONID")) {
+				LOGGER.info("same cookie name:"+ cookie.getName() + " \tcookie value:"+ cookie.getValue());
+			} else {
+				LOGGER.info("cookie name:"+ cookie.getName() + " \tcookie value:"+ cookie.getValue());	
+			}
+		});
+		System.out.println("");
+		LOGGER.info("Session Id: []", session.getAttribute("JSESSIONID"));
+		LOGGER.info("session.getAttributeNames().toString(): []", session.getAttributeNames().toString());
+		
+		System.out.println("");
+		return "tested getSession: "+session.getAttribute("JSESSIONID");
 	}
 
 	@GetMapping("/test")
