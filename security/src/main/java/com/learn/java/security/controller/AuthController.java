@@ -1,5 +1,7 @@
 package com.learn.java.security.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -8,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
-import com.learn.java.security.util.ThreadLocalUtilityService;
 
 @RestController
 public class AuthController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
 	private UserService userService;
@@ -73,6 +76,7 @@ public class AuthController {
 	
 	@GetMapping("/user")
 	public com.learn.java.security.model.entity.User getUser() {
+		LOGGER.info("INSIDE CONTROLLER.");
 		com.learn.java.security.model.entity.User user = userService.getUser();
 		return user;
 	}

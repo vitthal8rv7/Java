@@ -40,6 +40,8 @@ public class StatsFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
+		
+		
 		MDC.clear();
 		MDC.put("testKey", "testValue");
 		 HttpServletRequest req = (HttpServletRequest) request;
@@ -47,7 +49,11 @@ public class StatsFilter implements Filter {
 		Long startTime = System.currentTimeMillis();
 		System.out.println("request start time: "+startTime);
 
+		
+		LOGGER.info("INSIDE FILTER : BEFORE DISPATCHER SERVLET AND CONTROLLER");
 		chain.doFilter(request, response);
+		LOGGER.info("INSIDE FILTER : AFTER CONTROLLER AND DISPATCHER SERVLET");
+		
 		
 		Long endTime = System.currentTimeMillis();
 		Long totalRequestTime = (endTime - startTime);
