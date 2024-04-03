@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -110,6 +111,13 @@ public class AuthController {
 		cookies.stream().forEach(cookie -> {
 			LOGGER.info("cookie name:"+ cookie.getName() + " \tcookie value:"+ cookie.getValue());
 		});
+		return "tested get cookies";
+	}
+
+	@GetMapping("/get/cookies-using-path-variables")
+	public String setCookies(@CookieValue(name = "userName", defaultValue = "Unknown") String userName, @CookieValue(name = "Authorization", defaultValue = "Unknown") String authorization) {
+			LOGGER.info("cookie name: userName " + " \tcookie value:"+ userName);
+			LOGGER.info("cookie name: Authorization " + " \tcookie value:"+ authorization);
 		return "tested get cookies";
 	}
 

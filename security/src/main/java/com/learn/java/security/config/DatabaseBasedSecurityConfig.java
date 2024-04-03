@@ -63,7 +63,7 @@ public class DatabaseBasedSecurityConfig {
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().requestMatchers("/ignore-request", "/thread-local", "/user", "/set/cookies",
-				"/get/cookies-using-request-object");
+				"/get/cookies-using-request-object", "/get/cookies-using-path-variables");
 	}
     
     
