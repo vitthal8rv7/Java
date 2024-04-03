@@ -1,5 +1,8 @@
 package com.learn.java.security.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 public class AuthController {
@@ -82,7 +89,30 @@ public class AuthController {
 		return user;
 	}
 
-	
+	@GetMapping("/set/cookies")
+	public String setCookies(HttpServletResponse response) {
+		Cookie cookie = new Cookie("userName", "RAM-1");
+		cookie.setMaxAge(600);
+		cookie.setPath("/");
+		cookie.setDomain("localhost");
+		Cookie cookie2 = new Cookie("Authorization", "RAM-2-Auth-Token");
+		cookie2.setMaxAge(600);
+		cookie2.setPath("/");
+		cookie2.setDomain("localhost");
+		response.addCookie(cookie);
+		response.addCookie(cookie2);
+		return "tested set cookies";
+	}
+
+	@GetMapping("/get/cookies-using-request-object")
+	public String setCookies(HttpServletRequest request) {
+		List<Cookie> cookies = Arrays.asList(request.getCookies());
+		cookies.stream().forEach(cookie -> {
+			LOGGER.info("cookie name:"+ cookie.getName() + " \tcookie value:"+ cookie.getValue());
+		});
+		return "tested get cookies";
+	}
+
 	@GetMapping("/test")
 	public String test() {
 		return "test";
