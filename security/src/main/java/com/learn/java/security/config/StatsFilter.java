@@ -57,7 +57,13 @@ public class StatsFilter implements Filter {
 		
 		Long endTime = System.currentTimeMillis();
 		Long totalRequestTime = (endTime - startTime);
-		Long totalDatabaseTime = (threadLocalUtilityService.getT2().get() - threadLocalUtilityService.getT1().get());
+		Long totalDatabaseTime = 0L;
+		try {
+			totalDatabaseTime = (threadLocalUtilityService.getT2().get() - threadLocalUtilityService.getT1().get());
+		} catch(Exception e) {
+			
+		}
+		
 		Long totalBETime = totalRequestTime - totalDatabaseTime;
 		
 //		LOGGER.info("BE_PERF_STAT_MS: "+totalBETime);

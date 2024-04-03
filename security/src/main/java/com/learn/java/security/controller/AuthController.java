@@ -65,6 +65,7 @@ public class AuthController {
 	
 	@GetMapping("/home")
 	public String home() {
+		LOGGER.info("INSIDE CONTROLLER.");
 		return "HomePage";
 	}
 	
