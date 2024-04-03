@@ -1,23 +1,32 @@
 package com.learn.java.security.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @RestController
 public class AuthController {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
 	@Autowired
 	private UserService userService;
-
+	
 	@GetMapping("/test/enable-method-security")
 	public String testEnableMethodSecurity() {
 //		userService.testEnableMethodSecurity();
@@ -64,9 +73,64 @@ public class AuthController {
 	
 	@GetMapping("/home")
 	public String home() {
+		LOGGER.info("INSIDE CONTROLLER.");
 		return "HomePage";
 	}
 	
+	@GetMapping("/thread-local")
+	public String threadLocal() {
+		userService.threadLocal();
+		return "thread-local";
+	}
+	
+	@GetMapping("/user")
+	public com.learn.java.security.model.entity.User getUser() {
+		LOGGER.info("INSIDE CONTROLLER.");
+		com.learn.java.security.model.entity.User user = userService.getUser();
+		return user;
+	}
+
+	@GetMapping("/set/cookies")
+	public String setCookies(HttpServletResponse response) {
+		
+		Cookie cookie = new Cookie("userName", "RAM-1");
+		cookie.setMaxAge(600);
+		cookie.setPath("/");
+		cookie.setDomain("localhost");
+		cookie.setHttpOnly(true);
+		cookie.setSecure(true);		
+		response.addCookie(cookie);
+		
+		Cookie cookie2 = new Cookie("Authorization", "RAM-2-Auth-Token");
+		cookie2.setMaxAge(600);
+		cookie2.setPath("/");
+		cookie2.setDomain("localhost");		
+		cookie2.setHttpOnly(true);
+		cookie2.setSecure(true);
+		response.addCookie(cookie2);
+		
+		
+		
+		
+		return "tested set cookies";
+	}
+
+	@GetMapping("/get/cookies-using-request-object")
+	public String setCookies(HttpServletRequest request) {
+		List<Cookie> cookies = Arrays.asList(request.getCookies());
+		cookies.stream().forEach(cookie -> {
+			LOGGER.info("cookie name:"+ cookie.getName() + " \tcookie value:"+ cookie.getValue());
+		});
+		return "tested get cookies";
+	}
+
+	@GetMapping("/get/cookies-using-path-variables")
+	public String setCookies(@CookieValue(name = "userName", defaultValue = "Unknown") String userName, @CookieValue(name = "Authorization", defaultValue = "Unknown") String authorization) {
+			LOGGER.info("cookie name: userName " + " \tcookie value:"+ userName);
+			LOGGER.info("cookie name: Authorization " + " \tcookie value:"+ authorization);
+		return "tested get cookies";
+	}
+
 	@GetMapping("/test")
 	public String test() {
 		return "test";
