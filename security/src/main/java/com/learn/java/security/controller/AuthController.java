@@ -92,16 +92,26 @@ public class AuthController {
 
 	@GetMapping("/set/cookies")
 	public String setCookies(HttpServletResponse response) {
+		
 		Cookie cookie = new Cookie("userName", "RAM-1");
 		cookie.setMaxAge(600);
 		cookie.setPath("/");
 		cookie.setDomain("localhost");
+		cookie.setHttpOnly(true);
+		cookie.setSecure(true);		
+		response.addCookie(cookie);
+		
 		Cookie cookie2 = new Cookie("Authorization", "RAM-2-Auth-Token");
 		cookie2.setMaxAge(600);
 		cookie2.setPath("/");
-		cookie2.setDomain("localhost");
-		response.addCookie(cookie);
+		cookie2.setDomain("localhost");		
+		cookie2.setHttpOnly(true);
+		cookie2.setSecure(true);
 		response.addCookie(cookie2);
+		
+		
+		
+		
 		return "tested set cookies";
 	}
 
