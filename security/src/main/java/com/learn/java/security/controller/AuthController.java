@@ -2,6 +2,7 @@ package com.learn.java.security.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.security.service.UserService;
 
+import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -133,8 +135,8 @@ public class AuthController {
 	}
 
 	
-	@GetMapping("/get-session")
-	public String getSession(HttpServletRequest request, HttpServletResponse response) {
+	@GetMapping("/get-session2")
+	public String getSession2(HttpServletRequest request, HttpServletResponse response) {
 		
 		HttpSession session = request.getSession(true);
 		List<Cookie> cookies = Arrays.asList(request.getCookies());
@@ -146,12 +148,66 @@ public class AuthController {
 			}
 		});
 		System.out.println("");
-		LOGGER.info("Session Id: []", session.getAttribute("JSESSIONID"));
-		LOGGER.info("session.getAttributeNames().toString(): []", session.getAttributeNames().toString());
+		LOGGER.info("Session Id: []"+ session.getAttribute("JSESSIONID"));
+		LOGGER.info("session.getAttributeNames().toString(): []"+ session.getAttributeNames().toString());
 		
 		System.out.println("");
 		return "tested getSession: "+session.getAttribute("JSESSIONID");
 	}
+	
+	
+	@GetMapping("/set-session")
+	public String setSession(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		LOGGER.info("Session Id: []"+ session.getId());
+		LOGGER.info("session.getAttribute(\"JSESSIONID\"): []"+ session.getAttribute("JSESSIONID"));
+		session.setAttribute("JSESSIONID", session.getId());
+		return "tested setSession: "+session.getAttribute("JSESSIONID");
+	}
+	
+	@GetMapping("/get-session")
+	public String getSession(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		LOGGER.info("Session Id: []"+ session.getId());
+		
+		String sessionId = (String) session.getAttribute("JSESSIONID");
+		if(StringUtils.isNotBlank(sessionId)) {
+			System.out.println("");
+			LOGGER.info("Session Id: []"+ sessionId);
+			System.out.println("");					
+		} else {
+			 return "Session not set!";
+		}
+		
+		return "tested getSession: "+sessionId;
+	}
+	
+	@GetMapping("/update-session")
+	public String updateSession(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(true);
+		LOGGER.info("Session Id: []"+ session.getId());
+		session.setAttribute("JSESSIONID", "NEW_"+session.getId());
+		return "tested updateSession: "+session.getAttribute("JSESSIONID");
+	}
+	
+	@GetMapping("/invalidate-session")
+	public String invalidateSession(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(false);
+		if(!Objects.isNull(session)) {
+			session.invalidate();
+			return "Session invalidated successfully!";
+		} else {
+			return "No session to invalidate!";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 	@GetMapping("/test")
 	public String test() {
