@@ -1,19 +1,25 @@
 package com.learn.java.security.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionInformation;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.security.config.SessionTracker;
 import com.learn.java.security.service.UserService;
 
 import io.micrometer.common.util.StringUtils;
@@ -26,9 +32,16 @@ import jakarta.servlet.http.HttpSession;
 public class AuthController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
+	
+//	@Autowired
+//	private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
+
+    @Autowired
+    private SessionRegistry sessionRegistry;
 
 	@Autowired
 	private UserService userService;
+	
 	
 	@GetMapping("/test/enable-method-security")
 	public String testEnableMethodSecurity() {
@@ -202,10 +215,32 @@ public class AuthController {
 	}
 	
 	
+
+	
+	@GetMapping("/list-all-sessions/sol-1")
+	public String listAllSessionsSol1(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		 List<SessionInformation> sessions = new ArrayList<>();
+		 sessionRegistry.getAllPrincipals()
+		 	.stream()
+		 		.forEach(principal -> 
+		 			sessions.addAll(sessionRegistry.getAllSessions(principal, false))
+		 		);		 
+		List<String> sessionIds = sessions.stream().map(session -> session.getSessionId()).collect(Collectors.toList());
+		LOGGER.info("sessionIds : "+sessionIds);
+		return "tested listAllSessionsSol1";
+	}
 	
 	
 	
-	
+	@GetMapping("/list-all-sessions/sol-2")
+	public String listAllSessionsSol2(HttpServletRequest request, HttpServletResponse response) {
+		
+		Set<String> sessionIds = SessionTracker.getActiveSessions();
+		LOGGER.info("sessionIds : "+sessionIds);
+		return "tested listAllSessionsSol2";
+	}
 	
 	
 
