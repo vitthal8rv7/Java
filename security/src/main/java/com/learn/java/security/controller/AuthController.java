@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learn.java.security.config.SessionTracker;
 import com.learn.java.security.service.UserService;
 
 import io.micrometer.common.util.StringUtils;
@@ -30,8 +32,6 @@ import jakarta.servlet.http.HttpSession;
 public class AuthController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
-
-	
 	
 //	@Autowired
 //	private FindByIndexNameSessionRepository<? extends Session> sessionRepository;
@@ -234,7 +234,13 @@ public class AuthController {
 	
 	
 	
-	
+	@GetMapping("/list-all-sessions/sol-2")
+	public String listAllSessionsSol2(HttpServletRequest request, HttpServletResponse response) {
+		
+		Set<String> sessionIds = SessionTracker.getActiveSessions();
+		LOGGER.info("sessionIds : "+sessionIds);
+		return "tested listAllSessionsSol2";
+	}
 	
 	
 
