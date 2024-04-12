@@ -45,6 +45,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Autowired
 	private ThreadLocalUtilityService threadLocalUtilityService;
 
+	// Reset Password API (forgot password)
+	// Before reseting user password, send OTP Or URL with token to confirm that given information 
+	// like number mail is user`s valid information to do that send OTP/URL with Token to user`s number or mail
+	// validate it and hitting validation API
+	// after successful confirmation reset user password and redirect to login page, else send appropriate exception message.
+
+	
+	
 	//	@PreAuthorize("hasRole('ADMIN')") //if the requirement is service specific then apply to interface 
 	// else if the requirement is implementation specific then apply to implementation class
 	@Override
