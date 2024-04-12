@@ -55,6 +55,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //		password = passwordEncoder.encode(password);		
 		password = passwordEncoder.encode(password+salting+peppering);
 
+		
+		// Before saving/registering user, send OTP Or URL with token to confirm that given information 
+		// like number mail is user`s valid information to do that send OTP/URL with Token to user`s number or mail
+		// validate it and hitting validation API
+		// after successful confirmation register user, else send appropriate exception message.
 		User user = userRepository.save(User.builder()
 				.userName(userName)
 				.roles(Arrays.asList("USER", "ADMIN"))
