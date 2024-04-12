@@ -14,4 +14,7 @@ public class PropertyHolder {
     @Value("${spring.application.security.pepper}")
     private String peppering;
 
+    @Value("${spring.application.security.encoder}")
+    private String encoder;
+
 }

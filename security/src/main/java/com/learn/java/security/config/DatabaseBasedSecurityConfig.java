@@ -1,8 +1,12 @@
 package com.learn.java.security.config;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,10 +15,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.learn.java.security.service.impl.UserServiceImpl;
+
+import net.logstash.logback.util.StringUtils;
 
 @Configuration
 @EnableWebSecurity//(debug = true)
@@ -26,6 +37,9 @@ public class DatabaseBasedSecurityConfig {
 
 	@Autowired
     public PasswordEncoder passwordEncoder;    
+
+	@Autowired
+    public PasswordEncoder passwordEncoder2;    
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -89,7 +103,9 @@ public class DatabaseBasedSecurityConfig {
     	System.out.println("");
     	
         auth.userDetailsService(userService)
-            .passwordEncoder(passwordEncoder);
+            .passwordEncoder(passwordEncoder2);
     }
+    
+
 
 }
