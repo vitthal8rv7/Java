@@ -81,22 +81,32 @@ public class DatabaseBasedSecurityConfig {
     
     
     // Authentication Verification
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("auth: "+auth.toString());
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	
-        auth.userDetailsService(userService)
-        	.passwordEncoder(customPasswordEncoder);
-    }
-    
+//    @Autowired
+//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+//    	System.out.println("");
+//    	System.out.println("");
+//    	System.out.println("");
+//    	System.out.println("");
+//    	System.out.println("auth: "+auth.toString());
+//    	System.out.println("");
+//    	System.out.println("");
+//    	System.out.println("");
+//    	System.out.println("");
+//    	
+//        auth.userDetailsService(userService)
+//        	.passwordEncoder(customPasswordEncoder);
+//    }
+//    
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.ldapAuthentication()
+			.userDnPatterns("uid={0},ou=users")
+			.groupSearchBase("ou=groups")
+			.contextSource()
+			.url("ldap://ldap-server-host:389/dc=example,dc=com")
+            .managerDn("cn=admin,dc=example,dc=com")
+            .managerPassword("admin-password");
+	}	
 
 
 }
