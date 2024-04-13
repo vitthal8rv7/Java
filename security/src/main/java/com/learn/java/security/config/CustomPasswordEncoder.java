@@ -1,50 +1,69 @@
-package com.learn.java.security;
+package com.learn.java.security.config;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
-import com.learn.java.security.config.PropertyHolder;
+import com.learn.java.security.service.impl.UserServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import net.logstash.logback.util.StringUtils;
 
-@SpringBootApplication
-public class SpringSecurityApplication {
+@Component
+public class CustomPasswordEncoder implements PasswordEncoder {
 
 	@Autowired
-	private PropertyHolder propertyHolder;
+	private PasswordEncoder passwordEncoder;
 	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder(); // You can use any password encoder you prefer
-		return PasswordEncoderFactories.createDelegatingPasswordEncoder(); // spring security 5.0
-		// we can add our custom password encoder
-		// check implementation code of above createDelegatingPasswordEncoder method for
-		// reference.
+	@Autowired
+	private UserServiceImpl userService;
+
+	@Autowired
+	private HttpServletRequest httpServletRequest;
+
+	@Override
+	public String encode(CharSequence rawPassword) {
+		
+		System.out.println("Before assigning new value: passwordEncoder = "+ passwordEncoder);
+		
+		passwordEncoder = createDelegatingPasswordEncoder("bcrypt");
+		// Here we can set any password encoder at run time by suppling value from database/any other data source
+//			encoderType = db.fetchEncoderType();
+//			passwordEncoder = createDelegatingPasswordEncoder(encoderType);
+		// or by adding condition by reading user password and check encode type
+		
+		
+		System.out.println("After assigning new value: passwordEncoder = "+ passwordEncoder);
+		
+		
+		return passwordEncoder.encode(rawPassword);
 	}
 
-	@Bean
-	public PasswordEncoder passwordEncoder2() {
-		// we can add our custom password encoder
-		// check implementation code of above createDelegatingPasswordEncoder method for
-		// reference.
-		String encoderType = null;
-		encoderType = propertyHolder.getEncoder();
-		System.out.println("---------------------------------------------------------encoderType: "+encoderType);
-		return createDelegatingPasswordEncoder(encoderType); // spring security 5.0
+	@Override
+	public boolean matches(CharSequence rawPassword, String encodedPassword) {
+		
+		// Using encoded password we can get the type of encoder and using it we can create that kind of encoder at runtime.
+		String subString = encodedPassword.subSequence(encodedPassword.indexOf('{')+1, encodedPassword.indexOf('}')).toString();
+		System.out.println("");
+		System.out.println("");
+		System.out.println("------subString => ENCODER TYPE: "+ subString);
+		//USING THIS CREATE NEW ENCODER AND USE IT TO MATCH THE PASSWORD
+		passwordEncoder = createDelegatingPasswordEncoder(subString);
+		
+		System.out.println("");
+		System.out.println("");
+		return passwordEncoder.matches(rawPassword, encodedPassword);
 	}
-
+	
 	public PasswordEncoder createDelegatingPasswordEncoder(String encodingId) {
 		if (StringUtils.isBlank(encodingId)) {
 			System.out.println("--------------------------------------------------------- encoderType is blank");
@@ -68,18 +87,4 @@ public class SpringSecurityApplication {
 		encoders.put("argon2@SpringSecurity_v5_8", Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8());
 		return new DelegatingPasswordEncoder(encodingId, encoders);
 	}
-
-	public static void main(String[] args) {
-
-//		System.out.println("p1: "+ new BCryptPasswordEncoder().encode("p1"));
-//		System.out.println("p2: "+ new BCryptPasswordEncoder().encode("p2"));
-//		System.out.println("p3: "+ new BCryptPasswordEncoder().encode("p3"));
-//		p1: $2a$10$O0kdPzuVoI172n0dBdsf0OHRAMzdpwU8izzmOOxUPqTXd.CW5k91C
-//		p2: $2a$10$RSuJuEWGqMno9/R0s4Wj5.lbL7XFB/VT1LsMmLBxVSOND8RxauiY2
-//		p3: $2a$10$o3mCDX.QURdIf8qKGqqQc.f6K1RqKAIdHuK41a8zxZMLY2hOwKG7y
-
-		SpringApplication.run(SpringSecurityApplication.class, args);
-
-	}
-
 }

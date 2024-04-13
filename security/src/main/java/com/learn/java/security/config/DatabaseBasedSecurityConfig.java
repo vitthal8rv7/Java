@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.learn.java.security.service.impl.UserServiceImpl;
@@ -24,9 +23,15 @@ public class DatabaseBasedSecurityConfig {
 	@Autowired
 	private UserServiceImpl userService;
 
-	@Autowired
-    public PasswordEncoder passwordEncoder;    
+//	@Autowired
+//    private PasswordEncoder passwordEncoder;    
+//
+//	@Autowired
+//    private PasswordEncoder passwordEncoder2;    
 
+	@Autowired
+	private CustomPasswordEncoder customPasswordEncoder;
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -89,7 +94,9 @@ public class DatabaseBasedSecurityConfig {
     	System.out.println("");
     	
         auth.userDetailsService(userService)
-            .passwordEncoder(passwordEncoder);
+        	.passwordEncoder(customPasswordEncoder);
     }
+    
+
 
 }
