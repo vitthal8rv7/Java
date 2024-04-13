@@ -21,7 +21,7 @@ import com.learn.java.security.service.impl.UserServiceImpl;
 public class DatabaseBasedSecurityConfig {
 
 	@Autowired
-	private UserServiceImpl userService;
+	private UserServiceImpl userDetailsService;
 
 //	@Autowired
 //    private PasswordEncoder passwordEncoder;    
@@ -54,6 +54,11 @@ public class DatabaseBasedSecurityConfig {
 					.expiredUrl("/expiredUrl.html");
 			
 		});
+		
+        http.rememberMe(rememberMe -> {
+        	rememberMe.tokenValiditySeconds(604800) // Remember me token validity for 7 days
+        				.userDetailsService(userDetailsService); // UserDetailsService for loading remember me
+        });
 		
 		http.formLogin();
 //		http.formLogin(request -> {
@@ -93,7 +98,7 @@ public class DatabaseBasedSecurityConfig {
     	System.out.println("");
     	System.out.println("");
     	
-        auth.userDetailsService(userService)
+        auth.userDetailsService(userDetailsService)
         	.passwordEncoder(customPasswordEncoder);
     }
     
