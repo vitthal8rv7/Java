@@ -1,5 +1,7 @@
 package com.learn.java.security.config;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,8 @@ import com.learn.java.security.service.impl.UserServiceImpl;
 @EnableWebSecurity // (debug = true)
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class DatabaseBasedSecurityConfig {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(DatabaseBasedSecurityConfig.class);
 
 	@Autowired
 	private UserServiceImpl userDetailsService;
@@ -45,6 +49,8 @@ public class DatabaseBasedSecurityConfig {
 			request.anyRequest().authenticated();
 
 		});
+		
+//		http.requiresChannel(t -> t.anyRequest().requiresSecure());
 
 		http.sessionManagement(session -> {
 			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
@@ -58,7 +64,10 @@ public class DatabaseBasedSecurityConfig {
 					.userDetailsService(userDetailsService); // UserDetailsService for loading remember me
 		});
 
-		http.formLogin();
+		http.formLogin(formLogin -> {
+			LOGGER.info("Apply Form Login");
+		});
+//		http.formLogin();
 //		http.formLogin(request -> {
 //			request.loginPage("/login").permitAll();
 //		});
