@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -20,6 +22,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.learn.java.security.config.AuthorizationInterceptor;
 import com.learn.java.security.config.PropertyHolder;
 import com.learn.java.security.model.entity.User;
 import com.learn.java.security.repository.UserRepository;
@@ -29,6 +32,8 @@ import com.learn.java.security.util.ThreadLocalUtilityService;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Autowired
 	private UserRepository userRepository;
@@ -148,6 +153,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		LOGGER.info("Inside loadUserByUsername: called by: "+ this.getClass().getCanonicalName());
 		System.out.println("loadUserByUsername: "+username);
 		User user = userRepository.findByUserNameIgnoreCase(username);
 		if(Objects.isNull(user)) {
