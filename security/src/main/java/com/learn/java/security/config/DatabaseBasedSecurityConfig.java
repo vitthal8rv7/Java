@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import com.learn.java.security.service.impl.UserServiceImpl;
 
 @Configuration
-@EnableWebSecurity//(debug = true)
+@EnableWebSecurity // (debug = true)
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class DatabaseBasedSecurityConfig {
 
@@ -31,7 +31,7 @@ public class DatabaseBasedSecurityConfig {
 
 	@Autowired
 	private CustomPasswordEncoder customPasswordEncoder;
-	
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -40,26 +40,24 @@ public class DatabaseBasedSecurityConfig {
 			request.requestMatchers("/user/**").hasRole("USER");
 			request.requestMatchers("/user-specific-readonly").hasAnyAuthority("USER_READ");
 			request.requestMatchers("/admin-specific").hasRole("ADMIN");
-			request.requestMatchers("/update-api").hasAnyAuthority("ADMIN_WRITE",  "USER_WRITE");
+			request.requestMatchers("/update-api").hasAnyAuthority("ADMIN_WRITE", "USER_WRITE");
 			request.requestMatchers("/update-admin-api/**").hasAnyAuthority("ADMIN_WRITE");
 			request.anyRequest().authenticated();
-			
+
 		});
 
 		http.sessionManagement(session -> {
 			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 //					.invalidSessionUrl("/invalidSession.html")
-					.maximumSessions(100)
-					.maxSessionsPreventsLogin(true)
-					.expiredUrl("/expiredUrl.html");
-			
+					.maximumSessions(100).maxSessionsPreventsLogin(true).expiredUrl("/expiredUrl.html");
+
 		});
-		
-        http.rememberMe(rememberMe -> {
-        	rememberMe.tokenValiditySeconds(604800) // Remember me token validity for 7 days
-        				.userDetailsService(userDetailsService); // UserDetailsService for loading remember me
-        });
-		
+
+		http.rememberMe(rememberMe -> {
+			rememberMe.tokenValiditySeconds(604800) // Remember me token validity for 7 days
+					.userDetailsService(userDetailsService); // UserDetailsService for loading remember me
+		});
+
 		http.formLogin();
 //		http.formLogin(request -> {
 //			request.loginPage("/login").permitAll();
@@ -68,42 +66,37 @@ public class DatabaseBasedSecurityConfig {
 //		http.logout(request -> {
 //			request.permitAll();
 //		});
-		
+
 		return http.build();
 	}
-	
-	
+
 	@Bean
 	public SessionRegistry sessionRegistry() {
 		return new SessionRegistryImpl();
 	}
-	 
+
 	@Bean
 	public WebSecurityCustomizer webSecurityCustomizer() {
 		return (web) -> web.ignoring().requestMatchers("/ignore-request", "/thread-local", "/user", "/set/cookies",
 				"/get/cookies-using-request-object", "/get/cookies-using-path-variables");
 	}
-    
-    
-    // Authentication Verification
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("auth: "+auth.toString());
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	System.out.println("");
-    	
-        auth.userDetailsService(userDetailsService)
-        	.passwordEncoder(customPasswordEncoder);
-    }
-    
-	
-	
+
+	// Authentication Verification
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("auth: " + auth.toString());
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");
+
+		auth.userDetailsService(userDetailsService).passwordEncoder(customPasswordEncoder);
+	}
+
 //	@Autowired
 //	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //		auth.ldapAuthentication()
@@ -114,6 +107,5 @@ public class DatabaseBasedSecurityConfig {
 //            .managerDn("cn=admin,dc=example,dc=com")
 //            .managerPassword("admin-password");
 //	}	
-
 
 }
