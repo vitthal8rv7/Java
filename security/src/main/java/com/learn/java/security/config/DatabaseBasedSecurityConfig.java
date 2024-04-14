@@ -50,7 +50,7 @@ public class DatabaseBasedSecurityConfig {
 
 		});
 		
-		http.requiresChannel(t -> t.anyRequest().requiresSecure());
+//		http.requiresChannel(t -> t.anyRequest().requiresSecure());
 
 		http.sessionManagement(session -> {
 			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
