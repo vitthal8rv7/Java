@@ -53,9 +53,12 @@ public class DatabaseBasedSecurityConfig {
 //		http.requiresChannel(t -> t.anyRequest().requiresSecure());
 
 		http.sessionManagement(session -> {
+			session.sessionFixation().newSession();
 			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 //					.invalidSessionUrl("/invalidSession.html")
-					.maximumSessions(100).maxSessionsPreventsLogin(true).expiredUrl("/expiredUrl.html");
+					.maximumSessions(100)
+					.maxSessionsPreventsLogin(true)
+					.expiredUrl("/expiredUrl.html");
 
 		});
 
