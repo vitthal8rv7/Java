@@ -20,7 +20,13 @@ public class SecurityConfig {
 		});
 
 		http.sessionManagement(session -> {
-			session.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+			session.sessionFixation().newSession();
+			session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//					.invalidSessionUrl("/invalidSession.html")
+					.maximumSessions(2)
+					.maxSessionsPreventsLogin(true)
+					.expiredUrl("/expiredUrl.html");
+
 		});
 
 		http.oauth2Login(oauthCustomizer -> {
