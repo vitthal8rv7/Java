@@ -1,4 +1,4 @@
-package com.learn.java.security.oauth2.google.controller;
+package com.learn.java.security.oauth2.client.controller;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.learn.java.security.oauth2.google.config;
+package com.learn.java.security.oauth2.client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
