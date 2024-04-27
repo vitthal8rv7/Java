@@ -2,7 +2,11 @@ server:
   port: 8080
   forward-headers-strategy: framework
 
+#spring.main.allow-bean-definition-overriding=true
+
 spring:
+  main:
+    allow-bean-definition-overriding: true
   security:
     user:
 
@@ -46,8 +50,8 @@ spring:
 
               redirect-uris:
                 - http://localhost:8081/login/oauth2/code/oidc-client
-#              post-logout-redirect-uris:
-#                - http://localhost:8081/logout
+              post-logout-redirect-uris:
+                - http://localhost:8081/logout
 
               # The scopes are defined in the authorization server.
               # These won't display in the consent page
@@ -68,9 +72,9 @@ spring:
             token:
               access-token-time-to-live: 3600s
               refresh-token-time-to-live: 7200s
-#        endpoint:
-#          token-uri: "/oauth2/token"
-#        issuer-uri: http://127.0.0.1:8080/issuer
+        endpoint:
+          token-uri: "/oauth2/token"
+        issuer-uri: http://127.0.0.1:8080/issuer
 logging:
   level:
     org:

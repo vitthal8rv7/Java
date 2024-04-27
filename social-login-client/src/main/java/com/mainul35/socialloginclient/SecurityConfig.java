@@ -24,13 +24,13 @@ public class SecurityConfig {
 
 		});
 		
-//		http.headers(hs -> {
-//			hs.disable();
-////			hs.httpStrictTransportSecurity(hs2 -> {
-////				hs2.maxAgeInSeconds(0).includeSubDomains(true);
-////			});
-//
-//		});
+		http.headers(hs -> {
+			hs.disable();
+//			hs.httpStrictTransportSecurity(hs2 -> {
+//				hs2.maxAgeInSeconds(0).includeSubDomains(true);
+//			});
+
+		});
 
         return http
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
