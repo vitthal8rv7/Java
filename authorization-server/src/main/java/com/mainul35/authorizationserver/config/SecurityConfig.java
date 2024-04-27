@@ -12,13 +12,14 @@
 //
 //	@Bean
 //	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//		http.headers(hs -> {
-//			hs.httpStrictTransportSecurity(hs2 -> {
-//				hs2.maxAgeInSeconds(300000).includeSubDomains(true);
-//			});
+////		http.headers(hs -> {
+////			hs.disable();
+//////			hs.httpStrictTransportSecurity(hs2 -> {
+//////				hs2.maxAgeInSeconds(0).includeSubDomains(true);
+//////			});
+////
+////		});
 //
-//		});
-//
-//		return http.build();
+//		return http.de
 //	}
 //}
