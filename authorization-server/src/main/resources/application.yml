@@ -1,20 +1,12 @@
-server:
-  port: 8080
-  forward-headers-strategy: framework
-
-#spring.main.allow-bean-definition-overriding=true
-
 spring:
-  main:
-    allow-bean-definition-overriding: true
   security:
     user:
 
       # Definition of the user details that we will use for login
       # in the authorization server
 
-      name: u1
-      password: p1
+      name: user
+      password: "{noop}secret"
       roles: USER
 
     # Oauth2 client registration starts from here
@@ -34,7 +26,7 @@ spring:
               # provided client credentials from client application
 
               client-id: oidc-client
-              client-secret: secret2
+              client-secret: "{noop}secret"
 
               # The following authorization-grant-type will be matched with the
               # provided authorization-grant-type from the client application
@@ -49,9 +41,9 @@ spring:
               # Client application after the resource owner (user) provides necessary consents.
 
               redirect-uris:
-                - http://localhost:8081/login/oauth2/code/oidc-client
+                - http://127.0.0.1:8081/login/oauth2/code/oidc-client
               post-logout-redirect-uris:
-                - http://localhost:8081/logout
+                - http://127.0.0.1:8081/logout
 
               # The scopes are defined in the authorization server.
               # These won't display in the consent page
@@ -72,9 +64,9 @@ spring:
             token:
               access-token-time-to-live: 3600s
               refresh-token-time-to-live: 7200s
-        endpoint:
-          token-uri: "/oauth2/token"
-        issuer-uri: http://127.0.0.1:8080/issuer
+#        endpoint:
+#          token-uri: "/oauth2/token"
+#        issuer-uri: http://127.0.0.1:8080/issuer
 logging:
   level:
     org:

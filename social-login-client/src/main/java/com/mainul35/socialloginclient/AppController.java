@@ -18,7 +18,7 @@ public class AppController {
         return ResponseEntity.ok("Public data");
     }
 
-    @GetMapping("/pd")
+    @GetMapping("/private-data")
     public ResponseEntity<String> getPrivateData() {
         return ResponseEntity.ok(appService.getJwtToken());
     }
