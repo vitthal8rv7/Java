@@ -1,0 +1,26 @@
+server:
+    port: 8081
+spring:
+    application:
+        name: spring-security-oauth2-client
+    data:
+        mongodb:
+            database: testDB
+            host: localhost
+            port: 27017
+            auto-index-creation: true
+    servlet:
+        multipart:
+            enabled: true
+            max-file-size: 250MB
+            max-request-size: 250MB
+    security:
+        oauth2:
+            client:
+                registration:
+                    oidc-client:
+                        client-id: oidc-client
+                        client-secret: secret2
+                    github:
+                        client-id: ef5d9b294a0c4c92bd90
+                        client-secret: dbae831f11eb27cdf71bc2542e8227801bf9daba
