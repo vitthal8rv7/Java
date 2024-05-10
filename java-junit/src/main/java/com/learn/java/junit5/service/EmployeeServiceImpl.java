@@ -321,4 +321,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	}
 
+	@Override
+	public String getWelcomeMessage() {
+		return "Hello Mockito Test";
+	}
+
 }

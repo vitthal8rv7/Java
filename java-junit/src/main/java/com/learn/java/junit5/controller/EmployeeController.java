@@ -22,10 +22,16 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
+	@GetMapping("/hello")
+	public String greeting() {
+		return employeeService.getWelcomeMessage();
+	}
+	
 	@GetMapping("/")
 	public String healthCheckUp() {
 		return "Running";
 	}
+	
 	@GetMapping("/employee")
 	public Employee getEmployee(@RequestParam(name = "id") String id) {
 		return employeeService.getEmployee(id);
@@ -69,4 +75,5 @@ public class EmployeeController {
 		employeeService.testDeclAPIsWithQuery();
 		return "Tested All Declared APIs with @query.";
 	}
+
 }
