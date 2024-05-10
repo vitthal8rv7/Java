@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class EmployeeControllerTest {
+public class EmployeeControllerTestApproach1 {
 
     @Autowired
     private MockMvc mockMvc;
