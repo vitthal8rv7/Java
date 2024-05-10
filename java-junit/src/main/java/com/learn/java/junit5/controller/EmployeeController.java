@@ -22,6 +22,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 
+	@GetMapping("/")
+	public String healthCheckUp() {
+		return "Running";
+	}
 	@GetMapping("/employee")
 	public Employee getEmployee(@RequestParam(name = "id") String id) {
 		return employeeService.getEmployee(id);
