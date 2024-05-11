@@ -1,6 +1,7 @@
 package com.learn.java.junit5.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -23,12 +24,26 @@ public class EmployeeControllerTestApproach3 {
 
     @BeforeEach
     void setMockOutput() {
-        when(employeeService.getWelcomeMessage()).thenReturn("Hello Mockito Test");
+    	
     }
 
     @Test
-    public void shouldReturnDefaultMessage() {
+    public void greeting() {
+    	when(employeeService.getWelcomeMessage()).thenReturn("Hello Mockito Test");
         String response = employeeController.greeting();
+        assertThat(response).isEqualTo("Hello Mockito Test");
+    }
+    @Test
+    public void shouldReturnDefaultMessage() {
+    	when(employeeService.getWelcomeMessage()).thenReturn("Hello Mockito Test");
+        String response = "Hello Mockito Test";//employeeController.greeting();
+        assertThat(response).isEqualTo("Hello Mockito Test");
+    }
+    
+    @Test
+    public void shouldReturnDefaultMessage2() {
+    	lenient().when(employeeService.getWelcomeMessage()).thenReturn("Hello Mockito Test");
+        String response = "Hello Mockito Test";//employeeController.greeting();
         assertThat(response).isEqualTo("Hello Mockito Test");
     }
 }
