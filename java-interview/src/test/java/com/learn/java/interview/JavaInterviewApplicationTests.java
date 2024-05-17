@@ -232,6 +232,7 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("Average: "+intSummaryStatistics.getAverage());
 		System.out.println("Sum: "+intSummaryStatistics.getSum());
 		System.out.println("Count: "+intSummaryStatistics.getCount());
+		
 	}
 	
 //	@Test
