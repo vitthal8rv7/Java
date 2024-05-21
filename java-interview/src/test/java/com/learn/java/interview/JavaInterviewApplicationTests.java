@@ -1,5 +1,7 @@
 package com.learn.java.interview;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -11,6 +13,34 @@ import org.junit.jupiter.api.Test;
 //@SpringBootTest
 class JavaInterviewApplicationTests {
 
+//	@Test
+//	void test4() {
+//		String givenString = "javaconceptoftheday";
+//		char[] charArray = givenString.toCharArray();
+//		Map<Character, Integer> subString = new LinkedHashMap<>();
+//		Map<Character, Integer> logestSubString = new LinkedHashMap<>();
+//		for(Integer i = 0; i < givenString.length(); i++) {
+//			System.out.println("");
+//			if(subString.containsKey(charArray[i])) {
+//				i = subString.get(charArray[i]);
+//				if(logestSubString.size() < subString.size()) {
+//					logestSubString = subString;
+//				}
+//				subString = new HashMap<>();
+//			} else {
+//				System.out.print(" "+charArray[i]);
+//				subString.put(charArray[i], i);
+//				
+//			}
+//		}
+//		if(logestSubString.size() < subString.size()) {
+//			logestSubString = subString;
+//		}
+//		System.out.println("logestSubString: "+logestSubString);
+//		logestSubString.keySet().stream().forEach(System.out::print);
+//		
+//	}
+//	
 //	@Test
 //	void test3() {
 //		class Abc {
