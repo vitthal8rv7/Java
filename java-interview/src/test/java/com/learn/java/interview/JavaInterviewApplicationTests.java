@@ -11,32 +11,49 @@ import org.junit.jupiter.api.Test;
 //@SpringBootTest
 class JavaInterviewApplicationTests {
 
-	@Test 
-	void test2() {
-		
-		String str = "Java Concept Of The Day";
-		
-		// Convert the string to lower case and filter out spaces
-        str = str.toLowerCase().replaceAll("\\s", "");
-
-        // Use streams to create a frequency map
-        Map<Character, Long> frequencyMap = str.chars()
-            .mapToObj(c -> (char) c)
-            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        // Find the character with the maximum frequency
-        Map.Entry<Character, Long> entry = frequencyMap.entrySet().stream()
-            .max(Map.Entry.comparingByValue())
-//            .stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-//            .map(Map.Entry::getValue)
-            .orElseThrow(() -> new IllegalArgumentException("String is empty or only contains whitespace")); 
-        System.out.println("m.getKey(): "+ entry.getKey());
-        System.out.println("m.getValue(): "+ entry.getValue());
-
-//entrym.getKey();
-//entry.getValue();
-  
-	}
+//	@Test
+//	void test3() {
+//		class Abc {
+//			private static void StringPermutation(String permutation, String input) {
+//				if (input.length() == 0) {
+//					System.out.println(permutation);
+//				} else {
+//					for (int i = 0; i < input.length(); i++) {
+//						StringPermutation(permutation + input.charAt(i),
+//								input.substring(0, i) + input.substring(i + 1, input.length()));
+//					}
+//				}
+//			}
+//		}
+//		Abc.StringPermutation("", "JSPA");
+//	}
+	
+//	@Test 
+//	void test2() {
+//		
+//		String str = "Java Concept Of The Day";
+//		
+//		// Convert the string to lower case and filter out spaces
+//        str = str.toLowerCase().replaceAll("\\s", "");
+//
+//        // Use streams to create a frequency map
+//        Map<Character, Long> frequencyMap = str.chars()
+//            .mapToObj(c -> (char) c)
+//            .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//
+//        // Find the character with the maximum frequency
+//        Map.Entry<Character, Long> entry = frequencyMap.entrySet().stream()
+//            .max(Map.Entry.comparingByValue())
+////            .stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+////            .map(Map.Entry::getValue)
+//            .orElseThrow(() -> new IllegalArgumentException("String is empty or only contains whitespace")); 
+//        System.out.println("m.getKey(): "+ entry.getKey());
+//        System.out.println("m.getValue(): "+ entry.getValue());
+//
+////entrym.getKey();
+////entry.getValue();
+//  
+//	}
 	
 //	@Test 
 //	void test1() {
