@@ -1,18 +1,40 @@
 package com.learn.java.interview;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
 
+
+//	@Test
+//	void test5() {
+//		String givenString = "Java Concept Of The Day";
+//		StringBuffer sb = new StringBuffer();
+//		List<Object> list = Arrays.asList(givenString.split(" "));
+//		Collections.reverse(list);
+//		list.stream().forEach(word -> sb.append(word+" "));
+//		sb.deleteCharAt(sb.length()-1);
+//		System.out.println(""+sb);
+//		String[] array = givenString.split(" ");
+//		for(int i = array.length-1; i>=0; i--) {
+//			sb.append(array[i]+" ");
+//		}
+//		sb.deleteCharAt(sb.length()-1);
+//		System.out.println(""+givenString);
+//		System.out.println(""+sb);
+//	}
+	
 //	@Test
 //	void test4() {
 //		String givenString = "javaconceptoftheday";
