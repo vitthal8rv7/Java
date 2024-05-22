@@ -18,21 +18,57 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.xml.stream.events.Characters;
+
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.env.Environment;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
-
-	
 	
 	@Test
-	void test8() {
-	
+	void test9() {
+		
 	}
-	
-	
+
+	// if “JavaConceptOfTheDay” is the given string, then ‘J’ is a first
+	// non-repeated character and ‘a’ is a first repeated character.
+	// a => a, "" // aa => "", a // abb => a, b // aab => b, a
+//	@Test
+//	void test8() {
+//		String givenString = "aab";//"abb";//"aa";//"a";//"JavaConceptOfTheDay";
+//		givenString = givenString.toLowerCase();
+//		// find 1st non-repeated char
+//		Boolean isRepeatedCharFound = false;
+//		Character repeatedChar = null;
+//		Boolean isNonRepeatedCharFound = false;
+//		Character nonRepeatedChar = null;
+//		Map<Character, Integer> map = new HashMap<>();
+//		for (char ch : givenString.toCharArray()) {
+//			if (map.containsKey(ch)) {
+//				map.put(ch, map.get(ch) + 1);
+//			} else {
+//				map.put(ch, 1);
+//			}
+//		}
+//		for (char ch : givenString.toCharArray()) {
+//			if((map.get(ch) == 1) && (isNonRepeatedCharFound == false)) {
+//				nonRepeatedChar = ch;
+//				isNonRepeatedCharFound = true;
+//			} else if((map.get(ch) > 1) && (isRepeatedCharFound == false)) {
+//				repeatedChar = ch;
+//				isRepeatedCharFound = true;
+//			}
+//			if(isRepeatedCharFound && isNonRepeatedCharFound) {
+//				break;
+//			}
+//		}
+//		System.out.println("repeatedChar: " + repeatedChar);
+//		System.out.println("nonRepeatedChar: " + nonRepeatedChar);
+//		System.out.println("map: " + map);
+//	}
+
 //	@Test
 //	void test7() {
 //		Boolean isPalindrome = true;
@@ -89,8 +125,7 @@ class JavaInterviewApplicationTests {
 //		System.out.println("newData: "+ newData);
 //
 //	}
-	
-	
+
 //	@Test
 //	void test6()
 //	{
@@ -115,7 +150,7 @@ class JavaInterviewApplicationTests {
 //		System.out.println(""+givenString);
 //		System.out.println(""+sb);
 //	}
-	
+
 //	@Test
 //	void test4() {
 //		String givenString = "javaconceptoftheday";
@@ -160,7 +195,7 @@ class JavaInterviewApplicationTests {
 //		}
 //		Abc.StringPermutation("", "JSPA");
 //	}
-	
+
 //	@Test 
 //	void test2() {
 //		
@@ -187,7 +222,7 @@ class JavaInterviewApplicationTests {
 ////entry.getValue();
 //  
 //	}
-	
+
 //	@Test 
 //	void test1() {
 //		final String space = " ";
@@ -214,8 +249,7 @@ class JavaInterviewApplicationTests {
 //
 //	}
 
-	
-	//	@Test
+	// @Test
 //	void contextLoads() {
 //		List<String> allSubStrings0 = new ArrayList<>();//AllSubStringWithDuplicates
 //		Set<String> allSubStrings02 = new HashSet<>(); //uniqueAllSubString
