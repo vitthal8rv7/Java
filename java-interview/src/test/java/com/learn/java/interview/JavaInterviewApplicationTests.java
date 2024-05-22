@@ -18,15 +18,107 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.xml.stream.events.Characters;
+
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.env.Environment;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
+
 	@Test
-	void test7() {
+	void test10() {
+		System.err.println(
+	            "This is how we throw error with System.err");
 	}
+	
+//	@Test
+//	void test10() {
+//		String string1 = "Tiger Runs @ The Speed Of 100 km/hour.";
+//		String string2 = "JavaConceptOfTheDay";
+//		System.out.println("string1: "+ string1);
+//		System.out.println("string2: "+ string2);
+//		string1 = string1 + string2;
+//		string2 = string1.substring(0, string1.length() - string2.length());
+//		string1 = string1.substring(string2.length(), string1.length());
+//		System.out.println("string1: "+ string1);
+//		System.out.println("string2: "+ string2);
+//	}
+	
+//	@Test
+//	void test9() {
+//		String givenString = "Tiger Runs @ The Speed Of 100 km/hour.";
+//		Short upperCaseCount = 0;
+//		Short lowerCaseCount = 0;
+//		Short digitCount = 0;
+//		Short specialCharCount = 0;
+//		for (char ch : givenString.toCharArray()) {
+//			if(Character.isDigit(ch)) {
+//				upperCaseCount++;
+//			} else if(Character.isLowerCase(ch)) {
+//				lowerCaseCount++;
+//			} else if(Character.isUpperCase(ch)) {
+//				digitCount++;
+//			} else {
+//				specialCharCount++;
+//			}
+//		}
+//		System.out.println("UpperCase: count: "+upperCaseCount+ " and % : "+((upperCaseCount*100)/(double)givenString.length()));
+//		System.out.println("lowerCaseCount: count: "+lowerCaseCount+ " and % : "+((lowerCaseCount*100)/(double)givenString.length()));
+//		System.out.println("digitCount: count: "+digitCount+ " and % : "+((digitCount*100)/(double)givenString.length()));
+//		System.out.println("specialCharCount: count: "+specialCharCount+ " and % : "+((specialCharCount*100)/(double)givenString.length()));
+//	}
+
+	// if “JavaConceptOfTheDay” is the given string, then ‘J’ is a first
+	// non-repeated character and ‘a’ is a first repeated character.
+	// a => a, "" // aa => "", a // abb => a, b // aab => b, a
+//	@Test
+//	void test8() {
+//		String givenString = "aab";//"abb";//"aa";//"a";//"JavaConceptOfTheDay";
+//		givenString = givenString.toLowerCase();
+//		// find 1st non-repeated char
+//		Boolean isRepeatedCharFound = false;
+//		Character repeatedChar = null;
+//		Boolean isNonRepeatedCharFound = false;
+//		Character nonRepeatedChar = null;
+//		Map<Character, Integer> map = new HashMap<>();
+//		for (char ch : givenString.toCharArray()) {
+//			if (map.containsKey(ch)) {
+//				map.put(ch, map.get(ch) + 1);
+//			} else {
+//				map.put(ch, 1);
+//			}
+//		}
+//		for (char ch : givenString.toCharArray()) {
+//			if((map.get(ch) == 1) && (isNonRepeatedCharFound == false)) {
+//				nonRepeatedChar = ch;
+//				isNonRepeatedCharFound = true;
+//			} else if((map.get(ch) > 1) && (isRepeatedCharFound == false)) {
+//				repeatedChar = ch;
+//				isRepeatedCharFound = true;
+//			}
+//			if(isRepeatedCharFound && isNonRepeatedCharFound) {
+//				break;
+//			}
+//		}
+//		System.out.println("repeatedChar: " + repeatedChar);
+//		System.out.println("nonRepeatedChar: " + nonRepeatedChar);
+//		System.out.println("map: " + map);
+//	}
+
+//	@Test
+//	void test7() {
+//		Boolean isPalindrome = true;
+//		String givenString = "abbbba";
+//		for(int i = 0, j = givenString.length()-1; j > i; i++, j--) {
+//			if(givenString.charAt(i) != givenString.charAt(j)) {
+//				isPalindrome = false;
+//				break;
+//			}
+//		}
+//		System.out.println("isPalindrome: "+isPalindrome);
+//	}
 
 //	@Test
 //	void test6() {
@@ -71,8 +163,7 @@ class JavaInterviewApplicationTests {
 //		System.out.println("newData: "+ newData);
 //
 //	}
-	
-	
+
 //	@Test
 //	void test6()
 //	{
@@ -97,7 +188,7 @@ class JavaInterviewApplicationTests {
 //		System.out.println(""+givenString);
 //		System.out.println(""+sb);
 //	}
-	
+
 //	@Test
 //	void test4() {
 //		String givenString = "javaconceptoftheday";
@@ -142,7 +233,7 @@ class JavaInterviewApplicationTests {
 //		}
 //		Abc.StringPermutation("", "JSPA");
 //	}
-	
+
 //	@Test 
 //	void test2() {
 //		
@@ -169,7 +260,7 @@ class JavaInterviewApplicationTests {
 ////entry.getValue();
 //  
 //	}
-	
+
 //	@Test 
 //	void test1() {
 //		final String space = " ";
@@ -196,8 +287,7 @@ class JavaInterviewApplicationTests {
 //
 //	}
 
-	
-	//	@Test
+	// @Test
 //	void contextLoads() {
 //		List<String> allSubStrings0 = new ArrayList<>();//AllSubStringWithDuplicates
 //		Set<String> allSubStrings02 = new HashSet<>(); //uniqueAllSubString
