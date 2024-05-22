@@ -24,9 +24,27 @@ import org.springframework.core.env.Environment;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
+
+	
+	
 	@Test
-	void test7() {
+	void test8() {
+	
 	}
+	
+	
+//	@Test
+//	void test7() {
+//		Boolean isPalindrome = true;
+//		String givenString = "abbbba";
+//		for(int i = 0, j = givenString.length()-1; j > i; i++, j--) {
+//			if(givenString.charAt(i) != givenString.charAt(j)) {
+//				isPalindrome = false;
+//				break;
+//			}
+//		}
+//		System.out.println("isPalindrome: "+isPalindrome);
+//	}
 
 //	@Test
 //	void test6() {
