@@ -26,11 +26,47 @@ import org.springframework.core.env.Environment;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
-	
+
 	@Test
-	void test9() {
-		
+	void test10() {
 	}
+	
+//	@Test
+//	void test10() {
+//		String string1 = "Tiger Runs @ The Speed Of 100 km/hour.";
+//		String string2 = "JavaConceptOfTheDay";
+//		System.out.println("string1: "+ string1);
+//		System.out.println("string2: "+ string2);
+//		string1 = string1 + string2;
+//		string2 = string1.substring(0, string1.length() - string2.length());
+//		string1 = string1.substring(string2.length(), string1.length());
+//		System.out.println("string1: "+ string1);
+//		System.out.println("string2: "+ string2);
+//	}
+	
+//	@Test
+//	void test9() {
+//		String givenString = "Tiger Runs @ The Speed Of 100 km/hour.";
+//		Short upperCaseCount = 0;
+//		Short lowerCaseCount = 0;
+//		Short digitCount = 0;
+//		Short specialCharCount = 0;
+//		for (char ch : givenString.toCharArray()) {
+//			if(Character.isDigit(ch)) {
+//				upperCaseCount++;
+//			} else if(Character.isLowerCase(ch)) {
+//				lowerCaseCount++;
+//			} else if(Character.isUpperCase(ch)) {
+//				digitCount++;
+//			} else {
+//				specialCharCount++;
+//			}
+//		}
+//		System.out.println("UpperCase: count: "+upperCaseCount+ " and % : "+((upperCaseCount*100)/(double)givenString.length()));
+//		System.out.println("lowerCaseCount: count: "+lowerCaseCount+ " and % : "+((lowerCaseCount*100)/(double)givenString.length()));
+//		System.out.println("digitCount: count: "+digitCount+ " and % : "+((digitCount*100)/(double)givenString.length()));
+//		System.out.println("specialCharCount: count: "+specialCharCount+ " and % : "+((specialCharCount*100)/(double)givenString.length()));
+//	}
 
 	// if “JavaConceptOfTheDay” is the given string, then ‘J’ is a first
 	// non-repeated character and ‘a’ is a first repeated character.
