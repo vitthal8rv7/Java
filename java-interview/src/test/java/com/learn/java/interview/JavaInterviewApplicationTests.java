@@ -29,6 +29,8 @@ class JavaInterviewApplicationTests {
 
 	@Test
 	void test10() {
+		System.err.println(
+	            "This is how we throw error with System.err");
 	}
 	
 //	@Test
