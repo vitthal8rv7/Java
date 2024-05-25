@@ -1,36 +1,50 @@
 package com.learn.java.interview;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Arrays;
 
-import javax.xml.stream.events.Characters;
-
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.env.Environment;
+
+import com.learn.java.interview.model.Student;
 
 //@SpringBootTest
 class JavaInterviewApplicationTests {
 
 	@Test
-	void test10() {
-		System.err.println(
-	            "This is how we throw error with System.err");
+	void test11() {
+		Student[] Arr = { new Student(1), new Student(2), new Student(3), new Student(5), new Student(0)};
+		Student[] tempArr = Arr.clone(); 
+		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+		System.out.println("Arr= "+ Arrays.asList(Arr));
+		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+		
+		tempArr = new Student[Arr.length];
+		System.arraycopy(Arr, 0, tempArr, 0, Arr.length); 
+		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+		System.out.println("Arr= "+ Arrays.asList(Arr));
+		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+		
+		tempArr = new Student[Arr.length];
+		Arrays.copyOf(Arr, Arr.length+1); 
+		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+		System.out.println("Arr= "+ Arrays.asList(Arr));
+		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+
+		Integer[] original = {1, 2, 3};
+		Integer[] copy = Arrays.copyOf(original, 2); // [1, 2, 3, 0, 0]
+		System.out.println("original= "+ Arrays.asList(original));
+		System.out.println("copy= "+ Arrays.asList(copy));
+
+		tempArr = new Student[Arr.length];
+		Arrays.copyOfRange(Arr, 0, Arr.length+1); 
+		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+		System.out.println("Arr= "+ Arrays.asList(Arr));
+		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+
+//		original = {1, 2, 3};
+		copy = Arrays.copyOfRange(original, 0, 2); // [1, 2, 3, 0, 0]
+		System.out.println("original= "+ Arrays.asList(original));
+		System.out.println("copy= "+ Arrays.asList(copy));
+
 	}
 	
 //	@Test
