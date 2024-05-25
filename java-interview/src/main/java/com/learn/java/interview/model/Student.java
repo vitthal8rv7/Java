@@ -10,12 +10,16 @@ import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Builder
 public class Student implements Serializable {
 
 	private static final long serialVersionUID = -5626583605787995466L;
 	Integer id;
+	
+	public Student() {
+		throw new RuntimeException();
+	}
 	
 //	@Override
 //	public String toString() {

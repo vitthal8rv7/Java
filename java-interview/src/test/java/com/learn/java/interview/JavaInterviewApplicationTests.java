@@ -10,42 +10,47 @@ import com.learn.java.interview.model.Student;
 class JavaInterviewApplicationTests {
 
 	@Test
-	void test11() {
-		Student[] Arr = { new Student(1), new Student(2), new Student(3), new Student(5), new Student(0)};
-		Student[] tempArr = Arr.clone(); 
-		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
-		System.out.println("Arr= "+ Arrays.asList(Arr));
-		System.out.println("tempArr= "+ Arrays.asList(tempArr));
-		
-		tempArr = new Student[Arr.length];
-		System.arraycopy(Arr, 0, tempArr, 0, Arr.length); 
-		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
-		System.out.println("Arr= "+ Arrays.asList(Arr));
-		System.out.println("tempArr= "+ Arrays.asList(tempArr));
-		
-		tempArr = new Student[Arr.length];
-		Arrays.copyOf(Arr, Arr.length+1); 
-		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
-		System.out.println("Arr= "+ Arrays.asList(Arr));
-		System.out.println("tempArr= "+ Arrays.asList(tempArr));
-
-		Integer[] original = {1, 2, 3};
-		Integer[] copy = Arrays.copyOf(original, 2); // [1, 2, 3, 0, 0]
-		System.out.println("original= "+ Arrays.asList(original));
-		System.out.println("copy= "+ Arrays.asList(copy));
-
-		tempArr = new Student[Arr.length];
-		Arrays.copyOfRange(Arr, 0, Arr.length+1); 
-		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
-		System.out.println("Arr= "+ Arrays.asList(Arr));
-		System.out.println("tempArr= "+ Arrays.asList(tempArr));
-
-//		original = {1, 2, 3};
-		copy = Arrays.copyOfRange(original, 0, 2); // [1, 2, 3, 0, 0]
-		System.out.println("original= "+ Arrays.asList(original));
-		System.out.println("copy= "+ Arrays.asList(copy));
+	void test12() {
 
 	}
+	
+//	@Test
+//	void test11() {
+//		Student[] Arr = { new Student(1), new Student(2), new Student(3), new Student(5), new Student(0)};
+//		Student[] tempArr = Arr.clone(); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//		
+//		tempArr = new Student[Arr.length];
+//		System.arraycopy(Arr, 0, tempArr, 0, Arr.length); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//		
+//		tempArr = new Student[Arr.length];
+//		Arrays.copyOf(Arr, Arr.length+1); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//
+//		Integer[] original = {1, 2, 3};
+//		Integer[] copy = Arrays.copyOf(original, 2); // [1, 2, 3, 0, 0]
+//		System.out.println("original= "+ Arrays.asList(original));
+//		System.out.println("copy= "+ Arrays.asList(copy));
+//
+//		tempArr = new Student[Arr.length];
+//		Arrays.copyOfRange(Arr, 0, Arr.length+1); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//
+////		original = {1, 2, 3};
+//		copy = Arrays.copyOfRange(original, 0, 2); // [1, 2, 3, 0, 0]
+//		System.out.println("original= "+ Arrays.asList(original));
+//		System.out.println("copy= "+ Arrays.asList(copy));
+//
+//	}
 	
 //	@Test
 //	void test10() {
