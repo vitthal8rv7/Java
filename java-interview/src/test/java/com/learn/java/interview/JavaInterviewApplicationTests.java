@@ -1,37 +1,159 @@
 package com.learn.java.interview;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.Externalizable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-import javax.xml.stream.events.Characters;
-
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.springframework.core.env.Environment;
 
 //@SpringBootTest
-class JavaInterviewApplicationTests {
+public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test10() {
-		System.err.println(
-	            "This is how we throw error with System.err");
+	void test14() {
+		
+		
 	}
+//	
+//	@Test
+//	void test13() {
+//		
+//		class BaseClass implements Serializable {
+//		    private static final long serialVersionUID = 1L;
+//		    int baseField;
+//
+//		    BaseClass() {
+//		    	
+//		    }
+//
+//		    BaseClass(int baseField) {
+//		        this.baseField = baseField;
+//		    }
+//		}
+//
+//		class ChildClass extends BaseClass implements Externalizable {
+//		    private static final long serialVersionUID = 1L;
+//		    int childField;
+//		    ChildClass() {
+//		    	
+//		    }
+//		    ChildClass(int baseField, int childField) {
+//		        super(baseField);
+//		        this.childField = childField;
+//		    }
+//
+//		    private void writeObject(ObjectOutputStream oos) throws IOException {
+//		    	System.out.println("inside writeObject");
+//		        oos.defaultWriteObject(); // Serialize base class fields
+//		        // Custom logic: do not serialize child class fields
+//		    }
+//
+//		    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+//		    	System.out.println("inside readObject");
+//		        ois.defaultReadObject(); // Deserialize base class fields
+//		        // Custom logic: initialize child class fields manually if needed
+//		        this.childField = 0; // or any default value or logic
+//		    }
+//
+//			@Override
+//			public void writeExternal(ObjectOutput out) throws IOException {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}
+//
+//		        ChildClass child = new ChildClass(1, 2);
+//
+//		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("test.txt"))) {
+//		            oos.writeObject(child);
+//		            System.out.println("inside oos");
+//		        } catch (IOException e) {
+//		            e.printStackTrace();
+//		        }
+//
+//		        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"))) {
+//		        	System.out.println("inside ois");
+//		        	ChildClass deserializedChild = (ChildClass) ois.readObject();
+//		            
+//		            System.out.println("BaseField: " + deserializedChild.baseField); // Will be 1
+////		            System.out.println("ChildField: " + deserializedChild.childField); // Will be 0 (default value set in readObject)
+//		        } catch (IOException | ClassNotFoundException e) {
+//		            e.printStackTrace();
+//		        }
+//		
+//	}
+
+	
+	
+//	@Test
+//	void test12() {
+//		class A {
+//			
+//			 void aMethod() {
+//				System.out.println("Insode A Class");
+//			}
+//		}
+//
+//		class B extends A {
+//			
+//			@Override
+//			private void aMethod() {
+//				System.out.println("Insode B Class");
+//			}
+//		}		
+//		
+//		
+//	}
+	
+//	@Test
+//	void test11() {
+//		Student[] Arr = { new Student(1), new Student(2), new Student(3), new Student(5), new Student(0)};
+//		Student[] tempArr = Arr.clone(); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//		
+//		tempArr = new Student[Arr.length];
+//		System.arraycopy(Arr, 0, tempArr, 0, Arr.length); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//		
+//		tempArr = new Student[Arr.length];
+//		Arrays.copyOf(Arr, Arr.length+1); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//
+//		Integer[] original = {1, 2, 3};
+//		Integer[] copy = Arrays.copyOf(original, 2); // [1, 2, 3, 0, 0]
+//		System.out.println("original= "+ Arrays.asList(original));
+//		System.out.println("copy= "+ Arrays.asList(copy));
+//
+//		tempArr = new Student[Arr.length];
+//		Arrays.copyOfRange(Arr, 0, Arr.length+1); 
+//		System.out.println("arr.0 == tempArr.0 "+ (Arrays.asList(Arr).get(0) == Arrays.asList(tempArr).get(0)));
+//		System.out.println("Arr= "+ Arrays.asList(Arr));
+//		System.out.println("tempArr= "+ Arrays.asList(tempArr));
+//
+////		original = {1, 2, 3};
+//		copy = Arrays.copyOfRange(original, 0, 2); // [1, 2, 3, 0, 0]
+//		System.out.println("original= "+ Arrays.asList(original));
+//		System.out.println("copy= "+ Arrays.asList(copy));
+//
+//	}
 	
 //	@Test
 //	void test10() {
