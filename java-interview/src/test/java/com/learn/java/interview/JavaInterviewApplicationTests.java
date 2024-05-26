@@ -1,18 +1,121 @@
 package com.learn.java.interview;
 
-import java.util.Arrays;
+import java.io.Externalizable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
 import org.junit.jupiter.api.Test;
 
-import com.learn.java.interview.model.Student;
-
 //@SpringBootTest
-class JavaInterviewApplicationTests {
+public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test12() {
-
+	void test14() {
+		
+		
 	}
+//	
+//	@Test
+//	void test13() {
+//		
+//		class BaseClass implements Serializable {
+//		    private static final long serialVersionUID = 1L;
+//		    int baseField;
+//
+//		    BaseClass() {
+//		    	
+//		    }
+//
+//		    BaseClass(int baseField) {
+//		        this.baseField = baseField;
+//		    }
+//		}
+//
+//		class ChildClass extends BaseClass implements Externalizable {
+//		    private static final long serialVersionUID = 1L;
+//		    int childField;
+//		    ChildClass() {
+//		    	
+//		    }
+//		    ChildClass(int baseField, int childField) {
+//		        super(baseField);
+//		        this.childField = childField;
+//		    }
+//
+//		    private void writeObject(ObjectOutputStream oos) throws IOException {
+//		    	System.out.println("inside writeObject");
+//		        oos.defaultWriteObject(); // Serialize base class fields
+//		        // Custom logic: do not serialize child class fields
+//		    }
+//
+//		    private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
+//		    	System.out.println("inside readObject");
+//		        ois.defaultReadObject(); // Deserialize base class fields
+//		        // Custom logic: initialize child class fields manually if needed
+//		        this.childField = 0; // or any default value or logic
+//		    }
+//
+//			@Override
+//			public void writeExternal(ObjectOutput out) throws IOException {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}
+//
+//		        ChildClass child = new ChildClass(1, 2);
+//
+//		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("test.txt"))) {
+//		            oos.writeObject(child);
+//		            System.out.println("inside oos");
+//		        } catch (IOException e) {
+//		            e.printStackTrace();
+//		        }
+//
+//		        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("test.txt"))) {
+//		        	System.out.println("inside ois");
+//		        	ChildClass deserializedChild = (ChildClass) ois.readObject();
+//		            
+//		            System.out.println("BaseField: " + deserializedChild.baseField); // Will be 1
+////		            System.out.println("ChildField: " + deserializedChild.childField); // Will be 0 (default value set in readObject)
+//		        } catch (IOException | ClassNotFoundException e) {
+//		            e.printStackTrace();
+//		        }
+//		
+//	}
+
+	
+	
+//	@Test
+//	void test12() {
+//		class A {
+//			
+//			 void aMethod() {
+//				System.out.println("Insode A Class");
+//			}
+//		}
+//
+//		class B extends A {
+//			
+//			@Override
+//			private void aMethod() {
+//				System.out.println("Insode B Class");
+//			}
+//		}		
+//		
+//		
+//	}
 	
 //	@Test
 //	void test11() {

@@ -18,7 +18,7 @@ public class Student implements Serializable {
 	Integer id;
 	
 	public Student() {
-		throw new RuntimeException();
+//		throw new RuntimeException();
 	}
 	
 //	@Override
