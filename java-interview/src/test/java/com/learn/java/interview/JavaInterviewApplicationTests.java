@@ -1,13 +1,5 @@
 package com.learn.java.interview;
 
-import java.io.Externalizable;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import org.junit.jupiter.api.Test;
@@ -16,11 +8,36 @@ import org.junit.jupiter.api.Test;
 public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test14() {
-		
+	void test15() {
 		
 	}
 	
+//	@Test
+//	void test14() {
+//		class A {
+//			Integer classAField1 = 1;
+//			void classAMethod() {
+//				classAField1 = 123;
+//				Integer classAMethodField = 2;
+//				class B {
+//					Integer classBField1 = 11;
+//					void classBMethod() {
+////						classAMethodField= 123;
+//						Integer classBMethodField = 22;
+//						System.out.println("classBMethodField: "+ classBMethodField);
+//						System.out.println("classBField1: "+ classBField1);
+//						System.out.println("classAMethodField: "+ classAMethodField);
+//						System.out.println("classAField1: "+ classAField1);
+//					}
+//				}
+//				B b = new B();
+//				b.classBMethod();
+//			}
+//		}
+//		A a = new A();
+//		a.classAMethod();
+//	}
+//	
 	
 //	
 //	@Test
