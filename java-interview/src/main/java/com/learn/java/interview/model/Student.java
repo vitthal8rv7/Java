@@ -10,7 +10,6 @@ import lombok.ToString;
 
 @Data
 @AllArgsConstructor
-
 @Builder
 public class Student implements Serializable {
 
@@ -20,7 +19,7 @@ public class Student implements Serializable {
 	public Student() {
 //		throw new RuntimeException();
 	}
-	
+
 //	@Override
 //	public String toString() {
 //		return ""+this.hashCode();
