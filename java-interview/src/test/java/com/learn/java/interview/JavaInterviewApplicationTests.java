@@ -1,26 +1,68 @@
 package com.learn.java.interview;
 
-import java.io.Externalizable;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
+
+import com.learn.java.interview.model.Student;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test14() {
-		
+	void test16() {
 		
 	}
+
+//	@Test
+//	void test15() {
+//		Comparator<Student> salaryComparator = new Comparator<Student>() {
+//
+//			@Override
+//			public int compare(Student e1, Student e2) {
+//				return (int) (e1.getId() - e2.getId());
+//			}
+//		};
+//		System.out.println("is equal: "+ salaryComparator.compare(new Student(1), new Student(1)));
+//		Comparable<Student> salaryComparable = new Comparable<Student>() {
+//			Student e1 = new Student(2);
+//			@Override
+//			public int compareTo(Student e2) {
+//				System.out.println("this.getClass().getName(): "+ this.getClass().getName());
+//				return e1.getId()-e2.getId();
+//			}
+//		};
+//		System.out.println("test: "+ salaryComparable.compareTo(new Student(1)));
+////		salaryComparable.compareTo(new Student(1));
+//	}
 	
+//	@Test
+//	void test14() {
+//		class A {
+//			Integer classAField1 = 1;
+//			void classAMethod() {
+//				classAField1 = 123;
+//				Integer classAMethodField = 2;
+//				class B {
+//					Integer classBField1 = 11;
+//					void classBMethod() {
+////						classAMethodField= 123;
+//						Integer classBMethodField = 22;
+//						System.out.println("classBMethodField: "+ classBMethodField);
+//						System.out.println("classBField1: "+ classBField1);
+//						System.out.println("classAMethodField: "+ classAMethodField);
+//						System.out.println("classAField1: "+ classAField1);
+//					}
+//				}
+//				B b = new B();
+//				b.classBMethod();
+//			}
+//		}
+//		A a = new A();
+//		a.classAMethod();
+//	}
+//	
 	
 //	
 //	@Test
