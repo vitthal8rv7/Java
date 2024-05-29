@@ -1,6 +1,7 @@
 package com.learn.java.interview;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
@@ -11,9 +12,28 @@ import com.learn.java.interview.model.Student;
 public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test16() {
-		
+	void test17() {
 	}
+//	@Test
+//	void test16() {
+//		class SortStudentByNameComparator implements Comparator<Student>{
+//
+//			@Override
+//			public int compare(Student o1, Student o2) {
+//				
+//				//Ascending Logic on last digit of number
+//				if((o1.getId()%10) > (o2.getId()%10))
+//					return 1;
+//				if((o1.getId()%10) < (o2.getId()%10))
+//					return -1;
+//				return 0;
+//				
+//				//using comparable which is implemented by Integer class.
+//				//return o1.getId().compareTo(o2.getId());
+//			}
+//			
+//		}
+//	}
 
 //	@Test
 //	void test15() {
