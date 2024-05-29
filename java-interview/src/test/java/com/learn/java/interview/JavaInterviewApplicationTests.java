@@ -8,12 +8,183 @@ import org.junit.jupiter.api.Test;
 
 import com.learn.java.interview.model.Student;
 
+import io.micrometer.common.util.StringUtils;
+import lombok.Data;
+
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-
-	@Test
-	void test17() {
+	
+	interface A {
+		String AB();
 	}
+	enum Weekdays implements A {
+		
+		MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDDAY, MONDAY2("text");
+		
+		private String message;
+		Weekdays(){
+			if(this.toString() == "FRIDAY") {
+				message = "Today is friday.";
+			}
+			System.out.println("Inside constructor: "+this.toString());
+		}
+		Weekdays(String message) {
+			this.message = message;
+			System.out.println("Inside constructor: "+this.toString());
+		}
+		public String getMessage() {
+			return message;
+		}
+		
+		public void setMessage(String message) {
+			this.message = message;
+		}
+		@Override
+		public String AB() {
+			System.out.println("Ab");
+			return "Ab";
+			
+		}
+	}
+	
+	@Test
+	void test19() {
+		System.out.println("Weekdays: " + Weekdays.class);
+		System.out.println("Weekdays: " + Weekdays.class.getName());
+		
+//		System.out.println("Weekdays:MONDAY " + StringUtils.isBlank(Weekdays.MONDAY));
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY); 
+			//first time Enum used: all Enums get initialized by calling required constructors 
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY); 
+			//second time Enum used, not initialization. already done. just use Enums.
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY.hashCode());
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY.ordinal());
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY.getDeclaringClass());
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY.getDeclaringClass().getName());
+		System.out.println("Weekdays:MONDAY:FRIDAY " + Weekdays.MONDAY.FRIDAY);
+		
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.MONDAY.hashCode()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.FRIDAY.hashCode()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.FRIDAY.hashCode() == Weekdays.FRIDAY.FRIDAY.hashCode()));
+	
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.ordinal()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.MONDAY.ordinal()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.FRIDAY.ordinal()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.valueOf("MONDAY").ordinal()));
+		System.out.println("Weekdays:MONDAY " + ("MONDAY".equals(Weekdays.MONDAY)));
+		System.out.println("Weekdays:MONDAY " + ("MONDAY".equals(Weekdays.MONDAY.toString())));
+		
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2));
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.toString()));
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.getMessage()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.MONDAY.getMessage()));
+		System.out.println("Weekdays:MONDAY " + (Weekdays.FRIDAY.getMessage()));
+		
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.compareTo(Weekdays.MONDAY2)));
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.compareTo(Weekdays.MONDAY)));
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.ordinal() - Weekdays.MONDAY2.ordinal()));
+		System.out.println("Weekdays:MONDAY2 " + (Weekdays.MONDAY2.ordinal() - Weekdays.MONDAY.ordinal()));
+
+		Weekdays w = Weekdays.FRIDAY;
+		switch(w) {
+		case FRIDAY: System.out.println("FRIDAY");break;
+		case MONDAY: System.out.println("MONDAY");break;
+		case MONDAY2: System.out.println("MONDAY2");break;
+		default: System.out.println("default");break;
+		}
+
+		String week = Weekdays.FRIDAY.toString();
+		switch(week) {
+		case "FRIDAY": System.out.println("FRIDAY");break;
+		case "MONDAY": System.out.println("MONDAY");break;
+		case "MONDAY2": System.out.println("MONDAY2");break;
+		default: System.out.println("default");break;
+		}
+
+		System.out.println("Weekdays:MONDAY " + Weekdays.MONDAY.AB());
+	}
+	
+//	@Test
+//	void test18() {
+//		enum E2 {
+			
+//			A(""){
+//				System.out.println("");
+//			}, B("", ""){
+//				System.out.println("");
+//			}, C(){
+//				System.out.println("");
+//			}, D(6){
+//				System.out.println("");
+//			};
+//		}
+//		  enum PizzaStatus {
+//			  
+//		        ORDERED (5){
+//		            @Override
+//		            public boolean isOrdered() {
+//		                return true;
+//		            }
+//		        },
+//		        READY (2){
+//		            @Override
+//		            public boolean isReady() {
+//		                return true;
+//		            }
+//		        },
+//		        DELIVERED (0){
+//		            @Override
+//		            public boolean isDelivered() {
+//		                return true;
+//		            }
+//		        };
+//
+//		        private int timeToDelivery;
+//
+//		        public boolean isOrdered() {return false;}
+//
+//		        public boolean isReady() {return false;}
+//
+//		        public boolean isDelivered(){return false;}
+//
+//		        public int getTimeToDelivery() {
+//		            return timeToDelivery;
+//		        }
+//
+//		        PizzaStatus (int timeToDelivery) {
+//		            this.timeToDelivery = timeToDelivery;
+//		        }
+//		    }
+//		  
+//		  class Demo {
+//			  PizzaStatus status = PizzaStatus.DELIVERED;
+//			    public boolean isDeliverable() {
+//		        return this.status.isReady();
+//		    }
+//			  
+//		  }
+//		  Demo d = new Demo();
+//		  d.isDeliverable();
+		
+//	}
+	
+//	@Test
+//	void test17() {
+//		
+//		enum demo1 {
+//			A(""), B;
+//			private String name = "";
+//			demo1(){
+//				
+//			}
+//			demo1(String s) {
+//				super(s, 1);
+//			}
+//		}
+//		
+//		//Enum demo2 = new Enum();//{A, B, C, D}
+//	}
+	
 //	@Test
 //	void test16() {
 //		class SortStudentByNameComparator implements Comparator<Student>{
