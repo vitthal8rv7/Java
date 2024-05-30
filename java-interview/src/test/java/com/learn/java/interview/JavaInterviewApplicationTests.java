@@ -3,6 +3,7 @@ package com.learn.java.interview;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class JavaInterviewApplicationTests implements Serializable  {
 	
 	@Test
 	void test20() {
-		
+		Optional<String> os;
 	}
 	
 //	interface A {
