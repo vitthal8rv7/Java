@@ -3,6 +3,7 @@ package com.learn.java.interview;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -14,12 +15,88 @@ import lombok.Data;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-	
-	
+
 	@Test
-	void test20() {
-		Optional<String> os;
+	void test21() {
+		Thread t2 = new Thread(){
+			@Override
+			public void run() {
+//				System.out.println("Run2");
+//				System.out.println("t2.isAlive(): "+this.isAlive());
+				try {
+					Thread.sleep(7000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				System.out.println("Run2");
+
+			}	
+		};
+		Thread t1 = new Thread() {
+			@Override
+			public void run() {
+//				System.out.println("Run1");
+				t2.start();
+//				System.out.println("this.isAlive(): "+this.isAlive());
+				
+
+			}
+			
+			
+		};
+		t1.start();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		System.out.println("t1.isAlive(): "+t1.isAlive());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("t2.isAlive(): "+t2.isAlive());
 	}
+
+//	public <T> void print(List<T> numbers) {
+//		
+//	}
+//	
+//	public <T extends Number> void print1(List<T> numbers) {
+//		
+//	}
+//	public <T extends Number & Comparable<T>> void print2(List<T> numbers) {
+//		
+//	}
+//
+////	public <T> void print3(List<> numbers) {
+////		
+////	}
+//
+//	public void show(List<?> numbers) {
+//		
+//	}
+//
+//	public void show1(List<? extends Number> numbers) {
+//		
+//	}
+//
+//	public void show2(List<? super Number> numbers) {
+//		
+//	}
+//
+//	@Test
+//	void test20() {
+//		Optional<String> os;
+//
+//	}
 	
 //	interface A {
 //		String AB();
