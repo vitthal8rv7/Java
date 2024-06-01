@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.locks.Lock;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +17,11 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
+	@Test
+	void test22() {
+		Lock lock;
+	}
+	
 	@Test
 	void test21() {
 		Thread t2 = new Thread(){
