@@ -5,7 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,8 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		Runnable  RunnableTask = () -> {
 		    // Perform some computation or task
 		};
+//		BlockingQueue<E> e;
+		Semaphore d;
 	}
 	
 	@Test
