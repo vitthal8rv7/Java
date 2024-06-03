@@ -1,11 +1,19 @@
 package com.learn.java.interview;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.Stack;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 
 import org.junit.jupiter.api.Test;
@@ -19,62 +27,107 @@ import lombok.Data;
 public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
-	void test22() {
-		Lock lock;
-		ScheduledExecutorService s;
-		Runnable  RunnableTask = () -> {
-		    // Perform some computation or task
-		};
+	void test25() {
 	}
 	
-	@Test
-	void test21() {
-		Thread t2 = new Thread(){
-			@Override
-			public void run() {
-//				System.out.println("Run2");
-//				System.out.println("t2.isAlive(): "+this.isAlive());
-				try {
-					Thread.sleep(7000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-//				System.out.println("Run2");
-
-			}	
-		};
-		Thread t1 = new Thread() {
-			@Override
-			public void run() {
-//				System.out.println("Run1");
-				t2.start();
-//				System.out.println("this.isAlive(): "+this.isAlive());
-				
-
-			}
-			
-			
-		};
-		t1.start();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		System.out.println("t1.isAlive(): "+t1.isAlive());
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println("t2.isAlive(): "+t2.isAlive());
-	}
+//	enum Day {
+//	    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+//	}
+//	@Test
+//	void test24() {
+//		LinkedList<String> list;
+//		Stack sl;
+//		EnumSet<Day> allDays = EnumSet.allOf(Day.class);
+//		allDays.remove(Day.FRIDAY);
+//		for(Day d : allDays) {
+//			System.out.println(""+d);
+//		} //use Iterator to traverse EnumSet.
+//	}
+//
+//	@Test
+//	void test23() {
+//		
+//		Integer[] intArray = {1, 2, 3, 4, 5};//new Integer[10];
+//		List<Integer> list = Arrays.asList(intArray);
+//		System.out.println("intArray: "+ list);
+//		intArray[0] = 2;
+//		System.out.println("intArray: "+ list);
+//		try {
+//			list.add(1);
+//			list.add(10);
+//			list.add(100);
+//		} catch(Exception e) {	
+//			System.out.println("Exception: "+ e);
+//		} finally {
+//			System.out.println("intArray: "+ list);
+//		}
+////		OUTPUT
+////		intArray: [1, 2, 3, 4, 5]
+////		intArray: [2, 2, 3, 4, 5]		
+////		Exception: [Ljava.lang.StackTraceElement;@139982de
+////		intArray: [2, 2, 3, 4, 5]		
+//	}
+	
+	
+//	@Test
+//	void test22() {
+//		Lock lock;
+//		ScheduledExecutorService s;
+//		Runnable  RunnableTask = () -> {
+//		    // Perform some computation or task
+//		};
+////		BlockingQueue<E> e;
+//		Semaphore d;
+//	}
+//	
+//	@Test
+//	void test21() {
+//		Thread t2 = new Thread(){
+//			@Override
+//			public void run() {
+////				System.out.println("Run2");
+////				System.out.println("t2.isAlive(): "+this.isAlive());
+//				try {
+//					Thread.sleep(7000);
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+////				System.out.println("Run2");
+//
+//			}	
+//		};
+//		Thread t1 = new Thread() {
+//			@Override
+//			public void run() {
+////				System.out.println("Run1");
+//				t2.start();
+////				System.out.println("this.isAlive(): "+this.isAlive());
+//				
+//
+//			}
+//			
+//			
+//		};
+//		t1.start();
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		System.out.println("t1.isAlive(): "+t1.isAlive());
+//		try {
+//			Thread.sleep(1000);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		System.out.println("t2.isAlive(): "+t2.isAlive());
+//	}
 
 //	public <T> void print(List<T> numbers) {
 //		
