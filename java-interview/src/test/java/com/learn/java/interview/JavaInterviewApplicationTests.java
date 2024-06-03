@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.BlockingDeque;
@@ -27,6 +28,7 @@ public class JavaInterviewApplicationTests implements Serializable  {
 	@Test
 	void test24() {
 		LinkedList<String> list;
+		Stack sl;
 	}
 	
 	
