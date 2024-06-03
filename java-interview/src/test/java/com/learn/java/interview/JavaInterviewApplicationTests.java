@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.Stack;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,15 +26,24 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
-	
-
 	@Test
-	void test24() {
-		LinkedList<String> list;
-		Stack sl;
+	void test25() {
 	}
 	
-	
+//	enum Day {
+//	    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
+//	}
+//	@Test
+//	void test24() {
+//		LinkedList<String> list;
+//		Stack sl;
+//		EnumSet<Day> allDays = EnumSet.allOf(Day.class);
+//		allDays.remove(Day.FRIDAY);
+//		for(Day d : allDays) {
+//			System.out.println(""+d);
+//		} //use Iterator to traverse EnumSet.
+//	}
+//
 //	@Test
 //	void test23() {
 //		
