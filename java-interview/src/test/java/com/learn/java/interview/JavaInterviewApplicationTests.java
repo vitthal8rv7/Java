@@ -22,28 +22,37 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
+	
+
 	@Test
-	void test23() {
-		Integer[] intArray = {1, 2, 3, 4, 5};//new Integer[10];
-		List<Integer> list = Arrays.asList(intArray);
-		System.out.println("intArray: "+ list);
-		intArray[0] = 2;
-		System.out.println("intArray: "+ list);
-		try {
-			list.add(1);
-			list.add(10);
-			list.add(100);
-		} catch(Exception e) {	
-			System.out.println("Exception: "+ e);
-		} finally {
-			System.out.println("intArray: "+ list);
-		}
-//		OUTPUT
-//		intArray: [1, 2, 3, 4, 5]
-//		intArray: [2, 2, 3, 4, 5]		
-//		Exception: [Ljava.lang.StackTraceElement;@139982de
-//		intArray: [2, 2, 3, 4, 5]		
+	void test24() {
+		LinkedList<String> list;
 	}
+	
+	
+//	@Test
+//	void test23() {
+//		
+//		Integer[] intArray = {1, 2, 3, 4, 5};//new Integer[10];
+//		List<Integer> list = Arrays.asList(intArray);
+//		System.out.println("intArray: "+ list);
+//		intArray[0] = 2;
+//		System.out.println("intArray: "+ list);
+//		try {
+//			list.add(1);
+//			list.add(10);
+//			list.add(100);
+//		} catch(Exception e) {	
+//			System.out.println("Exception: "+ e);
+//		} finally {
+//			System.out.println("intArray: "+ list);
+//		}
+////		OUTPUT
+////		intArray: [1, 2, 3, 4, 5]
+////		intArray: [2, 2, 3, 4, 5]		
+////		Exception: [Ljava.lang.StackTraceElement;@139982de
+////		intArray: [2, 2, 3, 4, 5]		
+//	}
 	
 	
 //	@Test
