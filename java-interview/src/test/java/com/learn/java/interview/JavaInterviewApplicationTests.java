@@ -8,6 +8,8 @@ import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.BlockingDeque;
@@ -28,6 +30,61 @@ public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
 	void test25() {
+		Queue<String> queue = new PriorityQueue<>();
+//		Queue queue = new PriorityQueue();
+		queue.add("VI");
+		queue.offer("1");
+		queue.offer("12");
+		queue.offer("11");
+		queue.offer("331");
+		queue.offer("13");
+		queue.offer("1");
+//		queue.offer(1);
+		System.out.println("queue: "+queue);
+		
+		Queue<Integer> queue2 = new PriorityQueue<>();
+//		Queue queue = new PriorityQueue();
+		queue2.add(1);
+		queue2.offer(23);
+		queue2.offer(23);
+		queue2.offer(23);
+		queue2.offer(23);
+		queue2.offer(200);
+		queue2.offer(-200);
+		queue2.offer(2);
+		queue2.offer(2);
+		queue2.offer(3);
+		queue2.offer(23);
+		queue2.offer(23);
+		queue2.offer(2);
+		queue2.offer(2);
+		queue2.offer(0);
+		queue2.offer(23);
+		queue2.offer(23);
+		queue2.offer(2);
+//		queue.offer(1);
+		System.out.println("queue2: "+queue2);
+
+		Queue<Integer> queue3 = new PriorityQueue<>();
+//		Queue queue = new PriorityQueue();
+		queue3.add(1);
+		queue3.add(823422);
+		queue3.add(3333333);
+		queue3.add(222);
+		queue3.add(2);
+		queue3.add(911);
+		queue3.add(913);
+		
+		
+		System.out.println("queue3: "+queue3);
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.poll());
+		System.out.println("queue3: "+queue3.peek());
+
 	}
 	
 //	enum Day {
