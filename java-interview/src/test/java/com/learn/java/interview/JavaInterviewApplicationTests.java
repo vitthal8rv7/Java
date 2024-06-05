@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.BlockingDeque;
@@ -17,6 +18,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -28,64 +30,149 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
-	@Test
-	void test25() {
-		Queue<String> queue = new PriorityQueue<>();
-//		Queue queue = new PriorityQueue();
-		queue.add("VI");
-		queue.offer("1");
-		queue.offer("12");
-		queue.offer("11");
-		queue.offer("331");
-		queue.offer("13");
-		queue.offer("1");
-//		queue.offer(1);
-		System.out.println("queue: "+queue);
-		
-		Queue<Integer> queue2 = new PriorityQueue<>();
-//		Queue queue = new PriorityQueue();
-		queue2.add(1);
-		queue2.offer(23);
-		queue2.offer(23);
-		queue2.offer(23);
-		queue2.offer(23);
-		queue2.offer(200);
-		queue2.offer(-200);
-		queue2.offer(2);
-		queue2.offer(2);
-		queue2.offer(3);
-		queue2.offer(23);
-		queue2.offer(23);
-		queue2.offer(2);
-		queue2.offer(2);
-		queue2.offer(0);
-		queue2.offer(23);
-		queue2.offer(23);
-		queue2.offer(2);
-//		queue.offer(1);
-		System.out.println("queue2: "+queue2);
+//	@Test
+//	void test26() {
+//		Integer number = 20;
+//		int limit = (int) logn(number);
+//		int k = number;
+//		Integer[] array = new Integer[k];
+//		boolean isSwapped = false;
+//		boolean isSwapped2 = false;
+//		int count = 0;
+//		for (int i = 0; k > 0; k--) {
+//			array[i++] = new Random().nextInt(100);
+//		}
+//		Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
+//		System.out.println("");
+//		for (int a = 0; a < number; a++) {
+//			isSwapped = false;
+//			for (int i = 0; i < number - 1; i++, i++) {
+////				System.out.println("" + array[i]);
+//				if (array[i] > array[i + 1]){
+//					isSwapped = true;
+//					count = 0;
+//					array[i] = array[i] + array[i + 1];
+//					array[i + 1] = array[i] - array[i + 1];
+//					array[i] = array[i] - array[i + 1];
+//				}
+//			}
+//			if(isSwapped != true ) {
+//				
+//				count ++;
+//				if(count == 2) {
+//					System.out.println("IN - IN");
+//				for (int i = 0; i < number - 1; i++) {
+////					System.out.println("" + array[i]);
+//					if (array[i] > array[i + 1]){
+//						isSwapped = true;
+//						array[i] = array[i] + array[i + 1];
+//						array[i + 1] = array[i] - array[i + 1];
+//						array[i] = array[i] - array[i + 1];
+//					}
+//				}
+//				count = 0;
+//				}
+////				for(int i = 1; i < number/2; i++, i++) {
+////					array[i] = array[i] + array[(number-1) - i];
+////					array[(number-1) - i] = array[i] - array[(number-1) - i];
+////					array[i] = array[i] - array[(number-1) - i];
+////				}			
+//			}
+//			if(isSorted(array)) {
+//				System.out.println("BREAK");
+//				break;
+//			}
+//			System.out.println("a: "+a);
+//			Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
+//			System.out.println("");
+//			for(int i = 1; i < number/2; i++, i++) {
+//				array[i] = array[i] + array[(number-1) - i];
+//				array[(number-1) - i] = array[i] - array[(number-1) - i];
+//				array[i] = array[i] - array[(number-1) - i];
+//			}
+//			Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
+//			System.out.println("");			
+//		}
+//		System.out.println("Exit");
+//		Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
+////		System.out.println("array:"+ );
+//	}
 
-		Queue<Integer> queue3 = new PriorityQueue<>();
-//		Queue queue = new PriorityQueue();
-		queue3.add(1);
-		queue3.add(823422);
-		queue3.add(3333333);
-		queue3.add(222);
-		queue3.add(2);
-		queue3.add(911);
-		queue3.add(913);
+	private boolean isSorted(Integer[] array) {
+		for(int i = 0; i<array.length-1; i++) {
+			if(array[i]>array[i+1]) {
+				return false;
+			}
+		}
+		return true;
 		
-		
-		System.out.println("queue3: "+queue3);
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.poll());
-		System.out.println("queue3: "+queue3.peek());
-
 	}
+
+	private double logn(double i) {
+		System.out.println("Math.log10(i): "+ Math.log(i));
+		return Math.log10(i);
+	}
+	
+	
+//	
+//	@Test
+//	void test25() {
+//		Queue<String> queue = new PriorityQueue<>();
+////		Queue queue = new PriorityQueue();
+//		queue.add("VI");
+//		queue.offer("1");
+//		queue.offer("12");
+//		queue.offer("11");
+//		queue.offer("331");
+//		queue.offer("13");
+//		queue.offer("1");
+////		queue.offer(1);
+//		System.out.println("queue: "+queue);
+//		
+//		Queue<Integer> queue2 = new PriorityQueue<>();
+////		Queue queue = new PriorityQueue();
+//		queue2.add(1);
+//		queue2.offer(23);
+//		queue2.offer(23);
+//		queue2.offer(23);
+//		queue2.offer(23);
+//		queue2.offer(200);
+//		queue2.offer(-200);
+//		queue2.offer(2);
+//		queue2.offer(2);
+//		queue2.offer(3);
+//		queue2.offer(23);
+//		queue2.offer(23);
+//		queue2.offer(2);
+//		queue2.offer(2);
+//		queue2.offer(0);
+//		queue2.offer(23);
+//		queue2.offer(23);
+//		queue2.offer(2);
+////		queue.offer(1);
+//		System.out.println("queue2: "+queue2);
+//
+//		Queue<Integer> queue3 = new PriorityQueue<>();
+////		Queue queue = new PriorityQueue();
+//		queue3.add(1);
+//		queue3.add(823422);
+//		queue3.add(3333333);
+//		queue3.add(222);
+//		queue3.add(2);
+//		queue3.add(911);
+//		queue3.add(913);
+//		
+//		
+//		System.out.println("queue3: "+queue3);
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.poll());
+//		System.out.println("queue3: "+queue3.peek());
+//
+//	}
 	
 //	enum Day {
 //	    MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
