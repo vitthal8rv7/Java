@@ -18,9 +18,14 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
+
 
 import com.learn.java.interview.model.Student;
 
@@ -30,6 +35,41 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
+	@Test
+	void test28() {
+		Predicate<Long> s;
+		BiFunction<String, String, Integer> lengthFunction = (s1, s2) -> {  (s1.length() + s2.length()) };
+		Supplier<String> sss;
+	}
+//	interface Employee {
+//		public String getSalary();
+//	}
+//
+//	@Test
+//	void test27() {
+//		class Main {
+//
+//			int x = 10;
+//
+//			private void doSomething() {
+//				Employee employee = () -> { //LambdaExpression do not create new class, when it invoke
+//					System.out.println(this.x); // In LambdaExpression this represent current class which is Main.
+//					System.out.println(this.toString());
+//					return "100";
+//				};
+//				employee.getSalary();
+//				Employee employee1 = new Employee() {//AnonymousClass create new class, when it invoke
+//					@Override
+//					public String getSalary() {
+//						System.out.println(this.toString()); // In LambdaExpression this represent current class which is new Employee().
+//						return "100";
+//					}
+//				};
+//				employee1.getSalary();
+//			}
+//		}
+//		new Main().doSomething();
+//	}
 //	@Test
 //	void test26() {
 //		Integer number = 20;
@@ -97,23 +137,21 @@ public class JavaInterviewApplicationTests implements Serializable  {
 //		Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
 ////		System.out.println("array:"+ );
 //	}
-
-	private boolean isSorted(Integer[] array) {
-		for(int i = 0; i<array.length-1; i++) {
-			if(array[i]>array[i+1]) {
-				return false;
-			}
-		}
-		return true;
-		
-	}
-
-	private double logn(double i) {
-		System.out.println("Math.log10(i): "+ Math.log(i));
-		return Math.log10(i);
-	}
-	
-	
+//
+//	private boolean isSorted(Integer[] array) {
+//		for(int i = 0; i<array.length-1; i++) {
+//			if(array[i]>array[i+1]) {
+//				return false;
+//			}
+//		}
+//		return true;
+//		
+//	}
+//
+//	private double logn(double i) {
+//		System.out.println("Math.log10(i): "+ Math.log(i));
+//		return Math.log10(i);
+//	}	
 //	
 //	@Test
 //	void test25() {
