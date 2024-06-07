@@ -2,7 +2,9 @@ package com.learn.java.interview;
 
 import java.io.Serializable;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,17 +38,35 @@ import lombok.Data;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-
 	@Test
 	void test28() {
-		Year y;
-		DayOfWeek d;
-		ZoneId z; 
 		
-		Predicate<Long> s;
-		BiFunction<String, String, Integer> lengthFunction = (s1, s2) -> {  (s1.length() + s2.length()) };
-		Supplier<String> sss;
+		// Define the event time in the event's local time zone
+		ZonedDateTime eventZonedDateTime = ZonedDateTime.now();
+		        
+		// Define the user's local time zone
+		ZoneId userTimeZone = ZoneId.of("Asia/Tokyo"); // User's time zone
+		ZoneId userTimeZone2 = ZoneId.of("America/New_York"); // Event time zone;
+		ZonedDateTime eventInUserTimeZone = eventZonedDateTime.withZoneSameInstant(userTimeZone);
+		ZonedDateTime eventInUserTimeZone2 = eventZonedDateTime.withZoneSameInstant(userTimeZone2); 
+		System.out.println("eventZonedDateTime: "+eventZonedDateTime);
+		System.out.println("eventInUserTimeZone: "+eventInUserTimeZone);
+		System.out.println("eventInUserTimeZone2: "+eventInUserTimeZone2);
+		
+		
+
 	}
+//
+//	@Test
+//	void test28() {
+//		Year y;
+//		DayOfWeek d;
+//		ZoneId z; 
+//		
+//		Predicate<Long> s;
+//		BiFunction<String, String, Integer> lengthFunction = (s1, s2) -> {  (s1.length() + s2.length()) };
+//		Supplier<String> sss;
+//	}
 //	interface Employee {
 //		public String getSalary();
 //	}
