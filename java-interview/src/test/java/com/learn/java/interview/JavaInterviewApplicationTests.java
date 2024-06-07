@@ -38,24 +38,30 @@ import lombok.Data;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-	@Test
-	void test28() {
-		
-		// Define the event time in the event's local time zone
-		ZonedDateTime eventZonedDateTime = ZonedDateTime.now();
-		        
-		// Define the user's local time zone
-		ZoneId userTimeZone = ZoneId.of("Asia/Tokyo"); // User's time zone
-		ZoneId userTimeZone2 = ZoneId.of("America/New_York"); // Event time zone;
-		ZonedDateTime eventInUserTimeZone = eventZonedDateTime.withZoneSameInstant(userTimeZone);
-		ZonedDateTime eventInUserTimeZone2 = eventZonedDateTime.withZoneSameInstant(userTimeZone2); 
-		System.out.println("eventZonedDateTime: "+eventZonedDateTime);
-		System.out.println("eventInUserTimeZone: "+eventInUserTimeZone);
-		System.out.println("eventInUserTimeZone2: "+eventInUserTimeZone2);
-		
-		
 
+	@Test
+	void test29() {
+		
 	}
+	
+//	@Test
+//	void test28() {
+//		
+//		// Define the event time in the event's local time zone
+//		ZonedDateTime eventZonedDateTime = ZonedDateTime.now();
+//		        
+//		// Define the user's local time zone
+//		ZoneId userTimeZone = ZoneId.of("Asia/Tokyo"); // User's time zone
+//		ZoneId userTimeZone2 = ZoneId.of("America/New_York"); // Event time zone;
+//		ZonedDateTime eventInUserTimeZone = eventZonedDateTime.withZoneSameInstant(userTimeZone);
+//		ZonedDateTime eventInUserTimeZone2 = eventZonedDateTime.withZoneSameInstant(userTimeZone2); 
+//		System.out.println("eventZonedDateTime: "+eventZonedDateTime);
+//		System.out.println("eventInUserTimeZone: "+eventInUserTimeZone);
+//		System.out.println("eventInUserTimeZone2: "+eventInUserTimeZone2);
+//		
+//		
+//
+//	}
 //
 //	@Test
 //	void test28() {
