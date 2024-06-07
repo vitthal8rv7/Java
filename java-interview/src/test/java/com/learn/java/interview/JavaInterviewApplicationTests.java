@@ -1,6 +1,8 @@
 package com.learn.java.interview;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,6 +39,10 @@ public class JavaInterviewApplicationTests implements Serializable  {
 
 	@Test
 	void test28() {
+		Year y;
+		DayOfWeek d;
+		ZoneId z; 
+		
 		Predicate<Long> s;
 		BiFunction<String, String, Integer> lengthFunction = (s1, s2) -> {  (s1.length() + s2.length()) };
 		Supplier<String> sss;
