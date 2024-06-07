@@ -27,6 +27,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
@@ -39,9 +40,8 @@ import lombok.Data;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-
 	@Test
-	void test29() {
+	void test31() {
 		Employee e = new Employee(1, "1");
 		System.out.println("Emp: "+e);
 		List<Employee> empList = new ArrayList<>();
@@ -51,24 +51,60 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		empList.add(new Employee(13, "13"));
 		empList.add(new Employee(1, "1"));
 		empList.add(new Employee(31, "31"));
-		
-		//If the elements of this stream are not Comparable,
-		//List<Employee> toList = empList.stream().sorted().toList(); // java.lang.ClassCastException
-		List<Employee> toList = empList.stream().sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).toList();
-		//Sorted method of stream does not modify existing list it return new if asked.
-		System.out.println("empList: "+empList);
-		System.out.println("toList: "+toList);
-		
-		List<Employee> toList2 = empList.stream().sorted(Comparator.comparing(Employee::getName)).toList();
-		//Sorted method of stream does not modify existing list it return new if asked.
-		System.out.println("empList: "+empList);
-		System.out.println("toList2: "+toList2);
-		
-		//List sort method will update existing list only
-		empList.sort(Comparator.comparing(Employee::getName));
-		System.out.println("empList: "+empList);
 	}
 	
+//	@Test
+//	void test30() {
+//		Employee e = new Employee(1, "1");
+//		System.out.println("Emp: "+e);
+//		List<Employee> empList = new ArrayList<>();
+//		empList.add(new Employee(21, "21"));
+//		empList.add(new Employee(2, "2"));
+//		empList.add(new Employee(11, "11"));
+//		empList.add(new Employee(13, "13"));
+//		empList.add(new Employee(1, "1"));
+//		empList.add(new Employee(31, "31"));
+////		empList.stream().filter(s -> true).collect(Collectors.toList());
+//		
+//		interface A {
+//			void aMethod();
+//		}
+//		interface B extends A {
+//			default void aMethod() {
+//				System.out.println("In Overrided Default Method");
+//			}
+//		}
+//		new B() {}.aMethod();
+//	}
+//	@Test
+//	void test29() {
+//		Employee e = new Employee(1, "1");
+//		System.out.println("Emp: "+e);
+//		List<Employee> empList = new ArrayList<>();
+//		empList.add(new Employee(21, "21"));
+//		empList.add(new Employee(2, "2"));
+//		empList.add(new Employee(11, "11"));
+//		empList.add(new Employee(13, "13"));
+//		empList.add(new Employee(1, "1"));
+//		empList.add(new Employee(31, "31"));
+//		
+//		//If the elements of this stream are not Comparable,
+//		//List<Employee> toList = empList.stream().sorted().toList(); // java.lang.ClassCastException
+//		List<Employee> toList = empList.stream().sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).toList();
+//		//Sorted method of stream does not modify existing list it return new if asked.
+//		System.out.println("empList: "+empList);
+//		System.out.println("toList: "+toList);
+//		
+//		List<Employee> toList2 = empList.stream().sorted(Comparator.comparing(Employee::getName)).toList();
+//		//Sorted method of stream does not modify existing list it return new if asked.
+//		System.out.println("empList: "+empList);
+//		System.out.println("toList2: "+toList2);
+//		
+//		//List sort method will update existing list only
+//		empList.sort(Comparator.comparing(Employee::getName));
+//		System.out.println("empList: "+empList);
+//	}
+//	
 //	@Test
 //	void test28() {
 //		
