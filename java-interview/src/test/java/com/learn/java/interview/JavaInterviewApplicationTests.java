@@ -1,6 +1,11 @@
 package com.learn.java.interview;
 
 import java.io.Serializable;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -18,10 +23,15 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
+import com.learn.java.interview.model.Employee;
 import com.learn.java.interview.model.Student;
 
 import io.micrometer.common.util.StringUtils;
@@ -30,6 +40,93 @@ import lombok.Data;
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
 
+	@Test
+	void test29() {
+		Employee e = new Employee(1, "1");
+		System.out.println("Emp: "+e);
+		List<Employee> empList = new ArrayList<>();
+		empList.add(new Employee(21, "21"));
+		empList.add(new Employee(2, "2"));
+		empList.add(new Employee(11, "11"));
+		empList.add(new Employee(13, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "31"));
+		
+		//If the elements of this stream are not Comparable,
+		//List<Employee> toList = empList.stream().sorted().toList(); // java.lang.ClassCastException
+		List<Employee> toList = empList.stream().sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).toList();
+		//Sorted method of stream does not modify existing list it return new if asked.
+		System.out.println("empList: "+empList);
+		System.out.println("toList: "+toList);
+		
+		List<Employee> toList2 = empList.stream().sorted(Comparator.comparing(Employee::getName)).toList();
+		//Sorted method of stream does not modify existing list it return new if asked.
+		System.out.println("empList: "+empList);
+		System.out.println("toList2: "+toList2);
+		
+		//List sort method will update existing list only
+		empList.sort(Comparator.comparing(Employee::getName));
+		System.out.println("empList: "+empList);
+	}
+	
+//	@Test
+//	void test28() {
+//		
+//		// Define the event time in the event's local time zone
+//		ZonedDateTime eventZonedDateTime = ZonedDateTime.now();
+//		        
+//		// Define the user's local time zone
+//		ZoneId userTimeZone = ZoneId.of("Asia/Tokyo"); // User's time zone
+//		ZoneId userTimeZone2 = ZoneId.of("America/New_York"); // Event time zone;
+//		ZonedDateTime eventInUserTimeZone = eventZonedDateTime.withZoneSameInstant(userTimeZone);
+//		ZonedDateTime eventInUserTimeZone2 = eventZonedDateTime.withZoneSameInstant(userTimeZone2); 
+//		System.out.println("eventZonedDateTime: "+eventZonedDateTime);
+//		System.out.println("eventInUserTimeZone: "+eventInUserTimeZone);
+//		System.out.println("eventInUserTimeZone2: "+eventInUserTimeZone2);
+//		
+//		
+//
+//	}
+//
+//	@Test
+//	void test28() {
+//		Year y;
+//		DayOfWeek d;
+//		ZoneId z; 
+//		
+//		Predicate<Long> s;
+//		BiFunction<String, String, Integer> lengthFunction = (s1, s2) -> {  (s1.length() + s2.length()) };
+//		Supplier<String> sss;
+//	}
+//	interface Employee {
+//		public String getSalary();
+//	}
+//
+//	@Test
+//	void test27() {
+//		class Main {
+//
+//			int x = 10;
+//
+//			private void doSomething() {
+//				Employee employee = () -> { //LambdaExpression do not create new class, when it invoke
+//					System.out.println(this.x); // In LambdaExpression this represent current class which is Main.
+//					System.out.println(this.toString());
+//					return "100";
+//				};
+//				employee.getSalary();
+//				Employee employee1 = new Employee() {//AnonymousClass create new class, when it invoke
+//					@Override
+//					public String getSalary() {
+//						System.out.println(this.toString()); // In LambdaExpression this represent current class which is new Employee().
+//						return "100";
+//					}
+//				};
+//				employee1.getSalary();
+//			}
+//		}
+//		new Main().doSomething();
+//	}
 //	@Test
 //	void test26() {
 //		Integer number = 20;
@@ -97,23 +194,21 @@ public class JavaInterviewApplicationTests implements Serializable  {
 //		Arrays.asList(array).stream().forEach(value -> System.out.print(" "+value));
 ////		System.out.println("array:"+ );
 //	}
-
-	private boolean isSorted(Integer[] array) {
-		for(int i = 0; i<array.length-1; i++) {
-			if(array[i]>array[i+1]) {
-				return false;
-			}
-		}
-		return true;
-		
-	}
-
-	private double logn(double i) {
-		System.out.println("Math.log10(i): "+ Math.log(i));
-		return Math.log10(i);
-	}
-	
-	
+//
+//	private boolean isSorted(Integer[] array) {
+//		for(int i = 0; i<array.length-1; i++) {
+//			if(array[i]>array[i+1]) {
+//				return false;
+//			}
+//		}
+//		return true;
+//		
+//	}
+//
+//	private double logn(double i) {
+//		System.out.println("Math.log10(i): "+ Math.log(i));
+//		return Math.log10(i);
+//	}	
 //	
 //	@Test
 //	void test25() {
