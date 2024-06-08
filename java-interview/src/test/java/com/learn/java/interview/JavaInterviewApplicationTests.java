@@ -222,7 +222,16 @@ public class JavaInterviewApplicationTests implements Serializable  {
 				.toList();
 
 		System.out.println("Sorted: Descending Order: last 3: "+ sortedEmpList12);
-
+		
+		
+		IntSummaryStatistics intSummaryStatistics = empList	.stream()
+															.mapToInt(emp -> emp.getId())
+															.summaryStatistics();
+		System.out.println("Min: "+intSummaryStatistics.getMin());
+		System.out.println("Max: "+intSummaryStatistics.getMax());
+		System.out.println("Average: "+intSummaryStatistics.getAverage());
+		System.out.println("Sum: "+intSummaryStatistics.getSum());
+		System.out.println("Count: "+intSummaryStatistics.getCount());
 	}
 	
 //	@Test
