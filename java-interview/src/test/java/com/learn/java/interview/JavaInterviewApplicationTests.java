@@ -205,6 +205,24 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("");
 		empList.sort((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ));
 		System.out.println("Sorted: Descending Order: "+ empList);
+		
+		System.out.println("");
+		//Sorted in Descending Order and fetch 1st 3
+		List<Employee> sortedEmpList11 = empList	.stream()
+				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+				.limit(3)
+				.toList();
+		System.out.println("Sorted: Descending Order: 1st 3: "+ sortedEmpList11);
+		
+		System.out.println("");
+		//Sorted in Descending Order and fetch last 3
+		List<Employee> sortedEmpList12 = empList	.stream()
+				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+				.skip(empList.size() - 3)
+				.toList();
+
+		System.out.println("Sorted: Descending Order: last 3: "+ sortedEmpList12);
+
 	}
 	
 //	@Test
