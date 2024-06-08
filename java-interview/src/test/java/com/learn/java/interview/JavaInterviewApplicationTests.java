@@ -10,8 +10,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.IntSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -27,7 +31,10 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -39,9 +46,8 @@ import lombok.Data;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
-
 	@Test
-	void test29() {
+	void test31() {
 		Employee e = new Employee(1, "1");
 		System.out.println("Emp: "+e);
 		List<Employee> empList = new ArrayList<>();
@@ -50,25 +56,185 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		empList.add(new Employee(11, "11"));
 		empList.add(new Employee(13, "13"));
 		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "31"));
+		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
+		try {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
+		Long l = list.stream().count();
+		System.out.println("l: "+l);
 		
-		//If the elements of this stream are not Comparable,
-		//List<Employee> toList = empList.stream().sorted().toList(); // java.lang.ClassCastException
-		List<Employee> toList = empList.stream().sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).toList();
-		//Sorted method of stream does not modify existing list it return new if asked.
-		System.out.println("empList: "+empList);
-		System.out.println("toList: "+toList);
+		System.out.print("SKIP 3: ");
+		list.stream().skip(3).forEach(System.out::print);
+		System.out.println("");
+		System.out.print("LIMIT 3: ");
+		list.stream().limit(3).forEach(System.out::print);
+		System.out.println("");
+		//Q.) Create a map from a list where the map contains distinct values from the list as keys and their frequencies as values?
+		 Map<Integer, Long> frequencyMap = list.stream()
+												.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		
-		List<Employee> toList2 = empList.stream().sorted(Comparator.comparing(Employee::getName)).toList();
-		//Sorted method of stream does not modify existing list it return new if asked.
-		System.out.println("empList: "+empList);
-		System.out.println("toList2: "+toList2);
+	
 		
-		//List sort method will update existing list only
-		empList.sort(Comparator.comparing(Employee::getName));
-		System.out.println("empList: "+empList);
+		 String input1 = "ab_jandl-fnand,lanbk hfk$dkf";
+		 
+		// Convert the string to lower case and split by non-word characters to handle punctuation
+		 Stream<String> wordSeperator = Arrays.stream(input1.toLowerCase().split("\\W+"));
+		//Count the number of occurrences of words in given string using Streams? 
+		Map<String, Long> wordFrequencyMap = wordSeperator.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	    System.out.println("wordFrequencyMap: "+wordFrequencyMap);
+
+	    // Convert the string to a stream of characters
+	    Stream<Character> charStream = input1.chars().mapToObj(inputChar ->  (char)inputChar);
+		//Count the number of occurrences of character in given string using Streams? 
+		Map<Character, Long> charFrequencyMap = charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	    System.out.println("charFrequencyMap: "+charFrequencyMap);
+
+	    //Count the number of occurrences of element in given list using Streams?
+	    Map<Integer, Long> numberFrequencyMap = list.stream()
+	    											.collect(
+	    													Collectors.groupingBy(Function.identity(), 
+	    													Collectors.counting()));
+	    //Find duplicate elements from the frequency map
+	    List<Integer> duplicateElements = numberFrequencyMap.entrySet()
+	    					.stream()
+	    					.filter(entry -> entry.getValue() > 1)
+	    					.map(entry -> entry.getKey())
+	    					.toList();
+	    System.out.println("duplicateElements: "+ duplicateElements);
+	    
+		 //Convert Employee List to employee name list then get employee name frequency
+		 Map<String, Long> empFrequencyMap = empList.stream()
+				 									.map(object -> object.getName())
+				 									.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		 System.out.println("empFrequencyMap: "+empFrequencyMap);
+		 
+		String s = list.stream()
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+			.toString();
+			//.forEach(System.out::print);		
+			System.out.println("s: "+s);
+			
+//			list.stream()
+//				.map(x -> Collectors.counting());
+			
+		
+		} catch(Exception ex ) {
+			System.out.println("e: "+ ex.getMessage());
+		}
+		
+		
+		Random random = new Random();
+		random.ints(5).forEach(System.out::println);
+		random.ints(40, 50).limit(5).forEach(System.out::println);
+		random.ints(5, 0, 10).forEach(System.out::println);
+
+	
+		List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+		IntSummaryStatistics stats = numbers.stream().mapToInt(x -> x).summaryStatistics();
+		System.out.println("Lowest number in List : " + stats);
+		System.out.println("Lowest number in List : " + stats.getMin());
+		//Lowest number in List : IntSummaryStatistics{count=7, sum=25, min=2, average=3.571429, max=7}
+		//Lowest number in List : 2Lowest number in List : 2
+		
+		Integer number = 7;
+		Boolean isPrime = IntStream	.range(2, number)
+									.filter(i -> (number%i==0))
+									.findAny()
+									.isEmpty();
+		System.out.println("isPrime: "+ (number>1 && isPrime));
+		
+		Boolean isPrime2 = IntStream.range(2, number)
+									.noneMatch(i -> (number%i==0));
+		System.out.println("isPrime2: "+ (number>1 && isPrime2));
+		
+		Predicate<Integer> isPrimeNumber = (element) -> (element>1 && IntStream	.range(2, element)
+															.noneMatch(i -> (element%i==0)));
+		System.out.println("isPrimeNumber: "+ isPrimeNumber.test(2));
+		List<Double> sqrtOfNPrime = Stream	.iterate(1, i -> i+1)
+											.filter(i -> isPrimeNumber.test(i))
+											.peek(System.out::println)
+											.limit(10)
+											.map(Math::sqrt)
+											.toList();
+		System.out.println("sqrtOfNPrime: "+ sqrtOfNPrime);
+		
+		List<Integer> list1 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+		Set<Integer> set1 = new HashSet<>();
+		List<Integer> duplicateList1 = list1.stream().filter(a -> !set1.add(a)).distinct().toList();
+		Set<Integer> set2 = new HashSet<>();
+		Set<Integer> duplicateSet2 = list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
+		System.out.println("duplicateList1: "+duplicateList1);
+		System.out.println("duplicateSet2: "+duplicateSet2);
+		
+		Set<String> employeeSet = new HashSet<>();
+		Set<String> duplicateSet3 = empList	.stream()
+											.filter(employee -> !employeeSet.add(employee.getName()))
+											.map(employee -> employee.getName())
+											.collect(Collectors.toSet());//.distinct().toList(); 
+		System.out.println("duplicateSet3: "+duplicateSet3);
 	}
 	
+//	@Test
+//	void test30() {
+//		Function f;
+//		interface A {
+//			static void bMethod() {
+//				System.out.println("A interface Static Method");
+//			}
+//			void aMethod();
+//		}
+//		interface B extends A {
+//			default void aMethod() {
+//				System.out.println("In Overrided Default Method");
+//			}
+//		}
+//		new B() {}.aMethod();
+//		class C implements A {
+//			static void cMethod() {
+//				System.out.println("C class Static Method");
+//			}
+//			@Override
+//			public void aMethod() {
+//				// TODO Auto-generated method stub
+//				
+//			}}
+//		class D extends C {}
+//		new D().cMethod();
+//	}
+//	@Test
+//	void test29() {
+//		Employee e = new Employee(1, "1");
+//		System.out.println("Emp: "+e);
+//		List<Employee> empList = new ArrayList<>();
+//		empList.add(new Employee(21, "21"));
+//		empList.add(new Employee(2, "2"));
+//		empList.add(new Employee(11, "11"));
+//		empList.add(new Employee(13, "13"));
+//		empList.add(new Employee(1, "1"));
+//		empList.add(new Employee(31, "31"));
+//		
+//		//If the elements of this stream are not Comparable,
+//		//List<Employee> toList = empList.stream().sorted().toList(); // java.lang.ClassCastException
+//		List<Employee> toList = empList.stream().sorted((e1, e2) -> e1.getName().compareTo(e2.getName())).toList();
+//		//Sorted method of stream does not modify existing list it return new if asked.
+//		System.out.println("empList: "+empList);
+//		System.out.println("toList: "+toList);
+//		
+//		List<Employee> toList2 = empList.stream().sorted(Comparator.comparing(Employee::getName)).toList();
+//		//Sorted method of stream does not modify existing list it return new if asked.
+//		System.out.println("empList: "+empList);
+//		System.out.println("toList2: "+toList2);
+//		
+//		//List sort method will update existing list only
+//		empList.sort(Comparator.comparing(Employee::getName));
+//		System.out.println("empList: "+empList);
+//	}
+//	
 //	@Test
 //	void test28() {
 //		
