@@ -57,6 +57,12 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		empList.add(new Employee(13, "13"));
 		empList.add(new Employee(1, "1"));
 		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(1, "1"));
+		empList.add(new Employee(31, "13"));
 		try {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
 		Long l = list.stream().count();
@@ -159,11 +165,18 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		
 		List<Integer> list1 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
 		Set<Integer> set1 = new HashSet<>();
-		List<Integer> duplicateList1 =list1.stream().filter(a -> !set1.add(a)).distinct().toList();
+		List<Integer> duplicateList1 = list1.stream().filter(a -> !set1.add(a)).distinct().toList();
 		Set<Integer> set2 = new HashSet<>();
-		Set<Integer> duplicateList2 =list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
+		Set<Integer> duplicateSet2 = list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
 		System.out.println("duplicateList1: "+duplicateList1);
-		System.out.println("duplicateList2: "+duplicateList2);
+		System.out.println("duplicateSet2: "+duplicateSet2);
+		
+		Set<String> employeeSet = new HashSet<>();
+		Set<String> duplicateSet3 = empList	.stream()
+											.filter(employee -> !employeeSet.add(employee.getName()))
+											.map(employee -> employee.getName())
+											.collect(Collectors.toSet());//.distinct().toList(); 
+		System.out.println("duplicateSet3: "+duplicateSet3);
 	}
 	
 //	@Test
