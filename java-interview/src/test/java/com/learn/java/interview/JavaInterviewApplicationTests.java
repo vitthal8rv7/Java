@@ -51,22 +51,30 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		empList.add(new Employee(13, "13"));
 		empList.add(new Employee(1, "1"));
 		empList.add(new Employee(31, "31"));
+		try {
+		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
+		Long l = list.stream().count();
+		System.out.println("l: "+l);
+		
+		String s = list.stream()
+			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+			.toString();
+			//.forEach(System.out::print);		
+			System.out.println("s: "+s);
+			
+		
+		} catch(Exception ex ) {
+			System.out.println("e: "+ ex.getMessage());
+		}
 	}
 	
 //	@Test
 //	void test30() {
-//		Employee e = new Employee(1, "1");
-//		System.out.println("Emp: "+e);
-//		List<Employee> empList = new ArrayList<>();
-//		empList.add(new Employee(21, "21"));
-//		empList.add(new Employee(2, "2"));
-//		empList.add(new Employee(11, "11"));
-//		empList.add(new Employee(13, "13"));
-//		empList.add(new Employee(1, "1"));
-//		empList.add(new Employee(31, "31"));
-////		empList.stream().filter(s -> true).collect(Collectors.toList());
-//		
+//		Function f;
 //		interface A {
+//			static void bMethod() {
+//				System.out.println("A interface Static Method");
+//			}
 //			void aMethod();
 //		}
 //		interface B extends A {
@@ -75,6 +83,17 @@ public class JavaInterviewApplicationTests implements Serializable  {
 //			}
 //		}
 //		new B() {}.aMethod();
+//		class C implements A {
+//			static void cMethod() {
+//				System.out.println("C class Static Method");
+//			}
+//			@Override
+//			public void aMethod() {
+//				// TODO Auto-generated method stub
+//				
+//			}}
+//		class D extends C {}
+//		new D().cMethod();
 //	}
 //	@Test
 //	void test29() {
