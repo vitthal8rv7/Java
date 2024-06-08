@@ -43,6 +43,7 @@ import com.learn.java.interview.model.Student;
 
 import io.micrometer.common.util.StringUtils;
 import lombok.Data;
+import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
@@ -177,6 +178,60 @@ public class JavaInterviewApplicationTests implements Serializable  {
 											.map(employee -> employee.getName())
 											.collect(Collectors.toSet());//.distinct().toList(); 
 		System.out.println("duplicateSet3: "+duplicateSet3);
+		
+		Set<String> duplicateSet4 = empList .stream()
+				.filter(emp -> Collections.frequency(empList, emp.getName()) > 1)
+				.map(emp -> emp.getName())
+				.collect(Collectors.toSet());
+		System.out.println("duplicateSet4: "+duplicateSet4);
+		
+//		Ascending Order
+		List<Employee> sortedEmpList = empList	.stream()
+												.sorted(Comparator.comparing(Employee::getName))
+												.toList();
+		System.out.println("Sorted: Ascending Order: "+ sortedEmpList);
+	
+//		Descending Order
+		List<Employee> sortedEmpList2 = empList	.stream()
+												.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ) )
+												.toList();
+		System.out.println("Sorted: Descending Order: "+ sortedEmpList2);
+		
+		//Sort and save in existing list
+		System.out.println("");
+		empList.sort((e1, e2) -> ( e1.getName().compareTo(e2.getName()) ));
+		System.out.println("Sorted: Ascending Order: "+ empList);
+
+		System.out.println("");
+		empList.sort((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ));
+		System.out.println("Sorted: Descending Order: "+ empList);
+		
+		System.out.println("");
+		//Sorted in Descending Order and fetch 1st 3
+		List<Employee> sortedEmpList11 = empList	.stream()
+				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+				.limit(3)
+				.toList();
+		System.out.println("Sorted: Descending Order: 1st 3: "+ sortedEmpList11);
+		
+		System.out.println("");
+		//Sorted in Descending Order and fetch last 3
+		List<Employee> sortedEmpList12 = empList	.stream()
+				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+				.skip(empList.size() - 3)
+				.toList();
+
+		System.out.println("Sorted: Descending Order: last 3: "+ sortedEmpList12);
+		
+		
+		IntSummaryStatistics intSummaryStatistics = empList	.stream()
+															.mapToInt(emp -> emp.getId())
+															.summaryStatistics();
+		System.out.println("Min: "+intSummaryStatistics.getMin());
+		System.out.println("Max: "+intSummaryStatistics.getMax());
+		System.out.println("Average: "+intSummaryStatistics.getAverage());
+		System.out.println("Sum: "+intSummaryStatistics.getSum());
+		System.out.println("Count: "+intSummaryStatistics.getCount());
 	}
 	
 //	@Test
