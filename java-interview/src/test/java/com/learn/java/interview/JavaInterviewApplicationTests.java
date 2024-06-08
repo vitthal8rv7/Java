@@ -12,6 +12,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -29,6 +30,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 
@@ -50,17 +52,53 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		empList.add(new Employee(11, "11"));
 		empList.add(new Employee(13, "13"));
 		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "31"));
+		empList.add(new Employee(31, "13"));
 		try {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
 		Long l = list.stream().count();
 		System.out.println("l: "+l);
 		
+		System.out.print("SKIP 3: ");
+		list.stream().skip(3).forEach(System.out::print);
+		System.out.println("");
+		System.out.print("LIMIT 3: ");
+		list.stream().limit(3).forEach(System.out::print);
+		System.out.println("");
+		//Q.) Create a map from a list where the map contains distinct values from the list as keys and their frequencies as values?
+		 Map<Integer, Long> frequencyMap = list.stream()
+												.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		
+	
+		
+		 String input1 = "ab_jandl-fnand,lanbk hfk$dkf";
+		 
+		// Convert the string to lower case and split by non-word characters to handle punctuation
+		 Stream<String> wordSeperator = Arrays.stream(input1.toLowerCase().split("\\W+"));
+		//Count the number of occurrences of words in given string using Streams? 
+		Map<String, Long> wordFrequencyMap = wordSeperator.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	    System.out.println("wordFrequencyMap: "+wordFrequencyMap);
+
+	    // Convert the string to a stream of characters
+	    Stream<Character> charStream = input1.chars().mapToObj(inputChar ->  (char)inputChar);
+		//Count the number of occurrences of character in given string using Streams? 
+		Map<Character, Long> charFrequencyMap = charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+	    System.out.println("charFrequencyMap: "+charFrequencyMap);
+
+	    
+		 //Convert Employee List to employee name list then get employee name frequency
+		 Map<String, Long> empFrequencyMap = empList.stream()
+				 									.map(object -> object.getName())
+				 									.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		 System.out.println("empFrequencyMap: "+empFrequencyMap);
+		 
 		String s = list.stream()
 			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
 			.toString();
 			//.forEach(System.out::print);		
 			System.out.println("s: "+s);
+			
+//			list.stream()
+//				.map(x -> Collectors.counting());
 			
 		
 		} catch(Exception ex ) {
