@@ -13,6 +13,7 @@ import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -28,6 +29,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -84,6 +86,18 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		Map<Character, Long> charFrequencyMap = charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 	    System.out.println("charFrequencyMap: "+charFrequencyMap);
 
+	    //Count the number of occurrences of element in given list using Streams?
+	    Map<Integer, Long> numberFrequencyMap = list.stream()
+	    											.collect(
+	    													Collectors.groupingBy(Function.identity(), 
+	    													Collectors.counting()));
+	    //Find duplicate elements from the frequency map
+	    List<Integer> duplicateElements = numberFrequencyMap.entrySet()
+	    					.stream()
+	    					.filter(entry -> entry.getValue() > 1)
+	    					.map(entry -> entry.getKey())
+	    					.toList();
+	    System.out.println("duplicateElements: "+ duplicateElements);
 	    
 		 //Convert Employee List to employee name list then get employee name frequency
 		 Map<String, Long> empFrequencyMap = empList.stream()
