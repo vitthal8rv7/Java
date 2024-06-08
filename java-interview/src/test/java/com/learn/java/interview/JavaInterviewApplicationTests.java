@@ -133,6 +133,28 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("Lowest number in List : " + stats.getMin());
 		//Lowest number in List : IntSummaryStatistics{count=7, sum=25, min=2, average=3.571429, max=7}
 		//Lowest number in List : 2Lowest number in List : 2
+		
+		Integer number = 7;
+		Boolean isPrime = IntStream	.range(2, number)
+									.filter(i -> (number%i==0))
+									.findAny()
+									.isEmpty();
+		System.out.println("isPrime: "+ (number>1 && isPrime));
+		
+		Boolean isPrime2 = IntStream.range(2, number)
+									.noneMatch(i -> (number%i==0));
+		System.out.println("isPrime2: "+ (number>1 && isPrime2));
+		
+		Predicate<Integer> isPrimeNumber = (element) -> (element>1 && IntStream	.range(2, element)
+															.noneMatch(i -> (element%i==0)));
+		System.out.println("isPrimeNumber: "+ isPrimeNumber.test(2));
+		List<Double> sqrtOfNPrime = Stream	.iterate(1, i -> i+1)
+											.filter(i -> isPrimeNumber.test(i))
+											.peek(System.out::println)
+											.limit(10)
+											.map(Math::sqrt)
+											.toList();
+		System.out.println("sqrtOfNPrime: "+ sqrtOfNPrime);
 	}
 	
 //	@Test
