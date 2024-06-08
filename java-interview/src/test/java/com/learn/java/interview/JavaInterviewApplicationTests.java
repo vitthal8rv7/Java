@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.IntSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -118,6 +119,20 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		} catch(Exception ex ) {
 			System.out.println("e: "+ ex.getMessage());
 		}
+		
+		
+		Random random = new Random();
+		random.ints(5).forEach(System.out::println);
+		random.ints(40, 50).limit(5).forEach(System.out::println);
+		random.ints(5, 0, 10).forEach(System.out::println);
+
+	
+		List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+		IntSummaryStatistics stats = numbers.stream().mapToInt(x -> x).summaryStatistics();
+		System.out.println("Lowest number in List : " + stats);
+		System.out.println("Lowest number in List : " + stats.getMin());
+		//Lowest number in List : IntSummaryStatistics{count=7, sum=25, min=2, average=3.571429, max=7}
+		//Lowest number in List : 2Lowest number in List : 2
 	}
 	
 //	@Test
