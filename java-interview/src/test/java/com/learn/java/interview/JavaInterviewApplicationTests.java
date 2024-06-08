@@ -232,6 +232,12 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("Average: "+intSummaryStatistics.getAverage());
 		System.out.println("Sum: "+intSummaryStatistics.getSum());
 		System.out.println("Count: "+intSummaryStatistics.getCount());
+		
+		String joinedString = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining());
+		System.out.println("joinedString: "+joinedString);
+		
+		String joinedStringWithDelimiter = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining(", "));
+		System.out.println("joinedStringWithDelimiter: "+joinedStringWithDelimiter);
 	}
 	
 //	@Test
