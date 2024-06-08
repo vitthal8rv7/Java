@@ -177,6 +177,13 @@ public class JavaInterviewApplicationTests implements Serializable  {
 											.map(employee -> employee.getName())
 											.collect(Collectors.toSet());//.distinct().toList(); 
 		System.out.println("duplicateSet3: "+duplicateSet3);
+		
+		Set<String> duplicateSet4 =empList .stream()
+				.filter(emp -> Collections.frequency(empList, emp.getName()) > 1)
+				.map(emp -> emp.getName())
+				.collect(Collectors.toSet());
+		System.out.println("duplicateSet4: "+duplicateSet4);
+				
 	}
 	
 //	@Test
