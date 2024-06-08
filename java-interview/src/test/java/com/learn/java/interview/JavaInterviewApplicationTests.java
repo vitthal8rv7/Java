@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.LinkedList;
 import java.util.List;
@@ -155,6 +156,14 @@ public class JavaInterviewApplicationTests implements Serializable  {
 											.map(Math::sqrt)
 											.toList();
 		System.out.println("sqrtOfNPrime: "+ sqrtOfNPrime);
+		
+		List<Integer> list1 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+		Set<Integer> set1 = new HashSet<>();
+		List<Integer> duplicateList1 =list1.stream().filter(a -> !set1.add(a)).distinct().toList();
+		Set<Integer> set2 = new HashSet<>();
+		Set<Integer> duplicateList2 =list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
+		System.out.println("duplicateList1: "+duplicateList1);
+		System.out.println("duplicateList2: "+duplicateList2);
 	}
 	
 //	@Test
