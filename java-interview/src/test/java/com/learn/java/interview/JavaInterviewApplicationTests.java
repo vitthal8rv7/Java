@@ -1,5 +1,7 @@
 package com.learn.java.interview;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -12,6 +14,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +25,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,9 +40,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.junit.jupiter.api.Test;
 
 import com.learn.java.interview.model.Employee;
+import com.learn.java.interview.model.Employee2;
 import com.learn.java.interview.model.Student;
 
 import io.micrometer.common.util.StringUtils;
@@ -49,21 +56,23 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 public class JavaInterviewApplicationTests implements Serializable  {
 	@Test
 	void test31() {
-		Employee e = new Employee(1, "1");
+		Employee e = new Employee(1, "1", "A");
 		System.out.println("Emp: "+e);
 		List<Employee> empList = new ArrayList<>();
-		empList.add(new Employee(21, "21"));
-		empList.add(new Employee(2, "2"));
-		empList.add(new Employee(11, "11"));
-		empList.add(new Employee(13, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(21, "21", "A"));
+		empList.add(new Employee(2, "2", "B"));
+		empList.add(new Employee(11, "11", "B"));
+		empList.add(new Employee(13, "13", "C"));
+		empList.add(new Employee(1, "1", "C"));
+		empList.add(new Employee(31, "13", "D"));
+		empList.add(new Employee(1, "1", "D"));
+		empList.add(new Employee(31, "13", "E"));
+		empList.add(new Employee(1, "1", "E"));
+		empList.add(new Employee(31, "13", "A"));
+		empList.add(new Employee(20, "1", "B"));
+		empList.add(new Employee(21, "1", "B"));
+		empList.add(new Employee(22, "1", "B"));
+		empList.add(new Employee(31, "13", "C"));
 		try {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
 		Long l = list.stream().count();
@@ -232,6 +241,136 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("Average: "+intSummaryStatistics.getAverage());
 		System.out.println("Sum: "+intSummaryStatistics.getSum());
 		System.out.println("Count: "+intSummaryStatistics.getCount());
+		
+		String joinedString = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining());
+		System.out.println("joinedString: "+joinedString);
+		
+		String joinedStringWithDelimiter = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining(", "));
+		System.out.println("joinedStringWithDelimiter: "+joinedStringWithDelimiter);
+		
+		
+		Map<Object, List<Employee>> groupByEmpName = empList.stream().collect(Collectors.groupingBy(emp -> emp.getName()));
+		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+		
+		//Override equals and hascode  method to check equality by user name or user id.
+		Map<String, Set<String>> groupByEmpName2 = empList	.stream()
+															.collect(Collectors.groupingBy(Employee::getName,  
+																	Collectors.mapping(Employee::getDesignation, Collectors.toSet()) ));
+		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+		
+		List<Employee2> emp2list = new ArrayList<>();
+
+
+		emp2list.add(new Employee2(4, "Name2", "Pune"));
+		emp2list.add(new Employee2(5, "Name2", "Nagpur"));
+		emp2list.add(new Employee2(6, "Name2", "Nagpur"));
+		
+		emp2list.add(new Employee2(4, "Name3", "Pune"));
+		emp2list.add(new Employee2(5, "Name3", "Pune"));
+		emp2list.add(new Employee2(6, "Name4", "Nagpur"));
+
+		emp2list.add(new Employee2(1, "Name1", "Pune"));
+		emp2list.add(new Employee2(2, "Name1", "Pune"));
+		emp2list.add(new Employee2(3, "Name1", "Mumbai"));
+
+		Map<String, Set<String>> emp2GroupByNameNoDplicateCity = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getName, 
+						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+		System.out.println("\n\n emp2GroupByNameNoDplicateCity: "+ emp2GroupByNameNoDplicateCity);
+		
+		Map<String, Set<String>> sortedGroupByNameNoDplicateCity = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getName, 
+						TreeMap::new,
+						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+		System.out.println("\n\n sortedGroupByNameNoDplicateCity: "+ sortedGroupByNameNoDplicateCity);
+		
+		
+		JavaInterviewApplicationTests repo = new JavaInterviewApplicationTests();
+		Optional<Employee2> emp = repo.findById();
+		Employee2 e2 = emp.orElseThrow(() -> new IllegalArgumentException());
+		String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
+		System.out.println("ename: "+ ename);
+		
+		Employee2 second2 = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getId))
+				.entrySet().stream()
+//				.limit(2)
+				.skip(1)
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("Second element is not present"))
+				.getValue().stream()
+				.findFirst().orElseThrow(() -> new IllegalArgumentException("Element is not present"));
+		System.out.println("secondSmallest1: "+second2);
+		
+		Integer secondSmallest1 =  emp2list.stream().map(val->val.getId()).sorted().distinct().skip(1).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException("Second element is not present"));
+		System.out.println("secondSmallest1: "+secondSmallest1);
+		
+		int[] a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
+		int[] a2 = {3, 4, 5, 6, 7, 8};
+		List<Integer> commonElement = Arrays.stream(a1)
+							.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+							.distinct()
+							.mapToObj(x -> x)
+							.toList();
+		System.out.println("common element: "+ commonElement);
+
+		List<Integer> commonElement2 = Arrays.stream(a1)
+				.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+				.distinct()
+				.boxed()
+				.toList();
+		System.out.println("common element 2: "+ commonElement2);
+		
+		final int length = a1.length-1;
+		IntStream.range(0, a1.length/2)
+				.forEach(i -> {
+					System.out.println("element:"+i);
+					a1[i] = a1[i] + a1[length - i];
+					a1[length - i] = a1[i] - a1[length - i];
+					a1[i] = a1[i] - a1[length - i];
+				});
+		Arrays.stream(a1).forEach(value -> System.out.print(" "+value));
+
+		System.out.println("");		
+		String[] sa = {"mlsm", "mlsm", "asjnadj", "mlsm", "asmkdmaks", "mlsm"};
+
+		Integer longestString = Arrays.stream(sa)
+										.mapToInt(String::length)
+										.max()
+										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+		System.out.println("longestString: "+ longestString);
+		
+		String longestStringName = Arrays.stream(sa)
+										.max(Comparator.comparingInt(String::length))
+										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+		System.out.println("longestStringName: "+ longestStringName);
+
+		//order may not preserved
+		List<String> a222 =  Arrays.stream(sa)
+				.distinct()
+				.toList();
+		System.out.println("a222: "+a222);
+		
+		List<String> uniqueList = Arrays.stream(sa)
+										.collect(Collectors.toCollection(LinkedHashSet::new))
+										.stream()
+										.collect(Collectors.toList());
+										//.toList();
+		System.out.println("uniqueList: "+uniqueList);
+										
+		
+	}
+	
+	private boolean isPresentInAnotherArray(int value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	Optional<Employee2> findById() {
+//		return null;
+//		return Optional.of(new Employee2(3, "Name1", "Mumbai"));
+		return Optional.of(new Employee2(3, null, "Mumbai"));
 	}
 	
 //	@Test

@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Employee implements Serializable {
+public class Employee2 implements Serializable {
 
 	private static final long serialVersionUID = 1280001198213810407L;
 
@@ -21,6 +21,6 @@ public class Employee implements Serializable {
 
 	String name;
 	
-	String designation;
+	String visitedCity;
 
 }
