@@ -22,6 +22,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
+import java.util.TreeMap;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
@@ -39,6 +40,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import com.learn.java.interview.model.Employee;
+import com.learn.java.interview.model.Employee2;
 import com.learn.java.interview.model.Student;
 
 import io.micrometer.common.util.StringUtils;
@@ -49,21 +51,23 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 public class JavaInterviewApplicationTests implements Serializable  {
 	@Test
 	void test31() {
-		Employee e = new Employee(1, "1");
+		Employee e = new Employee(1, "1", "A");
 		System.out.println("Emp: "+e);
 		List<Employee> empList = new ArrayList<>();
-		empList.add(new Employee(21, "21"));
-		empList.add(new Employee(2, "2"));
-		empList.add(new Employee(11, "11"));
-		empList.add(new Employee(13, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
-		empList.add(new Employee(1, "1"));
-		empList.add(new Employee(31, "13"));
+		empList.add(new Employee(21, "21", "A"));
+		empList.add(new Employee(2, "2", "B"));
+		empList.add(new Employee(11, "11", "B"));
+		empList.add(new Employee(13, "13", "C"));
+		empList.add(new Employee(1, "1", "C"));
+		empList.add(new Employee(31, "13", "D"));
+		empList.add(new Employee(1, "1", "D"));
+		empList.add(new Employee(31, "13", "E"));
+		empList.add(new Employee(1, "1", "E"));
+		empList.add(new Employee(31, "13", "A"));
+		empList.add(new Employee(20, "1", "B"));
+		empList.add(new Employee(21, "1", "B"));
+		empList.add(new Employee(22, "1", "B"));
+		empList.add(new Employee(31, "13", "C"));
 		try {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
 		Long l = list.stream().count();
@@ -238,6 +242,44 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		
 		String joinedStringWithDelimiter = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining(", "));
 		System.out.println("joinedStringWithDelimiter: "+joinedStringWithDelimiter);
+		
+		
+		Map<Object, List<Employee>> groupByEmpName = empList.stream().collect(Collectors.groupingBy(emp -> emp.getName()));
+		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+		
+		//Override equals and hascode  method to check equality by user name or user id.
+		Map<String, Set<String>> groupByEmpName2 = empList	.stream()
+															.collect(Collectors.groupingBy(Employee::getName,  
+																	Collectors.mapping(Employee::getDesignation, Collectors.toSet()) ));
+		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+		
+		List<Employee2> emp2list = new ArrayList<>();
+
+
+		emp2list.add(new Employee2(4, "Name2", "Pune"));
+		emp2list.add(new Employee2(5, "Name2", "Nagpur"));
+		emp2list.add(new Employee2(6, "Name2", "Nagpur"));
+		
+		emp2list.add(new Employee2(4, "Name3", "Pune"));
+		emp2list.add(new Employee2(5, "Name3", "Pune"));
+		emp2list.add(new Employee2(6, "Name4", "Nagpur"));
+
+		emp2list.add(new Employee2(1, "Name1", "Pune"));
+		emp2list.add(new Employee2(2, "Name1", "Pune"));
+		emp2list.add(new Employee2(3, "Name1", "Mumbai"));
+
+		Map<String, Set<String>> emp2GroupByNameNoDplicateCity = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getName, 
+						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+		System.out.println("\n\n emp2GroupByNameNoDplicateCity: "+ emp2GroupByNameNoDplicateCity);
+		
+		Map<String, Set<String>> sortedGroupByNameNoDplicateCity = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getName, 
+						TreeMap::new,
+						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+		System.out.println("\n\n sortedGroupByNameNoDplicateCity: "+ sortedGroupByNameNoDplicateCity);
+		
+		
 	}
 	
 //	@Test
