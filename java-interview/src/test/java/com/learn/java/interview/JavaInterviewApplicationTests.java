@@ -37,6 +37,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.security.auth.login.AccountNotFoundException;
+
 import org.junit.jupiter.api.Test;
 
 import com.learn.java.interview.model.Employee;
@@ -280,6 +282,22 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		System.out.println("\n\n sortedGroupByNameNoDplicateCity: "+ sortedGroupByNameNoDplicateCity);
 		
 		
+		JavaInterviewApplicationTests repo = new JavaInterviewApplicationTests();
+		Optional<Employee2> emp = repo.findById();
+		try {
+			Employee2 e2 = emp.orElseThrow(() -> new AccountNotFoundException());
+			String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
+			System.out.println("ename: "+ ename);
+		} catch (AccountNotFoundException e3) {
+			e3.printStackTrace();
+		}
+		
+	}
+	
+	Optional<Employee2> findById() {
+//		return null;
+//		return Optional.of(new Employee2(3, "Name1", "Mumbai"));
+		return Optional.of(new Employee2(3, null, "Mumbai"));
 	}
 	
 //	@Test
