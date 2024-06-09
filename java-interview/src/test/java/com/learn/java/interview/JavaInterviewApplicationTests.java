@@ -288,8 +288,44 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
 		System.out.println("ename: "+ ename);
 		
+		Employee2 second2 = emp2list.stream()
+				.collect(Collectors.groupingBy(Employee2::getId))
+				.entrySet().stream()
+//				.limit(2)
+				.skip(1)
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException("Second element is not present"))
+				.getValue().stream()
+				.findFirst().orElseThrow(() -> new IllegalArgumentException("Element is not present"));
+		System.out.println("secondSmallest1: "+second2);
+		
+		Integer secondSmallest1 =  emp2list.stream().map(val->val.getId()).sorted().distinct().skip(1).findFirst()
+					.orElseThrow(() -> new IllegalArgumentException("Second element is not present"));
+		System.out.println("secondSmallest1: "+secondSmallest1);
+		
+		int[] a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
+		int[] a2 = {3, 4, 5, 6, 7, 8};
+		List<Integer> commonElement = Arrays.stream(a1)
+							.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+							.distinct()
+							.mapToObj(x -> x)
+							.toList();
+		System.out.println("common element: "+ commonElement);
+
+		List<Integer> commonElement2 = Arrays.stream(a1)
+				.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+				.distinct()
+				.boxed()
+				.toList();
+		System.out.println("common element 2: "+ commonElement2);
+
 	}
 	
+	private boolean isPresentInAnotherArray(int value) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	Optional<Employee2> findById() {
 //		return null;
 //		return Optional.of(new Employee2(3, "Name1", "Mumbai"));
