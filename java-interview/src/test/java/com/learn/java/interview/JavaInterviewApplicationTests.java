@@ -14,6 +14,7 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.IntSummaryStatistics;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -332,7 +333,7 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		Arrays.stream(a1).forEach(value -> System.out.print(" "+value));
 
 		System.out.println("");		
-		String[] sa = {"asjnadj", "mlsm", "asmkdmaks"};
+		String[] sa = {"mlsm", "mlsm", "asjnadj", "mlsm", "asmkdmaks", "mlsm"};
 
 		Integer longestString = Arrays.stream(sa)
 										.mapToInt(String::length)
@@ -345,7 +346,20 @@ public class JavaInterviewApplicationTests implements Serializable  {
 										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
 		System.out.println("longestStringName: "+ longestStringName);
 
-
+		//order may not preserved
+		List<String> a222 =  Arrays.stream(sa)
+				.distinct()
+				.toList();
+		System.out.println("a222: "+a222);
+		
+		List<String> uniqueList = Arrays.stream(sa)
+										.collect(Collectors.toCollection(LinkedHashSet::new))
+										.stream()
+										.collect(Collectors.toList());
+										//.toList();
+		System.out.println("uniqueList: "+uniqueList);
+										
+		
 	}
 	
 	private boolean isPresentInAnotherArray(int value) {
