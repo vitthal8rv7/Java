@@ -1,5 +1,7 @@
 package com.learn.java.interview;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -318,6 +320,31 @@ public class JavaInterviewApplicationTests implements Serializable  {
 				.boxed()
 				.toList();
 		System.out.println("common element 2: "+ commonElement2);
+		
+		final int length = a1.length-1;
+		IntStream.range(0, a1.length/2)
+				.forEach(i -> {
+					System.out.println("element:"+i);
+					a1[i] = a1[i] + a1[length - i];
+					a1[length - i] = a1[i] - a1[length - i];
+					a1[i] = a1[i] - a1[length - i];
+				});
+		Arrays.stream(a1).forEach(value -> System.out.print(" "+value));
+
+		System.out.println("");		
+		String[] sa = {"asjnadj", "mlsm", "asmkdmaks"};
+
+		Integer longestString = Arrays.stream(sa)
+										.mapToInt(String::length)
+										.max()
+										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+		System.out.println("longestString: "+ longestString);
+		
+		String longestStringName = Arrays.stream(sa)
+										.max(Comparator.comparingInt(String::length))
+										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+		System.out.println("longestStringName: "+ longestStringName);
+
 
 	}
 	
