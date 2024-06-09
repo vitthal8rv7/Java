@@ -284,13 +284,9 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		
 		JavaInterviewApplicationTests repo = new JavaInterviewApplicationTests();
 		Optional<Employee2> emp = repo.findById();
-		try {
-			Employee2 e2 = emp.orElseThrow(() -> new AccountNotFoundException());
-			String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
-			System.out.println("ename: "+ ename);
-		} catch (AccountNotFoundException e3) {
-			e3.printStackTrace();
-		}
+		Employee2 e2 = emp.orElseThrow(() -> new IllegalArgumentException());
+		String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
+		System.out.println("ename: "+ ename);
 		
 	}
 	
