@@ -58,7 +58,18 @@ public class JavaInterviewApplicationTests implements Serializable  {
 	
 	@Test
 	void test32() { 
+		//3. Write a Java program to check if a vowel is present in a string.
+		String input = "sfsd";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+		input = "sfsde";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+		input = "sfsd e";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
 		
+		
+		//5. Write a Java program to print a Fibonacci sequence using recursion.
+		
+
 	}
 	
 	
