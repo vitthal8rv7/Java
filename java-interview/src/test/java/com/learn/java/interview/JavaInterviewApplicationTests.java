@@ -54,325 +54,345 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 
 //@SpringBootTest
 public class JavaInterviewApplicationTests implements Serializable  {
+	
+	
 	@Test
-	void test31() {
-		Employee e = new Employee(1, "1", "A");
-		System.out.println("Emp: "+e);
-		List<Employee> empList = new ArrayList<>();
-		empList.add(new Employee(21, "21", "A"));
-		empList.add(new Employee(2, "2", "B"));
-		empList.add(new Employee(11, "11", "B"));
-		empList.add(new Employee(13, "13", "C"));
-		empList.add(new Employee(1, "1", "C"));
-		empList.add(new Employee(31, "13", "D"));
-		empList.add(new Employee(1, "1", "D"));
-		empList.add(new Employee(31, "13", "E"));
-		empList.add(new Employee(1, "1", "E"));
-		empList.add(new Employee(31, "13", "A"));
-		empList.add(new Employee(20, "1", "B"));
-		empList.add(new Employee(21, "1", "B"));
-		empList.add(new Employee(22, "1", "B"));
-		empList.add(new Employee(31, "13", "C"));
-		try {
-		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
-		Long l = list.stream().count();
-		System.out.println("l: "+l);
+	void test32() { 
+		//3. Write a Java program to check if a vowel is present in a string.
+		String input = "sfsd";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+		input = "sfsde";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+		input = "sfsd e";
+		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
 		
-		System.out.print("SKIP 3: ");
-		list.stream().skip(3).forEach(System.out::print);
-		System.out.println("");
-		System.out.print("LIMIT 3: ");
-		list.stream().limit(3).forEach(System.out::print);
-		System.out.println("");
-		//Q.) Create a map from a list where the map contains distinct values from the list as keys and their frequencies as values?
-		 Map<Integer, Long> frequencyMap = list.stream()
-												.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 		
-	
+		//5. Write a Java program to print a Fibonacci sequence using recursion.
 		
-		 String input1 = "ab_jandl-fnand,lanbk hfk$dkf";
-		 
-		// Convert the string to lower case and split by non-word characters to handle punctuation
-		 Stream<String> wordSeperator = Arrays.stream(input1.toLowerCase().split("\\W+"));
-		//Count the number of occurrences of words in given string using Streams? 
-		Map<String, Long> wordFrequencyMap = wordSeperator.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-	    System.out.println("wordFrequencyMap: "+wordFrequencyMap);
 
-	    // Convert the string to a stream of characters
-	    Stream<Character> charStream = input1.chars().mapToObj(inputChar ->  (char)inputChar);
-		//Count the number of occurrences of character in given string using Streams? 
-		Map<Character, Long> charFrequencyMap = charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-	    System.out.println("charFrequencyMap: "+charFrequencyMap);
-
-	    //Count the number of occurrences of element in given list using Streams?
-	    Map<Integer, Long> numberFrequencyMap = list.stream()
-	    											.collect(
-	    													Collectors.groupingBy(Function.identity(), 
-	    													Collectors.counting()));
-	    //Find duplicate elements from the frequency map
-	    List<Integer> duplicateElements = numberFrequencyMap.entrySet()
-	    					.stream()
-	    					.filter(entry -> entry.getValue() > 1)
-	    					.map(entry -> entry.getKey())
-	    					.toList();
-	    System.out.println("duplicateElements: "+ duplicateElements);
-	    
-		 //Convert Employee List to employee name list then get employee name frequency
-		 Map<String, Long> empFrequencyMap = empList.stream()
-				 									.map(object -> object.getName())
-				 									.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-		 System.out.println("empFrequencyMap: "+empFrequencyMap);
-		 
-		String s = list.stream()
-			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
-			.toString();
-			//.forEach(System.out::print);		
-			System.out.println("s: "+s);
-			
-//			list.stream()
-//				.map(x -> Collectors.counting());
-			
-		
-		} catch(Exception ex ) {
-			System.out.println("e: "+ ex.getMessage());
-		}
-		
-		
-		Random random = new Random();
-		random.ints(5).forEach(System.out::println);
-		random.ints(40, 50).limit(5).forEach(System.out::println);
-		random.ints(5, 0, 10).forEach(System.out::println);
-
-	
-		List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
-		IntSummaryStatistics stats = numbers.stream().mapToInt(x -> x).summaryStatistics();
-		System.out.println("Lowest number in List : " + stats);
-		System.out.println("Lowest number in List : " + stats.getMin());
-		//Lowest number in List : IntSummaryStatistics{count=7, sum=25, min=2, average=3.571429, max=7}
-		//Lowest number in List : 2Lowest number in List : 2
-		
-		Integer number = 7;
-		Boolean isPrime = IntStream	.range(2, number)
-									.filter(i -> (number%i==0))
-									.findAny()
-									.isEmpty();
-		System.out.println("isPrime: "+ (number>1 && isPrime));
-		
-		Boolean isPrime2 = IntStream.range(2, number)
-									.noneMatch(i -> (number%i==0));
-		System.out.println("isPrime2: "+ (number>1 && isPrime2));
-		
-		Predicate<Integer> isPrimeNumber = (element) -> (element>1 && IntStream	.range(2, element)
-															.noneMatch(i -> (element%i==0)));
-		System.out.println("isPrimeNumber: "+ isPrimeNumber.test(2));
-		List<Double> sqrtOfNPrime = Stream	.iterate(1, i -> i+1)
-											.filter(i -> isPrimeNumber.test(i))
-											.peek(System.out::println)
-											.limit(10)
-											.map(Math::sqrt)
-											.toList();
-		System.out.println("sqrtOfNPrime: "+ sqrtOfNPrime);
-		
-		List<Integer> list1 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
-		Set<Integer> set1 = new HashSet<>();
-		List<Integer> duplicateList1 = list1.stream().filter(a -> !set1.add(a)).distinct().toList();
-		Set<Integer> set2 = new HashSet<>();
-		Set<Integer> duplicateSet2 = list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
-		System.out.println("duplicateList1: "+duplicateList1);
-		System.out.println("duplicateSet2: "+duplicateSet2);
-		
-		Set<String> employeeSet = new HashSet<>();
-		Set<String> duplicateSet3 = empList	.stream()
-											.filter(employee -> !employeeSet.add(employee.getName()))
-											.map(employee -> employee.getName())
-											.collect(Collectors.toSet());//.distinct().toList(); 
-		System.out.println("duplicateSet3: "+duplicateSet3);
-		
-		Set<String> duplicateSet4 = empList .stream()
-				.filter(emp -> Collections.frequency(empList, emp.getName()) > 1)
-				.map(emp -> emp.getName())
-				.collect(Collectors.toSet());
-		System.out.println("duplicateSet4: "+duplicateSet4);
-		
-//		Ascending Order
-		List<Employee> sortedEmpList = empList	.stream()
-												.sorted(Comparator.comparing(Employee::getName))
-												.toList();
-		System.out.println("Sorted: Ascending Order: "+ sortedEmpList);
-	
-//		Descending Order
-		List<Employee> sortedEmpList2 = empList	.stream()
-												.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ) )
-												.toList();
-		System.out.println("Sorted: Descending Order: "+ sortedEmpList2);
-		
-		//Sort and save in existing list
-		System.out.println("");
-		empList.sort((e1, e2) -> ( e1.getName().compareTo(e2.getName()) ));
-		System.out.println("Sorted: Ascending Order: "+ empList);
-
-		System.out.println("");
-		empList.sort((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ));
-		System.out.println("Sorted: Descending Order: "+ empList);
-		
-		System.out.println("");
-		//Sorted in Descending Order and fetch 1st 3
-		List<Employee> sortedEmpList11 = empList	.stream()
-				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
-				.limit(3)
-				.toList();
-		System.out.println("Sorted: Descending Order: 1st 3: "+ sortedEmpList11);
-		
-		System.out.println("");
-		//Sorted in Descending Order and fetch last 3
-		List<Employee> sortedEmpList12 = empList	.stream()
-				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
-				.skip(empList.size() - 3)
-				.toList();
-
-		System.out.println("Sorted: Descending Order: last 3: "+ sortedEmpList12);
-		
-		
-		IntSummaryStatistics intSummaryStatistics = empList	.stream()
-															.mapToInt(emp -> emp.getId())
-															.summaryStatistics();
-		System.out.println("Min: "+intSummaryStatistics.getMin());
-		System.out.println("Max: "+intSummaryStatistics.getMax());
-		System.out.println("Average: "+intSummaryStatistics.getAverage());
-		System.out.println("Sum: "+intSummaryStatistics.getSum());
-		System.out.println("Count: "+intSummaryStatistics.getCount());
-		
-		String joinedString = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining());
-		System.out.println("joinedString: "+joinedString);
-		
-		String joinedStringWithDelimiter = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining(", "));
-		System.out.println("joinedStringWithDelimiter: "+joinedStringWithDelimiter);
-		
-		
-		Map<Object, List<Employee>> groupByEmpName = empList.stream().collect(Collectors.groupingBy(emp -> emp.getName()));
-		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
-		
-		//Override equals and hascode  method to check equality by user name or user id.
-		Map<String, Set<String>> groupByEmpName2 = empList	.stream()
-															.collect(Collectors.groupingBy(Employee::getName,  
-																	Collectors.mapping(Employee::getDesignation, Collectors.toSet()) ));
-		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
-		
-		List<Employee2> emp2list = new ArrayList<>();
-
-
-		emp2list.add(new Employee2(4, "Name2", "Pune"));
-		emp2list.add(new Employee2(5, "Name2", "Nagpur"));
-		emp2list.add(new Employee2(6, "Name2", "Nagpur"));
-		
-		emp2list.add(new Employee2(4, "Name3", "Pune"));
-		emp2list.add(new Employee2(5, "Name3", "Pune"));
-		emp2list.add(new Employee2(6, "Name4", "Nagpur"));
-
-		emp2list.add(new Employee2(1, "Name1", "Pune"));
-		emp2list.add(new Employee2(2, "Name1", "Pune"));
-		emp2list.add(new Employee2(3, "Name1", "Mumbai"));
-
-		Map<String, Set<String>> emp2GroupByNameNoDplicateCity = emp2list.stream()
-				.collect(Collectors.groupingBy(Employee2::getName, 
-						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
-		System.out.println("\n\n emp2GroupByNameNoDplicateCity: "+ emp2GroupByNameNoDplicateCity);
-		
-		Map<String, Set<String>> sortedGroupByNameNoDplicateCity = emp2list.stream()
-				.collect(Collectors.groupingBy(Employee2::getName, 
-						TreeMap::new,
-						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
-		System.out.println("\n\n sortedGroupByNameNoDplicateCity: "+ sortedGroupByNameNoDplicateCity);
-		
-		
-		JavaInterviewApplicationTests repo = new JavaInterviewApplicationTests();
-		Optional<Employee2> emp = repo.findById();
-		Employee2 e2 = emp.orElseThrow(() -> new IllegalArgumentException());
-		String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
-		System.out.println("ename: "+ ename);
-		
-		Employee2 second2 = emp2list.stream()
-				.collect(Collectors.groupingBy(Employee2::getId))
-				.entrySet().stream()
-//				.limit(2)
-				.skip(1)
-				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("Second element is not present"))
-				.getValue().stream()
-				.findFirst().orElseThrow(() -> new IllegalArgumentException("Element is not present"));
-		System.out.println("secondSmallest1: "+second2);
-		
-		Integer secondSmallest1 =  emp2list.stream().map(val->val.getId()).sorted().distinct().skip(1).findFirst()
-					.orElseThrow(() -> new IllegalArgumentException("Second element is not present"));
-		System.out.println("secondSmallest1: "+secondSmallest1);
-		
-		int[] a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
-		int[] a2 = {3, 4, 5, 6, 7, 8};
-		List<Integer> commonElement = Arrays.stream(a1)
-							.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
-							.distinct()
-							.mapToObj(x -> x)
-							.toList();
-		System.out.println("common element: "+ commonElement);
-
-		List<Integer> commonElement2 = Arrays.stream(a1)
-				.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
-				.distinct()
-				.boxed()
-				.toList();
-		System.out.println("common element 2: "+ commonElement2);
-		
-		final int length = a1.length-1;
-		IntStream.range(0, a1.length/2)
-				.forEach(i -> {
-					System.out.println("element:"+i);
-					a1[i] = a1[i] + a1[length - i];
-					a1[length - i] = a1[i] - a1[length - i];
-					a1[i] = a1[i] - a1[length - i];
-				});
-		Arrays.stream(a1).forEach(value -> System.out.print(" "+value));
-
-		System.out.println("");		
-		String[] sa = {"mlsm", "mlsm", "asjnadj", "mlsm", "asmkdmaks", "mlsm"};
-
-		Integer longestString = Arrays.stream(sa)
-										.mapToInt(String::length)
-										.max()
-										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
-		System.out.println("longestString: "+ longestString);
-		
-		String longestStringName = Arrays.stream(sa)
-										.max(Comparator.comparingInt(String::length))
-										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
-		System.out.println("longestStringName: "+ longestStringName);
-
-		//order may not preserved
-		List<String> a222 =  Arrays.stream(sa)
-				.distinct()
-				.toList();
-		System.out.println("a222: "+a222);
-		
-		List<String> uniqueList = Arrays.stream(sa)
-										.collect(Collectors.toCollection(LinkedHashSet::new))
-										.stream()
-										.collect(Collectors.toList());
-										//.toList();
-		System.out.println("uniqueList: "+uniqueList);
-										
-		
 	}
 	
-	private boolean isPresentInAnotherArray(int value) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	Optional<Employee2> findById() {
-//		return null;
-//		return Optional.of(new Employee2(3, "Name1", "Mumbai"));
-		return Optional.of(new Employee2(3, null, "Mumbai"));
-	}
 	
+	
+//	@Test
+//	void test31() {
+//		Employee e = new Employee(1, "1", "A");
+//		System.out.println("Emp: "+e);
+//		List<Employee> empList = new ArrayList<>();
+//		empList.add(new Employee(21, "21", "A"));
+//		empList.add(new Employee(2, "2", "B"));
+//		empList.add(new Employee(11, "11", "B"));
+//		empList.add(new Employee(13, "13", "C"));
+//		empList.add(new Employee(1, "1", "C"));
+//		empList.add(new Employee(31, "13", "D"));
+//		empList.add(new Employee(1, "1", "D"));
+//		empList.add(new Employee(31, "13", "E"));
+//		empList.add(new Employee(1, "1", "E"));
+//		empList.add(new Employee(31, "13", "A"));
+//		empList.add(new Employee(20, "1", "B"));
+//		empList.add(new Employee(21, "1", "B"));
+//		empList.add(new Employee(22, "1", "B"));
+//		empList.add(new Employee(31, "13", "C"));
+//		try {
+//		List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 4, 3, 2, 1, 6, 7, 8, 9);
+//		Long l = list.stream().count();
+//		System.out.println("l: "+l);
+//		
+//		System.out.print("SKIP 3: ");
+//		list.stream().skip(3).forEach(System.out::print);
+//		System.out.println("");
+//		System.out.print("LIMIT 3: ");
+//		list.stream().limit(3).forEach(System.out::print);
+//		System.out.println("");
+//		//Q.) Create a map from a list where the map contains distinct values from the list as keys and their frequencies as values?
+//		 Map<Integer, Long> frequencyMap = list.stream()
+//												.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//		
+//	
+//		
+//		 String input1 = "ab_jandl-fnand,lanbk hfk$dkf";
+//		 
+//		// Convert the string to lower case and split by non-word characters to handle punctuation
+//		 Stream<String> wordSeperator = Arrays.stream(input1.toLowerCase().split("\\W+"));
+//		//Count the number of occurrences of words in given string using Streams? 
+//		Map<String, Long> wordFrequencyMap = wordSeperator.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//	    System.out.println("wordFrequencyMap: "+wordFrequencyMap);
+//
+//	    // Convert the string to a stream of characters
+//	    Stream<Character> charStream = input1.chars().mapToObj(inputChar ->  (char)inputChar);
+//		//Count the number of occurrences of character in given string using Streams? 
+//		Map<Character, Long> charFrequencyMap = charStream.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//	    System.out.println("charFrequencyMap: "+charFrequencyMap);
+//
+//	    //Count the number of occurrences of element in given list using Streams?
+//	    Map<Integer, Long> numberFrequencyMap = list.stream()
+//	    											.collect(
+//	    													Collectors.groupingBy(Function.identity(), 
+//	    													Collectors.counting()));
+//	    //Find duplicate elements from the frequency map
+//	    List<Integer> duplicateElements = numberFrequencyMap.entrySet()
+//	    					.stream()
+//	    					.filter(entry -> entry.getValue() > 1)
+//	    					.map(entry -> entry.getKey())
+//	    					.toList();
+//	    System.out.println("duplicateElements: "+ duplicateElements);
+//	    
+//		 //Convert Employee List to employee name list then get employee name frequency
+//		 Map<String, Long> empFrequencyMap = empList.stream()
+//				 									.map(object -> object.getName())
+//				 									.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+//		 System.out.println("empFrequencyMap: "+empFrequencyMap);
+//		 
+//		String s = list.stream()
+//			.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+//			.toString();
+//			//.forEach(System.out::print);		
+//			System.out.println("s: "+s);
+//			
+////			list.stream()
+////				.map(x -> Collectors.counting());
+//			
+//		
+//		} catch(Exception ex ) {
+//			System.out.println("e: "+ ex.getMessage());
+//		}
+//		
+//		
+//		Random random = new Random();
+//		random.ints(5).forEach(System.out::println);
+//		random.ints(40, 50).limit(5).forEach(System.out::println);
+//		random.ints(5, 0, 10).forEach(System.out::println);
+//
+//	
+//		List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+//		IntSummaryStatistics stats = numbers.stream().mapToInt(x -> x).summaryStatistics();
+//		System.out.println("Lowest number in List : " + stats);
+//		System.out.println("Lowest number in List : " + stats.getMin());
+//		//Lowest number in List : IntSummaryStatistics{count=7, sum=25, min=2, average=3.571429, max=7}
+//		//Lowest number in List : 2Lowest number in List : 2
+//		
+//		Integer number = 7;
+//		Boolean isPrime = IntStream	.range(2, number)
+//									.filter(i -> (number%i==0))
+//									.findAny()
+//									.isEmpty();
+//		System.out.println("isPrime: "+ (number>1 && isPrime));
+//		
+//		Boolean isPrime2 = IntStream.range(2, number)
+//									.noneMatch(i -> (number%i==0));
+//		System.out.println("isPrime2: "+ (number>1 && isPrime2));
+//		
+//		Predicate<Integer> isPrimeNumber = (element) -> (element>1 && IntStream	.range(2, element)
+//															.noneMatch(i -> (element%i==0)));
+//		System.out.println("isPrimeNumber: "+ isPrimeNumber.test(2));
+//		List<Double> sqrtOfNPrime = Stream	.iterate(1, i -> i+1)
+//											.filter(i -> isPrimeNumber.test(i))
+//											.peek(System.out::println)
+//											.limit(10)
+//											.map(Math::sqrt)
+//											.toList();
+//		System.out.println("sqrtOfNPrime: "+ sqrtOfNPrime);
+//		
+//		List<Integer> list1 = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
+//		Set<Integer> set1 = new HashSet<>();
+//		List<Integer> duplicateList1 = list1.stream().filter(a -> !set1.add(a)).distinct().toList();
+//		Set<Integer> set2 = new HashSet<>();
+//		Set<Integer> duplicateSet2 = list1.stream().filter(a -> !set2.add(a)).collect(Collectors.toSet());
+//		System.out.println("duplicateList1: "+duplicateList1);
+//		System.out.println("duplicateSet2: "+duplicateSet2);
+//		
+//		Set<String> employeeSet = new HashSet<>();
+//		Set<String> duplicateSet3 = empList	.stream()
+//											.filter(employee -> !employeeSet.add(employee.getName()))
+//											.map(employee -> employee.getName())
+//											.collect(Collectors.toSet());//.distinct().toList(); 
+//		System.out.println("duplicateSet3: "+duplicateSet3);
+//		
+//		Set<String> duplicateSet4 = empList .stream()
+//				.filter(emp -> Collections.frequency(empList, emp.getName()) > 1)
+//				.map(emp -> emp.getName())
+//				.collect(Collectors.toSet());
+//		System.out.println("duplicateSet4: "+duplicateSet4);
+//		
+////		Ascending Order
+//		List<Employee> sortedEmpList = empList	.stream()
+//												.sorted(Comparator.comparing(Employee::getName))
+//												.toList();
+//		System.out.println("Sorted: Ascending Order: "+ sortedEmpList);
+//	
+////		Descending Order
+//		List<Employee> sortedEmpList2 = empList	.stream()
+//												.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ) )
+//												.toList();
+//		System.out.println("Sorted: Descending Order: "+ sortedEmpList2);
+//		
+//		//Sort and save in existing list
+//		System.out.println("");
+//		empList.sort((e1, e2) -> ( e1.getName().compareTo(e2.getName()) ));
+//		System.out.println("Sorted: Ascending Order: "+ empList);
+//
+//		System.out.println("");
+//		empList.sort((e1, e2) -> (- e1.getName().compareTo(e2.getName()) ));
+//		System.out.println("Sorted: Descending Order: "+ empList);
+//		
+//		System.out.println("");
+//		//Sorted in Descending Order and fetch 1st 3
+//		List<Employee> sortedEmpList11 = empList	.stream()
+//				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+//				.limit(3)
+//				.toList();
+//		System.out.println("Sorted: Descending Order: 1st 3: "+ sortedEmpList11);
+//		
+//		System.out.println("");
+//		//Sorted in Descending Order and fetch last 3
+//		List<Employee> sortedEmpList12 = empList	.stream()
+//				.sorted((e1, e2) -> (- e1.getName().compareTo(e2.getName())))
+//				.skip(empList.size() - 3)
+//				.toList();
+//
+//		System.out.println("Sorted: Descending Order: last 3: "+ sortedEmpList12);
+//		
+//		
+//		IntSummaryStatistics intSummaryStatistics = empList	.stream()
+//															.mapToInt(emp -> emp.getId())
+//															.summaryStatistics();
+//		System.out.println("Min: "+intSummaryStatistics.getMin());
+//		System.out.println("Max: "+intSummaryStatistics.getMax());
+//		System.out.println("Average: "+intSummaryStatistics.getAverage());
+//		System.out.println("Sum: "+intSummaryStatistics.getSum());
+//		System.out.println("Count: "+intSummaryStatistics.getCount());
+//		
+//		String joinedString = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining());
+//		System.out.println("joinedString: "+joinedString);
+//		
+//		String joinedStringWithDelimiter = empList.stream().map(emp -> emp.getName()).collect(Collectors.joining(", "));
+//		System.out.println("joinedStringWithDelimiter: "+joinedStringWithDelimiter);
+//		
+//		
+//		Map<Object, List<Employee>> groupByEmpName = empList.stream().collect(Collectors.groupingBy(emp -> emp.getName()));
+//		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+//		
+//		//Override equals and hascode  method to check equality by user name or user id.
+//		Map<String, Set<String>> groupByEmpName2 = empList	.stream()
+//															.collect(Collectors.groupingBy(Employee::getName,  
+//																	Collectors.mapping(Employee::getDesignation, Collectors.toSet()) ));
+//		System.out.println("\n\ngroupByEmpName: "+ groupByEmpName);
+//		
+//		List<Employee2> emp2list = new ArrayList<>();
+//
+//
+//		emp2list.add(new Employee2(4, "Name2", "Pune"));
+//		emp2list.add(new Employee2(5, "Name2", "Nagpur"));
+//		emp2list.add(new Employee2(6, "Name2", "Nagpur"));
+//		
+//		emp2list.add(new Employee2(4, "Name3", "Pune"));
+//		emp2list.add(new Employee2(5, "Name3", "Pune"));
+//		emp2list.add(new Employee2(6, "Name4", "Nagpur"));
+//
+//		emp2list.add(new Employee2(1, "Name1", "Pune"));
+//		emp2list.add(new Employee2(2, "Name1", "Pune"));
+//		emp2list.add(new Employee2(3, "Name1", "Mumbai"));
+//
+//		Map<String, Set<String>> emp2GroupByNameNoDplicateCity = emp2list.stream()
+//				.collect(Collectors.groupingBy(Employee2::getName, 
+//						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+//		System.out.println("\n\n emp2GroupByNameNoDplicateCity: "+ emp2GroupByNameNoDplicateCity);
+//		
+//		Map<String, Set<String>> sortedGroupByNameNoDplicateCity = emp2list.stream()
+//				.collect(Collectors.groupingBy(Employee2::getName, 
+//						TreeMap::new,
+//						Collectors.mapping(Employee2::getVisitedCity, Collectors.toSet())));
+//		System.out.println("\n\n sortedGroupByNameNoDplicateCity: "+ sortedGroupByNameNoDplicateCity);
+//		
+//		
+//		JavaInterviewApplicationTests repo = new JavaInterviewApplicationTests();
+//		Optional<Employee2> emp = repo.findById();
+//		Employee2 e2 = emp.orElseThrow(() -> new IllegalArgumentException());
+//		String ename = Optional.ofNullable(e2.getName()).orElse("Anonymous User");
+//		System.out.println("ename: "+ ename);
+//		
+//		Employee2 second2 = emp2list.stream()
+//				.collect(Collectors.groupingBy(Employee2::getId))
+//				.entrySet().stream()
+////				.limit(2)
+//				.skip(1)
+//				.findFirst()
+//				.orElseThrow(() -> new IllegalArgumentException("Second element is not present"))
+//				.getValue().stream()
+//				.findFirst().orElseThrow(() -> new IllegalArgumentException("Element is not present"));
+//		System.out.println("secondSmallest1: "+second2);
+//		
+//		Integer secondSmallest1 =  emp2list.stream().map(val->val.getId()).sorted().distinct().skip(1).findFirst()
+//					.orElseThrow(() -> new IllegalArgumentException("Second element is not present"));
+//		System.out.println("secondSmallest1: "+secondSmallest1);
+//		
+//		int[] a1 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5};
+//		int[] a2 = {3, 4, 5, 6, 7, 8};
+//		List<Integer> commonElement = Arrays.stream(a1)
+//							.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+//							.distinct()
+//							.mapToObj(x -> x)
+//							.toList();
+//		System.out.println("common element: "+ commonElement);
+//
+//		List<Integer> commonElement2 = Arrays.stream(a1)
+//				.filter(value -> Arrays.stream(a2).anyMatch(value2 -> (value2==value)))
+//				.distinct()
+//				.boxed()
+//				.toList();
+//		System.out.println("common element 2: "+ commonElement2);
+//		
+//		final int length = a1.length-1;
+//		IntStream.range(0, a1.length/2)
+//				.forEach(i -> {
+//					System.out.println("element:"+i);
+//					a1[i] = a1[i] + a1[length - i];
+//					a1[length - i] = a1[i] - a1[length - i];
+//					a1[i] = a1[i] - a1[length - i];
+//				});
+//		Arrays.stream(a1).forEach(value -> System.out.print(" "+value));
+//
+//		System.out.println("");		
+//		String[] sa = {"mlsm", "mlsm", "asjnadj", "mlsm", "asmkdmaks", "mlsm"};
+//
+//		Integer longestString = Arrays.stream(sa)
+//										.mapToInt(String::length)
+//										.max()
+//										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+//		System.out.println("longestString: "+ longestString);
+//		
+//		String longestStringName = Arrays.stream(sa)
+//										.max(Comparator.comparingInt(String::length))
+//										.orElseThrow((() -> new IllegalArgumentException("Longest string is not present")));
+//		System.out.println("longestStringName: "+ longestStringName);
+//
+//		//order may not preserved
+//		List<String> a222 =  Arrays.stream(sa)
+//				.distinct()
+//				.toList();
+//		System.out.println("a222: "+a222);
+//		
+//		List<String> uniqueList = Arrays.stream(sa)
+//										.collect(Collectors.toCollection(LinkedHashSet::new))
+//										.stream()
+//										.collect(Collectors.toList());
+//										//.toList();
+//		System.out.println("uniqueList: "+uniqueList);
+//										
+//		
+//	}
+//	
+//	private boolean isPresentInAnotherArray(int value) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	Optional<Employee2> findById() {
+////		return null;
+////		return Optional.of(new Employee2(3, "Name1", "Mumbai"));
+//		return Optional.of(new Employee2(3, null, "Mumbai"));
+//	}
+//	
 //	@Test
 //	void test30() {
 //		Function f;
