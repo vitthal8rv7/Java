@@ -43,6 +43,9 @@ import java.util.stream.Stream;
 import javax.security.auth.login.AccountNotFoundException;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.interview.model.Employee;
 import com.learn.java.interview.model.Employee2;
@@ -53,6 +56,8 @@ import lombok.Data;
 import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 
 //@SpringBootTest
+@RestController
+@Controller
 public class JavaInterviewApplicationTests implements Serializable  {
 	
 	
@@ -68,6 +73,7 @@ public class JavaInterviewApplicationTests implements Serializable  {
 		
 		
 		//5. Write a Java program to print a Fibonacci sequence using recursion.
+		//org.springframework.stereotype.
 		
 
 	}
