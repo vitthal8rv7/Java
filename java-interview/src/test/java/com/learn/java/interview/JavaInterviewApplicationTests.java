@@ -33,6 +33,7 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.Lock;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
@@ -45,6 +46,7 @@ import javax.security.auth.login.AccountNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.learn.java.interview.model.Employee;
@@ -59,25 +61,52 @@ import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 @RestController
 @Controller
 public class JavaInterviewApplicationTests implements Serializable  {
+
+	
 	
 	
 	@Test
-	void test32() { 
-		//3. Write a Java program to check if a vowel is present in a string.
-		String input = "sfsd";
-		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
-		input = "sfsde";
-		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
-		input = "sfsd e";
-		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
-		
-		
-		//5. Write a Java program to print a Fibonacci sequence using recursion.
-		//org.springframework.stereotype.
-		
-
-	}
+	void test33() { 
 	
+	
+	}
+//	
+//	@Test
+//	void test32() { 
+//		
+//		
+//		@Controller
+//		@ResponseBody
+//		 class MyRestController {}
+//		//3. Write a Java program to check if a vowel is present in a string.
+//		String input = "sfsd";
+//		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+//		input = "sfsde";
+//		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+//		input = "sfsd e";
+//		System.out.println("is found ovel: "+input.toLowerCase().matches(".*[aeiou].*")); 
+//
+//		IntFunction<String> printMsg = (i) -> {
+//			String result = "";
+//			if(i%3==0) {
+//				result = result + "Fizz";
+//			}
+//			if(i%5==0) {
+//				result = result + "Buzz";
+//			}
+//			if(result.isBlank()) {
+//				result = result +i;
+//			}
+//			return result;
+//		};
+//		Integer n = 20;
+//		IntStream.range(1, n).mapToObj(i -> printMsg.apply(i)).forEach(System.out::println);		
+//		
+//		//5. Write a Java program to print a Fibonacci sequence using recursion.
+//		//org.springframework.stereotype.
+//
+//	}
+//	
 	
 	
 //	@Test
