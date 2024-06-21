@@ -18,9 +18,16 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'pl.project13.maven:spring-git-commit-id-plugin'
+	//implementation 'io.springfox:springfox-boot-starter:3.0.0'	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.11'	
+	//implementation 'pl.project13.maven:spring-git-commit-id-plugin'
+	
 }
+
 
 tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder-jammy-base:latest'
