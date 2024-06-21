@@ -15,8 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.builders.ResponseBuilder;
@@ -45,6 +44,7 @@ public class SwaggerConfig {
 		Docket api() {
 			return new Docket(DocumentationType.SWAGGER_2)
 					.useDefaultResponseMessages(false)
+					.apiInfo(apiInfo2())
 					.globalResponses(HttpMethod.GET, list()) // common and apply to all APIs.
 					.select()
 					.apis(RequestHandlerSelectors.any()) 
@@ -72,6 +72,18 @@ public class SwaggerConfig {
 	        );
 	    }
 	    
+	  private ApiInfo apiInfo2() {
+      return new ApiInfoBuilder()
+              .title("Java Learning REST API ")
+              .description("Spring Boot REST API for Swagger Demo Application")
+              .version("1.0.0")
+              .termsOfServiceUrl("http://localhost:8080/swagger-ui/index.html")
+              .contact(new Contact("Vitthal Aradwad", "https://www.google.com", "vitthalaradwad@gmail.com"))
+              .license("Apache License Version 2.0")
+              .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
+              .build();
+  }
+
 	    
 	    
 	    
@@ -154,15 +166,4 @@ public class SwaggerConfig {
 //                .apiInfo(apiInfo());
 //    }
 //
-//    private ApiInfo apiInfo() {
-//        return new ApiInfoBuilder()
-//                .title("Spring Boot REST API")
-//                .description("Spring Boot REST API for Demo Application")
-//                .version("1.0.0")
-//                .termsOfServiceUrl("https://example.com/terms")
-//                .contact(new Contact("Your Name", "www.example.com", "your-email@example.com"))
-//                .license("Apache License Version 2.0")
-//                .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
-//                .build();
-//    }
 //}
