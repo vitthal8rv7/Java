@@ -20,10 +20,9 @@ import io.swagger.annotations.ApiResponses;
 })
 @RestController
 @RequestMapping("/api")
-@Api(value = "Demo API", tags = {"Demo API"})
 public class DemoController2 {
 
-    @ApiOperation(value = "Get a demo message", response = String.class)
+   @ApiOperation(value = "Get a demo message2.1", response = String.class, tags = {"Demo API2.1"})
    @GetMapping("/message3")
     public ResponseEntity<String> getMessage() {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
@@ -34,7 +33,8 @@ public class DemoController2 {
             @ApiResponse(code = 401, message = "DemoController2.1: You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "DemoController2.1: Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "DemoController2.1: The resource you were trying to reach is not found")
-    })    
+    })
+    @ApiOperation(value = "Get a demo message2.2", response = String.class, tags = {"Demo API2.2"})
     @GetMapping("/message4")
     public ResponseEntity<String> getMessage2() {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);

@@ -8,21 +8,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/api")
-@Api(value = "Demo API", tags = {"Demo API"})
+@Api(value = "Controller for Demo API", tags = {"Demo API1"})
 public class DemoController {
 
-    @ApiOperation(value = "Get a demo message", response = String.class)
+   @ApiOperation(value = "Get a demo message", response = String.class, tags = {"Demo API1"})
    @GetMapping("/message")
     public ResponseEntity<String> getMessage() {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
     }
     
     
+    @ApiOperation(value = "Get a demo message2", response = String.class, tags = {"Demo API2"})
     @GetMapping("/message2")
     public ResponseEntity<String> getMessage2() {
         return new ResponseEntity<>("Hello, World!", HttpStatus.OK);
