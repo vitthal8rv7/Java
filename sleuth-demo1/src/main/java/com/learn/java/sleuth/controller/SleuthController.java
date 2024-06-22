@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.learn.java.sleuth.model.Employee;
 
@@ -25,6 +26,8 @@ public class SleuthController {
 
 	@GetMapping("/log-levels")
 	public String checkLogLevels() {
+		RestTemplate restTemplate = new RestTemplate();
+		restTemplate.getForObject("http://localhost:8081/logger/demo/log-levels", String.class);
 		logger.info("Log Level : INFO");
 		logger.trace("Log Level : TRACE");
 		logger.warn("Log Level : WARN");

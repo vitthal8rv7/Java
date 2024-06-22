@@ -1,15 +1,13 @@
-package com.learn.java.sleuth;
+package com.learning.java.sleuth.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@EnableSwagger2
-//@EnableWebMvc
-public class SleuthDemo1Application {
+public class SleuthServerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SleuthDemo1Application.class, args);
+		SpringApplication.run(SleuthServerApplication.class, args);
 	}
 
 }
