@@ -2,10 +2,10 @@ package com.learn.java.sleuth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-//@EnableSwagger2
-//@EnableWebMvc
+@EnableWebMvc
 public class SleuthDemo1Application {
 
 	public static void main(String[] args) {
