@@ -34,12 +34,12 @@ public class SleuthController {
 		
         HttpHeaders headers = new HttpHeaders();
         headers.set("Content-Type", "application/json");
-        headers.set("X-TRACE-OPERATION", "log-levels");
-        headers.set("X-TRACE-REQUESTID", tracer.currentSpan().context().traceIdString());
-        headers.set("traceId", ""+tracer.currentSpan().context().traceId());
-        headers.set("X-TRACE-USER", "Vitthal Aradwad");
+//        headers.set("X-TRACE-OPERATION", "log-levels");
+//        headers.set("X-TRACE-REQUESTID", tracer.currentSpan().context().traceIdString());
+//        headers.set("traceId", ""+tracer.currentSpan().context().traceId());
+//        headers.set("X-TRACE-USER", "Vitthal Aradwad");
         HttpEntity<String> httpEntity = new HttpEntity<>(headers);
-        ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8080/logger/demo/traceid/2", HttpMethod.GET,
+        ResponseEntity<String> responseEntity = restTemplate.exchange("http://localhost:8080/logger/demo/traceid", HttpMethod.GET,
                 httpEntity, String.class);
         logger.info("httpEntity"+ responseEntity.getBody());
 		return "Log Level Checked.\n Default Log Level Is INFO.";
