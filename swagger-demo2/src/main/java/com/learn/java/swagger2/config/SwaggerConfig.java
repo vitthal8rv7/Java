@@ -131,7 +131,8 @@ public class SwaggerConfig {
 	            }
 	        };
 	    }    
-	}	
+
+}	
 //	@Bean
 //	Docket api() {
 //		List<Response> list = new ArrayList<Response>();
