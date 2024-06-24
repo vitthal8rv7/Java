@@ -1,74 +1,73 @@
 package com.learn.java.interview;
 
-import static org.junit.jupiter.api.DynamicTest.stream;
-
-import java.io.Serializable;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.IntSummaryStatistics;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Optional;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.Random;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.function.IntFunction;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
-
-import javax.security.auth.login.AccountNotFoundException;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.learn.java.interview.model.Employee;
-import com.learn.java.interview.model.Employee2;
-import com.learn.java.interview.model.Student;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import io.micrometer.common.util.StringUtils;
-import lombok.Data;
-import net.bytebuddy.build.HashCodeAndEqualsPlugin.Sorted;
 
-//@SpringBootTest
-@RestController
-@Controller
-public class JavaInterviewApplicationTests implements Serializable  {
+@SpringBootTest
+public class JavaInterviewApplicationTests {
 
 	
 	
 	
 	@Test
 	void test33() { 
-	
-	
+		String [] args = {"5", "1 4", "2 5", "3 898", "1 3", "2 12"};
+		System.out.println("Hello");
+		Arrays.stream(args).skip(1).forEach(value -> {
+			Arrays.stream(value.split("\\W")).forEach(System.out::println);
+		});
+		Predicate<Integer> isOdd = number -> number%2!=0;
+		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
+														.filter(i -> (number%i==0))
+														.findAny()
+														.isEmpty();
+		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
+															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
+															.findAny()
+															.isEmpty();
+														
+				
+		Arrays.stream(args)
+				.skip(1)
+				.forEach(str -> {
+					String[] str2 = str.split("\\W");
+					Integer operation = Integer.parseInt(str2[0]);
+					Integer number = Integer.parseInt(str2[1]);
+					System.out.println("In Switch");
+					switch(operation) {
+						case 1: 
+							if(isOdd.test(number)) {
+								System.out.println("ODD");
+							} else {
+								System.out.println("EVEN");
+							}
+							break;
+						case 2: 
+							if(isPrime.test(number)) {
+								System.out.println("PRIME");
+							} else {
+								System.out.println("COMPOSITE");
+							}						
+							break;
+						case 3: 
+							if(isPalindrome.test(str2[1])) {
+								System.out.println("PALINDROME");
+							} else {
+								System.out.println("NOT PALINDROME");
+							}												
+							break;
+						default : 
+							System.out.println("DEFAULT");
+							break;
+					}
+				});
 	}
 //	
 //	@Test

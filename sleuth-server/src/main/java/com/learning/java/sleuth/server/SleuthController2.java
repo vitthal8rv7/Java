@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.micrometer.tracing.Span;
 import io.micrometer.tracing.Tracer;
+import io.swagger.v3.oas.annotations.Operation;
 
 
 
@@ -21,6 +22,7 @@ public class SleuthController2 {
 	@Autowired
 	private Tracer tracer;
 
+	@Operation(description = "test description", summary  = "TEST SUMMARY")
 	@GetMapping("/traceid")
 	public String getSleuthTraceId() {
 		logger.info("Hello with Sleuth");
