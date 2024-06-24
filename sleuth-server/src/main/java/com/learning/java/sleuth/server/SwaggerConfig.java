@@ -1,4 +1,4 @@
-package com.learn.java.sleuth.config;
+package com.learning.java.sleuth.server;
 
 import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
