@@ -1,23 +1,20 @@
 package com.learn.java.interview;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.HttpHeaders;
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	@GetMapping("/greet")
-	public String greet(@RequestParam(name = "firstName", required = true) String firstName,
-			@RequestParam(name = "lastName", required = false, defaultValue = "Sir") String lastName) {
-		return "Hello, " + firstName + " " + lastName + "!";
-	}
 
 	@Test
 	void test34() {
-
+		HttpHeaders headers = new HttpHeaders();
+		List<String> values = headers.get("");
 	}
 	
 //	@Test
