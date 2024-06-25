@@ -1,74 +1,75 @@
 package com.learn.java.interview;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.function.Predicate;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpHeaders;
 
-import io.micrometer.common.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	
-	
-	
+
 	@Test
-	void test33() { 
-		String [] args = {"5", "1 4", "2 5", "3 898", "1 3", "2 12"};
-		System.out.println("Hello");
-		Arrays.stream(args).skip(1).forEach(value -> {
-			Arrays.stream(value.split("\\W")).forEach(System.out::println);
-		});
-		Predicate<Integer> isOdd = number -> number%2!=0;
-		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
-														.filter(i -> (number%i==0))
-														.findAny()
-														.isEmpty();
-		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
-															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
-															.findAny()
-															.isEmpty();
-														
-				
-		Arrays.stream(args)
-				.skip(1)
-				.forEach(str -> {
-					String[] str2 = str.split("\\W");
-					Integer operation = Integer.parseInt(str2[0]);
-					Integer number = Integer.parseInt(str2[1]);
-					System.out.println("In Switch");
-					switch(operation) {
-						case 1: 
-							if(isOdd.test(number)) {
-								System.out.println("ODD");
-							} else {
-								System.out.println("EVEN");
-							}
-							break;
-						case 2: 
-							if(isPrime.test(number)) {
-								System.out.println("PRIME");
-							} else {
-								System.out.println("COMPOSITE");
-							}						
-							break;
-						case 3: 
-							if(isPalindrome.test(str2[1])) {
-								System.out.println("PALINDROME");
-							} else {
-								System.out.println("NOT PALINDROME");
-							}												
-							break;
-						default : 
-							System.out.println("DEFAULT");
-							break;
-					}
-				});
+	void test34() {
+		HttpHeaders headers = new HttpHeaders();
+		List<String> values = headers.get("");
 	}
+	
+//	@Test
+//	void test33() { 
+//		String [] args = {"5", "1 4", "2 5", "3 898", "1 3", "2 12"};
+//		System.out.println("Hello");
+//		Arrays.stream(args).skip(1).forEach(value -> {
+//			Arrays.stream(value.split("\\W")).forEach(System.out::println);
+//		});
+//		Predicate<Integer> isOdd = number -> number%2!=0;
+//		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
+//														.filter(i -> (number%i==0))
+//														.findAny()
+//														.isEmpty();
+//		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
+//															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
+//															.findAny()
+//															.isEmpty();
+//														
+//				
+//		Arrays.stream(args)
+//				.skip(1)
+//				.forEach(str -> {
+//					String[] str2 = str.split("\\W");
+//					Integer operation = Integer.parseInt(str2[0]);
+//					Integer number = Integer.parseInt(str2[1]);
+//					
+//					switch(operation) {
+//						case 1: 
+//							if(isOdd.test(number)) {
+//								System.out.println("ODD");
+//							} else {
+//								System.out.println("EVEN");
+//							}
+//							break;
+//						case 2: 
+//							if(isPrime.test(number)) {
+//								System.out.println("PRIME");
+//							} else {
+//								System.out.println("COMPOSITE");
+//							}						
+//							break;
+//						case 3: 
+//							if(isPalindrome.test(str2[1])) {
+//								System.out.println("PALINDROME");
+//							} else {
+//								System.out.println("NOT PALINDROME");
+//							}												
+//							break;
+//						default : 
+//							System.out.println("DEFAULT");
+//							break;
+//					}
+//				});
+//	}
 //	
 //	@Test
 //	void test32() { 
