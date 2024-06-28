@@ -1,6 +1,8 @@
 package com.learn.java.interview;
 
 import java.util.List;
+import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +17,42 @@ public class JavaInterviewApplicationTests {
 	void test34() {
 		HttpHeaders headers = new HttpHeaders();
 		List<String> values = headers.get("");
+
+		Scanner scanner = new Scanner(System.in);
+		scanner.next();
+
+		int numbOfQueries = scanner.nextInt();
+		for (int i = 0; i < numbOfQueries; i++) {
+			int a = scanner.nextInt();
+			int b = scanner.nextInt();
+			int n = scanner.nextInt();
+			printResult(a, b, n);
+			System.out.println("");
+		}
+		scanner.close();
+		int N = 123;
+		IntStream.rangeClosed(1, 10)
+				.mapToObj(i -> String.format("%d x %d = %d", N, i, (N * i)))
+				.forEach(System.out::println);
+		;
+	}
+
+	private void printResult(int a, int b, int n) {
+		int result = a+b;
+		for(int i = 1; i < n; i++) {
+			
+			result = result + (b * squareOf(i));
+			System.out.print(""+result+" ");
+		}
+		
+	}
+
+	private int squareOf(int n) {
+		int result = 1;
+		for(int i = 0; i<n; i++) {
+			result = result * 2;
+		}
+		return result;
 	}
 	
 //	@Test
