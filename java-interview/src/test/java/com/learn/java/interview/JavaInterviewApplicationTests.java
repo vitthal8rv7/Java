@@ -7,54 +7,98 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
+import org.springframework.util.StringUtils;
+
+
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-
 	@Test
-	void test34() {
-		HttpHeaders headers = new HttpHeaders();
-		List<String> values = headers.get("");
-
+	void test35() {
 		Scanner scanner = new Scanner(System.in);
-		scanner.next();
-
-		int numbOfQueries = scanner.nextInt();
-		for (int i = 0; i < numbOfQueries; i++) {
-			int a = scanner.nextInt();
-			int b = scanner.nextInt();
-			int n = scanner.nextInt();
-			printResult(a, b, n);
-			System.out.println("");
+		while (true) {
+			String size = scanner.nextLine();
+			if (!size.isBlank()) {
+				for (int i = 0; i < Integer.parseInt(size); i++) {
+					while (true) {
+						String value = scanner.nextLine();
+						if (!value.isBlank()) {
+							Long l = 0l;
+							try {
+								l = Long.parseLong(value);
+								System.out.println(value + " can be fitted in:");
+								if(l >= Byte.MIN_VALUE && l <= Byte.MAX_VALUE) {
+									 System.out.println("* byte");
+									 System.out.println("* short");
+									 System.out.println("* int");
+									 System.out.println("* long");									 
+								} else if(l >= Short.MIN_VALUE && l <= Short.MAX_VALUE) {
+									 System.out.println("* short");
+									 System.out.println("* int");
+									 System.out.println("* long");									 
+								} else if(l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE) {
+									 System.out.println("* int");
+									 System.out.println("* long");
+								} else {
+									 System.out.println("* long");
+								}								
+							} catch (Exception e) {
+								System.out.println(value + " can't be fitted anywhere.");
+								break;
+							}
+						}
+						break;
+					}
+				}
+				break;
+			}
 		}
-		scanner.close();
-		int N = 123;
-		IntStream.rangeClosed(1, 10)
-				.mapToObj(i -> String.format("%d x %d = %d", N, i, (N * i)))
-				.forEach(System.out::println);
-		;
 	}
 
-	private void printResult(int a, int b, int n) {
-		int result = a+b;
-		for(int i = 1; i < n; i++) {
-			
-			result = result + (b * squareOf(i));
-			System.out.print(""+result+" ");
-		}
-		
-	}
-
-	private int squareOf(int n) {
-		int result = 1;
-		for(int i = 0; i<n; i++) {
-			result = result * 2;
-		}
-		return result;
-	}
-	
+//	@Test
+//	void test34() {
+//		HttpHeaders headers = new HttpHeaders();
+//		List<String> values = headers.get("");
+//
+//		Scanner scanner = new Scanner(System.in);
+//		scanner.next();
+//
+//		int numbOfQueries = scanner.nextInt();
+//		for (int i = 0; i < numbOfQueries; i++) {
+//			int a = scanner.nextInt();
+//			int b = scanner.nextInt();
+//			int n = scanner.nextInt();
+//			printResult(a, b, n);
+//			System.out.println("");
+//		}
+//		scanner.close();
+//		int N = 123;
+//		IntStream.rangeClosed(1, 10)
+//				.mapToObj(i -> String.format("%d x %d = %d", N, i, (N * i)))
+//				.forEach(System.out::println);
+//		;
+//	}
+//
+//	private void printResult(int a, int b, int n) {
+//		int result = a+b;
+//		for(int i = 1; i < n; i++) {
+//			
+//			result = result + (b * squareOf(i));
+//			System.out.print(""+result+" ");
+//		}
+//		
+//	}
+//
+//	private int squareOf(int n) {
+//		int result = 1;
+//		for(int i = 0; i<n; i++) {
+//			result = result * 2;
+//		}
+//		return result;
+//	}
+//	
 //	@Test
 //	void test33() { 
 //		String [] args = {"5", "1 4", "2 5", "3 898", "1 3", "2 12"};
