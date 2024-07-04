@@ -1,10 +1,12 @@
 package com.learn.java.interview;
 
 import java.sql.Time;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -20,24 +22,34 @@ import org.springframework.util.StringUtils;
 public class JavaInterviewApplicationTests {
 
 	
-	
-	@Test 
-	void test39() {
-        Scanner scanner = new Scanner(System.in);
-        scanner.close();
-        
-        Calendar calendar =  Calendar.getInstance();
-        calendar.set(2024, 7, 11);
-        
-        LocalDate localDate = LocalDate.of(2024, 7, 11);
-        
-        System.out.println("Day: "+localDate.getDayOfMonth());
-        System.out.println("Day: "+localDate.getDayOfWeek().toString());
-//        System.out.println("c.getFirstDayOfWeek: "+calendar.getMinimalDaysInFirstWeek());
-//        System.out.println("c.getFirstDayOfWeek: "+calendar.getFirstDayOfWeek());
-    }
-	
 
+	
+//	@Test 
+//	void test40() {
+//        Scanner scanner = new Scanner(System.in);
+//        scanner.useLocale(Locale.ENGLISH);
+//        double number = scanner.nextDouble();
+//        String payment = null;
+//        System.out.println("US: "+ NumberFormat.getCurrencyInstance(Locale.US).format(number));
+////        System.out.println("India: "+ NumberFormat.getCurrencyInstance(new Locale("en", "IN")).format(number));
+//        String india = NumberFormat.getCurrencyInstance(Locale.US).format(number);
+//        india =  india.replace("$","Rs.");
+//        System.out.println("India: "+ india);
+////        System.out.println("China: "+ NumberFormat.getCurrencyInstance(Locale.CHINA).format(number));
+//        payment =  payment.replace("¥","￥");
+//        System.out.println("China: "+ payment);
+////        System.out.println("France: "+ NumberFormat.getCurrencyInstance(Locale.FRANCE).format(number));
+//        payment = NumberFormat.getCurrencyInstance(Locale.FRANCE).format(number);
+//        payment =  payment.replace(" "," ");
+//        System.out.println("France: "+ payment);
+//        scanner.close();
+//    }	
+//	@Test 
+//	void test39() {
+//        LocalDate localDate = LocalDate.of(2024, 7, 11);        
+//        System.out.println("Day: "+localDate.getDayOfMonth());
+//        System.out.println(""+localDate.getDayOfWeek().toString());
+//    }
 //	@Test 
 //	void test38() {
 //        Scanner scanner = new Scanner(System.in);
