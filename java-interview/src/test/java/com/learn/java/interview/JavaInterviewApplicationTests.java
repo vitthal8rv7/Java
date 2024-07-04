@@ -15,12 +15,28 @@ import org.springframework.util.StringUtils;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	@Test 
-	void test38() {
-
-	}
-
 	
+	
+	@Test 
+	void test39() {
+        Scanner scanner = new Scanner(System.in);
+        scanner.close();
+    }
+	
+
+//	@Test 
+//	void test38() {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        String nString = Integer.toString(n);
+//        if(n == (Integer.parseInt(nString))) {
+//        	System.out.println("Good job");
+//        } else {
+//        	System.out.println("Wrong answer");
+//        }
+//        scanner.close();
+//    }
+//	
 //	@Test 
 //	void test37() {
 //		int b =0, h = -1;
