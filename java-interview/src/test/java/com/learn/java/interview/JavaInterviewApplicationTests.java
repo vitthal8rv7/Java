@@ -15,13 +15,26 @@ import org.springframework.util.StringUtils;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	
 	@Test 
-	void test37() {
-		
-		
+	void test38() {
+
 	}
+
 	
+//	@Test 
+//	void test37() {
+//		int b =0, h = -1;
+//		try{
+//	        if (b <= 0 || h <= 0) {
+//	            throw new Exception("Breadth and height must be positive");
+//	        } else {
+//	            System.out.println(b*h);
+//	        }
+//	       } catch(Exception e) {
+//	           System.out.println(e.getClass().getName()+ ": "+e.getMessage());    
+//	       }
+//	}
+//	
 //	@Test 
 //	void test36() {
 //        
