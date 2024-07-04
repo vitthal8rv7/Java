@@ -1,5 +1,9 @@
 package com.learn.java.interview;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.IntStream;
@@ -21,6 +25,16 @@ public class JavaInterviewApplicationTests {
 	void test39() {
         Scanner scanner = new Scanner(System.in);
         scanner.close();
+        
+        Calendar calendar =  Calendar.getInstance();
+        calendar.set(2024, 7, 11);
+        
+        LocalDate localDate = LocalDate.of(2024, 7, 11);
+        
+        System.out.println("Day: "+localDate.getDayOfMonth());
+        System.out.println("Day: "+localDate.getDayOfWeek().toString());
+//        System.out.println("c.getFirstDayOfWeek: "+calendar.getMinimalDaysInFirstWeek());
+//        System.out.println("c.getFirstDayOfWeek: "+calendar.getFirstDayOfWeek());
     }
 	
 
