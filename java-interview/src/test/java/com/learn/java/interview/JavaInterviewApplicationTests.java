@@ -15,48 +15,76 @@ import org.springframework.util.StringUtils;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	@Test
-	void test35() {
-		Scanner scanner = new Scanner(System.in);
-		while (true) {
-			String size = scanner.nextLine();
-			if (!size.isBlank()) {
-				for (int i = 0; i < Integer.parseInt(size); i++) {
-					while (true) {
-						String value = scanner.nextLine();
-						if (!value.isBlank()) {
-							Long l = 0l;
-							try {
-								l = Long.parseLong(value);
-								System.out.println(value + " can be fitted in:");
-								if(l >= Byte.MIN_VALUE && l <= Byte.MAX_VALUE) {
-									 System.out.println("* byte");
-									 System.out.println("* short");
-									 System.out.println("* int");
-									 System.out.println("* long");									 
-								} else if(l >= Short.MIN_VALUE && l <= Short.MAX_VALUE) {
-									 System.out.println("* short");
-									 System.out.println("* int");
-									 System.out.println("* long");									 
-								} else if(l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE) {
-									 System.out.println("* int");
-									 System.out.println("* long");
-								} else {
-									 System.out.println("* long");
-								}								
-							} catch (Exception e) {
-								System.out.println(value + " can't be fitted anywhere.");
-								break;
-							}
-						}
-						break;
-					}
-				}
-				break;
-			}
-		}
+	
+	@Test 
+	void test37() {
+		
+		
 	}
-
+	
+//	@Test 
+//	void test36() {
+//        
+//        Scanner scanner = new Scanner(System.in);
+//       int lineNumber = 0;
+//
+//       // Read until end of file
+//       while (scanner.hasNextLine()) {
+//           String line = scanner.nextLine();
+//           lineNumber++;
+//           System.out.printf("%d %s%n", lineNumber, line);
+//       }
+////       do {
+////           String line = scanner.nextLine();
+////           lineNumber++;
+////           System.out.printf("%d %s%n", lineNumber, line);
+////       }while (scanner.hasNextLine());
+//
+//       scanner.close();
+//	}
+	
+//	@Test
+//	void test35() {
+//		Scanner scanner = new Scanner(System.in);
+//		while (true) {
+//			String size = scanner.nextLine();
+//			if (!size.isBlank()) {
+//				for (int i = 0; i < Integer.parseInt(size); i++) {
+//					while (true) {
+//						String value = scanner.nextLine();
+//						if (!value.isBlank()) {
+//							Long l = 0l;
+//							try {
+//								l = Long.parseLong(value);
+//								System.out.println(value + " can be fitted in:");
+//								if(l >= Byte.MIN_VALUE && l <= Byte.MAX_VALUE) {
+//									 System.out.println("* byte");
+//									 System.out.println("* short");
+//									 System.out.println("* int");
+//									 System.out.println("* long");									 
+//								} else if(l >= Short.MIN_VALUE && l <= Short.MAX_VALUE) {
+//									 System.out.println("* short");
+//									 System.out.println("* int");
+//									 System.out.println("* long");									 
+//								} else if(l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE) {
+//									 System.out.println("* int");
+//									 System.out.println("* long");
+//								} else {
+//									 System.out.println("* long");
+//								}								
+//							} catch (Exception e) {
+//								System.out.println(value + " can't be fitted anywhere.");
+//								break;
+//							}
+//						}
+//						break;
+//					}
+//				}
+//				break;
+//			}
+//		}
+//	}
+//
 //	@Test
 //	void test34() {
 //		HttpHeaders headers = new HttpHeaders();
