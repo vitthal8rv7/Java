@@ -25,7 +25,34 @@ import org.springframework.util.StringUtils;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 	@Test
-	void test45() {}	
+	void test46() {
+		
+		
+	}
+//	@Test
+//	void test45() {
+////		s.split("\\W+");
+////		Regular Expression:
+////
+////		\\W matches any non-word character.
+////		The + quantifier ensures that one or more consecutive non-word characters are treated as a single delimiter.
+//        Scanner scan = new Scanner(System.in);
+//        String s = scan.nextLine();
+//        scan.close();
+//        // Write your code here.
+//        if(s.isBlank()) {
+//            System.out.println("0");
+//        } else {
+//        s = s.trim();
+//        String []stringArray = s.split("[\\s!,?._'@]+");
+//        System.out.println(stringArray.length);
+//        for(String str: stringArray) {
+//            if(str.trim().length() > 0)
+//                System.out.println(str.trim());
+//        }
+//        }
+//         
+//	}	
 //	@Test
 //	void test44() {
 //        Scanner scan = new Scanner(System.in);
@@ -62,9 +89,7 @@ public class JavaInterviewApplicationTests {
 //        Arrays.sort(charArray);
 //        b = new String(charArray);
 //		return a.equals(b);
-	}
-	
-	
+//	}
 //	@Test
 //	void test43() {
 //		String input = "madama";
