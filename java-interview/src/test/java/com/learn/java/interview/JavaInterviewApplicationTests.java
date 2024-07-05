@@ -24,7 +24,11 @@ public class JavaInterviewApplicationTests {
 	
 	@Test
 	void test43() {
-		
+		String input = "madama";
+		boolean isPalindrome = false;
+		isPalindrome = IntStream.range(0, (input.length()-1)/2)
+				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
+		System.out.println((isPalindrome == true)?"Yes":"No"); 
 	}	
 //	@Test
 //	void test42() {
