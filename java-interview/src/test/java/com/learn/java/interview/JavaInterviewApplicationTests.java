@@ -23,7 +23,17 @@ public class JavaInterviewApplicationTests {
 
 	
 
-	
+	@Test
+	void test41() {
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        String B=sc.next();
+        /* Enter your code here. Print output to STDOUT. */
+        System.out.println(A.length() + B.length());
+        System.out.println((A.compareTo(B) > 0)?"Yes":"No");
+        System.out.println(Character.toUpperCase(A.charAt(0)) + A.substring(1) + " " + Character.toUpperCase(B.charAt(0)) + B.substring(1));
+        sc.close();
+	}
 //	@Test 
 //	void test40() {
 //        Scanner scanner = new Scanner(System.in);
