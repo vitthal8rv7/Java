@@ -22,8 +22,62 @@ import org.springframework.util.StringUtils;
 public class JavaInterviewApplicationTests {
 
 	
-
-	
+	@Test
+	void test43() {
+		String input = "madama";
+		boolean isPalindrome = false;
+		isPalindrome = IntStream.range(0, (input.length()-1)/2)
+				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
+		System.out.println((isPalindrome == true)?"Yes":"No"); 
+	}	
+//	@Test
+//	void test42() {
+//		Scanner scan = new Scanner(System.in);
+//		String s = scan.next();
+//		int k = scan.nextInt();
+//		scan.close();
+//		try {
+//			System.out.println(getSmallestAndLargest(s, k));
+//		} catch (Exception e) {
+//			System.out.println(e);
+//		}
+//	}
+//
+//	private String getSmallestAndLargest(String s, int k) {
+//		String smallest = "";
+//		String largest = "";
+//
+//		// Complete the function
+//		// 'smallest' must be the lexicographically smallest substring of length 'k'
+//		// 'largest' must be the lexicographically largest substring of length 'k'
+//		if (s.length() <= k) {
+//			smallest = s;
+//			largest = s;
+//		} else {
+//			smallest = largest = s.substring(0, k);
+//			for (int i = 1; i < ((s.length()+1) - k); i++) {
+//				String subString = s.substring(i, i+k);
+//				if (smallest.compareTo(subString) >= 0) {
+//					smallest = subString;
+//				} else if (largest.compareTo(subString) < 0) {
+//					largest = subString;
+//				}
+//			}
+//		}
+//		return smallest + "\n" + largest;
+//	}
+//	
+//	@Test
+//	void test41() {
+//        Scanner sc=new Scanner(System.in);
+//        String A=sc.next();
+//        String B=sc.next();
+//        /* Enter your code here. Print output to STDOUT. */
+//        System.out.println(A.length() + B.length());
+//        System.out.println((A.compareTo(B) > 0)?"Yes":"No");
+//        System.out.println(Character.toUpperCase(A.charAt(0)) + A.substring(1) + " " + Character.toUpperCase(B.charAt(0)) + B.substring(1));
+//        sc.close();
+//	}
 //	@Test 
 //	void test40() {
 //        Scanner scanner = new Scanner(System.in);
