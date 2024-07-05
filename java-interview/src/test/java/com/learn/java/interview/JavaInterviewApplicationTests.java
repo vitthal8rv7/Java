@@ -1,6 +1,12 @@
 package com.learn.java.interview;
 
+import java.sql.Time;
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -15,48 +21,125 @@ import org.springframework.util.StringUtils;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	@Test
-	void test35() {
-		Scanner scanner = new Scanner(System.in);
-		while (true) {
-			String size = scanner.nextLine();
-			if (!size.isBlank()) {
-				for (int i = 0; i < Integer.parseInt(size); i++) {
-					while (true) {
-						String value = scanner.nextLine();
-						if (!value.isBlank()) {
-							Long l = 0l;
-							try {
-								l = Long.parseLong(value);
-								System.out.println(value + " can be fitted in:");
-								if(l >= Byte.MIN_VALUE && l <= Byte.MAX_VALUE) {
-									 System.out.println("* byte");
-									 System.out.println("* short");
-									 System.out.println("* int");
-									 System.out.println("* long");									 
-								} else if(l >= Short.MIN_VALUE && l <= Short.MAX_VALUE) {
-									 System.out.println("* short");
-									 System.out.println("* int");
-									 System.out.println("* long");									 
-								} else if(l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE) {
-									 System.out.println("* int");
-									 System.out.println("* long");
-								} else {
-									 System.out.println("* long");
-								}								
-							} catch (Exception e) {
-								System.out.println(value + " can't be fitted anywhere.");
-								break;
-							}
-						}
-						break;
-					}
-				}
-				break;
-			}
-		}
-	}
+	
 
+	
+//	@Test 
+//	void test40() {
+//        Scanner scanner = new Scanner(System.in);
+//        scanner.useLocale(Locale.ENGLISH);
+//        double number = scanner.nextDouble();
+//        String payment = null;
+//        System.out.println("US: "+ NumberFormat.getCurrencyInstance(Locale.US).format(number));
+////        System.out.println("India: "+ NumberFormat.getCurrencyInstance(new Locale("en", "IN")).format(number));
+//        String india = NumberFormat.getCurrencyInstance(Locale.US).format(number);
+//        india =  india.replace("$","Rs.");
+//        System.out.println("India: "+ india);
+////        System.out.println("China: "+ NumberFormat.getCurrencyInstance(Locale.CHINA).format(number));
+//        payment =  payment.replace("¥","￥");
+//        System.out.println("China: "+ payment);
+////        System.out.println("France: "+ NumberFormat.getCurrencyInstance(Locale.FRANCE).format(number));
+//        payment = NumberFormat.getCurrencyInstance(Locale.FRANCE).format(number);
+//        payment =  payment.replace(" "," ");
+//        System.out.println("France: "+ payment);
+//        scanner.close();
+//    }	
+//	@Test 
+//	void test39() {
+//        LocalDate localDate = LocalDate.of(2024, 7, 11);        
+//        System.out.println("Day: "+localDate.getDayOfMonth());
+//        System.out.println(""+localDate.getDayOfWeek().toString());
+//    }
+//	@Test 
+//	void test38() {
+//        Scanner scanner = new Scanner(System.in);
+//        int n = scanner.nextInt();
+//        String nString = Integer.toString(n);
+//        if(n == (Integer.parseInt(nString))) {
+//        	System.out.println("Good job");
+//        } else {
+//        	System.out.println("Wrong answer");
+//        }
+//        scanner.close();
+//    }
+//	
+//	@Test 
+//	void test37() {
+//		int b =0, h = -1;
+//		try{
+//	        if (b <= 0 || h <= 0) {
+//	            throw new Exception("Breadth and height must be positive");
+//	        } else {
+//	            System.out.println(b*h);
+//	        }
+//	       } catch(Exception e) {
+//	           System.out.println(e.getClass().getName()+ ": "+e.getMessage());    
+//	       }
+//	}
+//	
+//	@Test 
+//	void test36() {
+//        
+//        Scanner scanner = new Scanner(System.in);
+//       int lineNumber = 0;
+//
+//       // Read until end of file
+//       while (scanner.hasNextLine()) {
+//           String line = scanner.nextLine();
+//           lineNumber++;
+//           System.out.printf("%d %s%n", lineNumber, line);
+//       }
+////       do {
+////           String line = scanner.nextLine();
+////           lineNumber++;
+////           System.out.printf("%d %s%n", lineNumber, line);
+////       }while (scanner.hasNextLine());
+//
+//       scanner.close();
+//	}
+	
+//	@Test
+//	void test35() {
+//		Scanner scanner = new Scanner(System.in);
+//		while (true) {
+//			String size = scanner.nextLine();
+//			if (!size.isBlank()) {
+//				for (int i = 0; i < Integer.parseInt(size); i++) {
+//					while (true) {
+//						String value = scanner.nextLine();
+//						if (!value.isBlank()) {
+//							Long l = 0l;
+//							try {
+//								l = Long.parseLong(value);
+//								System.out.println(value + " can be fitted in:");
+//								if(l >= Byte.MIN_VALUE && l <= Byte.MAX_VALUE) {
+//									 System.out.println("* byte");
+//									 System.out.println("* short");
+//									 System.out.println("* int");
+//									 System.out.println("* long");									 
+//								} else if(l >= Short.MIN_VALUE && l <= Short.MAX_VALUE) {
+//									 System.out.println("* short");
+//									 System.out.println("* int");
+//									 System.out.println("* long");									 
+//								} else if(l >= Integer.MIN_VALUE && l <= Integer.MAX_VALUE) {
+//									 System.out.println("* int");
+//									 System.out.println("* long");
+//								} else {
+//									 System.out.println("* long");
+//								}								
+//							} catch (Exception e) {
+//								System.out.println(value + " can't be fitted anywhere.");
+//								break;
+//							}
+//						}
+//						break;
+//					}
+//				}
+//				break;
+//			}
+//		}
+//	}
+//
 //	@Test
 //	void test34() {
 //		HttpHeaders headers = new HttpHeaders();
