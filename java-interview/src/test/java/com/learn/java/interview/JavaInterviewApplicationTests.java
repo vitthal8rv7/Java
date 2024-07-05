@@ -9,12 +9,14 @@ import java.math.BigInteger;
 import java.sql.Time;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
@@ -30,11 +32,46 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	
+
 	@Test
-	void test47() {
+	void test48() {
+		
 		
 	}
+	
+//	@Test
+//	void test47() {
+//		List<List<Integer>> listOfList = new ArrayList<>();
+//		List<Integer> list = null;
+//		Scanner scanner = new Scanner(System.in);
+//		int n = scanner.nextInt();
+//		for(int i = 0; i < n; i++) {
+//			int d = scanner.nextInt();
+//			list = new ArrayList<>();
+//			for(int j = 0; j < d; j++) {
+//				list.add(scanner.nextInt());
+//			}	
+//			listOfList.add(list);
+//		}
+//		int q = scanner.nextInt();
+//		System.out.println("Q");
+//		for(int k = 0; k < q; k++) {
+//			int x = scanner.nextInt();
+//			int y = scanner.nextInt();
+//			Integer result = null;
+//			try {
+//				result = listOfList.get(x-1).get(y-1);	
+//			} catch(Exception e) {
+//				
+//			}
+//			if(Objects.isNull(result)) {
+//				System.out.println("ERROR!");
+//			} else {
+//				System.out.println(""+result);
+//			}
+//		}	
+//		scanner.close();
+//	}
 //	@Test
 //	void test46() throws IOException {
 //		try {
