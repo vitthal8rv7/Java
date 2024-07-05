@@ -1,9 +1,13 @@
 package com.learn.java.interview;
 
+import static org.mockito.ArgumentMatchers.anyList;
+
 import java.sql.Time;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -20,16 +24,55 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
-	
 	@Test
-	void test43() {
-		String input = "madama";
-		boolean isPalindrome = false;
-		isPalindrome = IntStream.range(0, (input.length()-1)/2)
-				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
-		System.out.println((isPalindrome == true)?"Yes":"No"); 
-	}	
+	void test45() {}	
+//	@Test
+//	void test44() {
+//        Scanner scan = new Scanner(System.in);
+//        String a = scan.next();
+//        String b = scan.next();
+//        scan.close();
+//        boolean ret = isAnagram(a, b);
+//        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+//	}
+//
+//	private boolean isAnagram(String a, String b) {
+//        a = a.toLowerCase();
+//        b = b.toLowerCase();
+//            int size = a.length();
+//            while((a.length() == b.length()) && (a.length() > 0 && b.length() > 0)) {
+//            	char ch = a.charAt(0);
+//               a = a.replaceAll(""+ch, "");
+//               b = b.replaceAll(""+ch, "");
+//               System.out.println("A: "+a);
+//               System.out.println("B: "+b);
+//            }
+//            if(a.length() == b.length()) {
+//                return true;
+//            } else {
+//            return false;
+//        } 
+//     
+//        a = a.toLowerCase();
+//        b = b.toLowerCase();
+//        char[] charArray = a.toCharArray();
+//        Arrays.sort(charArray);
+//        a = new String(charArray);
+//        charArray = b.toCharArray();
+//        Arrays.sort(charArray);
+//        b = new String(charArray);
+//		return a.equals(b);
+	}
+	
+	
+//	@Test
+//	void test43() {
+//		String input = "madama";
+//		boolean isPalindrome = false;
+//		isPalindrome = IntStream.range(0, (input.length()-1)/2)
+//				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
+//		System.out.println((isPalindrome == true)?"Yes":"No"); 
+//	}	
 //	@Test
 //	void test42() {
 //		Scanner scan = new Scanner(System.in);
