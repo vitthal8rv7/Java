@@ -1,14 +1,24 @@
 package com.learn.java.interview;
 
+import static org.mockito.ArgumentMatchers.anyList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.sql.Time;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,16 +30,110 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
 	
 	@Test
-	void test43() {
-		String input = "madama";
-		boolean isPalindrome = false;
-		isPalindrome = IntStream.range(0, (input.length()-1)/2)
-				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
-		System.out.println((isPalindrome == true)?"Yes":"No"); 
-	}	
+	void test47() {
+		
+	}
+//	@Test
+//	void test46() throws IOException {
+//		try {
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//        String n = bufferedReader.readLine();
+//        bufferedReader.close();
+//        BigInteger bigNumber = new BigInteger(n);
+//        boolean isPrime = bigNumber.isProbablePrime(100);
+//        if(isPrime) {
+//        	System.out.println("prime");
+//        } else {
+//        	System.out.println("not prime");
+//        }
+////        Predicate<Long> isPrimeNumber =   
+////        if(number.bitLength() >= 2) {
+////        	isPrimeNumber = (element) -> (element>1 && LongStream.range(2l, (long)Math.sqrt(element)).noneMatch(i -> (element%i==0)));
+////        } else {
+////        	isPrimeNumber = (element) -> (element>1 && LongStream.range(2l, (long)element).noneMatch(i -> (element%i==0)));
+////        }
+////        
+////        System.out.println("isPrimeNumber: "+ isPrimeNumber.test(number));
+////        if(isPrimeNumber.test(number)) {
+////        	 System.out.println("prime");
+////        } else {
+////        	System.out.println("not prime");
+////        }
+//		} catch(Exception e) {
+//			System.out.println("Exception: "+e);
+//		}
+//	}
+//	@Test
+//	void test45() {
+////		s.split("\\W+");
+////		Regular Expression:
+////
+////		\\W matches any non-word character.
+////		The + quantifier ensures that one or more consecutive non-word characters are treated as a single delimiter.
+//        Scanner scan = new Scanner(System.in);
+//        String s = scan.nextLine();
+//        scan.close();
+//        // Write your code here.
+//        if(s.isBlank()) {
+//            System.out.println("0");
+//        } else {
+//        s = s.trim();
+//        String []stringArray = s.split("[\\s!,?._'@]+");
+//        System.out.println(stringArray.length);
+//        for(String str: stringArray) {
+//            if(str.trim().length() > 0)
+//                System.out.println(str.trim());
+//        }
+//        }
+//         
+//	}	
+//	@Test
+//	void test44() {
+//        Scanner scan = new Scanner(System.in);
+//        String a = scan.next();
+//        String b = scan.next();
+//        scan.close();
+//        boolean ret = isAnagram(a, b);
+//        System.out.println( (ret) ? "Anagrams" : "Not Anagrams" );
+//	}
+//
+//	private boolean isAnagram(String a, String b) {
+//        a = a.toLowerCase();
+//        b = b.toLowerCase();
+//            int size = a.length();
+//            while((a.length() == b.length()) && (a.length() > 0 && b.length() > 0)) {
+//            	char ch = a.charAt(0);
+//               a = a.replaceAll(""+ch, "");
+//               b = b.replaceAll(""+ch, "");
+//               System.out.println("A: "+a);
+//               System.out.println("B: "+b);
+//            }
+//            if(a.length() == b.length()) {
+//                return true;
+//            } else {
+//            return false;
+//        } 
+//     
+//        a = a.toLowerCase();
+//        b = b.toLowerCase();
+//        char[] charArray = a.toCharArray();
+//        Arrays.sort(charArray);
+//        a = new String(charArray);
+//        charArray = b.toCharArray();
+//        Arrays.sort(charArray);
+//        b = new String(charArray);
+//		return a.equals(b);
+//	}
+//	@Test
+//	void test43() {
+//		String input = "madama";
+//		boolean isPalindrome = false;
+//		isPalindrome = IntStream.range(0, (input.length()-1)/2)
+//				 .allMatch(i -> input.charAt(i) == input.charAt((input.length()-1) - i));
+//		System.out.println((isPalindrome == true)?"Yes":"No"); 
+//	}	
 //	@Test
 //	void test42() {
 //		Scanner scan = new Scanner(System.in);
