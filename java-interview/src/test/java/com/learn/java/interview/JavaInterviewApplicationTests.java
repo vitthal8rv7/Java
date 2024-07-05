@@ -2,6 +2,10 @@ package com.learn.java.interview;
 
 import static org.mockito.ArgumentMatchers.anyList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.sql.Time;
 import java.text.NumberFormat;
 import java.time.LocalDate;
@@ -12,7 +16,9 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,11 +30,41 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	
 	@Test
-	void test46() {
-		
+	void test47() {
 		
 	}
+//	@Test
+//	void test46() throws IOException {
+//		try {
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//        String n = bufferedReader.readLine();
+//        bufferedReader.close();
+//        BigInteger bigNumber = new BigInteger(n);
+//        boolean isPrime = bigNumber.isProbablePrime(100);
+//        if(isPrime) {
+//        	System.out.println("prime");
+//        } else {
+//        	System.out.println("not prime");
+//        }
+////        Predicate<Long> isPrimeNumber =   
+////        if(number.bitLength() >= 2) {
+////        	isPrimeNumber = (element) -> (element>1 && LongStream.range(2l, (long)Math.sqrt(element)).noneMatch(i -> (element%i==0)));
+////        } else {
+////        	isPrimeNumber = (element) -> (element>1 && LongStream.range(2l, (long)element).noneMatch(i -> (element%i==0)));
+////        }
+////        
+////        System.out.println("isPrimeNumber: "+ isPrimeNumber.test(number));
+////        if(isPrimeNumber.test(number)) {
+////        	 System.out.println("prime");
+////        } else {
+////        	System.out.println("not prime");
+////        }
+//		} catch(Exception e) {
+//			System.out.println("Exception: "+e);
+//		}
+//	}
 //	@Test
 //	void test45() {
 ////		s.split("\\W+");
