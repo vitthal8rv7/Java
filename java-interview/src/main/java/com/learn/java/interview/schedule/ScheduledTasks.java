@@ -25,10 +25,10 @@ public class ScheduledTasks {
 	 * every Day of the week
      *
     */
-    @Scheduled(cron = "* * * * * ?")
-    public void cronJob() {
-        System.out.println("0 Scheduled job executed at: " + LocalDateTime.now());
-    }
+//    @Scheduled(cron = "* * * * * ?")
+//    public void cronJob() {
+//        System.out.println("0 Scheduled job executed at: " + LocalDateTime.now());
+//    }
 //		SAME AS ABOVE    
 //    @Scheduled(cron = "* * * * * *")
 //    public void cronJob2() {
@@ -43,7 +43,7 @@ public class ScheduledTasks {
 //    public void cronJob3() {
 //        System.out.println("Scheduled job executed at: " + LocalDateTime.now());
 //    }
-//
+
 
 	/*
 	 * every 4th Second of 43th Minute of every Hours 
@@ -80,17 +80,18 @@ public class ScheduledTasks {
 //	  	@Scheduled(cron = "0/4 * * * * ?") (cronJob5): not wait for 0th second, it work like @Scheduled(cron = "*/4 * * * * ?") (cronJob6):
 
     
-	  @Scheduled(cron = "8 * * * * ?")
-	  public void cronJob6() {
-	      System.out.println("6 Scheduled job 5 executed at: " + LocalDateTime.now());
-	  }
+    	// Run at 8th sec of every minute
+//	  @Scheduled(cron = "8 * * * * ?")
+//	  public void cronJob6() {
+//	      System.out.println("6 Scheduled job 5 executed at: " + LocalDateTime.now());
+//	  }
 	  
 	  // cron = "6/5 * * * * ?" ==> run every 5 sec but skip fist 6 seconds of every minute 
 	 //  cron = "16/8 * * * * ?" ==> run every 10 sec but skip fist 16 seconds of every minute
-	  @Scheduled(cron = "16/8 * * * * ?")
-	  public void cronJob7() {
-	      System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
-	  }
+//	  @Scheduled(cron = "16/8 * * * * ?")
+//	  public void cronJob7() {
+//	      System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
+//	  }
 //	  Scheduled job 5 executed at: 2024-07-06T12:01:24.015573
 //	  Scheduled job 5 executed at: 2024-07-06T12:01:32.005290
 //	  Scheduled job 5 executed at: 2024-07-06T12:01:40.005359
@@ -104,8 +105,18 @@ public class ScheduledTasks {
 //	  Scheduled job 5 executed at: 2024-07-06T12:02:56.005227
 //	  Scheduled job 5 executed at: 2024-07-06T12:03:16.005521
 //	  Scheduled job 5 executed at: 2024-07-06T12:03:24.001554
+	
+	
+	//Run Once Per Every Minute At 0th Second
+//	@Scheduled(cron = "0 * * * * *")
+//	public void cronJob7() {
+//		System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
+//	}  
 
-	  
-	  
+	@Scheduled(cron = "0-5 * * * * *")
+	public void cronJob7() {
+		System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
+	}  
+
 	
 }
