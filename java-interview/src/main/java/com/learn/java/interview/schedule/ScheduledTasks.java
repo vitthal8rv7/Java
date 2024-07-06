@@ -79,6 +79,26 @@ public class ScheduledTasks {
 //		But Practically both run any 4th second of the minute, not wait for 0th second
 //	  	@Scheduled(cron = "0/4 * * * * ?") (cronJob5): not wait for 0th second, it work like @Scheduled(cron = "*/4 * * * * ?") (cronJob6):
 
+	  // cron = "6/5 * * * * ?" ==> run every 5 sec but skip fist 6 seconds of every minute 
+	 //  cron = "16/8 * * * * ?" ==> run every 10 sec but skip fist 16 seconds of every minute
+	  @Scheduled(cron = "16/8 * * * * ?")
+	  public void cronJob6() {
+	      System.out.println("Scheduled job 5 executed at: " + LocalDateTime.now());
+	  }
+//	  Scheduled job 5 executed at: 2024-07-06T12:01:24.015573
+//	  Scheduled job 5 executed at: 2024-07-06T12:01:32.005290
+//	  Scheduled job 5 executed at: 2024-07-06T12:01:40.005359
+//	  Scheduled job 5 executed at: 2024-07-06T12:01:48.000728
+//	  Scheduled job 5 executed at: 2024-07-06T12:01:56.005302
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:16.005040
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:24.003739
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:32.005434
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:40.003022
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:48.005248
+//	  Scheduled job 5 executed at: 2024-07-06T12:02:56.005227
+//	  Scheduled job 5 executed at: 2024-07-06T12:03:16.005521
+//	  Scheduled job 5 executed at: 2024-07-06T12:03:24.001554
+
 	  
 	  
 	
