@@ -25,10 +25,10 @@ public class ScheduledTasks {
 	 * every Day of the week
      *
     */
-//    @Scheduled(cron = "* * * * * ?")
-//    public void cronJob() {
-//        System.out.println("Scheduled job executed at: " + LocalDateTime.now());
-//    }
+    @Scheduled(cron = "* * * * * ?")
+    public void cronJob() {
+        System.out.println("0 Scheduled job executed at: " + LocalDateTime.now());
+    }
 //		SAME AS ABOVE    
 //    @Scheduled(cron = "* * * * * *")
 //    public void cronJob2() {
@@ -79,11 +79,17 @@ public class ScheduledTasks {
 //		But Practically both run any 4th second of the minute, not wait for 0th second
 //	  	@Scheduled(cron = "0/4 * * * * ?") (cronJob5): not wait for 0th second, it work like @Scheduled(cron = "*/4 * * * * ?") (cronJob6):
 
+    
+	  @Scheduled(cron = "8 * * * * ?")
+	  public void cronJob6() {
+	      System.out.println("6 Scheduled job 5 executed at: " + LocalDateTime.now());
+	  }
+	  
 	  // cron = "6/5 * * * * ?" ==> run every 5 sec but skip fist 6 seconds of every minute 
 	 //  cron = "16/8 * * * * ?" ==> run every 10 sec but skip fist 16 seconds of every minute
 	  @Scheduled(cron = "16/8 * * * * ?")
-	  public void cronJob6() {
-	      System.out.println("Scheduled job 5 executed at: " + LocalDateTime.now());
+	  public void cronJob7() {
+	      System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
 	  }
 //	  Scheduled job 5 executed at: 2024-07-06T12:01:24.015573
 //	  Scheduled job 5 executed at: 2024-07-06T12:01:32.005290
