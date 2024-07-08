@@ -37,50 +37,81 @@ import org.springframework.util.StringUtils;
 public class JavaInterviewApplicationTests {
 
 	@Test
-	void test50() {
-		Scanner scanner = new Scanner(System.in);
-		Integer N = Integer.parseInt(scanner.nextLine());
-		String ipAddress = null;
-
-		try {
-			Pattern pattern = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
-/*
- * Regular Expression (IPADDRESS_PATTERN):
-	^ and $ are anchors that match the start and end of the string, ensuring the entire string is matched.
-	((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}:
-	Matches the first three octets.
-	Each octet can be:
-		25[0-5]: Numbers from 250 to 255.
-		2[0-4][0-9]: Numbers from 200 to 249.
-		[01]?[0-9][0-9]?: Numbers from 0 to 199.
-		(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):
-	Matches the fourth octet using the same logic as the first three octets.
-	\. matches the literal dot . between octets.
- * 
- * */			
-			
-			for (int i = 0; i < N; i++) {
-				ipAddress = null;
-				while (ipAddress == null) {
-					ipAddress = scanner.nextLine();
-				}
-				// check Validity
-				Matcher matcher = pattern.matcher(ipAddress);
-				if (matcher.find()) {
-					System.out.println("true");
-				} else {
-					System.out.println("false");
-				}
-
-			}
-		} catch (PatternSyntaxException e) {
-			// System.out.println("Invalid");
-		}
-
-		scanner.close();
-
+	void test51() {
+		
 	}
 	
+//	@Test
+//	void test50() {
+//		
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			String userName = null;
+//			Pattern pattern = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_]{7,29}$");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//
+//				userName = scanner.nextLine();
+//				// check Validity
+//				Matcher matcher = pattern.matcher(userName);
+//				if (matcher.find()) {
+//					System.out.println("Valid");
+//				} else {
+//					System.out.println("Invalid");
+//				}
+//
+//			}
+//		} catch (PatternSyntaxException e) {
+//			System.out.println("Invalid Pattern");
+//		} catch (Exception e2) {
+//
+//		}
+//		scanner.close();
+//
+//	}	
+//	@Test
+//	void test50() {
+//    Scanner scanner = new Scanner(System.in);
+//String ipAddress = null;
+//
+//try {
+//Pattern pattern = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+///*
+//* Regular Expression (IPADDRESS_PATTERN):
+//^ and $ are anchors that match the start and end of the string, ensuring the entire string is matched.
+//((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}:
+//Matches the first three octets.
+//Each octet can be:
+//25[0-5]: Numbers from 250 to 255.
+//2[0-4][0-9]: Numbers from 200 to 249.
+//[01]?[0-9][0-9]?: Numbers from 0 to 199.
+//(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):
+//Matches the fourth octet using the same logic as the first three octets.
+//\. matches the literal dot . between octets.
+//* 
+//* */            
+//
+//
+//    do {
+//        ipAddress = scanner.nextLine();
+//    // check Validity
+//    Matcher matcher = pattern.matcher(ipAddress);
+//    if (matcher.find()) {
+//        System.out.println("true");
+//    } else {
+//        System.out.println("false");
+//    }
+//
+//}while (ipAddress != null); 
+//} catch (PatternSyntaxException e) {
+//// System.out.println("Invalid");
+//} catch (Exception e2) {
+//
+//}
+//
+//scanner.close();
+//	}
+//	
 //	@Test
 //	void test49() {
 //        Scanner scanner = new Scanner(System.in);
