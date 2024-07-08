@@ -19,6 +19,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
@@ -34,10 +37,33 @@ import org.springframework.util.StringUtils;
 public class JavaInterviewApplicationTests {
 
 	@Test
-	void test49() {
+	void test50() { 
 		
 	}
+
 	
+//	@Test
+//	void test49() {
+//        Scanner scanner = new Scanner(System.in);
+//        Integer N = Integer.parseInt(scanner.nextLine());
+//        String regex = null;
+//        Pattern pattern = null;
+//        for(int i = 0; i < N; i++){
+//            
+//            try {
+//            	while(regex == null) {
+//            		regex = scanner.nextLine();
+//            	}
+//            	pattern = Pattern.compile(regex);
+//            	pattern.flags();
+//            	System.out.println("Valid");
+//            } catch(PatternSyntaxException e) {
+//            	System.out.println("Invalid");
+//            }
+//            regex = null;
+//        }
+//        scanner.close();	
+//	}	
 //	@Test
 //	void test48() {
 //        Scanner scanner = new Scanner(System.in);

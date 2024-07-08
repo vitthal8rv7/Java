@@ -113,10 +113,10 @@ public class ScheduledTasks {
 //		System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
 //	}  
 
-	@Scheduled(cron = "0-5 * * * * *")
-	public void cronJob7() {
-		System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
-	}  
+//	@Scheduled(cron = "0-5 * * * * *")
+//	public void cronJob7() {
+//		System.out.println("7 Scheduled job 5 executed at: " + LocalDateTime.now());
+//	}  
 
 	
 }
