@@ -34,11 +34,59 @@ import org.springframework.util.StringUtils;
 public class JavaInterviewApplicationTests {
 
 	@Test
-	void test48() {
-		
+	void test49() {
 		
 	}
 	
+//	@Test
+//	void test48() {
+//        Scanner scanner = new Scanner(System.in);
+//        int N = Integer.parseInt(scanner.nextLine());
+//       
+//        String input = scanner.nextLine();
+//        
+//        String[] values = input.split("[\\s!,?._'@]+");
+//        List<Integer> list = new ArrayList<>();
+//        for(int i = 0; i < N; i++) {
+//        	list.add(Integer.parseInt(values[i]));
+//        }
+//        int Q = Integer.parseInt(scanner.nextLine());
+//        for(int j = 0; j < Q; j++) {
+//        	String queryType = null;
+//        	do {
+//        		queryType = scanner.nextLine();
+//        	}while(queryType.isBlank());
+//             
+//            if(queryType.equalsIgnoreCase("insert")) {
+////            	int a = Integer.parseInt(scanner.nextLine());
+////            	int b = Integer.parseInt(scanner.nextLine());
+//                int a = scanner.nextInt();
+//                int b = scanner.nextInt();
+//            	if(a < 0 || a > list.size()) continue;
+//            	if(a == list.size()) {
+//            		list.add(b);
+//            	}
+//            	else {
+//            		list.add(a, b);
+//            	}
+//            } else {
+//            	int a = Integer.parseInt(scanner.nextLine());
+//            	if(a < 0 || a >= list.size()) continue;
+//            	list.remove(a);
+//            }  	
+//        }
+//        
+//        for(int i = 0; i<list.size(); i++) {
+//        	if(i == 0) {
+//        		System.out.print(""+list.get(i));
+//        	} else {
+//        		System.out.print(" "+list.get(i));
+//        	}
+//        	
+//        }
+//        scanner.close();
+//		
+//	}
 //	@Test
 //	void test47() {
 //		List<List<Integer>> listOfList = new ArrayList<>();
