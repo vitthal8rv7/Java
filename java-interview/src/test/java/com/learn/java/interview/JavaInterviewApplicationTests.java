@@ -19,6 +19,9 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
@@ -32,12 +35,185 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
-	@Test
-	void test49() {
-		
-	}
-	
+//	@Test
+//	void test54() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("<([^<>]+)>([^<>]+)</\\1>");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group(2));
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}		
+//	@Test
+//	void test53() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("<([\\w\\s]+)>([^<>]+)</\\1>");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group(2));
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}	
+//	@Test
+//	void test52() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("<([\\w\\s]+)>(.*?)</\\1>");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group(2));
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//
+//		
+//
+//	}	
+//	@Test
+//	void test51() {
+//		Pattern pattern = Pattern.compile("[abc]");
+//		Matcher matcher = pattern.matcher("apple banana cherry");
+//		while (matcher.find()) {
+//		    System.out.println("Found: " + matcher.group()); 
+//		}
+//	}
+//	@Test
+//	void test50() {
+//		
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			String userName = null;
+//			Pattern pattern = Pattern.compile("^[a-zA-Z][a-zA-Z0-9_]{7,29}$");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//
+//				userName = scanner.nextLine();
+//				// check Validity
+//				Matcher matcher = pattern.matcher(userName);
+//				if (matcher.find()) {
+//					System.out.println("Valid");
+//				} else {
+//					System.out.println("Invalid");
+//				}
+//
+//			}
+//		} catch (PatternSyntaxException e) {
+//			System.out.println("Invalid Pattern");
+//		} catch (Exception e2) {
+//
+//		}
+//		scanner.close();
+//
+//	}	
+//	@Test
+//	void test50() {
+//    Scanner scanner = new Scanner(System.in);
+//String ipAddress = null;
+//
+//try {
+//Pattern pattern = Pattern.compile("^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+///*
+//* Regular Expression (IPADDRESS_PATTERN):
+//^ and $ are anchors that match the start and end of the string, ensuring the entire string is matched.
+//((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}:
+//Matches the first three octets.
+//Each octet can be:
+//25[0-5]: Numbers from 250 to 255.
+//2[0-4][0-9]: Numbers from 200 to 249.
+//[01]?[0-9][0-9]?: Numbers from 0 to 199.
+//(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):
+//Matches the fourth octet using the same logic as the first three octets.
+//\. matches the literal dot . between octets.
+//* 
+//* */            
+//
+//
+//    do {
+//        ipAddress = scanner.nextLine();
+//    // check Validity
+//    Matcher matcher = pattern.matcher(ipAddress);
+//    if (matcher.find()) {
+//        System.out.println("true");
+//    } else {
+//        System.out.println("false");
+//    }
+//
+//}while (ipAddress != null); 
+//} catch (PatternSyntaxException e) {
+//// System.out.println("Invalid");
+//} catch (Exception e2) {
+//
+//}
+//
+//scanner.close();
+//	}
+//	
+//	@Test
+//	void test49() {
+//        Scanner scanner = new Scanner(System.in);
+//        Integer N = Integer.parseInt(scanner.nextLine());
+//        String regex = null;
+//        Pattern pattern = null;
+//        for(int i = 0; i < N; i++){
+//            
+//            try {
+//            	while(regex == null) {
+//            		regex = scanner.nextLine();
+//            	}
+//            	pattern = Pattern.compile(regex);
+//            	pattern.flags();
+//            	System.out.println("Valid");
+//            } catch(PatternSyntaxException e) {
+//            	System.out.println("Invalid");
+//            }
+//            regex = null;
+//        }
+//        scanner.close();	
+//	}	
 //	@Test
 //	void test48() {
 //        Scanner scanner = new Scanner(System.in);
