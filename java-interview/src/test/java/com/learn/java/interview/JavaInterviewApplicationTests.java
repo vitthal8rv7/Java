@@ -38,7 +38,11 @@ public class JavaInterviewApplicationTests {
 
 	@Test
 	void test51() {
-		
+		Pattern pattern = Pattern.compile("[abc]");
+		Matcher matcher = pattern.matcher("apple banana cherry");
+		while (matcher.find()) {
+		    System.out.println("Found: " + matcher.group()); 
+		}
 	}
 	
 //	@Test
