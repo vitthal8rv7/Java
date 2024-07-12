@@ -1,52 +1,120 @@
 package com.learn.java.interview;
 
-import static org.mockito.ArgumentMatchers.anyList;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
-import java.sql.Time;
-import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.util.StringUtils;
 
 
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
 	@Test
-	void test57() {
-		Scanner scanner = new Scanner(System.in);
-		String n1 = scanner.nextLine();
-		BigInteger bn1 = new BigInteger(n1);
-		String n2 = scanner.nextLine();
-		BigInteger bn2 = new BigInteger(n2);
-		System.out.println(""+bn1.add(bn2));
-		System.out.println(""+bn1.multiply(bn2));
-		scanner.close();
+	void test59() {
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		    int N = Integer.parseInt(bufferedReader.readLine());
+		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+		    List<Integer> input = Arrays.stream(arr)
+		          .map(Integer::parseInt)
+		          .collect(toList());
+		    System.out.println("N: "+N);
+		    System.out.println("input: "+input);
+		    int k = 0;
+		    for(int i = 0; i < N; i++) {
+		    	for(int j = i+1; j <= N; j++) {
+		    		List<Integer> subList = input.subList(i, j);
+		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
+		    		System.out.println("SubList: "+subList);
+		    		if(sum < 0) k++;
+		    	}
+		    }
+		    System.out.println("K: "+k);
+		} catch (Exception e) {
+			System.out.println("Exception: "+e);
+		}
+
 	}
+//	@Test
+//	void test58() throws IOException {
+//	    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//	
+//	    List<List<Integer>> arr = new ArrayList<>();
+//	    IntStream.range(0, 6).forEach(i -> {
+//	        try {
+//	            arr.add(
+//	                Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+//	                    .map(Integer::parseInt)
+//	                    .collect(toList())
+//	            );
+//	        } catch (IOException ex) {
+//	            throw new RuntimeException(ex);
+//	        }
+//	    });
+//	    bufferedReader.close();
+//	    
+//	    Integer maxSum = null;
+//	    Integer sum = 0;
+//        for(int i = 0; i < arr.size()-2; i++) {
+//            for(int j = 0; j < arr.size()-2; j++) {
+//            	sum = 0;
+//            	sum = sum + arr.get(i).get(j) + arr.get(i).get(j+1) + arr.get(i).get(j+2)
+//            			+ arr.get(i+1).get(j+1) 
+//            			+ arr.get(i+2).get(j) + arr.get(i+2).get(j+1) + arr.get(i+2).get(j+2);
+//            	System.out.println("sum: "+sum); 
+//                if(Objects.isNull(maxSum)) maxSum = sum;
+//            	if(maxSum < sum) {
+//                	maxSum = sum;
+//                }
+//            }
+//        }
+//        System.out.println("MaxSum: "+ maxSum);
+//        
+//	}
+//	@Test
+//	void test57() {
+//        //Input
+//        Scanner sc= new Scanner(System.in);
+//        int n=sc.nextInt();
+//        String []s=new String[n+2];
+//        for(int i=0;i<n;i++){
+//            s[i]=sc.next();
+//        }
+//        sc.close();
+//
+//        //Write your code here
+//        try {
+//        	Arrays.sort(s, 0, n, (a, b) -> new BigDecimal(b).compareTo(new BigDecimal(a)));
+//        } catch(Exception e) {
+//        	System.out.println("Exception: "+e);
+//        }
+//        
+//        //Output
+//        for(int i=0;i<n;i++)
+//        {
+//            System.out.println(s[i]);
+//        }		
+//	}
+//	@Test
+//	void test57() {
+//		Scanner scanner = new Scanner(System.in);
+//		String n1 = scanner.nextLine();
+//		BigInteger bn1 = new BigInteger(n1);
+//		String n2 = scanner.nextLine();
+//		BigInteger bn2 = new BigInteger(n2);
+//		System.out.println(""+bn1.add(bn2));
+//		System.out.println(""+bn1.multiply(bn2));
+//		scanner.close();
+//	}
 //	@Test
 //	void test56() {
 //		
