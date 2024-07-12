@@ -35,37 +35,41 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	
-	@Test
-	void test56() {
-		
-		String as = null;
-        String regex = "\\b(\\w+)(\\s+\\1)+\\b";
-        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 
-        Scanner in = new Scanner(System.in);
-        int numSentences = Integer.parseInt(in.nextLine());
-        
-        while (numSentences-- > 0) {
-            String input = in.nextLine();
-            
-            Matcher m = p.matcher(input);
-            
-            // Check for subsequences of input that match the compiled pattern
-            while (m.find()) {
-            	String m1 = m.group();
-            	String m2 = m.group(1);
-                input = input.replaceAll(m1, m2);
-                as = null;
-            }
-            
-            // Prints the modified sentence.
-            System.out.println(input);
-        }
-        
-        in.close();		
+	@Test
+	void test57() {
 		
 	}
+//	@Test
+//	void test56() {
+//		
+//		String as = null;
+//        String regex = "\\b(\\w+)(\\s+\\1)+\\b";
+//        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//
+//        Scanner in = new Scanner(System.in);
+//        int numSentences = Integer.parseInt(in.nextLine());
+//        
+//        while (numSentences-- > 0) {
+//            String input = in.nextLine();
+//            
+//            Matcher m = p.matcher(input);
+//            
+//            // Check for subsequences of input that match the compiled pattern
+//            while (m.find()) {
+//            	String m1 = m.group();
+//            	String m2 = m.group(1);
+//                input = input.replaceAll(m1, m2);
+//                as = null;
+//            }
+//            
+//            // Prints the modified sentence.
+//            System.out.println(input);
+//        }
+//        
+//        in.close();		
+//		
+//	}
 //	@Test
 //	void test55() {
 //        StringBuffer result = new StringBuffer();
