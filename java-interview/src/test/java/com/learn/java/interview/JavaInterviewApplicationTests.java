@@ -38,7 +38,14 @@ public class JavaInterviewApplicationTests {
 
 	@Test
 	void test57() {
-		
+		Scanner scanner = new Scanner(System.in);
+		String n1 = scanner.nextLine();
+		BigInteger bn1 = new BigInteger(n1);
+		String n2 = scanner.nextLine();
+		BigInteger bn2 = new BigInteger(n2);
+		System.out.println(""+bn1.add(bn2));
+		System.out.println(""+bn1.multiply(bn2));
+		scanner.close();
 	}
 //	@Test
 //	void test56() {
