@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.anyList;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Time;
 import java.text.NumberFormat;
@@ -35,18 +36,44 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
 	@Test
-	void test57() {
-		Scanner scanner = new Scanner(System.in);
-		String n1 = scanner.nextLine();
-		BigInteger bn1 = new BigInteger(n1);
-		String n2 = scanner.nextLine();
-		BigInteger bn2 = new BigInteger(n2);
-		System.out.println(""+bn1.add(bn2));
-		System.out.println(""+bn1.multiply(bn2));
-		scanner.close();
-	}
+	void test58() {}
+	
+//	@Test
+//	void test57() {
+//        //Input
+//        Scanner sc= new Scanner(System.in);
+//        int n=sc.nextInt();
+//        String []s=new String[n+2];
+//        for(int i=0;i<n;i++){
+//            s[i]=sc.next();
+//        }
+//        sc.close();
+//
+//        //Write your code here
+//        try {
+//        	Arrays.sort(s, 0, n, (a, b) -> new BigDecimal(b).compareTo(new BigDecimal(a)));
+//        } catch(Exception e) {
+//        	System.out.println("Exception: "+e);
+//        }
+//        
+//        //Output
+//        for(int i=0;i<n;i++)
+//        {
+//            System.out.println(s[i]);
+//        }		
+//	}
+//	@Test
+//	void test57() {
+//		Scanner scanner = new Scanner(System.in);
+//		String n1 = scanner.nextLine();
+//		BigInteger bn1 = new BigInteger(n1);
+//		String n2 = scanner.nextLine();
+//		BigInteger bn2 = new BigInteger(n2);
+//		System.out.println(""+bn1.add(bn2));
+//		System.out.println(""+bn1.multiply(bn2));
+//		scanner.close();
+//	}
 //	@Test
 //	void test56() {
 //		
