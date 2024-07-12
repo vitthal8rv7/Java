@@ -1,44 +1,58 @@
 package com.learn.java.interview;
 
-import static org.mockito.ArgumentMatchers.anyList;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.sql.Time;
-import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Scanner;
-import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 import java.util.stream.IntStream;
-import java.util.stream.LongStream;
-
+import java.util.stream.Stream;
+import static java.util.stream.Collectors.toList;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.util.StringUtils;
 
 
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	@Test
-	void test58() {}
-	
+//	@Test
+//	void test58() throws IOException {
+//	    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//	
+//	    List<List<Integer>> arr = new ArrayList<>();
+//	    IntStream.range(0, 6).forEach(i -> {
+//	        try {
+//	            arr.add(
+//	                Stream.of(bufferedReader.readLine().replaceAll("\\s+$", "").split(" "))
+//	                    .map(Integer::parseInt)
+//	                    .collect(toList())
+//	            );
+//	        } catch (IOException ex) {
+//	            throw new RuntimeException(ex);
+//	        }
+//	    });
+//	    bufferedReader.close();
+//	    
+//	    Integer maxSum = null;
+//	    Integer sum = 0;
+//        for(int i = 0; i < arr.size()-2; i++) {
+//            for(int j = 0; j < arr.size()-2; j++) {
+//            	sum = 0;
+//            	sum = sum + arr.get(i).get(j) + arr.get(i).get(j+1) + arr.get(i).get(j+2)
+//            			+ arr.get(i+1).get(j+1) 
+//            			+ arr.get(i+2).get(j) + arr.get(i+2).get(j+1) + arr.get(i+2).get(j+2);
+//            	System.out.println("sum: "+sum); 
+//                if(Objects.isNull(maxSum)) maxSum = sum;
+//            	if(maxSum < sum) {
+//                	maxSum = sum;
+//                }
+//            }
+//        }
+//        System.out.println("MaxSum: "+ maxSum);
+//        
+//	}
 //	@Test
 //	void test57() {
 //        //Input
