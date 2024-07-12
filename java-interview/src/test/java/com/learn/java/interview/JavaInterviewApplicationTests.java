@@ -35,6 +35,57 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	
+	@Test
+	void test55() {
+		Scanner scanner = new Scanner(System.in);
+		try {
+			Boolean isFound = false;
+			String input = null;
+			Pattern pattern = Pattern.compile("[\\w.%+-]+@[\\w.-]+\\.\\w{2,}");
+			Integer N = Integer.parseInt(scanner.nextLine());
+			for (int i = 0; i < N; i++) {
+				isFound = true;
+				input = scanner.nextLine();
+				Matcher matcher = pattern.matcher(input);
+				while (matcher.find()) {
+				    System.out.println(matcher.group());
+				    isFound = false;
+				} 
+				if(isFound){
+					//System.out.println("None");
+				}
+			}
+		} catch (Exception e2) {
+			
+		}
+		scanner.close();
+	}		
+//	@Test
+//	void test54() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("<([^<>]+)>([^<>]+)</\\1>");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group());
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					//System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}	
 //	@Test
 //	void test54() {
 //		Scanner scanner = new Scanner(System.in);
