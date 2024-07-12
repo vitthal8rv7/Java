@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.IntStream;
@@ -17,6 +18,32 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	@Test
+	void test59() {
+		try {
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		    int N = Integer.parseInt(bufferedReader.readLine());
+		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+		    List<Integer> input = Arrays.stream(arr)
+		          .map(Integer::parseInt)
+		          .collect(toList());
+		    System.out.println("N: "+N);
+		    System.out.println("input: "+input);
+		    int k = 0;
+		    for(int i = 0; i < N; i++) {
+		    	for(int j = i+1; j <= N; j++) {
+		    		List<Integer> subList = input.subList(i, j);
+		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
+		    		System.out.println("SubList: "+subList);
+		    		if(sum < 0) k++;
+		    	}
+		    }
+		    System.out.println("K: "+k);
+		} catch (Exception e) {
+			System.out.println("Exception: "+e);
+		}
+
+	}
 //	@Test
 //	void test58() throws IOException {
 //	    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
