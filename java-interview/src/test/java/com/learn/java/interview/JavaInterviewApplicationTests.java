@@ -35,6 +35,122 @@ import org.springframework.util.StringUtils;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+
+	@Test
+	void test57() {
+		Scanner scanner = new Scanner(System.in);
+		String n1 = scanner.nextLine();
+		BigInteger bn1 = new BigInteger(n1);
+		String n2 = scanner.nextLine();
+		BigInteger bn2 = new BigInteger(n2);
+		System.out.println(""+bn1.add(bn2));
+		System.out.println(""+bn1.multiply(bn2));
+		scanner.close();
+	}
+//	@Test
+//	void test56() {
+//		
+//		String as = null;
+//        String regex = "\\b(\\w+)(\\s+\\1)+\\b";
+//        Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+//
+//        Scanner in = new Scanner(System.in);
+//        int numSentences = Integer.parseInt(in.nextLine());
+//        
+//        while (numSentences-- > 0) {
+//            String input = in.nextLine();
+//            
+//            Matcher m = p.matcher(input);
+//            
+//            // Check for subsequences of input that match the compiled pattern
+//            while (m.find()) {
+//            	String m1 = m.group();
+//            	String m2 = m.group(1);
+//                input = input.replaceAll(m1, m2);
+//                as = null;
+//            }
+//            
+//            // Prints the modified sentence.
+//            System.out.println(input);
+//        }
+//        
+//        in.close();		
+//		
+//	}
+//	@Test
+//	void test55() {
+//        StringBuffer result = new StringBuffer();
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			String input = null;
+//			Pattern pattern = Pattern.compile("\\b(\\w+)(\\s+\\1)+\\b", Pattern.CASE_INSENSITIVE);
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//		        while (matcher.find()) {
+//		            matcher.appendReplacement(result, matcher.group(1));
+//		        }
+//		        matcher.appendTail(result);
+//		        System.out.println(""+result.toString());
+//		        result = new StringBuffer();
+//		        
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}	
+//	@Test
+//	void test55() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("[\\w.%+-]+@[\\w.-]+\\.\\w{2,}");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group());
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					//System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}		
+//	@Test
+//	void test54() {
+//		Scanner scanner = new Scanner(System.in);
+//		try {
+//			Boolean isFound = false;
+//			String input = null;
+//			Pattern pattern = Pattern.compile("<([^<>]+)>([^<>]+)</\\1>");
+//			Integer N = Integer.parseInt(scanner.nextLine());
+//			for (int i = 0; i < N; i++) {
+//				isFound = true;
+//				input = scanner.nextLine();
+//				Matcher matcher = pattern.matcher(input);
+//				while (matcher.find()) {
+//				    System.out.println(matcher.group());
+//				    isFound = false;
+//				} 
+//				if(isFound){
+//					//System.out.println("None");
+//				}
+//			}
+//		} catch (Exception e2) {
+//			
+//		}
+//		scanner.close();
+//	}	
 //	@Test
 //	void test54() {
 //		Scanner scanner = new Scanner(System.in);
