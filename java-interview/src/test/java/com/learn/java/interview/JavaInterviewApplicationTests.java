@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Stack;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
@@ -21,6 +22,38 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	@Test
+	void test61() {
+	Scanner sc = new Scanner(System.in);
+		while (sc.hasNext()) {
+			String input=sc.next();
+            //Complete the code
+            Stack<Character> stack = new Stack<>();
+            char[] chars = input.toCharArray();
+            for(char ch: chars)
+            {
+                if(stack.isEmpty()) {
+                    stack.push(ch);
+                } else if((ch == '{') || (ch == '[') || (ch == '(')) {
+                    stack.push(ch);
+                } else if((ch == '}') || (ch == ']') || (ch == ')')) {
+                    char ch2 = stack.peek();
+                    if( (ch2 == '{' && ch == '}') ||
+                        (ch2 == '[' && ch == ']') ||
+                        (ch2 == '(' && ch == ')') ) {
+                        stack.pop();
+                    } else {
+                        stack.push(ch);
+                    }
+                }
+            }
+            if(stack.isEmpty()) {
+                System.out.println("true");
+            } else {
+                System.out.println("false");
+            }
+		}		
+	}
 //	@Test
 //	void test60() {
 //		Scanner in = new Scanner(System.in);
