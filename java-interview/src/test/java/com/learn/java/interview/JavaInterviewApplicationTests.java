@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,13 +21,46 @@ import static java.util.stream.Collectors.toList;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.learn.java.interview.model.test.Student;
+
 
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 //	@Test
-//	void test62() {
+//	void test63() {
+//		Scanner in = new Scanner(System.in);
+//		int testCases = Integer.parseInt(in.nextLine());
+//		
+//		List<Student> studentList = new ArrayList<Student>();
+//		while(testCases>0){
+//			int id = in.nextInt();
+//			String fname = in.next();
+//			double cgpa = in.nextDouble();
+//			
+//			Student st = new Student(id, fname, cgpa);
+//			studentList.add(st);
+//			
+//			testCases--;
+//		}
+//	//	studentList.stream().sorted(Comparator.comparing(Student::getCgpa));
+//	//	studentList = studentList.stream().sorted((studentObj1, studentObj2) -> studentObj2.getCgpa().compareTo(studentObj1.getCgpa())).toList();
+//		Collections.sort(studentList, ((studentObj1, studentObj2) -> {			
+//			if(studentObj1.getCgpa().equals(studentObj2.getCgpa())) {
+//				if(studentObj1.getFname().equalsIgnoreCase(studentObj2.getFname())) {
+//					return  studentObj1.getId().compareTo(studentObj2.getId());	
+//				}
+//				return  studentObj1.getFname().compareTo(studentObj2.getFname());
+//			}
+//			return studentObj2.getCgpa().compareTo(studentObj1.getCgpa());
+//		}));
+//      	for(Student st: studentList){
+//			System.out.println(st.getFname());
+//		}
+//	}
+//	@Test
+//	void test62() {	
 //		Scanner in = new Scanner(System.in);
 //		int n = Integer.parseInt(in.nextLine());
 //		Set<String> set = new HashSet<>();
