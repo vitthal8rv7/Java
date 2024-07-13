@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -28,6 +29,58 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+//	@Test
+//	void test64() {
+//		Scanner scanner = new Scanner(System.in);
+//		String val[] =scanner.nextLine().split("\\s+");
+//		int N = Integer.parseInt(val[0]);
+//		int M = Integer.parseInt(val[1]);
+//		BitSet bs1 = new BitSet(N);
+//		BitSet bs2 = new BitSet(N);
+//		
+////		System.out.println("bs1: "+ bs1);
+////		System.out.println("bs2: "+ bs2);
+//		//System.out.println("arr: "+Arrays.asList(val));
+//		for(int i = 0; i < M; i++) {
+//			String arr[] = scanner.nextLine().split("\\s+");
+//			if(arr[0].equalsIgnoreCase("and")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.and(bs2);
+//				} else {
+//					bs2.and(bs1);
+//				}
+//			} else if(arr[0].equalsIgnoreCase("set")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.set(Integer.parseInt(arr[2]), true);
+//				} else {
+//					bs2.set(Integer.parseInt(arr[2]), true);
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("flip")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.flip(Integer.parseInt(arr[2]));
+//				} else {
+//					bs2.flip(Integer.parseInt(arr[2]));
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("or")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.or(bs2);
+//				} else {
+//					bs2.or(bs1);
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("xor")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.xor(bs2);
+//				} else {
+//					bs2.xor(bs1);
+//				}				
+//			} else {
+//				System.out.println("Incorrect Operation.");
+//			}
+//			System.out.println(""+ bs1.cardinality()+ " " + bs2.cardinality());
+//			//System.out.println("arr: "+Arrays.asList(arr));
+//		}
+//		scanner.close();
+//	}
 //	@Test
 //	void test63() {
 //		Scanner in = new Scanner(System.in);
