@@ -3,6 +3,7 @@ package com.learn.java.interview;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.BitSet;
@@ -29,6 +30,36 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+//	@Test
+//	void test65() throws ClassNotFoundException {
+//        Class student = Class.forName("Student");
+//        Method[] methods = student.getDeclaredMethods();
+//
+//        ArrayList<String> methodList = new ArrayList<>();
+//        for(Method method: methods){
+//            methodList.add(method.getName());
+//        }
+//        Collections.sort(methodList);
+//        for(String name: methodList){
+//            System.out.println(name);
+//        }
+//	}
+//	@Test
+//	void test64() {
+//		try{
+//			Scanner scanner = new Scanner(System.in);
+//			Integer x = Integer.parseInt(scanner.nextLine());
+//			Integer y = Integer.parseInt(scanner.nextLine());
+//			System.out.println("test: "+ x/y);;
+//			scanner.close();
+//		} catch(Exception e) {
+//			if(e.getClass().getName() == "java.lang.NumberFormatException") {
+//				System.out.println("java.util.InputMismatchException");
+//			} else {
+//				System.out.println(""+e);
+//			}
+//		}
+//	}
 //	@Test
 //	void test64() {
 //		Scanner scanner = new Scanner(System.in);
