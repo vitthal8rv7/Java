@@ -6,10 +6,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Stack;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -22,38 +24,71 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	@Test
-	void test61() {
-	Scanner sc = new Scanner(System.in);
-		while (sc.hasNext()) {
-			String input=sc.next();
-            //Complete the code
-            Stack<Character> stack = new Stack<>();
-            char[] chars = input.toCharArray();
-            for(char ch: chars)
-            {
-                if(stack.isEmpty()) {
-                    stack.push(ch);
-                } else if((ch == '{') || (ch == '[') || (ch == '(')) {
-                    stack.push(ch);
-                } else if((ch == '}') || (ch == ']') || (ch == ')')) {
-                    char ch2 = stack.peek();
-                    if( (ch2 == '{' && ch == '}') ||
-                        (ch2 == '[' && ch == ']') ||
-                        (ch2 == '(' && ch == ')') ) {
-                        stack.pop();
-                    } else {
-                        stack.push(ch);
-                    }
-                }
-            }
-            if(stack.isEmpty()) {
-                System.out.println("true");
-            } else {
-                System.out.println("false");
-            }
-		}		
-	}
+//	@Test
+//	void test62() {
+//		Scanner in = new Scanner(System.in);
+//		int n = Integer.parseInt(in.nextLine());
+//		Set<String> set = new HashSet<>();
+//		for(int i=0;i<n;i++)
+//		{
+//			String name=in.nextLine();
+//			set.add(name);
+//			System.out.println(""+set.size());
+//		}		
+//		in.close();
+//
+///*        Scanner s = new Scanner(System.in);
+//        int t = s.nextInt();
+//        String [] pair_left = new String[t];
+//        String [] pair_right = new String[t];
+//        
+//        for (int i = 0; i < t; i++) {
+//            pair_left[i] = s.next();
+//            pair_right[i] = s.next();
+//        }
+//
+////Write your code here
+//        Set<String> set = new HashSet<>();
+//        for(int i=0;i<t;i++)
+//        {
+//            String name = pair_left[i].trim() + " " +pair_right[i].trim();
+//            set.add(name);
+//            System.out.println(""+set.size());
+//        }       
+//        */
+//	}
+//	@Test
+//	void test61() {
+//	Scanner sc = new Scanner(System.in);
+//		while (sc.hasNext()) {
+//			String input=sc.next();
+//            //Complete the code
+//            Stack<Character> stack = new Stack<>();
+//            char[] chars = input.toCharArray();
+//            for(char ch: chars)
+//            {
+//                if(stack.isEmpty()) {
+//                    stack.push(ch);
+//                } else if((ch == '{') || (ch == '[') || (ch == '(')) {
+//                    stack.push(ch);
+//                } else if((ch == '}') || (ch == ']') || (ch == ')')) {
+//                    char ch2 = stack.peek();
+//                    if( (ch2 == '{' && ch == '}') ||
+//                        (ch2 == '[' && ch == ']') ||
+//                        (ch2 == '(' && ch == ')') ) {
+//                        stack.pop();
+//                    } else {
+//                        stack.push(ch);
+//                    }
+//                }
+//            }
+//            if(stack.isEmpty()) {
+//                System.out.println("true");
+//            } else {
+//                System.out.println("false");
+//            }
+//		}		
+//	}
 //	@Test
 //	void test60() {
 //		Scanner in = new Scanner(System.in);
