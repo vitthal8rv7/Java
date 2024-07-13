@@ -5,8 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
@@ -18,32 +21,58 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	@Test
-	void test59() {
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		    int N = Integer.parseInt(bufferedReader.readLine());
-		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-		    List<Integer> input = Arrays.stream(arr)
-		          .map(Integer::parseInt)
-		          .collect(toList());
-		    System.out.println("N: "+N);
-		    System.out.println("input: "+input);
-		    int k = 0;
-		    for(int i = 0; i < N; i++) {
-		    	for(int j = i+1; j <= N; j++) {
-		    		List<Integer> subList = input.subList(i, j);
-		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
-		    		System.out.println("SubList: "+subList);
-		    		if(sum < 0) k++;
-		    	}
-		    }
-		    System.out.println("K: "+k);
-		} catch (Exception e) {
-			System.out.println("Exception: "+e);
-		}
-
-	}
+//	@Test
+//	void test60() {
+//		Scanner in = new Scanner(System.in);
+//		int n = Integer.parseInt(in.nextLine());
+//        Map<String, Integer> map = new HashMap<>();
+//		for(int i=0;i<n;i++)
+//		{
+//			String name=in.nextLine();
+//			int phone= Integer.parseInt(in.nextLine());
+//			map.put(name, phone);
+//		}
+//        //System.out.println("Map: "+map);
+//		while(in.hasNext())
+//		{
+//			String s=in.nextLine();
+//			
+//			//System.out.println("S: "+s);
+//            if(Objects.isNull(map.get(s))) {
+//                System.out.println("Not found");
+//            } else {
+//                System.out.println(s+"="+map.get(s));
+//            }
+//		}	
+//	}
+//	@Test
+//	void test59() {
+//		Map<String, Integer> map = new HashMap<>();
+//		map.get(2);
+//		try {
+//			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//		    int N = Integer.parseInt(bufferedReader.readLine());
+//		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+//		    List<Integer> input = Arrays.stream(arr)
+//		          .map(Integer::parseInt)
+//		          .collect(toList());
+//		    System.out.println("N: "+N);
+//		    System.out.println("input: "+input);
+//		    int k = 0;
+//		    for(int i = 0; i < N; i++) {
+//		    	for(int j = i+1; j <= N; j++) {
+//		    		List<Integer> subList = input.subList(i, j);
+//		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
+//		    		System.out.println("SubList: "+subList);
+//		    		if(sum < 0) k++;
+//		    	}
+//		    }
+//		    System.out.println("K: "+k);
+//		} catch (Exception e) {
+//			System.out.println("Exception: "+e);
+//		}
+//
+//	}
 //	@Test
 //	void test58() throws IOException {
 //	    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
