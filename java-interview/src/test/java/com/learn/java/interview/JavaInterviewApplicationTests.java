@@ -30,6 +30,31 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	
+	
+	@Test
+	void test66() {
+		class Player{
+		    String name;
+		    int score;
+		    
+		    Player(String name, int score){
+		        this.name = name;
+		        this.score = score;
+		    }
+		}
+		class Checker implements Comparator<Player> {
+	        @Override
+	        public int compare(Player a, Player b) {
+	            if(a.score == b.score) {
+	                return a.name.compareTo(b.name); 
+	            } else {
+	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
+	            }
+	        }
+		}
+	}
+
 //	@Test
 //	void test65() throws ClassNotFoundException {
 //        Class student = Class.forName("Student");
