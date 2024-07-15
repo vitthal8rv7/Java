@@ -3,47 +3,309 @@ package com.learn.java.interview;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Stack;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.learn.java.interview.model.test.Student;
+
 
 
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+	
 	@Test
-	void test59() {
-		try {
-			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		    int N = Integer.parseInt(bufferedReader.readLine());
-		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
-		    List<Integer> input = Arrays.stream(arr)
-		          .map(Integer::parseInt)
-		          .collect(toList());
-		    System.out.println("N: "+N);
-		    System.out.println("input: "+input);
-		    int k = 0;
-		    for(int i = 0; i < N; i++) {
-		    	for(int j = i+1; j <= N; j++) {
-		    		List<Integer> subList = input.subList(i, j);
-		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
-		    		System.out.println("SubList: "+subList);
-		    		if(sum < 0) k++;
-		    	}
+	void test67() {
+		class Prime {
+		    Boolean isPrime = false;
+		    public void checkPrime(Integer... values ) {
+		        for(Integer value: values) {
+		            if(value < 2) continue;
+		            isPrime = true;
+		            for(int i = 2; i < value; i++) {
+		                if(value % i == 0) {
+		                    isPrime = false;
+		                }
+		            }
+		            if(isPrime) {
+		                System.out.print(""+value+" "); 
+		            }
+		        }
+		        System.out.println("");
 		    }
-		    System.out.println("K: "+k);
-		} catch (Exception e) {
-			System.out.println("Exception: "+e);
 		}
-
 	}
+	
+	@Test
+	void test66() {
+		class Player{
+		    String name;
+		    int score;
+		    
+		    Player(String name, int score){
+		        this.name = name;
+		        this.score = score;
+		    }
+		}
+		class Checker implements Comparator<Player> {
+	        @Override
+	        public int compare(Player a, Player b) {
+	            if(a.score == b.score) {
+	                return a.name.compareTo(b.name); 
+	            } else {
+	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
+	            }
+	        }
+		}
+	}
+
+//	@Test
+//	void test65() throws ClassNotFoundException {
+//        Class student = Class.forName("Student");
+//        Method[] methods = student.getDeclaredMethods();
+//
+//        ArrayList<String> methodList = new ArrayList<>();
+//        for(Method method: methods){
+//            methodList.add(method.getName());
+//        }
+//        Collections.sort(methodList);
+//        for(String name: methodList){
+//            System.out.println(name);
+//        }
+//	}
+//	@Test
+//	void test64() {
+//		try{
+//			Scanner scanner = new Scanner(System.in);
+//			Integer x = Integer.parseInt(scanner.nextLine());
+//			Integer y = Integer.parseInt(scanner.nextLine());
+//			System.out.println("test: "+ x/y);;
+//			scanner.close();
+//		} catch(Exception e) {
+//			if(e.getClass().getName() == "java.lang.NumberFormatException") {
+//				System.out.println("java.util.InputMismatchException");
+//			} else {
+//				System.out.println(""+e);
+//			}
+//		}
+//	}
+//	@Test
+//	void test64() {
+//		Scanner scanner = new Scanner(System.in);
+//		String val[] =scanner.nextLine().split("\\s+");
+//		int N = Integer.parseInt(val[0]);
+//		int M = Integer.parseInt(val[1]);
+//		BitSet bs1 = new BitSet(N);
+//		BitSet bs2 = new BitSet(N);
+//		
+////		System.out.println("bs1: "+ bs1);
+////		System.out.println("bs2: "+ bs2);
+//		//System.out.println("arr: "+Arrays.asList(val));
+//		for(int i = 0; i < M; i++) {
+//			String arr[] = scanner.nextLine().split("\\s+");
+//			if(arr[0].equalsIgnoreCase("and")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.and(bs2);
+//				} else {
+//					bs2.and(bs1);
+//				}
+//			} else if(arr[0].equalsIgnoreCase("set")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.set(Integer.parseInt(arr[2]), true);
+//				} else {
+//					bs2.set(Integer.parseInt(arr[2]), true);
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("flip")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.flip(Integer.parseInt(arr[2]));
+//				} else {
+//					bs2.flip(Integer.parseInt(arr[2]));
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("or")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.or(bs2);
+//				} else {
+//					bs2.or(bs1);
+//				}				
+//			} else if(arr[0].equalsIgnoreCase("xor")) {
+//				if(arr[1].equalsIgnoreCase("1")) {
+//					bs1.xor(bs2);
+//				} else {
+//					bs2.xor(bs1);
+//				}				
+//			} else {
+//				System.out.println("Incorrect Operation.");
+//			}
+//			System.out.println(""+ bs1.cardinality()+ " " + bs2.cardinality());
+//			//System.out.println("arr: "+Arrays.asList(arr));
+//		}
+//		scanner.close();
+//	}
+//	@Test
+//	void test63() {
+//		Scanner in = new Scanner(System.in);
+//		int testCases = Integer.parseInt(in.nextLine());
+//		
+//		List<Student> studentList = new ArrayList<Student>();
+//		while(testCases>0){
+//			int id = in.nextInt();
+//			String fname = in.next();
+//			double cgpa = in.nextDouble();
+//			
+//			Student st = new Student(id, fname, cgpa);
+//			studentList.add(st);
+//			
+//			testCases--;
+//		}
+//	//	studentList.stream().sorted(Comparator.comparing(Student::getCgpa));
+//	//	studentList = studentList.stream().sorted((studentObj1, studentObj2) -> studentObj2.getCgpa().compareTo(studentObj1.getCgpa())).toList();
+//		Collections.sort(studentList, ((studentObj1, studentObj2) -> {			
+//			if(studentObj1.getCgpa().equals(studentObj2.getCgpa())) {
+//				if(studentObj1.getFname().equalsIgnoreCase(studentObj2.getFname())) {
+//					return  studentObj1.getId().compareTo(studentObj2.getId());	
+//				}
+//				return  studentObj1.getFname().compareTo(studentObj2.getFname());
+//			}
+//			return studentObj2.getCgpa().compareTo(studentObj1.getCgpa());
+//		}));
+//      	for(Student st: studentList){
+//			System.out.println(st.getFname());
+//		}
+//	}
+//	@Test
+//	void test62() {	
+//		Scanner in = new Scanner(System.in);
+//		int n = Integer.parseInt(in.nextLine());
+//		Set<String> set = new HashSet<>();
+//		for(int i=0;i<n;i++)
+//		{
+//			String name=in.nextLine();
+//			set.add(name);
+//			System.out.println(""+set.size());
+//		}		
+//		in.close();
+//
+///*        Scanner s = new Scanner(System.in);
+//        int t = s.nextInt();
+//        String [] pair_left = new String[t];
+//        String [] pair_right = new String[t];
+//        
+//        for (int i = 0; i < t; i++) {
+//            pair_left[i] = s.next();
+//            pair_right[i] = s.next();
+//        }
+//
+////Write your code here
+//        Set<String> set = new HashSet<>();
+//        for(int i=0;i<t;i++)
+//        {
+//            String name = pair_left[i].trim() + " " +pair_right[i].trim();
+//            set.add(name);
+//            System.out.println(""+set.size());
+//        }       
+//        */
+//	}
+//	@Test
+//	void test61() {
+//	Scanner sc = new Scanner(System.in);
+//		while (sc.hasNext()) {
+//			String input=sc.next();
+//            //Complete the code
+//            Stack<Character> stack = new Stack<>();
+//            char[] chars = input.toCharArray();
+//            for(char ch: chars)
+//            {
+//                if(stack.isEmpty()) {
+//                    stack.push(ch);
+//                } else if((ch == '{') || (ch == '[') || (ch == '(')) {
+//                    stack.push(ch);
+//                } else if((ch == '}') || (ch == ']') || (ch == ')')) {
+//                    char ch2 = stack.peek();
+//                    if( (ch2 == '{' && ch == '}') ||
+//                        (ch2 == '[' && ch == ']') ||
+//                        (ch2 == '(' && ch == ')') ) {
+//                        stack.pop();
+//                    } else {
+//                        stack.push(ch);
+//                    }
+//                }
+//            }
+//            if(stack.isEmpty()) {
+//                System.out.println("true");
+//            } else {
+//                System.out.println("false");
+//            }
+//		}		
+//	}
+//	@Test
+//	void test60() {
+//		Scanner in = new Scanner(System.in);
+//		int n = Integer.parseInt(in.nextLine());
+//        Map<String, Integer> map = new HashMap<>();
+//		for(int i=0;i<n;i++)
+//		{
+//			String name=in.nextLine();
+//			int phone= Integer.parseInt(in.nextLine());
+//			map.put(name, phone);
+//		}
+//        //System.out.println("Map: "+map);
+//		while(in.hasNext())
+//		{
+//			String s=in.nextLine();
+//			
+//			//System.out.println("S: "+s);
+//            if(Objects.isNull(map.get(s))) {
+//                System.out.println("Not found");
+//            } else {
+//                System.out.println(s+"="+map.get(s));
+//            }
+//		}	
+//	}
+//	@Test
+//	void test59() {
+//		Map<String, Integer> map = new HashMap<>();
+//		map.get(2);
+//		try {
+//			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+//		    int N = Integer.parseInt(bufferedReader.readLine());
+//		    String[] arr = bufferedReader.readLine().replaceAll("\\s+$", "").split(" ");
+//		    List<Integer> input = Arrays.stream(arr)
+//		          .map(Integer::parseInt)
+//		          .collect(toList());
+//		    System.out.println("N: "+N);
+//		    System.out.println("input: "+input);
+//		    int k = 0;
+//		    for(int i = 0; i < N; i++) {
+//		    	for(int j = i+1; j <= N; j++) {
+//		    		List<Integer> subList = input.subList(i, j);
+//		    		Integer sum = subList.stream().mapToInt(vl -> vl).sum();
+//		    		System.out.println("SubList: "+subList);
+//		    		if(sum < 0) k++;
+//		    	}
+//		    }
+//		    System.out.println("K: "+k);
+//		} catch (Exception e) {
+//			System.out.println("Exception: "+e);
+//		}
+//
+//	}
 //	@Test
 //	void test58() throws IOException {
 //	    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
