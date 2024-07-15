@@ -31,6 +31,27 @@ import com.learn.java.interview.model.test.Student;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 	
+	@Test
+	void test67() {
+		class Prime {
+		    Boolean isPrime = false;
+		    public void checkPrime(Integer... values ) {
+		        for(Integer value: values) {
+		            if(value < 2) continue;
+		            isPrime = true;
+		            for(int i = 2; i < value; i++) {
+		                if(value % i == 0) {
+		                    isPrime = false;
+		                }
+		            }
+		            if(isPrime) {
+		                System.out.print(""+value+" "); 
+		            }
+		        }
+		        System.out.println("");
+		    }
+		}
+	}
 	
 	@Test
 	void test66() {
