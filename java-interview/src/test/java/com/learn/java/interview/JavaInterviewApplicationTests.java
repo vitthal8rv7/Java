@@ -30,52 +30,86 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	
-	@Test
-	void test67() {
-		class Prime {
-		    Boolean isPrime = false;
-		    public void checkPrime(Integer... values ) {
-		        for(Integer value: values) {
-		            if(value < 2) continue;
-		            isPrime = true;
-		            for(int i = 2; i < value; i++) {
-		                if(value % i == 0) {
-		                    isPrime = false;
-		                }
-		            }
-		            if(isPrime) {
-		                System.out.print(""+value+" "); 
-		            }
-		        }
-		        System.out.println("");
-		    }
-		}
-	}
-	
-	@Test
-	void test66() {
-		class Player{
-		    String name;
-		    int score;
-		    
-		    Player(String name, int score){
-		        this.name = name;
-		        this.score = score;
-		    }
-		}
-		class Checker implements Comparator<Player> {
-	        @Override
-	        public int compare(Player a, Player b) {
-	            if(a.score == b.score) {
-	                return a.name.compareTo(b.name); 
-	            } else {
-	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
-	            }
-	        }
-		}
-	}
 
+
+//	@Test
+//	void test68() {
+//		Integer game[] = {0, 0, 1, 1, 1, 0, 1, 0};
+//		Integer leap = 3;
+//		int index = 0;
+//		Integer count = 0;
+//		while(index < game.length) {
+//			System.out.println("index = "+index);
+//			if(count++ > 100) break;
+//			
+//			if(index < 0) {
+//				System.out.println("false");
+//				break;
+//			} 
+//			if(game[index] > 0) {
+//				System.out.println("false");break;
+//			}
+//			game[index] = 1;
+//			System.out.println("game of index is "+ game[index]);
+//			
+//			if(((index + leap) >= game.length) || (index+1 >= game.length )) {
+//				System.out.println("true");
+//				break;
+//			}
+//			
+//			if(game[index + leap] == 0) {
+//				index = index + leap;
+//			} else if(game[index + 1] == 0) {
+//				index = index + 1;
+//			} else if(game[index - 1] == 0) {
+//				index = index - 1;
+//			}
+//		}
+//	}
+//	@Test
+//	void test67() {
+//		class Prime {
+//		    Boolean isPrime = false;
+//		    public void checkPrime(Integer... values ) {
+//		        for(Integer value: values) {
+//		            if(value < 2) continue;
+//		            isPrime = true;
+//		            for(int i = 2; i < value; i++) {
+//		                if(value % i == 0) {
+//		                    isPrime = false;
+//		                }
+//		            }
+//		            if(isPrime) {
+//		                System.out.print(""+value+" "); 
+//		            }
+//		        }
+//		        System.out.println("");
+//		    }
+//		}
+//	}
+//	
+//	@Test
+//	void test66() {
+//		class Player{
+//		    String name;
+//		    int score;
+//		    
+//		    Player(String name, int score){
+//		        this.name = name;
+//		        this.score = score;
+//		    }
+//		}
+//		class Checker implements Comparator<Player> {
+//	        @Override
+//	        public int compare(Player a, Player b) {
+//	            if(a.score == b.score) {
+//	                return a.name.compareTo(b.name); 
+//	            } else {
+//	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
+//	            }
+//	        }
+//		}
+//	}
 //	@Test
 //	void test65() throws ClassNotFoundException {
 //        Class student = Class.forName("Student");
