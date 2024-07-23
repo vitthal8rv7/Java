@@ -26,56 +26,142 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.learn.java.interview.model.test.Student;
 
 
-
+//1
+//58 27
+//0 0 0 1 1 0 1 0 1 0 0 0 1 1 1 0 0 0 1 1 1 0 1 1 0 1 1 0 1 0 0 0 0 1 0 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 1 1 0 1 0
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	
-	@Test
-	void test67() {
-		class Prime {
-		    Boolean isPrime = false;
-		    public void checkPrime(Integer... values ) {
-		        for(Integer value: values) {
-		            if(value < 2) continue;
-		            isPrime = true;
-		            for(int i = 2; i < value; i++) {
-		                if(value % i == 0) {
-		                    isPrime = false;
-		                }
-		            }
-		            if(isPrime) {
-		                System.out.print(""+value+" "); 
-		            }
-		        }
-		        System.out.println("");
-		    }
-		}
-	}
-	
-	@Test
-	void test66() {
-		class Player{
-		    String name;
-		    int score;
-		    
-		    Player(String name, int score){
-		        this.name = name;
-		        this.score = score;
-		    }
-		}
-		class Checker implements Comparator<Player> {
-	        @Override
-	        public int compare(Player a, Player b) {
-	            if(a.score == b.score) {
-	                return a.name.compareTo(b.name); 
-	            } else {
-	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
-	            }
-	        }
-		}
-	}
 
+    private boolean canWin(int leap, int[] game, int i) {
+        if (i < 0 || game[i] == 1) {
+            return false;
+        }
+        if (i + 1 >= game.length || i + leap >= game.length) {
+            return true;
+        }
+        game[i] = 1;
+
+        return canWin(leap, game, i + leap) || 
+               canWin(leap, game, i + 1) ||
+               canWin(leap, game, i - 1);
+    }
+   
+	@Test
+	void test68() {
+		//String s1[] = {"YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","YES ","YES ","YES ","NO ","YES ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","YES ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","YES ","NO ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","NO ","YES ","YES ","NO ","YES ","NO ","NO ","NO ","YES ","YES ","NO ","NO ","YES ","NO ","YES ","YES"};
+		Integer index = 0;
+		Scanner scan = new Scanner(System.in);
+        int q = scan.nextInt();
+        while (q-- > 0) {
+            Integer n = scan.nextInt();
+            int leap = scan.nextInt();
+            
+            int[] game = new int[n];
+            for (int i = 0; i < n; i++) {
+                game[i] = scan.nextInt();
+            }
+            String s2 = (canWin(leap, game, 0)) ? "YES" : "NO";
+//            try {
+//            	
+//            if(!(s1[index++].trim().equalsIgnoreCase(s2.trim()))) {
+//            	System.out.println("S1: "+ s1[index-1]);
+//            	System.out.println("S2: "+ s2);
+//            	System.out.println("Failed for leap: "+ leap);
+//            	System.out.println("Failed for array length: "+ game.length);
+//            	System.out.println("Failed for array: "+ Arrays.asList(game));
+//            	break;
+//            }
+//            } catch(Exception e) {
+//            	System.out.println(e);
+//            }
+
+            System.out.println(s2);
+        }
+        scan.close();
+	}
+//	1
+//	58 27
+//	0 0 0 1 1 0 1 0 1 0 0 0 1 1 1 0 0 0 1 1 1 0 1 1 0 1 1 0 1 0 0 0 0 1 0 0 1 1 1 1 0 1 0 0 1 1 0 1 1 1 1 1 1 1 1 0 1 0
+	
+//	@Test
+//	void test68() {
+//		Integer game[] = {0, 0, 1, 1, 1, 0, 1, 0};
+//		Integer leap = 3;
+//		int index = 0;
+//		Integer count = 0;
+//		while(index < game.length) {
+//			System.out.println("index = "+index);
+//			if(count++ > 100) break;
+//			
+//			if(index < 0) {
+//				System.out.println("false");
+//				break;
+//			} 
+//			if(game[index] > 0) {
+//				System.out.println("false");break;
+//			}
+//			game[index] = 1;
+//			System.out.println("game of index is "+ game[index]);
+//			
+//			if(((index + leap) >= game.length) || (index+1 >= game.length )) {
+//				System.out.println("true");
+//				break;
+//			}
+//			
+//			if(game[index + leap] == 0) {
+//				index = index + leap;
+//			} else if(game[index + 1] == 0) {
+//				index = index + 1;
+//			} else if(game[index - 1] == 0) {
+//				index = index - 1;
+//			}
+//		}
+//	}
+//	@Test
+//	void test67() {
+//		class Prime {
+//		    Boolean isPrime = false;
+//		    public void checkPrime(Integer... values ) {
+//		        for(Integer value: values) {
+//		            if(value < 2) continue;
+//		            isPrime = true;
+//		            for(int i = 2; i < value; i++) {
+//		                if(value % i == 0) {
+//		                    isPrime = false;
+//		                }
+//		            }
+//		            if(isPrime) {
+//		                System.out.print(""+value+" "); 
+//		            }
+//		        }
+//		        System.out.println("");
+//		    }
+//		}
+//	}
+//	
+//	@Test
+//	void test66() {
+//		class Player{
+//		    String name;
+//		    int score;
+//		    
+//		    Player(String name, int score){
+//		        this.name = name;
+//		        this.score = score;
+//		    }
+//		}
+//		class Checker implements Comparator<Player> {
+//	        @Override
+//	        public int compare(Player a, Player b) {
+//	            if(a.score == b.score) {
+//	                return a.name.compareTo(b.name); 
+//	            } else {
+//	                return Integer.valueOf(a.score).compareTo(Integer.valueOf(b.score)); 
+//	            }
+//	        }
+//		}
+//	}
 //	@Test
 //	void test65() throws ClassNotFoundException {
 //        Class student = Class.forName("Student");
