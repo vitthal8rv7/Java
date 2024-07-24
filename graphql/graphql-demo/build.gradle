@@ -28,7 +28,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.graphql-java/graphql-spring-boot-autoconfigure
 	//implementation group: 'com.graphql-java', name: 'graphql-spring-boot-autoconfigure', version: '5.0.2'
 
-
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'
 	//testImplementation 'org.springframework.graphql:spring-graphql-test'
