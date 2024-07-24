@@ -30,21 +30,62 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
+	
 	@Test
-	void test70() {
-		Predicate<Integer> isOdd = number -> number%2!=0;
-		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
-														.filter(i -> (number%i==0))
-														.findAny()
-														.isEmpty();
-		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
-															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
-															.findAny()
-															.isEmpty();
-		int a =2;
-		String.valueOf(a);
+	void test72() {
+		Integer a[] = {12, 24, 10, 24};
+		List<Integer> scores = Arrays.asList(a);
+		List<Integer> result = new ArrayList<>();
+		Integer min = scores.get(0);
+		Integer max = scores.get(0);
+		Integer minRBCount = 0;
+		Integer maxRBCount = 0;
+		for(Integer value: scores) {
+			if(value > max) {
+				max = value;
+				maxRBCount++;
+			} else if(value < min) {
+				min = value;
+				minRBCount++;
+			}
+		}
+		System.out.println(maxRBCount);
+		System.out.println(minRBCount);
+		result.add(maxRBCount);
+		result.add(minRBCount);
+		
 	}
+//	@Test
+//	void test71() {
+//		String s = "12:00:00AM";
+//		System.out.println("S = "+s);
+//		String s2[] = s.split("\\D");
+//		Arrays.asList(s2).stream().forEach(System.out::println);
+//		String s3[] = s.split("\\d");
+//		Arrays.asList(s3).stream().forEach(System.out::println);		
+//		Integer value = Integer.parseInt(s2[0]);
+//		if(s3[s3.length-1].equalsIgnoreCase("pm") && (value < 12)) {
+//			s2[0] = "" + (value + 12);
+//		} else if(s3[s3.length-1].equalsIgnoreCase("am") && (value == 12)) {
+//			s2[0] = "00";
+//		} 
+//		s = Arrays.asList(s2).stream().reduce((s11, s22) -> s11+":"+s22).orElseThrow();
+//		System.out.println("S = "+s);
+//	}
+//	@Test
+//	void test70() {
+//		Predicate<Integer> isOdd = number -> number%2!=0;
+//		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
+//														.filter(i -> (number%i==0))
+//														.findAny()
+//														.isEmpty();
+//		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
+//															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
+//															.findAny()
+//															.isEmpty();
+//		int a =2;
+//		String.valueOf(a);
+//	}
 //    private boolean canWin(int leap, int[] game, int i) {
 //        if (i < 0 || game[i] == 1) {
 //            return false;
