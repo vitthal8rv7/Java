@@ -42,7 +42,8 @@ public class JavaInterviewApplicationTests {
 															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
 															.findAny()
 															.isEmpty();
-
+		int a =2;
+		String.valueOf(a);
 	}
 //    private boolean canWin(int leap, int[] game, int i) {
 //        if (i < 0 || game[i] == 1) {
