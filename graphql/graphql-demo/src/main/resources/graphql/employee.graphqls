@@ -32,7 +32,6 @@ input EmployeeInput {
 	address: AddressInput
 }
 
-
 type Query {
 	getEmployee(id: String!) : Employee
 	testQuery: String
