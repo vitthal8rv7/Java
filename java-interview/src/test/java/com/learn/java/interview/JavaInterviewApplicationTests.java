@@ -18,6 +18,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
@@ -30,31 +31,77 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-	
-	@Test
-	void test72() {
-		Integer a[] = {12, 24, 10, 24};
-		List<Integer> scores = Arrays.asList(a);
-		List<Integer> result = new ArrayList<>();
-		Integer min = scores.get(0);
-		Integer max = scores.get(0);
-		Integer minRBCount = 0;
-		Integer maxRBCount = 0;
-		for(Integer value: scores) {
-			if(value > max) {
-				max = value;
-				maxRBCount++;
-			} else if(value < min) {
-				min = value;
-				minRBCount++;
-			}
-		}
-		System.out.println(maxRBCount);
-		System.out.println(minRBCount);
-		result.add(maxRBCount);
-		result.add(minRBCount);
-		
-	}
+
+//	@Test
+//	void test73() {
+//
+//		Scanner scanner = new Scanner(System.in);		
+//		scanner.useDelimiter("\n");
+//		while(true) {
+//			String s = scanner.next();
+////			System.out.println("");
+//			if(s.isBlank()) break;
+////			System.out.println("S = "+s);
+//			if(s.charAt(0) == 'S') {
+//				String regex = "(?<=[a-z])(?=[A-Z])";
+////				System.out.println("Before Split = "+s);
+//				if(s.charAt(2) == 'M') {
+//					s = s.substring(4, s.length()-2);
+//				} else {
+//					s = s.substring(4, s.length());
+//				}	
+//				s = Arrays.stream(s.split(regex))
+//							.reduce((s1, s2) -> (s1.toLowerCase() + " " + s2.toLowerCase()))
+//							.get();
+////				System.out.println("After Split = "+s);
+//				System.out.println(s);
+//			} else if(s.charAt(0) == 'C') {
+////				System.out.println("Before Combine = "+s);
+//				String str = s.substring(4, s.length());
+////				System.out.println("Before Combine = "+str);
+//				String[] sArray = str.split("\\s");
+//				str = Arrays.stream(sArray)
+//							.reduce((s1, s2) -> (s1 + s2.substring(0, 1).toUpperCase() + s2.substring(1, s2.length()) ))
+//							.get();
+////				System.out.println("After Combine = "+str);
+//				if(s.charAt(2) == 'M' ) {
+//					str = str + "()";
+//					str = str.substring(0, 1).toLowerCase() + str.substring(1, str.length());
+//				} else if(s.charAt(2) == 'V' ) {
+//					str = str.substring(0, 1).toLowerCase() + str.substring(1, str.length());
+//				} else {
+//					str = str.substring(0, 1).toUpperCase() + str.substring(1, str.length());
+//				} 	
+////				System.out.println("After Combine = "+str);
+//				
+//				System.out.println(str);
+//			}
+//		}
+//		scanner.close();
+//	}
+//	@Test
+//	void test72() {
+//		Integer a[] = {12, 24, 10, 24};
+//		List<Integer> scores = Arrays.asList(a);
+//		List<Integer> result = new ArrayList<>();
+//		Integer min = scores.get(0);
+//		Integer max = scores.get(0);
+//		Integer minRBCount = 0;
+//		Integer maxRBCount = 0;
+//		for(Integer value: scores) {
+//			if(value > max) {
+//				max = value;
+//				maxRBCount++;
+//			} else if(value < min) {
+//				min = value;
+//				minRBCount++;
+//			}
+//		}
+//		System.out.println(maxRBCount);
+//		System.out.println(minRBCount);
+//		result.add(maxRBCount);
+//		result.add(minRBCount);	
+//	}
 //	@Test
 //	void test71() {
 //		String s = "12:00:00AM";
