@@ -1,0 +1,33 @@
+type Query {
+    search(keyword: String!): [SearchResult!]!  
+    animals: [Animal]  
+}
+
+union SearchResult = User | Post
+
+type User {
+    id: ID!
+    name: String!
+}
+type Post {
+    id: ID!
+    title: String!
+    content: String!
+}
+
+interface Animal {
+    id: ID!
+    name: String!
+}
+
+type Dog implements Animal {
+    id: ID!
+    name: String!
+    breed: String!
+}
+
+type Cat implements Animal {
+    id: ID!
+    name: String!
+    lives: Int!
+}
