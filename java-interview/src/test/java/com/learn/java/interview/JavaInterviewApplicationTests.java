@@ -18,6 +18,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
@@ -30,21 +31,141 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
 	@Test
-	void test70() {
-		Predicate<Integer> isOdd = number -> number%2!=0;
-		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
-														.filter(i -> (number%i==0))
-														.findAny()
-														.isEmpty();
-		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
-															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
-															.findAny()
-															.isEmpty();
-		int a =2;
-		String.valueOf(a);
+	void test74() {
+		List<Integer> result = new ArrayList<>();
+		List<String> strings = new ArrayList<>(); 
+		strings.add("ab"); strings.add("ab"); strings.add("abc"); 
+		List<String> queries = new ArrayList<>();
+		queries.add("ab"); queries.add("abc"); queries.add("bc");
+		queries.stream().forEach(key ->
+				{
+					result.add((int) strings.stream()
+											.filter(value -> key.equalsIgnoreCase(value))
+											.count());
+				});
+		System.out.println("result: "+result);
+		
 	}
+	//9:40
+//	@Test
+//	void test74() {
+//		List<Integer> ar = new ArrayList<>();
+//		ar.add(1); ar.add(3); ar.add(2); ar.add(6); ar.add(1); ar.add(2);
+//		Integer k = 3;
+//		
+//		Integer noOfPairs = 0;
+//		for(int  i = 0; i < ar.size()-1; i++) {
+//			for(int  j = i+1; j < ar.size(); j++) {
+//				if((ar.get(i) + ar.get(j)) % k == 0) {
+//					noOfPairs++;
+//				}
+//			}			
+//		}
+//		System.out.println("noOfPairs: "+noOfPairs);
+//		
+//	}
+//	@Test
+//	void test73() {
+//
+//		Scanner scanner = new Scanner(System.in);		
+//		scanner.useDelimiter("\n");
+//		while(true) {
+//			String s = scanner.next();
+////			System.out.println("");
+//			if(s.isBlank()) break;
+////			System.out.println("S = "+s);
+//			if(s.charAt(0) == 'S') {
+//				String regex = "(?<=[a-z])(?=[A-Z])";
+////				System.out.println("Before Split = "+s);
+//				if(s.charAt(2) == 'M') {
+//					s = s.substring(4, s.length()-2);
+//				} else {
+//					s = s.substring(4, s.length());
+//				}	
+//				s = Arrays.stream(s.split(regex))
+//							.reduce((s1, s2) -> (s1.toLowerCase() + " " + s2.toLowerCase()))
+//							.get();
+////				System.out.println("After Split = "+s);
+//				System.out.println(s);
+//			} else if(s.charAt(0) == 'C') {
+////				System.out.println("Before Combine = "+s);
+//				String str = s.substring(4, s.length());
+////				System.out.println("Before Combine = "+str);
+//				String[] sArray = str.split("\\s");
+//				str = Arrays.stream(sArray)
+//							.reduce((s1, s2) -> (s1 + s2.substring(0, 1).toUpperCase() + s2.substring(1, s2.length()) ))
+//							.get();
+////				System.out.println("After Combine = "+str);
+//				if(s.charAt(2) == 'M' ) {
+//					str = str + "()";
+//					str = str.substring(0, 1).toLowerCase() + str.substring(1, str.length());
+//				} else if(s.charAt(2) == 'V' ) {
+//					str = str.substring(0, 1).toLowerCase() + str.substring(1, str.length());
+//				} else {
+//					str = str.substring(0, 1).toUpperCase() + str.substring(1, str.length());
+//				} 	
+////				System.out.println("After Combine = "+str);
+//				
+//				System.out.println(str);
+//			}
+//		}
+//		scanner.close();
+//	}
+//	@Test
+//	void test72() {
+//		Integer a[] = {12, 24, 10, 24};
+//		List<Integer> scores = Arrays.asList(a);
+//		List<Integer> result = new ArrayList<>();
+//		Integer min = scores.get(0);
+//		Integer max = scores.get(0);
+//		Integer minRBCount = 0;
+//		Integer maxRBCount = 0;
+//		for(Integer value: scores) {
+//			if(value > max) {
+//				max = value;
+//				maxRBCount++;
+//			} else if(value < min) {
+//				min = value;
+//				minRBCount++;
+//			}
+//		}
+//		System.out.println(maxRBCount);
+//		System.out.println(minRBCount);
+//		result.add(maxRBCount);
+//		result.add(minRBCount);	
+//	}
+//	@Test
+//	void test71() {
+//		String s = "12:00:00AM";
+//		System.out.println("S = "+s);
+//		String s2[] = s.split("\\D");
+//		Arrays.asList(s2).stream().forEach(System.out::println);
+//		String s3[] = s.split("\\d");
+//		Arrays.asList(s3).stream().forEach(System.out::println);		
+//		Integer value = Integer.parseInt(s2[0]);
+//		if(s3[s3.length-1].equalsIgnoreCase("pm") && (value < 12)) {
+//			s2[0] = "" + (value + 12);
+//		} else if(s3[s3.length-1].equalsIgnoreCase("am") && (value == 12)) {
+//			s2[0] = "00";
+//		} 
+//		s = Arrays.asList(s2).stream().reduce((s11, s22) -> s11+":"+s22).orElseThrow();
+//		System.out.println("S = "+s);
+//	}
+//	@Test
+//	void test70() {
+//		Predicate<Integer> isOdd = number -> number%2!=0;
+//		Predicate<Integer> isPrime = number -> IntStream.range(2, number>5?(int) Math.sqrt(number):number)
+//														.filter(i -> (number%i==0))
+//														.findAny()
+//														.isEmpty();
+//		Predicate<String> isPalindrome = palStr ->  IntStream.range(0, palStr.length()/2)
+//															.filter(i -> palStr.charAt(i) != palStr.charAt(palStr.length()-(i+1)))
+//															.findAny()
+//															.isEmpty();
+//		int a =2;
+//		String.valueOf(a);
+//	}
 //    private boolean canWin(int leap, int[] game, int i) {
 //        if (i < 0 || game[i] == 1) {
 //            return false;
