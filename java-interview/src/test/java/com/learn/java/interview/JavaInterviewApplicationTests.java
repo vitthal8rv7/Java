@@ -31,7 +31,40 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
+	@Test
+	void test74() {
+		List<Integer> result = new ArrayList<>();
+		List<String> strings = new ArrayList<>(); 
+		strings.add("ab"); strings.add("ab"); strings.add("abc"); 
+		List<String> queries = new ArrayList<>();
+		queries.add("ab"); queries.add("abc"); queries.add("bc");
+		queries.stream().forEach(key ->
+				{
+					result.add((int) strings.stream()
+											.filter(value -> key.equalsIgnoreCase(value))
+											.count());
+				});
+		System.out.println("result: "+result);
+		
+	}
+	//9:40
+//	@Test
+//	void test74() {
+//		List<Integer> ar = new ArrayList<>();
+//		ar.add(1); ar.add(3); ar.add(2); ar.add(6); ar.add(1); ar.add(2);
+//		Integer k = 3;
+//		
+//		Integer noOfPairs = 0;
+//		for(int  i = 0; i < ar.size()-1; i++) {
+//			for(int  j = i+1; j < ar.size(); j++) {
+//				if((ar.get(i) + ar.get(j)) % k == 0) {
+//					noOfPairs++;
+//				}
+//			}			
+//		}
+//		System.out.println("noOfPairs: "+noOfPairs);
+//		
+//	}
 //	@Test
 //	void test73() {
 //
