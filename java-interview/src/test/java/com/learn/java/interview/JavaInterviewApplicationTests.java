@@ -13,12 +13,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
@@ -31,23 +35,49 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+
 	@Test
-	void test74() {
-		List<Integer> result = new ArrayList<>();
-		List<String> strings = new ArrayList<>(); 
-		strings.add("ab"); strings.add("ab"); strings.add("abc"); 
-		List<String> queries = new ArrayList<>();
-		queries.add("ab"); queries.add("abc"); queries.add("bc");
-		queries.stream().forEach(key ->
-				{
-					result.add((int) strings.stream()
-											.filter(value -> key.equalsIgnoreCase(value))
-											.count());
-				});
-		System.out.println("result: "+result);
-		
+	void test75() {
+		List<Integer> a = new ArrayList<>();
+		a.add(1); a.add(2); a.add(1); a.add(2); a.add(3); a.add(4); a.add(4);
+//		Map<Integer, Integer> b = new HashMap<>();
+//		for(int i = 0; i < a.size(); i++) {
+//			if(b.get(a.get(i)) != null) {
+//				b.put(a.get(i), b.get(a.get(i)) + 1);
+//			} else {
+//				b.put(a.get(i), 1);
+//			}
+//		}
+//		for(int i = 0; i < a.size(); i++) {
+//			if(b.get(a.get(i)) == 1) {
+//				System.out.println(""+ a.get(i));
+//			}
+//		}
+		Map<Integer, Long> frequency = a.stream()
+										.collect(Collectors.groupingBy(Function.identity(), 
+												 Collectors.counting()));
+		for(Entry<Integer, Long> entrySet: frequency.entrySet()) {
+			if(entrySet.getValue() == 1) {
+				System.out.println(""+ entrySet.getKey());
+			}
+		}
 	}
-	//9:40
+//	@Test
+//	void test74() {
+//		List<Integer> result = new ArrayList<>();
+//		List<String> strings = new ArrayList<>(); 
+//		strings.add("ab"); strings.add("ab"); strings.add("abc"); 
+//		List<String> queries = new ArrayList<>();
+//		queries.add("ab"); queries.add("abc"); queries.add("bc");
+//		queries.stream().forEach(key ->
+//				{
+//					result.add((int) strings.stream()
+//											.filter(value -> key.equalsIgnoreCase(value))
+//											.count());
+//				});
+//		System.out.println("result: "+result);
+//		
+//	}
 //	@Test
 //	void test74() {
 //		List<Integer> ar = new ArrayList<>();
