@@ -36,32 +36,37 @@ import com.learn.java.interview.model.test.Student;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
+	
 	@Test
 	void test75() {
-		List<Integer> a = new ArrayList<>();
-		a.add(1); a.add(2); a.add(1); a.add(2); a.add(3); a.add(4); a.add(4);
-//		Map<Integer, Integer> b = new HashMap<>();
-//		for(int i = 0; i < a.size(); i++) {
-//			if(b.get(a.get(i)) != null) {
-//				b.put(a.get(i), b.get(a.get(i)) + 1);
-//			} else {
-//				b.put(a.get(i), 1);
-//			}
-//		}
-//		for(int i = 0; i < a.size(); i++) {
-//			if(b.get(a.get(i)) == 1) {
-//				System.out.println(""+ a.get(i));
-//			}
-//		}
-		Map<Integer, Long> frequency = a.stream()
-										.collect(Collectors.groupingBy(Function.identity(), 
-												 Collectors.counting()));
-		for(Entry<Integer, Long> entrySet: frequency.entrySet()) {
-			if(entrySet.getValue() == 1) {
-				System.out.println(""+ entrySet.getKey());
-			}
-		}
+		
 	}
+//	@Test
+//	void test75() {
+//		List<Integer> a = new ArrayList<>();
+//		a.add(1); a.add(2); a.add(1); a.add(2); a.add(3); a.add(4); a.add(4);
+////		Map<Integer, Integer> b = new HashMap<>();
+////		for(int i = 0; i < a.size(); i++) {
+////			if(b.get(a.get(i)) != null) {
+////				b.put(a.get(i), b.get(a.get(i)) + 1);
+////			} else {
+////				b.put(a.get(i), 1);
+////			}
+////		}
+////		for(int i = 0; i < a.size(); i++) {
+////			if(b.get(a.get(i)) == 1) {
+////				System.out.println(""+ a.get(i));
+////			}
+////		}
+//		Map<Integer, Long> frequency = a.stream()
+//										.collect(Collectors.groupingBy(Function.identity(), 
+//												 Collectors.counting()));
+//		for(Entry<Integer, Long> entrySet: frequency.entrySet()) {
+//			if(entrySet.getValue() == 1) {
+//				System.out.println(""+ entrySet.getKey());
+//			}
+//		}
+//	}
 //	@Test
 //	void test74() {
 //		List<Integer> result = new ArrayList<>();
