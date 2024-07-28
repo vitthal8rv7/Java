@@ -36,7 +36,28 @@ import com.learn.java.interview.model.test.Student;
 @SpringBootTest
 public class JavaInterviewApplicationTests {
 
-	
+//	@Test
+//	void test76() {
+//		long n = 11;
+//		System.out.println("n = "+n);
+//		long flipped = ~n & 0xFFFFFFFFL;
+//		System.out.println("0xFFFFFFFFL = "+0xFFFFFFFFL);
+//		System.out.println("flipped = "+flipped);
+////		String s = String.valueOf(n);
+////		StringBuilder sb = new StringBuilder();
+////		for(char ch: s.toCharArray() ) {
+////			if(ch == '0') {
+////				ch = '1';
+////			} else {
+////				ch = '0';
+////			}
+////			sb.append(ch);
+////		}
+////		Long l = Long.valueOf(sb.toString());
+////		System.out.println("n = "+n);
+////		System.out.println("l = "+sb);
+////		System.out.println("l = "+l);
+//	}	
 //	@Test
 //	void test75() {
 //		List<Integer> grades = new ArrayList<>();
