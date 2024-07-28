@@ -37,10 +37,21 @@ import com.learn.java.interview.model.test.Student;
 public class JavaInterviewApplicationTests {
 
 	
-	@Test
-	void test75() {
-		
-	}
+//	@Test
+//	void test75() {
+//		List<Integer> grades = new ArrayList<>();
+//		grades.add(73);grades.add(67);grades.add(38);grades.add(33);
+//		for(Integer value: grades) {
+//			if(value < 38) {
+//			} else if( (  (((value/5)*5)+5) -value) < 3) {
+//				System.out.println(""+(((value/5)*5)+5)); 
+//			} else {
+//				System.out.println(""+value);
+//			}
+//		}
+//		        
+//		        
+//	}
 //	@Test
 //	void test75() {
 //		List<Integer> a = new ArrayList<>();
