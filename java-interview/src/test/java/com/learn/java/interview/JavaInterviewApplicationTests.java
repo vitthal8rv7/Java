@@ -35,6 +35,45 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+
+//	@Test
+//	void test78() {
+//		try {
+//			List<Integer> result = new ArrayList<>();
+//			List<Integer> arr = new ArrayList<>();
+//			arr.add(1);
+//			arr.add(2);
+//			arr.add(3);
+//			arr.add(1);
+//			arr.add(2);
+//			arr.add(3);
+//			arr.add(4);
+//			arr.add(5);
+//			arr.add(3);
+//			Integer[] array = new Integer[arr.size()];
+//			for (int i = 0; i < arr.size(); i++) {
+//				array[i] = 0;
+//			}
+//			IntStream.range(0, arr.size()).forEach(i -> {
+//				array[arr.get(i)] = array[arr.get(i)] + 1;
+//			});
+//			System.out.println("arr: " + arr);
+//			System.out.println("array: " + Arrays.asList(array));
+//
+//			for (int i = 0; i < arr.size(); i++) {
+//				if (array[i] == 0) {
+////				skip
+//				} else {
+//					for (int j = 0; j < array[i]; j++) {
+//						result.add(i);
+//					}
+//				}
+//			}
+//			System.out.println("result: " + result);
+//		} catch (Exception e) {
+//			System.out.println("Exception e: " + e);
+//		}
+//	}
 //	@Test
 //	void test77() {
 //		List<List<Integer>> arr = new ArrayList<>();
