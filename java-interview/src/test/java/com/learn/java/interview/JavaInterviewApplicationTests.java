@@ -35,12 +35,71 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
-	
-	@Test
-	void test75() {
-		
-	}
+//	@Test
+//	void test77() {
+//		List<List<Integer>> arr = new ArrayList<>();
+//		List<Integer> a1 = new ArrayList<>();
+//		a1.add(1); a1.add(2); a1.add(3);
+//		arr.add(a1);
+//		
+//		a1 = new ArrayList<>();
+//		a1.add(4); a1.add(5); a1.add(6);
+//		arr.add(a1);
+//		
+//		a1 = new ArrayList<>();
+//		a1.add(9); a1.add(8); a1.add(9);
+//		arr.add(a1);
+//		
+//		Integer length = arr.size() - 1;
+//		Integer left = 0;
+//		Integer right = 0;
+//		System.out.println(""+arr);
+//		for(int i = 0; i < arr.size(); i++) {
+//				left = left + arr.get(i).get(i);
+//				right = right + arr.get(i).get(length - i);
+//				System.out.println("left: "+left);
+//				System.out.println("right: "+right);
+//		}
+//		Integer result = Math.abs(left - right);
+//		System.out.println("result = "+result + " "+ (left - right));
+//	}
+//	@Test
+//	void test76() {
+//		long n = 11;
+//		System.out.println("n = "+n);
+//		long flipped = ~n & 0xFFFFFFFFL;
+//		System.out.println("0xFFFFFFFFL = "+0xFFFFFFFFL);
+//		System.out.println("flipped = "+flipped);
+////		String s = String.valueOf(n);
+////		StringBuilder sb = new StringBuilder();
+////		for(char ch: s.toCharArray() ) {
+////			if(ch == '0') {
+////				ch = '1';
+////			} else {
+////				ch = '0';
+////			}
+////			sb.append(ch);
+////		}
+////		Long l = Long.valueOf(sb.toString());
+////		System.out.println("n = "+n);
+////		System.out.println("l = "+sb);
+////		System.out.println("l = "+l);
+//	}	
+//	@Test
+//	void test75() {
+//		List<Integer> grades = new ArrayList<>();
+//		grades.add(73);grades.add(67);grades.add(38);grades.add(33);
+//		for(Integer value: grades) {
+//			if(value < 38) {
+//			} else if( (  (((value/5)*5)+5) -value) < 3) {
+//				System.out.println(""+(((value/5)*5)+5)); 
+//			} else {
+//				System.out.println(""+value);
+//			}
+//		}
+//		        
+//		        
+//	}
 //	@Test
 //	void test75() {
 //		List<Integer> a = new ArrayList<>();
