@@ -35,7 +35,34 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
-
+//	@Test
+//	void test77() {
+//		List<List<Integer>> arr = new ArrayList<>();
+//		List<Integer> a1 = new ArrayList<>();
+//		a1.add(1); a1.add(2); a1.add(3);
+//		arr.add(a1);
+//		
+//		a1 = new ArrayList<>();
+//		a1.add(4); a1.add(5); a1.add(6);
+//		arr.add(a1);
+//		
+//		a1 = new ArrayList<>();
+//		a1.add(9); a1.add(8); a1.add(9);
+//		arr.add(a1);
+//		
+//		Integer length = arr.size() - 1;
+//		Integer left = 0;
+//		Integer right = 0;
+//		System.out.println(""+arr);
+//		for(int i = 0; i < arr.size(); i++) {
+//				left = left + arr.get(i).get(i);
+//				right = right + arr.get(i).get(length - i);
+//				System.out.println("left: "+left);
+//				System.out.println("right: "+right);
+//		}
+//		Integer result = Math.abs(left - right);
+//		System.out.println("result = "+result + " "+ (left - right));
+//	}
 //	@Test
 //	void test76() {
 //		long n = 11;
