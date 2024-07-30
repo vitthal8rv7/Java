@@ -37,6 +37,19 @@ import com.learn.java.interview.model.test.Student;
 public class JavaInterviewApplicationTests {
 
 //	@Test
+//	void test79() {
+//		boolean isPangram = true;
+//		String pangram = "abcdefghijklmnopqrstuvwxyz";
+//		String given = "We promptly judged antique ivory buckles for the next prize".toLowerCase();
+//		for(char ch : pangram.toCharArray()) {
+//			if(!given.contains(""+ch)) {
+//				isPangram = false;
+//			}
+//		}
+//		System.out.println("isPangram: "+isPangram);
+////		boolean isPangram = pangram.chars().peek(System.out::println).allMatch(value -> given.contains(""+value));		
+//	}
+//	@Test
 //	void test78() {
 //		try {
 //			List<Integer> result = new ArrayList<>();
