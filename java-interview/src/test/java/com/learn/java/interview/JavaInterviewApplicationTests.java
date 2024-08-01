@@ -35,6 +35,81 @@ import com.learn.java.interview.model.test.Student;
 
 @SpringBootTest
 public class JavaInterviewApplicationTests {
+
+//	@Test
+//	void test79() {	
+//		String s = "SOSSPSSQSSOR";
+//		int length = s.length();
+//		String expected = "";
+//		StringBuilder sb = new StringBuilder();
+//		//System.out.println("length: "+length);
+//		for(int i = 0; i < length; i=i+3) {
+//			sb.append("SOS");
+//			//System.out.println("sb: "+sb);
+//		}
+//		expected = sb.toString();
+//		int count = 0;
+//		for(int i = 0; i < length; i++) {
+//			if(s.charAt(i) == expected.charAt(i)) {
+//				//skip
+//			} else {
+//				count ++;
+//			}
+//		}
+//		//System.out.println("count: "+count);
+//	}
+//	
+//	@Test
+//	void test79() {
+//		boolean isPangram = true;
+//		String pangram = "abcdefghijklmnopqrstuvwxyz";
+//		String given = "We promptly judged antique ivory buckles for the next prize".toLowerCase();
+//		for(char ch : pangram.toCharArray()) {
+//			if(!given.contains(""+ch)) {
+//				isPangram = false;
+//			}
+//		}
+//		System.out.println("isPangram: "+isPangram);
+////		boolean isPangram = pangram.chars().peek(System.out::println).allMatch(value -> given.contains(""+value));		
+//	}
+//	@Test
+//	void test78() {
+//		try {
+//			List<Integer> result = new ArrayList<>();
+//			List<Integer> arr = new ArrayList<>();
+//			arr.add(1);
+//			arr.add(2);
+//			arr.add(3);
+//			arr.add(1);
+//			arr.add(2);
+//			arr.add(3);
+//			arr.add(4);
+//			arr.add(5);
+//			arr.add(3);
+//			Integer[] array = new Integer[arr.size()];
+//			for (int i = 0; i < arr.size(); i++) {
+//				array[i] = 0;
+//			}
+//			IntStream.range(0, arr.size()).forEach(i -> {
+//				array[arr.get(i)] = array[arr.get(i)] + 1;
+//			});
+//			System.out.println("arr: " + arr);
+//			System.out.println("array: " + Arrays.asList(array));
+//
+//			for (int i = 0; i < arr.size(); i++) {
+//				if (array[i] == 0) {
+////				skip
+//				} else {
+//					for (int j = 0; j < array[i]; j++) {
+//						result.add(i);
+//					}
+//				}
+//			}
+//			System.out.println("result: " + result);
+//		} catch (Exception e) {
+//			System.out.println("Exception e: " + e);
+//		}
+//	}
 //	@Test
 //	void test77() {
 //		List<List<Integer>> arr = new ArrayList<>();
