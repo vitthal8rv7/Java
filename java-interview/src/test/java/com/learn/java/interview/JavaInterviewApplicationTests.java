@@ -37,6 +37,29 @@ import com.learn.java.interview.model.test.Student;
 public class JavaInterviewApplicationTests {
 
 //	@Test
+//	void test79() {	
+//		String s = "SOSSPSSQSSOR";
+//		int length = s.length();
+//		String expected = "";
+//		StringBuilder sb = new StringBuilder();
+//		//System.out.println("length: "+length);
+//		for(int i = 0; i < length; i=i+3) {
+//			sb.append("SOS");
+//			//System.out.println("sb: "+sb);
+//		}
+//		expected = sb.toString();
+//		int count = 0;
+//		for(int i = 0; i < length; i++) {
+//			if(s.charAt(i) == expected.charAt(i)) {
+//				//skip
+//			} else {
+//				count ++;
+//			}
+//		}
+//		//System.out.println("count: "+count);
+//	}
+//	
+//	@Test
 //	void test79() {
 //		boolean isPangram = true;
 //		String pangram = "abcdefghijklmnopqrstuvwxyz";
