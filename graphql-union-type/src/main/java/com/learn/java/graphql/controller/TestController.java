@@ -40,15 +40,15 @@ public class TestController {
 	}
 
 	@GetMapping("/user")
-	User getUser() {
+	User getUser(@RequestParam(name = "uid") String uid) {
 		//System.out.println("INSIDE getResult1.");
-		return userService.getUser();
+		return userService.getUser(uid);
 	}
 	
 	@PutMapping("/user")
 	User updateUser(@RequestParam(name = "uid") String uid, @RequestParam(name = "uname") String uname) {
 		//System.out.println("INSIDE getResult1.");
-		return userService.updateUser(new User(uid, uname));
+		return userService.updateUser(uid);
 	}
 	
 	@DeleteMapping("/user")

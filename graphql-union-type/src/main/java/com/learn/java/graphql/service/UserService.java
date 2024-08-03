@@ -8,9 +8,9 @@ public interface UserService {
 
 	public List<User> getUsers();
 	
-	public User getUser();
+	public User getUser(String id);
 
-	public User updateUser(User user);
+	public User updateUser(String id);
 
 	public User deleteUser(String string);
 

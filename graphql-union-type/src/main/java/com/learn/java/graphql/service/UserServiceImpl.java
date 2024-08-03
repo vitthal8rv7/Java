@@ -16,6 +16,7 @@ public class UserServiceImpl implements UserService {
 //	@Autowired
 //	private UserRepository UserRepository;
 	
+	User user = null;
 	@Override
 	public List<User> getUsers() {
 		System.out.println("INSIDE getUsers");
@@ -25,25 +26,31 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 	
-	@Cacheable(value = "cache1", key = "")
+	@Cacheable(value = "ram")
 	@Override
-	public User getUser() {
-		System.out.println("INSIDE getUsers");
-		return new User("id", "UserName1");
-	}
-
-	@CachePut(value = "cache1", key = "#user.id")
-	@Override
-	public User updateUser(User user) {
-		System.out.println("INSIDE updateUser");
+	public User getUser(String id) {
+		
+		if(user == null) {
+			System.out.println("INSIDE getUsers");
+			user = new User("id", "UserName1");
+		}
 		return user;
 	}
 
-	@CacheEvict(value = "cache1", key = "#id")
+	@CachePut(value = "ram")
+	@Override
+	public User updateUser(String id) {
+		System.out.println("INSIDE updateUser");
+		user.setName("name3");
+		return user;
+	}
+
+	@CacheEvict(value = "ram")
 	@Override
 	public User deleteUser(String id) {
 		System.out.println("INSIDE deleteUser");
-		return null;
+		user = null;
+		return user;
 	}
 
 }
