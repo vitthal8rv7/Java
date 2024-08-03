@@ -33,10 +33,16 @@ public class TestController {
 		return "";
 	}
 	
-	@GetMapping("/user")
+	@GetMapping("/users")
 	List<User> getUsers() {
 		//System.out.println("INSIDE getResult1.");
 		return userService.getUsers();
+	}
+
+	@GetMapping("/user")
+	User getUser() {
+		//System.out.println("INSIDE getResult1.");
+		return userService.getUser();
 	}
 	
 	@PutMapping("/user")

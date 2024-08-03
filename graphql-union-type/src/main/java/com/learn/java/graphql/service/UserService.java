@@ -7,6 +7,8 @@ import com.learn.java.graphql.model.User;
 public interface UserService {
 
 	public List<User> getUsers();
+	
+	public User getUser();
 
 	public User updateUser(User user);
 
