@@ -3,6 +3,7 @@ package com.learn.java.graphql.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -13,12 +14,16 @@ import com.learn.java.graphql.model.User;
 @Service
 public class UserServiceImpl implements UserService {
 
+	
+	
 //	@Autowired
 //	private UserRepository UserRepository;
 	
 	User user = null;
 	@Override
 	public List<User> getUsers() {
+		
+		
 		System.out.println("INSIDE getUsers");
 		List<User> users = new ArrayList<>();
 		users.add(new User("U1", "UserName1"));
