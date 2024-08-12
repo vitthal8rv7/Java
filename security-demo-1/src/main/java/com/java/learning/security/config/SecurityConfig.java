@@ -21,8 +21,9 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfig -> csrfConfig.disable())
                 .authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/home3").permitAll()
                         .requestMatchers("/home").authenticated()
-                                .requestMatchers("/home2").hasRole("ADMIN"));
+                        .requestMatchers("/home2").hasRole("ADMIN"));
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());//hbc -> hbc.authenticationEntryPoint(new CustomAuthenticationException()));
         http.exceptionHandling(ehc -> ehc.authenticationEntryPoint(new CustomAuthenticationException()));
