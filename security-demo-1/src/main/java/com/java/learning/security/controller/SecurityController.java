@@ -15,4 +15,9 @@ public class SecurityController {
     public String home() {
         return "Welcome Home";
     }
+
+    @GetMapping("/home2")
+    public String home2() {
+        return "Welcome Home";
+    }
 }
