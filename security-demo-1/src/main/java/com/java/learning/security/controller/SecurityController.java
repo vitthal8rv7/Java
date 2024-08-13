@@ -5,9 +5,66 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class SecurityController {
-//
+    @GetMapping("/home5")
+    public List<String> index(@RequestParam(name = "name", required = true) String name) {
+        List<String> list = new ArrayList<>();
+        for(int k = 1; k <= name.length()/2; k++) {
+            int i = k;
+            boolean shouldUpdateIVariable = false;
+            for(int j = 0; j+i <= name.length(); j = j+i) {
+                if(shouldUpdateIVariable) {
+                    shouldUpdateIVariable = false;
+                    i = k + 1;
+                }
+                String s = name.substring(j, j+i);
+                list.add(s);
+
+                if(k - i > 1) {
+                    if((s.charAt(s.length()-2) == '9' || s.charAt(s.length()-2) == '0') && s.charAt(s.length()-1) == '9') {
+                        shouldUpdateIVariable = true;
+                    }
+                } else {
+                    if(s.charAt(s.length()-1) == '9') {
+                        shouldUpdateIVariable = true;
+                    }
+                }
+                //System.out.println("i = "+ i);
+                //System.out.println("j = "+ j);
+            }// j
+            //System.out.println("k = "+ k);
+            if(isBeautiful(list)) {
+                System.out.println("YES "+ list.get(0));
+                return list;
+            }
+            list = new ArrayList<>();
+        }// k
+        System.out.println("NO");
+        return list;
+    }
+
+    private boolean isBeautiful(List<String> list) {
+        boolean result = true;
+        for(String s : list) {
+            if(s.startsWith("0")) {
+                result = false;
+                return result;
+            }
+        }
+
+        for(int i = 0; i < list.size()-1; i++) {
+            Integer value1 = Integer.parseInt(list.get(i));
+            Integer value2 = Integer.parseInt(list.get(i+1));
+            if(value2 - value1 != 1) {
+                result = false;
+            }
+        }
+        return result;
+    }
 //    @GetMapping("/home5")
 //    public String index(@RequestParam(name = "name", required = true) String name) {
 //        System.out.println(name.length());
