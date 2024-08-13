@@ -20,10 +20,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfig -> csrfConfig.disable())
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/home5").permitAll()
-                        .requestMatchers("/home").authenticated()
-                        .requestMatchers("/home2").hasRole("ADMIN"));
+                .authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
+//                        .requestMatchers("/home5").permitAll()
+//                        .requestMatchers("/home").authenticated()
+//                        .requestMatchers("/home2").hasRole("ADMIN"));
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());//hbc -> hbc.authenticationEntryPoint(new CustomAuthenticationException()));
         http.exceptionHandling(ehc -> ehc.authenticationEntryPoint(new CustomAuthenticationException()));

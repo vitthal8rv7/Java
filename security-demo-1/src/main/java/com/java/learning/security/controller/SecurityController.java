@@ -1,54 +1,122 @@
 package com.java.learning.security.controller;
 
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import com.java.learning.security.model.Request;
 
 @RestController
 public class SecurityController {
-    @GetMapping("/home5")
-    public List<String> index(@RequestParam(name = "name", required = true) String name) {
-        List<String> list = new ArrayList<>();
-        for(int k = 1; k <= name.length()/2; k++) {
-            int i = k;
-            boolean shouldUpdateIVariable = false;
-            for(int j = 0; j+i <= name.length(); j = j+i) {
-                if(shouldUpdateIVariable) {
-                    shouldUpdateIVariable = false;
-                    i = k + 1;
-                }
-                String s = name.substring(j, j+i);
-                list.add(s);
+    @PostMapping("/home6")
+    public void index6(@RequestParam(name = "name", required = true) String name) {
 
-                if(k - i > 1) {
-                    if((s.charAt(s.length()-2) == '9' || s.charAt(s.length()-2) == '0') && s.charAt(s.length()-1) == '9') {
-                        shouldUpdateIVariable = true;
+
+            List<String> list = new ArrayList<>();
+            for (int k = 1; k <= name.length() / 2; k++) {
+                int i = k;
+                boolean shouldUpdateIVariable = false;
+                for (int j = 0; j + i <= name.length(); j = j + i) {
+                    if (shouldUpdateIVariable) {
+                        shouldUpdateIVariable = false;
+                        i = k + 1;
                     }
-                } else {
-                    if(s.charAt(s.length()-1) == '9') {
-                        shouldUpdateIVariable = true;
+                    String s = null;
+                    if (j + i <= name.length()) {
+                        s = name.substring(j, j + i);
                     }
+                    if (Objects.isNull(s)) {
+                        break;
+                    }
+                    list.add(s);
+
+                    if (i  > 1) {
+                        if(i == 9)
+                        System.out.println("s1: "+s);
+                        if ((s.charAt(s.length() - 2) == '9' || s.charAt(s.length() - 2) == '0') && s.charAt(s.length() - 1) == '9') {
+                            shouldUpdateIVariable = true;
+                        }
+                    } else {
+                        if(i == 9)
+                        System.out.println("s2: "+s);
+                        if (s.charAt(s.length() - 1) == '9') {
+                            shouldUpdateIVariable = true;
+                        }
+                    }
+                    //System.out.println("i = "+ i);
+                    //System.out.println("j = "+ j);
+                }// j
+                //System.out.println("k = "+ k);
+                if (isBeautiful(list,  name, i)) {
+                    System.out.println("YES " + list.get(0));
+                    return;
                 }
-                //System.out.println("i = "+ i);
-                //System.out.println("j = "+ j);
-            }// j
-            //System.out.println("k = "+ k);
-            if(isBeautiful(list)) {
-                System.out.println("YES "+ list.get(0));
-                return list;
-            }
-            list = new ArrayList<>();
-        }// k
-        System.out.println("NO");
-        return list;
+                list = new ArrayList<>();
+            }// k
+            System.out.println("NO");
+            return;
+
     }
 
-    private boolean isBeautiful(List<String> list) {
+    @PostMapping("/home5")
+    public void index(@RequestBody(required = true) Request request) {
+        for(String name : request.getNames()) {
+            boolean flag = false;
+
+            List<String> list = new ArrayList<>();
+            for (int k = 1; k <= name.length() / 2; k++) {
+                int i = k;
+                boolean shouldUpdateIVariable = false;
+                for (int j = 0; j + i <= name.length(); j = j + i) {
+                    if (shouldUpdateIVariable) {
+                        shouldUpdateIVariable = false;
+                        i = k + 1;
+                    }
+                    String s = null;
+                    if (j + i <= name.length()) {
+                        s = name.substring(j, j + i);
+                    }
+                    if (Objects.isNull(s)) {
+                        break;
+                    }
+                    list.add(s);
+
+                    if ( i > 1) {
+                        if ((s.charAt(s.length() - 2) == '9' || s.charAt(s.length() - 2) == '0') && s.charAt(s.length() - 1) == '9') {
+                            shouldUpdateIVariable = true;
+                        }
+                    } else {
+                        if (s.charAt(s.length() - 1) == '9') {
+                            shouldUpdateIVariable = true;
+                        }
+                    }
+                    //System.out.println("i = "+ i);
+                    //System.out.println("j = "+ j);
+                }// j
+                //System.out.println("k = "+ k);
+                if (isBeautiful(list,  name, i)) {
+                    System.out.println("YES " + list.get(0));
+                    flag = true;
+                    //return;
+                }
+                list = new ArrayList<>();
+            }// k
+           // System.out.println("NO");
+            //return;
+            if(flag) {
+               // System.out.println("YES " + list.get(0));
+            } else {
+                System.out.println("NO");
+            }
+        }
+    }
+
+    private boolean isBeautiful(List<String> list, String name, int k) {
         boolean result = true;
+        if(list.size() <= 1) return false;
+        //if(list.size() < name.length()/(list.get(0).length())) return false;
         for(String s : list) {
             if(s.startsWith("0")) {
                 result = false;
@@ -57,8 +125,8 @@ public class SecurityController {
         }
 
         for(int i = 0; i < list.size()-1; i++) {
-            Integer value1 = Integer.parseInt(list.get(i));
-            Integer value2 = Integer.parseInt(list.get(i+1));
+            Long value1 = Long.parseLong(list.get(i));
+            Long value2 = Long.parseLong(list.get(i+1));
             if(value2 - value1 != 1) {
                 result = false;
             }
