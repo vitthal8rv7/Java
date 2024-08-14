@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Order(1)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CalculatorTest {
 
     @Test
