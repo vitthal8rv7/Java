@@ -8,7 +8,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 @Component
 @Profile("prod")
@@ -30,6 +33,9 @@ public class CustomAuthenticationProvider2 implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UserDetails user = new CustomUserDetailsService().loadUserByUsername(authentication.getName());
         System.out.println("INSIDE PROD");
+        if(Objects.isNull(user)) {
+            throw new UsernameNotFoundException("Username not found");
+        }
         if(authentication.getCredentials().equals(user.getPassword())) {
             return new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         } else {
