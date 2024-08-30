@@ -39,7 +39,9 @@ class JunitRestControllerTest {
     @Test
     void returnStringWithResponseEntity() throws Exception {
         String output = "Hello World!";
+
         mockMvc.perform(get("/get")).andExpect(status().isOk()).andExpect(content().string(output));
+
     }
 
     @Test
@@ -63,6 +65,11 @@ class JunitRestControllerTest {
         assertFalse(output.contains("id=null"));
         assertTrue(output.contains("name=emp1"));
         assertTrue(output.contains("age=22"));
+
+        verify(employeeService, times(1)).getEmployeeAsString();
+        verify(employeeService, atLeast(1)).getEmployeeAsString();
+        verify(employeeService, atMost(1)).getEmployeeAsString();
+
     }
 
 
@@ -81,18 +88,19 @@ class JunitRestControllerTest {
 
     @Test
     void saveEmployee() throws Exception {
+
         Employee employee = new Employee(UUID.randomUUID().toString(), "emp1", 22);
         String employeeAsString = objectMapper.writeValueAsString(employee);
 
         when(employeeService.saveEmployee(employee))
-                .thenReturn(new Employee(employee.id(), employee.name() , employee.age()));
+                .thenReturn(new Employee(employee.getId(), employee.getName() , employee.getAge()));
 
         mockMvc.perform(post("/save-employee")
                         .content(employeeAsString)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(employee.id()))
+                .andExpect(jsonPath("$.id").value(employee.getId()))
                 .andExpect(jsonPath("$.name").value("emp1"))
                 .andExpect(jsonPath("$.age").value(22));
 
