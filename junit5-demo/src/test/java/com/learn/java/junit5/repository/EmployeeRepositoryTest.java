@@ -1,9 +1,18 @@
 package com.learn.java.junit5.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.learn.java.junit5.controller.JunitRestController;
 import com.learn.java.junit5.record.Employee;
+import jakarta.annotation.security.RunAs;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
@@ -16,12 +25,17 @@ class EmployeeRepositoryTest {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
-    public void findAll() {
+    public void findAll() throws JSONException, JsonProcessingException {
         employeeRepository.save(new Employee("id", "name", 22));
         List<Employee> employees = employeeRepository.findAll();
+
+        String employeeAsString = objectMapper.writeValueAsString(employees);
         assertEquals(1, employees.size());
         assertEquals("id", employees.get(0).getId());
         assertEquals( employees.get(0).getName(), "name");
+        JSONAssert.assertEquals("[{id:\"id\", name:\"name\", age:22}]",  employeeAsString, false);
     }
 }
