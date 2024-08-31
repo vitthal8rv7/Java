@@ -1,7 +1,7 @@
 package com.learn.java.junit5;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learn.java.junit5.record.Employee;
+import com.learn.java.junit5.model.Employee;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,8 @@ class Junit5DemoApplicationTests {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
-	private final ObjectMapper objectMapper = new ObjectMapper();
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	@Test
 	void contextLoads() throws Exception {

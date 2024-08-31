@@ -1,6 +1,6 @@
 package com.learn.java.junit5.repository;
 
-import com.learn.java.junit5.record.Employee;
+import com.learn.java.junit5.model.Employee;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

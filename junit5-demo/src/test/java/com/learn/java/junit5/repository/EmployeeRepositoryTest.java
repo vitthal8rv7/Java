@@ -2,17 +2,12 @@ package com.learn.java.junit5.repository;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.learn.java.junit5.controller.JunitRestController;
-import com.learn.java.junit5.record.Employee;
-import jakarta.annotation.security.RunAs;
+import com.learn.java.junit5.model.Employee;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 

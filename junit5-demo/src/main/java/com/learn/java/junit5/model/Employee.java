@@ -1,4 +1,4 @@
-package com.learn.java.junit5.record;
+package com.learn.java.junit5.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

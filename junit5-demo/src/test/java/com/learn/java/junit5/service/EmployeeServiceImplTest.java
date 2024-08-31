@@ -1,13 +1,11 @@
 package com.learn.java.junit5.service;
 
-import com.learn.java.junit5.record.Employee;
+import com.learn.java.junit5.model.Employee;
 import com.learn.java.junit5.repository.EmployeeRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;

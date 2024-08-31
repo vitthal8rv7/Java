@@ -1,6 +1,6 @@
 package com.learn.java.junit5.controller;
 
-import com.learn.java.junit5.record.Employee;
+import com.learn.java.junit5.model.Employee;
 import com.learn.java.junit5.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
