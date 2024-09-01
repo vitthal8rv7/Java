@@ -6,6 +6,8 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.ReadContext;
 import com.learn.java.junit5.model.Employee;
 import static org.assertj.core.api.Assertions.*;
 
@@ -26,7 +28,9 @@ public class JsonPathTest {
                 new Employee("id2", "name2", 24),
                 new Employee("id3", "name3", 24));
         String employees = objectMapper.writeValueAsString(employeeList);
+
         DocumentContext context = parse(employees);
+
         Integer length = context.read("$.length()");
         assertThat(length).isEqualTo(3);
         assertThat("name1").isEqualTo(context.read("$[0].name"));
@@ -37,20 +41,23 @@ public class JsonPathTest {
         List<String> first2Elements = context.read("$.[0:2]");
         assertThat(first2Elements).hasSize(2);
         //employeeList.add(new Employee("id4", "name4", 24));
-        List<String> findElementsByAge24 = context.read("$.[?(@.age==24)]");
+        Employee[] findElementsByAge24 = context.read("$.[?(@.age==24)]", Employee[].class);
+        System.out.println("findElementsByAge24: "+Arrays.toString(findElementsByAge24));
+        System.out.println("first object name: "+findElementsByAge24[0].getName());
+        System.out.println("second object name: "+findElementsByAge24[1].getName());
         assertThat(findElementsByAge24).hasSize(2);
         System.out.println("findElementsByAge24: "+findElementsByAge24);
-//        String s = findElementsByAge24.get(0);
-        
-//        Employee[] e = objectMapper.readValue((JsonParser) findElementsByAge24, Employee[].class);
-        //assertThat(e.getName()).isEqualTo("name2");
-//        List<String>  empArray = context.read("$.[?(@.age==24)]");
-//        List<Employee> find2ElementsByAge24 = objectMapper.readValue((JsonParser) empArray, new TypeReference<List<Employee>>(){});
-//        System.out.println("name: "+find2ElementsByAge24.getClass().getName());
-//        assertThat(find2ElementsByAge24).hasSize(2);
-//        System.out.println("find2ElementsByAge24: "+find2ElementsByAge24);
-//        assertThat(find2ElementsByAge24.get(0).getName()).isEqualTo("name2");
-//        assertThat(find2ElementsByAge24.get(1).getName()).isEqualTo("name3");
+        ReadContext ctx = JsonPath.parse(employeeList);
+        System.out.println("employeeList: "+employeeList);
+        System.out.println("employees: "+employees);
+        System.out.println("ctx: "+ctx.jsonString());
+        String name = context.read("$[0].name");
+        System.out.println("name: "+name);
+        Employee[] name2 = context.read("$[?(@.name == 'name3')]", Employee[].class);
+        System.out.println("name2: "+name2[0].getName());
 
+        //Integer age = ctx.read("$.employee.age");
+        //String department = ctx.read("$.employee.department");
+        //List<String> skills = ctx.read("$.employee.skills");
     }
 }
